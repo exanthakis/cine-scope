@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import MovieCard from '@/components/movie/MovieCard.vue'
+import MoviePagination from '@/components/movie/MoviePagination.vue'
 import MovieService from '@/services/MovieService'
 import type { Movie } from '@/types'
 import { computed, onMounted, ref, watchEffect } from 'vue'
@@ -36,33 +37,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <main
-    class="container grid grid-cols-1 gap-4 p-5 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
-  >
-    <MovieCard
-      v-for="movie in movies"
-      :key="movie.id"
-      :id="movie.id"
-      :title="movie.title"
-      :date="movie.release_date"
-      :imgUrl="movie.poster_path"
-    />
-
-    <div class="pagination">
-      <RouterLink
-        id="page-prev"
-        :to="{ name: 'movie-list', query: { page: page - 1 } }"
-        rel="prev"
-        v-if="page != 1"
-        >&#60; Previous</RouterLink
-      >
-      <RouterLink
-        id="page-next"
-        :to="{ name: 'movie-list', query: { page: page + 1 } }"
-        rel="next"
-        v-if="hasNextPage"
-        >Next &#62;</RouterLink
-      >
+  <main class="container">
+    <div
+      class="grid grid-cols-1 gap-4 p-5 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+    >
+      <MovieCard
+        v-for="movie in movies"
+        :key="movie.id"
+        :id="movie.id"
+        :title="movie.title"
+        :date="movie.release_date"
+        :imgUrl="movie.poster_path"
+      />
     </div>
+
+    <MoviePagination :page="page" :hasNextPage="hasNextPage" />
   </main>
 </template>

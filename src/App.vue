@@ -5,9 +5,9 @@ import SiteNavigation from './components/layout/SiteNavigation.vue'
 <template>
   <div class="flex flex-col items-center max-7xl">
     <SiteNavigation />
-  </div>
 
-  <RouterView />
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
