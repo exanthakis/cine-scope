@@ -2,4 +2,8 @@
 @import 'tailwindcss';
 
 @theme {
+  --color-film-primary: rgb(229, 9, 20);
+  --color-film-secondary: #fff;
+  --color-film-tertiary: #000;
+  --font-roboto: 'Roboto', sans-serif;
 }

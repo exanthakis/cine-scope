@@ -1,18 +1,11 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import SiteNavigation from './components/layout/SiteNavigation.vue'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <div class="flex flex-col items-center max-7xl">
+    <SiteNavigation />
+  </div>
 
   <RouterView />
 </template>
