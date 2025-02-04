@@ -2,9 +2,11 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-film-primary: rgb(229, 9, 20);
+  --color-film-primary: #e50914;
   --color-film-secondary: #fff;
   --color-film-tertiary: #000;
+  --color-button-hover: #f40612;
+  --color-button-sec-hover: hsla(0, 0%, 59%, 0.3);
   --font-roboto: 'Roboto', sans-serif;
 }
 
