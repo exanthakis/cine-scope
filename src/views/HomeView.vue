@@ -39,7 +39,7 @@ onMounted(() => {
 <template>
   <main class="container">
     <div
-      class="grid grid-cols-1 gap-4 p-5 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+      class="grid grid-cols-1 gap-4 px-5 py-10 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
     >
       <MovieCard
         v-for="movie in movies"

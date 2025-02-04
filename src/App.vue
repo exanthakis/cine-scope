@@ -3,7 +3,7 @@ import SiteNavigation from './components/layout/SiteNavigation.vue'
 </script>
 
 <template>
-  <div class="flex flex-col items-center max-7xl">
+  <div class="relative flex flex-col items-center max-7xl">
     <SiteNavigation />
 
     <RouterView />

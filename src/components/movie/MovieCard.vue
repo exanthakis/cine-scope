@@ -9,17 +9,27 @@ const onFavoriteClick = () => {
 </script>
 <template>
   <RouterLink :to="{ name: 'movie-details', params: { id } }">
-    <div class="mx-auto rounded-sm w-fit">
+    <div
+      class="relative mx-auto overflow-hidden transition duration-200 transform rounded-sm group w-fit hover:scale-105"
+    >
       <img
-        class="h-full rounded-lg"
+        class="h-full rounded-lg shadow-lg"
         :src="`https://image.tmdb.org/t/p/w500${imgUrl}`"
         :alt="title"
       />
-
-      <button @click="onFavoriteClick">like</button>
-
+      <div
+        class="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-end p-1 duration-200 opacity-0 group-hover:opacity-100 bg-film-tertiary/35 transition-normal"
+      >
+        <button
+          class="absolute z-10 flex items-center justify-center w-8 h-8 rounded-full cursor-pointer bg-film-tertiary top-2 right-2"
+          @click.stop.prevent="onFavoriteClick"
+        >
+          🤍
+        </button>
+      </div>
+      <!-- 
       <h3>{{ title }}</h3>
-      <p>{{ date?.split('-')[0] }}</p>
+      <p>{{ date?.split('-')[0] }}</p> -->
     </div>
   </RouterLink>
 </template>
