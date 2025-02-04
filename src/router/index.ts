@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MovieDetailsView from '@/views/MovieDetailsView.vue'
 import NetworkError from '@/views/NetworkError.vue'
 import HomeView from '@/views/HomeView.vue'
+import PopularMovies from '@/views/PopularMovies.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,6 +11,12 @@ const router = createRouter({
       path: '/',
       name: 'movie-list',
       component: HomeView,
+      props: (route) => ({ page: parseInt(route.query.page?.toString() || '1') }),
+    },
+    {
+      path: '/popular',
+      name: 'popular-list',
+      component: PopularMovies,
       props: (route) => ({ page: parseInt(route.query.page?.toString() || '1') }),
     },
     {

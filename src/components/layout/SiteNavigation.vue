@@ -11,7 +11,10 @@ import TheLogo from '../ui/TheLogo.vue'
       <TheLogo />
       <ul class="flex items-center gap-3">
         <li>
-          <RouterLink :to="{ name: 'movie-list' }">Movies</RouterLink>
+          <RouterLink :to="{ name: 'movie-list' }">Search Movies</RouterLink>
+        </li>
+        <li>
+          <RouterLink :to="{ name: 'popular-list' }">Popular Movies</RouterLink>
         </li>
         <li><RouterLink :to="{ name: 'favorites' }">Favorites</RouterLink></li>
       </ul>

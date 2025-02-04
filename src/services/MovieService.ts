@@ -20,4 +20,15 @@ const getMovieData = (id: string) => {
   )
 }
 
-export default { getPopularMovies, getMovieData }
+export const searchMovies = async (query: string, page: string) => {
+  return apiClient.get(
+    '/search/movie?api_key=' +
+      import.meta.env.VITE_TMDB_API_KEY +
+      '&query=' +
+      encodeURIComponent(query) +
+      '&page=' +
+      page,
+  )
+}
+
+export default { getPopularMovies, getMovieData, searchMovies }
