@@ -76,11 +76,13 @@ const formattedGenres = movieDetails.genres
                 </span>
               </div>
               <!-- overview -->
-              <p class="max-w-xl mx-auto mt-4 mb-10 ml-0 text-lg text-gray-300">
+              <p class="max-w-xl mx-auto mt-4 mb-8 ml-0 text-lg text-gray-300">
                 {{ movieDetails.overview }}
               </p>
 
-              <a :href="'https://www.imdb.com/title/' + imdbLink + '/'">imdb</a>
+              <a :href="'https://www.imdb.com/title/' + imdbLink + '/'" target="_blank"
+                ><img alt="Imdb logo" class="logo" src="@/assets/imdb.svg" width="60" height="40"
+              /></a>
             </div>
           </div>
         </div>
