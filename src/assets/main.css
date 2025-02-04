@@ -7,3 +7,8 @@
   --color-film-tertiary: #000;
   --font-roboto: 'Roboto', sans-serif;
 }
+
+@utility container {
+  margin-inline: auto;
+  max-width: 100rem;
+}

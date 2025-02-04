@@ -36,25 +36,27 @@ const duration = computed(() => {
   return 0
 })
 
+const imdbLink = computed(() => (movieDetails.imdb_id ? movieDetails.imdb_id : 0))
+console.log('imdbLink', imdbLink.value)
 const formattedGenres = movieDetails.genres
   ? movieDetails.genres.map((genre) => genre.name).join(' - ')
   : ''
 </script>
 
 <template>
-  <div class="w-full bg-[#181818] relative text-white pl-10">
+  <div class="w-full bg-[#181818] relative text-white">
     <div
-      class="w-full bg-center bg-cover h-[80vh]"
+      class="w-full bg-center bg-cover min-h-[70vh] h-[80vh] px-[5vw] gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
       :style="{
         backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}')`,
         backgroundPosition: '50% top',
       }"
     >
       <div
-        class="flex items-center justify-start w-full h-full py-12 bg-opacity-50 gradient-primary after:z-[-1] after:absolute after:content-[''] after:left-0 after:right[-200px] after:top-0 after:w-[50%] after:h-full"
+        class="container flex items-center justify-start h-full py-12 bg-opacity-50 gradient-left after:z-[-1] after:absolute after:content-[''] after:left-0 after:right[-200px] after:top-0 after:w-[60%] after:h-full"
       >
         <div class="text-start z-100">
-          <div class="container px-4 mx-auto">
+          <div class="pl-0 pr-4 mx-auto">
             <div class="max-w-4xl mx-auto text-start">
               <span class="font-semibold text-gray-200 text-2xl uppercase py-2.5">{{
                 movieDetails.title
@@ -77,9 +79,26 @@ const formattedGenres = movieDetails.genres
               <p class="max-w-xl mx-auto mt-4 mb-10 ml-0 text-lg text-gray-300">
                 {{ movieDetails.overview }}
               </p>
+
+              <a :href="'https://www.imdb.com/title/' + imdbLink + '/'">imdb</a>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="pt-20 bg-[#181818] w-full px-[5vw]">
+    <div class="container pb-5">
+      <div>
+        <div class="hook-hr h-0.5 mb-4"></div>
+        <div class="max-w-xl mx-auto text-base text-[#a3a3a3] text-center">
+          {{ movieDetails.tagline }}
+        </div>
+        <div class="hook-hr h-0.5 mt-4"></div>
+      </div>
+
+      <div class="py-10">
+        <h2 class="text-3xl text-white">More Details</h2>
       </div>
     </div>
   </div>

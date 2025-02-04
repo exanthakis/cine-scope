@@ -19,7 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.gradient-primary::after {
+.gradient-left::after {
   background: linear-gradient(
     90deg,
     #181818 10%,
@@ -41,4 +41,31 @@ body {
     hsla(0, 0%, 9%, 0)
   );
   z-index: 1;
+}
+
+.gradient-bottom::after {
+  background: linear-gradient(
+    0deg,
+    #181818 0,
+    hsla(0, 0%, 9%, 0.987) 1.62%,
+    hsla(0, 0%, 9%, 0.951) 3.1%,
+    hsla(0, 0%, 9%, 0.896) 4.5%,
+    hsla(0, 0%, 9%, 0.825) 5.8%,
+    hsla(0, 0%, 9%, 0.741) 7.06%,
+    hsla(0, 0%, 9%, 0.648) 8.24%,
+    hsla(0, 0%, 9%, 0.55) 9.42%,
+    hsla(0, 0%, 9%, 0.45) 10.58%,
+    hsla(0, 0%, 9%, 0.352) 11.76%,
+    hsla(0, 0%, 9%, 0.259) 12.94%,
+    hsla(0, 0%, 9%, 0.175) 14.2%,
+    hsla(0, 0%, 9%, 0.104) 15.5%,
+    hsla(0, 0%, 9%, 0.049) 16.9%,
+    hsla(0, 0%, 9%, 0.013) 18.38%,
+    hsla(0, 0%, 9%, 0) 20%
+  );
+  z-index: 1;
+}
+
+.hook-hr {
+  background: linear-gradient(90deg, #777 0, rgba(51, 51, 51, 0.5) 50%, #777);
 }
