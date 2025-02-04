@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import MovieDetailsView from '@/views/MovieDetailsView.vue'
 import NetworkError from '@/views/NetworkError.vue'
+import HomeView from '@/views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,7 +10,7 @@ const router = createRouter({
       path: '/',
       name: 'movie-list',
       component: HomeView,
-      props: (route) => ({ page: parseInt(route.query.page as string) || 1 }),
+      props: (route) => ({ page: parseInt(route.query.page?.toString() || '1') }),
     },
     {
       path: '/movies/:id',

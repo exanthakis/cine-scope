@@ -1,10 +1,3 @@
-export interface MovieCard {
-  id: number
-  title: string
-  date: string
-  imgUrl?: string
-}
-
 export interface Movie {
   adult: boolean
   backdrop_path: string
@@ -20,11 +13,4 @@ export interface Movie {
   video: boolean
   vote_average: number
   vote_count: number
-}
-
-export interface GetPopularMovies {
-  page: number
-  results: Movie[]
-  total_pages: number
-  total_results: number
 }

@@ -14,5 +14,10 @@ const getPopularMovies = (page: string) => {
     '/movie/popular?api_key=' + import.meta.env.VITE_TMDB_API_KEY + '&page=' + page,
   )
 }
+const getMovieData = (id: string) => {
+  return apiClient.get(
+    '/movie/' + id + '?api_key=' + import.meta.env.VITE_TMDB_API_KEY + '&language=en-US',
+  )
+}
 
-export default { getPopularMovies }
+export default { getPopularMovies, getMovieData }

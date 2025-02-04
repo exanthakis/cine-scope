@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { MovieCard } from '@/types'
+import type { MovieCardProps } from '@/types/component-types'
 
-defineProps<MovieCard>()
+defineProps<MovieCardProps>()
 
 const onFavoriteClick = () => {
   console.log('clicked')

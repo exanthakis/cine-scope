@@ -2,7 +2,7 @@
 import MovieCard from '@/components/movie/MovieCard.vue'
 import MoviePagination from '@/components/movie/MoviePagination.vue'
 import MovieService from '@/services/MovieService'
-import type { Movie } from '@/types'
+import type { Movie } from '@/types/api'
 import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 
