@@ -32,6 +32,7 @@ const router = createRouter({
       component: NetworkError,
     },
   ],
+  linkActiveClass: 'active',
 })
 
 export default router

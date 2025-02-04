@@ -69,3 +69,8 @@ body {
 .hook-hr {
   background: linear-gradient(90deg, #777 0, rgba(51, 51, 51, 0.5) 50%, #777);
 }
+
+nav .active {
+  font-weight: bolder;
+  color: #e50914;
+}
