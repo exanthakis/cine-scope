@@ -64,6 +64,7 @@ watch([page], getSearchResults)
       v-show="movieResults && movieResults.length > 0"
       :page="page"
       :hasNextPage="hasNextPage"
+      route="movie-list"
     />
   </main>
 </template>

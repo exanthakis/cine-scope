@@ -51,6 +51,6 @@ onMounted(() => {
       />
     </div>
 
-    <MoviePagination :page="page" :hasNextPage="hasNextPage" />
+    <MoviePagination :page="page" :hasNextPage="hasNextPage" route="popular-list" />
   </main>
 </template>
