@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import MovieCard from '@/components/movie/MovieCard.vue'
+import MovieCardSkeleton from '@/components/movie/MovieCardSkeleton.vue'
 import MoviePagination from '@/components/movie/MoviePagination.vue'
+import SearchInput from '@/components/SearchInput.vue'
 import MovieService from '@/services/MovieService'
 import type { Movie } from '@/types/api'
 import { computed, ref, watch } from 'vue'
@@ -10,6 +12,8 @@ const totalPages = ref(0)
 const searchQuery = ref('')
 const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 const movieResults = ref<Movie[] | null>(null)
+const isLoading = ref(false)
+const searchError = ref<string | null>(null)
 
 const page = computed(() => props.page)
 
@@ -18,21 +22,30 @@ const hasNextPage = computed(() => {
 })
 
 const getSearchResults = async () => {
-  clearTimeout(queryTimeout.value ?? undefined)
+  if (!searchQuery.value.trim()) {
+    movieResults.value = null
+    return
+  }
+
+  searchError.value = null
+
+  if (queryTimeout.value) clearTimeout(queryTimeout.value)
 
   queryTimeout.value = setTimeout(async () => {
-    if (searchQuery.value !== '') {
-      try {
-        const movieDetails = await MovieService.searchMovies(searchQuery.value, page.value)
-        movieResults.value = movieDetails.data.results
-        totalPages.value = movieDetails.data.total_pages
-      } catch {
-        // searchError.value = true
-      }
-      return
+    isLoading.value = true
+    try {
+      const movieDetails = await MovieService.searchMovies(searchQuery.value, page.value)
+      movieResults.value = movieDetails.data.results
+      totalPages.value = movieDetails.data.total_pages
+    } catch (error) {
+      searchError.value =
+        error instanceof Error ? error.message : 'Failed to fetch data - please try again later'
+    } finally {
+      // Flicker Delay to display skeleton
+      await new Promise((res) => setTimeout(res, 1000))
+      isLoading.value = false
     }
-    movieResults.value = null
-  }, 2000)
+  }, 1500)
 }
 
 watch([page], getSearchResults)
@@ -40,16 +53,25 @@ watch([page], getSearchResults)
 
 <template>
   <main class="container">
+    <SearchInput v-model:searchQuery="searchQuery" @get-search-results="getSearchResults" />
     <div
+      v-if="isLoading"
       class="grid grid-cols-1 gap-4 px-5 py-10 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
     >
-      <input
-        type="text"
-        v-model="searchQuery"
-        @input="getSearchResults"
-        placeholder="Search for a city or state"
-        class="py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]"
-      />
+      <MovieCardSkeleton v-for="res in movieResults?.length" :key="res" />
+    </div>
+    <p v-else-if="!isLoading && searchError">{{ searchError }}</p>
+    <p
+      v-else-if="
+        !isLoading && (!movieResults || movieResults.length === 0) && searchQuery.trim().length > 0
+      "
+    >
+      No stored movies found
+    </p>
+    <div
+      v-else
+      class="grid grid-cols-1 gap-4 px-5 py-10 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+    >
       <MovieCard
         v-for="movie in movieResults"
         :key="movie.id"
