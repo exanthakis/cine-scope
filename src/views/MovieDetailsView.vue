@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MovieDetails from '@/components/movie/MovieDetails.vue'
+import MovieDetails from '@/components/movie/MovieDetails/MovieDetails.vue'
 import type { MovieDetailsProps } from '@/types/component-types'
 
 defineProps<MovieDetailsProps>()

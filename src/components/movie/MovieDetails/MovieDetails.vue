@@ -3,6 +3,7 @@ import MovieService from '@/services/MovieService'
 import type { MovieDetailsProps } from '@/types/component-types'
 import type { MovieDetails } from '@/types/movie-details'
 import { computed } from 'vue'
+import MovieDetailsItem from './MovieDetailsItem.vue'
 
 const props = defineProps<MovieDetailsProps>()
 const id = computed(() => props.id)
@@ -37,10 +38,31 @@ const duration = computed(() => {
 })
 
 const imdbLink = computed(() => (movieDetails.imdb_id ? movieDetails.imdb_id : 0))
-console.log('imdbLink', imdbLink.value)
-const formattedGenres = movieDetails.genres
-  ? movieDetails.genres.map((genre) => genre.name).join(' - ')
-  : ''
+
+const formattedGenres = computed(() => {
+  return movieDetails.genres ? movieDetails.genres.map((genre) => genre.name).join(' - ') : ''
+})
+const adultContent = computed(() => {
+  return movieDetails.adult ? 'Yes' : 'No'
+})
+
+const spokenLanguages = computed(() => {
+  return movieDetails.spoken_languages
+    ? movieDetails.spoken_languages.map((lang) => lang.english_name).join(', ')
+    : ''
+})
+
+const productionCountries = computed(() => {
+  return movieDetails.production_countries
+    ? movieDetails.production_countries.map((country) => country.name).join(', ')
+    : ''
+})
+
+const originCountry = computed(() => {
+  return movieDetails.origin_country
+    ? movieDetails.origin_country.map((country) => country).join(', ')
+    : ''
+})
 </script>
 
 <template>
@@ -58,9 +80,12 @@ const formattedGenres = movieDetails.genres
         <div class="text-start z-100">
           <div class="pl-0 pr-4 mx-auto">
             <div class="max-w-4xl mx-auto text-start">
-              <span class="font-semibold text-gray-200 text-2xl uppercase py-2.5">{{
-                movieDetails.title
-              }}</span>
+              <span class="font-semibold text-gray-200 text-2xl uppercase py-2.5">
+                <a v-if="movieDetails.homepage" :href="movieDetails.homepage" target="_blank">
+                  {{ movieDetails.title }}
+                </a>
+                <span v-else>{{ movieDetails.title }}</span>
+              </span>
 
               <!-- info metadata -->
               <div class="mt-4 text-[#a3a3a3] font-normal">
@@ -91,7 +116,7 @@ const formattedGenres = movieDetails.genres
   </div>
   <div class="pt-20 bg-[#181818] w-full px-[5vw]">
     <div class="container pb-5">
-      <div>
+      <div v-if="movieDetails.tagline">
         <div class="hook-hr h-0.5 mb-4"></div>
         <div class="max-w-xl mx-auto text-base text-[#a3a3a3] text-center">
           {{ movieDetails.tagline }}
@@ -100,7 +125,41 @@ const formattedGenres = movieDetails.genres
       </div>
 
       <div class="py-10">
-        <h2 class="text-3xl text-white">More Details</h2>
+        <h2 class="text-3xl text-white mb-2.5 mt-5">More Details</h2>
+        <div
+          class="grid grid-cols-1 gap-4 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+        >
+          <MovieDetailsItem>
+            <template #header>Audio</template>
+            <template #default>{{ spokenLanguages }}</template>
+          </MovieDetailsItem>
+          <MovieDetailsItem>
+            <template #header>Adult Content</template>
+            <template #default>{{ adultContent }}</template>
+          </MovieDetailsItem>
+          <MovieDetailsItem>
+            <template #header>Production Countries</template>
+            <template #default>{{ productionCountries }}</template>
+          </MovieDetailsItem>
+          <MovieDetailsItem>
+            <template #header>Origin Country</template>
+            <template #default>{{ originCountry }}</template>
+          </MovieDetailsItem>
+        </div>
+        <div class="mt-4">
+          <MovieDetailsItem>
+            <template #header>Production Companies</template>
+            <template #default v-if="movieDetails && movieDetails.production_companies">
+              <template v-for="prodCmp in movieDetails.production_companies" :key="prodCmp.id">
+                <img
+                  class="mt-2 rounded-lg h-9"
+                  :src="`https://image.tmdb.org/t/p/original${prodCmp.logo_path}`"
+                  :alt="prodCmp.name"
+                />
+              </template>
+            </template>
+          </MovieDetailsItem>
+        </div>
       </div>
     </div>
   </div>
