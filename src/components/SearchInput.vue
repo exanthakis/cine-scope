@@ -9,7 +9,7 @@ const handleInput = () => {
 
 <template>
   <div
-    class="m-8 relative search-input rounded-sm p-4 mx-auto text-white max-w-2xl justify-center shadow-xl"
+    class="m-8 relative search-input rounded-sm p-4 text-white w-full justify-center shadow-xl mx-[5vw]"
   >
     <input
       type="text"

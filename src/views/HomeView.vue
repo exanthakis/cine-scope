@@ -53,7 +53,9 @@ watch([page], getSearchResults)
 
 <template>
   <main class="container">
-    <SearchInput v-model:searchQuery="searchQuery" @get-search-results="getSearchResults" />
+    <div class="flex w-full justify-center align-center mx-auto max-w-2xl">
+      <SearchInput v-model:searchQuery="searchQuery" @get-search-results="getSearchResults" />
+    </div>
     <div
       v-if="isLoading"
       class="grid grid-cols-1 gap-4 px-5 py-10 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
