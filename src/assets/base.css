@@ -12,7 +12,7 @@
 body {
   color: var(--color-text);
   line-height: 1.6;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -73,4 +73,9 @@ body {
 nav .active {
   font-weight: bolder;
   color: #e50914;
+}
+
+.search-input {
+  background: linear-gradient(90deg, #6c1f41 -3.05%, #220e0f 99.59%);
+  box-shadow: 8px 5px 16px 0 rgba(0, 0, 0, 0.37);
 }
