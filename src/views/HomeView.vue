@@ -64,7 +64,7 @@ watch([page], getSearchResults)
     </div>
     <div
       v-if="isLoading"
-      class="grid grid-cols-1 gap-4 px-5 py-10 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+      class="grid grid-cols-1 gap-4 px-5 py-10 mx-auto max-2xl xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
     >
       <MovieCardSkeleton v-for="res in movieResults?.length" :key="res" />
     </div>
@@ -77,10 +77,10 @@ watch([page], getSearchResults)
     </p>
     <div v-else class="px-5">
       <p v-if="totalResults && totalResults > 0" class="text-left">
-        Total results found: {{ totalResults }}
+        Total results found: <span class="font-bold">{{ totalResults }}</span>
       </p>
       <div
-        class="grid grid-cols-1 gap-4 py-7 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+        class="grid grid-cols-1 gap-4 py-7 mx-auto max-2xl xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
       >
         <MovieCard
           v-for="movie in movieResults"
@@ -95,8 +95,9 @@ watch([page], getSearchResults)
 
     <MoviePagination
       v-show="movieResults && movieResults.length > 0"
+      :total-pages="totalPages"
       :page="page"
-      :hasNextPage="hasNextPage"
+      :has-next-page="hasNextPage"
       route="movie-list"
     />
   </main>

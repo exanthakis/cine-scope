@@ -1,30 +1,104 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import BaseButton from '../ui/BaseButton.vue'
+
 interface MoviePaginationProps {
+  totalPages: number
   page: number
   route: string
   hasNextPage: boolean
 }
-defineProps<MoviePaginationProps>()
+
+const router = useRouter()
+const { page, route, totalPages } = defineProps<MoviePaginationProps>()
+
+const goToPage = (pageNumber: number) => {
+  router.push({ name: route, query: { page: pageNumber } })
+}
+
+const visiblePages = computed(() => {
+  const range = []
+  const maxVisible = 3
+
+  let start = Math.max(1, page - Math.floor(maxVisible / 2))
+  const end = Math.min(totalPages, start + maxVisible - 1)
+
+  if (end - start < maxVisible - 1) {
+    start = Math.max(1, end - maxVisible + 1)
+  }
+
+  for (let i = start; i <= end; i++) {
+    range.push(i)
+  }
+
+  return range
+})
 </script>
 
 <template>
-  <div class="mt-12 text-sm leading-6">
-    <div class="flex items-center mb-10 font-semibold text-slate-700">
+  <div class="mt-12 text-sm leading-6 max-w-2xl mx-auto">
+    <div class="flex items-center mb-10 font-semibold text-slate-700 justify-center">
       <RouterLink
         id="page-prev"
-        class="flex items-center group hover:text-slate-900"
+        :class="[
+          'flex items-center group hover:text-slate-900 pr-2 sm:pr-4 text-lg',
+          page === 1 ? 'opacity-25 pointer-events-none ' : '',
+        ]"
         :to="{ name: route, query: { page: page - 1 } }"
         rel="prev"
-        v-if="page != 1"
-        >&#60; Previous</RouterLink
+        >&#60;
+      </RouterLink>
+
+      <!-- First Page -->
+      <BaseButton
+        v-if="visiblePages[0] > 1"
+        class="!px-2 sm:!px-3"
+        :mode="page === 1 ? 'primary' : 'secondary'"
+        :isLink="false"
+        @click="goToPage(1)"
       >
+        1
+      </BaseButton>
+
+      <!-- Dots for skipped pages -->
+      <span v-if="visiblePages[0] > 2" class="px-2">...</span>
+
+      <BaseButton
+        v-for="p in visiblePages"
+        :key="p"
+        :mode="p === page ? 'primary' : 'secondary'"
+        class="!px-2 sm:!px-3"
+        :isLink="false"
+        @click="goToPage(p)"
+      >
+        {{ p }}
+      </BaseButton>
+
+      <!-- Dots for skipped pages -->
+      <span v-if="visiblePages[visiblePages.length - 1] < totalPages - 1" class="px-2">...</span>
+
+      <!-- Last Page -->
+      <BaseButton
+        v-if="visiblePages[visiblePages.length - 1] < totalPages"
+        :mode="'secondary'"
+        class="!px-2 sm:!px-3"
+        :isLink="false"
+        @click="goToPage(totalPages)"
+      >
+        {{ totalPages }}
+      </BaseButton>
+
       <RouterLink
         id="page-next"
-        class="flex items-center ml-auto group hover:text-slate-900"
         :to="{ name: route, query: { page: page + 1 } }"
         rel="next"
-        v-if="hasNextPage"
-        >Next &#62;</RouterLink
+        :class="[
+          'flex items-center  group hover:text-slate-900 pl-2 sm:pl-4 text-lg',
+          !hasNextPage ? 'opacity-25 pointer-events-none ' : '',
+        ]"
+      >
+        &#62;</RouterLink
       >
     </div>
   </div>
