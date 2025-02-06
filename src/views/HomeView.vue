@@ -10,6 +10,7 @@ import { useRouter } from 'vue-router'
 
 const props = defineProps(['page'])
 const totalPages = ref(0)
+const totalResults = ref(null)
 const searchQuery = ref('')
 const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 const movieResults = ref<Movie[] | null>(null)
@@ -30,6 +31,7 @@ const getSearchResults = async () => {
   }
 
   searchError.value = null
+  totalResults.value = null
 
   if (queryTimeout.value) clearTimeout(queryTimeout.value)
 
@@ -37,6 +39,7 @@ const getSearchResults = async () => {
     isLoading.value = true
     try {
       const movieDetails = await MovieService.searchMovies(searchQuery.value, page.value)
+      totalResults.value = movieDetails.data.total_results
       movieResults.value = movieDetails.data.results
       totalPages.value = movieDetails.data.total_pages
     } catch (error) {
@@ -67,24 +70,27 @@ watch([page], getSearchResults)
     </div>
     <p v-else-if="!isLoading && searchError">{{ searchError }}</p>
     <p
-      v-else-if="
-        !isLoading && (!movieResults || movieResults.length === 0) && searchQuery.trim().length > 0
-      "
+      v-else-if="!isLoading && totalResults === 0 && searchQuery.trim().length > 0"
+      class="text-lg font-bold text-center"
     >
       Sorry, we couldn't find any results
     </p>
-    <div
-      v-else
-      class="grid grid-cols-1 gap-4 px-5 py-10 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
-    >
-      <MovieCard
-        v-for="movie in movieResults"
-        :key="movie.id"
-        :id="movie.id"
-        :title="movie.title"
-        :date="movie.release_date"
-        :imgUrl="movie.poster_path"
-      />
+    <div v-else class="px-5">
+      <p v-if="totalResults && totalResults > 0" class="text-left">
+        Total results found: {{ totalResults }}
+      </p>
+      <div
+        class="grid grid-cols-1 gap-4 py-7 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+      >
+        <MovieCard
+          v-for="movie in movieResults"
+          :key="movie.id"
+          :id="movie.id"
+          :title="movie.title"
+          :date="movie.release_date"
+          :imgUrl="movie.poster_path"
+        />
+      </div>
     </div>
 
     <MoviePagination
