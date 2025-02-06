@@ -118,7 +118,7 @@ const addToFavorite = (id: number) => {
     </BaseDialog>
 
     <div
-      class="w-full bg-center bg-cover min-h-[70vh] h-[80vh] px-[5vw] gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
+      class="w-full relative bg-center bg-cover min-h-[70vh] px-[5vw] h-[80vh] gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
       :style="{
         backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}')`,
         backgroundPosition: '50% top',
@@ -163,7 +163,7 @@ const addToFavorite = (id: number) => {
         </div>
       </div>
 
-      <FavoritesBadge>
+      <FavoritesBadge class="absolute bottom-15">
         <template #default>
           <div class="flex justify-between items-center z-10 w-full pr-4">
             <h5 class="text-film-secondary z-10">⭐ Add to Favorites</h5>
