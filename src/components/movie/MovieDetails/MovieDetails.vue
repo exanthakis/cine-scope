@@ -2,14 +2,16 @@
 import MovieService from '@/services/MovieService'
 import type { MovieDetailsProps } from '@/types/component-types'
 import type { MovieDetails } from '@/types/movie-details'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import MovieDetailsItem from './MovieDetailsItem.vue'
 import { useRouter } from 'vue-router'
 import type { AxiosError } from 'axios'
+import FavoritesBadge from '@/components/FavoritesBadge.vue'
 
 const props = defineProps<MovieDetailsProps>()
 const id = computed(() => props.id)
 const router = useRouter()
+const openFavModal = ref(false)
 
 const getMovieData = async () => {
   try {
@@ -71,10 +73,50 @@ const originCountry = computed(() => {
     ? movieDetails.origin_country.map((country) => country).join(', ')
     : ''
 })
+
+const toggleFavModal = () => {
+  if (openFavModal.value === false) document.documentElement.style.overflow = 'hidden'
+  else document.documentElement.style.overflow = 'auto'
+
+  openFavModal.value = !openFavModal.value
+}
+
+const addToFavorite = (id: number) => {
+  console.log('add to favorite, id: ', id)
+}
 </script>
 
 <template>
   <div class="w-full bg-[#181818] relative text-white">
+    <BaseDialog
+      :show="!!openFavModal"
+      title="Do you want to add the movie to your favorites?"
+      @close="toggleFavModal"
+    >
+      <template #default>
+        <p>
+          Are you sure you want to add <strong>{{ movieDetails.title }}</strong> to your favorites?
+          This will save the movie to your list, allowing you to easily find and watch it later. You
+          can access your favorites anytime from the main navigation.
+        </p>
+        <p class="pt-5">Click 'Confirm' to add it now, or 'Close' if you change your mind.</p>
+      </template>
+      <template #actions>
+        <div class="flex gap-3">
+          <BaseButton
+            mode="primary"
+            class="rounded-xs"
+            :isLink="false"
+            @click="addToFavorite(movieDetails.id ? movieDetails.id : -1)"
+            >Confirm</BaseButton
+          >
+          <BaseButton mode="secondary" class="rounded-xs" :isLink="false" @click="toggleFavModal"
+            >Close</BaseButton
+          >
+        </div>
+      </template>
+    </BaseDialog>
+
     <div
       class="w-full bg-center bg-cover min-h-[70vh] h-[80vh] px-[5vw] gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
       :style="{
@@ -120,6 +162,17 @@ const originCountry = computed(() => {
           </div>
         </div>
       </div>
+
+      <FavoritesBadge>
+        <template #default>
+          <div class="flex justify-between items-center z-10 w-full pr-4">
+            <h5 class="text-film-secondary z-10">⭐ Add to Favorites</h5>
+            <BaseButton class="!px-7" :mode="'primary'" :isLink="false" @click="toggleFavModal">
+              Add Now
+            </BaseButton>
+          </div>
+        </template>
+      </FavoritesBadge>
     </div>
   </div>
   <div class="pt-20 bg-[#181818] w-full px-[5vw]">
