@@ -6,6 +6,7 @@ import SearchInput from '@/components/SearchInput.vue'
 import MovieService from '@/services/MovieService'
 import type { Movie } from '@/types/api'
 import { computed, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 
 const props = defineProps(['page'])
 const totalPages = ref(0)
@@ -14,6 +15,7 @@ const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 const movieResults = ref<Movie[] | null>(null)
 const isLoading = ref(false)
 const searchError = ref<string | null>(null)
+const router = useRouter()
 
 const page = computed(() => props.page)
 
@@ -40,6 +42,7 @@ const getSearchResults = async () => {
     } catch (error) {
       searchError.value =
         error instanceof Error ? error.message : 'Failed to fetch data - please try again later'
+      router.push({ name: 'network-error' })
     } finally {
       // Flicker Delay to display skeleton
       await new Promise((res) => setTimeout(res, 1000))
@@ -68,7 +71,7 @@ watch([page], getSearchResults)
         !isLoading && (!movieResults || movieResults.length === 0) && searchQuery.trim().length > 0
       "
     >
-      No stored movies found
+      Sorry, we couldn't find any results
     </p>
     <div
       v-else

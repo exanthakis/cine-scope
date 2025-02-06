@@ -3,6 +3,7 @@ import MovieDetailsView from '@/views/MovieDetailsView.vue'
 import NetworkError from '@/views/NetworkError.vue'
 import HomeView from '@/views/HomeView.vue'
 import PopularMovies from '@/views/PopularMovies.vue'
+import NotFound from '@/views/NotFound.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,12 +35,32 @@ const router = createRouter({
       component: () => import('../views/FavoritesView.vue'),
     },
     {
+      path: '/404/:resource',
+      name: '404-resource',
+      component: NotFound,
+      props: true,
+    },
+    {
+      path: '/:catchAll(.*)',
+      name: 'not-found',
+      component: NotFound,
+    },
+    {
       path: '/network-error',
       name: 'network-error',
       component: NetworkError,
     },
   ],
   linkActiveClass: 'active',
+  scrollBehavior(_, _2, savePosition) {
+    if (savePosition) {
+      return savePosition
+    }
+    return {
+      left: 0,
+      top: 0,
+    }
+  },
 })
 
 export default router

@@ -4,9 +4,12 @@ import type { MovieDetailsProps } from '@/types/component-types'
 import type { MovieDetails } from '@/types/movie-details'
 import { computed } from 'vue'
 import MovieDetailsItem from './MovieDetailsItem.vue'
+import { useRouter } from 'vue-router'
+import type { AxiosError } from 'axios'
 
 const props = defineProps<MovieDetailsProps>()
 const id = computed(() => props.id)
+const router = useRouter()
 
 const getMovieData = async () => {
   try {
@@ -16,7 +19,12 @@ const getMovieData = async () => {
     await new Promise((res) => setTimeout(res, 1000))
     return movieDetails.data
   } catch (err) {
-    if (err instanceof Error) return err.message
+    const error = err as AxiosError
+    if (error && error.response && error.response.status == 404) {
+      router.push({ name: '404-resource', params: { resource: 'movie' } })
+    } else {
+      router.push({ name: 'network-error' })
+    }
   }
 }
 
