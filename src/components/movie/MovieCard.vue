@@ -13,7 +13,7 @@ const onFavoriteClick = () => {
       class="relative min-h-[40vh] h-full w-full mx-auto overflow-hidden transition duration-200 transform rounded-sm group hover:scale-105"
     >
       <img
-        class="h-full rounded-lg shadow-lg"
+        class="h-full rounded-lg shadow-lg w-full"
         :src="`https://image.tmdb.org/t/p/w500${imgUrl}`"
         :alt="title"
       />
