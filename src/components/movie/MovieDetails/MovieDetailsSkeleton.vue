@@ -5,10 +5,10 @@ import AnimatedPlaceholder from '@/components/ui/AnimatedPlaceholder.vue'
 <template>
   <div class="w-full bg-[#181818] relative text-white">
     <div
-      class="w-full bg-center bg-cover min-h-[70vh] bg-gradient-to-r from-gray-100 animate-pulse h-[80vh] px-[5vw] gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
+      class="w-full bg-center bg-cover min-h-[70vh] bg-gradient-to-r from-gray-100 animate-pulse h-[80vh] gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
     >
       <div
-        class="container flex items-center justify-start h-full py-12 bg-opacity-50 gradient-left after:z-[-1] after:absolute after:content-[''] after:left-0 after:right[-200px] after:top-0 after:w-[60%] after:h-full"
+        class="container max-w-screen-xl flex items-center justify-start h-full py-12 bg-opacity-50 gradient-left after:z-[-1] after:absolute after:content-[''] after:left-0 after:right[-200px] after:top-0 after:w-[60%] after:h-full"
       >
         <div class="text-start z-100 w-[30%]">
           <div class="pl-0 pr-4 mx-auto">
@@ -35,8 +35,8 @@ import AnimatedPlaceholder from '@/components/ui/AnimatedPlaceholder.vue'
       </div>
     </div>
   </div>
-  <div class="pt-20 bg-[#181818] w-full px-[5vw]">
-    <div class="container pb-5">
+  <div class="pt-20 bg-[#181818] w-full">
+    <div class="container pb-5 max-w-screen-xl">
       <AnimatedPlaceholder class="max-w-[100%] h-10 mb-8" />
     </div>
   </div>

@@ -118,14 +118,14 @@ const addToFavorite = (id: number) => {
     </BaseDialog>
 
     <div
-      class="w-full bg-center bg-cover min-h-[70vh] h-[80vh] px-[5vw] gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
+      class="w-full bg-center bg-cover min-h-[70vh] h-[80vh] gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
       :style="{
         backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}')`,
         backgroundPosition: '50% top',
       }"
     >
       <div
-        class="container flex items-center justify-start h-full py-12 bg-opacity-50 gradient-left after:z-[-1] after:absolute after:content-[''] after:left-0 after:right[-200px] after:top-0 after:w-[60%] after:h-full"
+        class="container max-w-screen-xl flex items-center justify-start h-full py-12 bg-opacity-50 gradient-left after:z-[-1] after:absolute after:content-[''] after:left-0 after:right[-200px] after:top-0 after:w-[60%] after:h-full"
       >
         <div class="text-start z-100">
           <div class="pl-0 pr-4 mx-auto">
@@ -175,8 +175,8 @@ const addToFavorite = (id: number) => {
       </FavoritesBadge>
     </div>
   </div>
-  <div class="pt-20 bg-[#181818] w-full px-[5vw]">
-    <div class="container pb-5">
+  <div class="pt-20 bg-[#181818] w-full">
+    <div class="container max-w-screen-xl pb-5">
       <div v-if="movieDetails.tagline">
         <div class="hook-hr h-0.5 mb-4"></div>
         <div class="max-w-xl mx-auto text-base text-[#a3a3a3] text-center">
