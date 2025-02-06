@@ -72,10 +72,18 @@ body {
 
 nav .active {
   font-weight: bolder;
-  color: #e50914;
+  color: #fff;
 }
 
 .search-input {
-  background: linear-gradient(90deg, #6c1f41 -3.05%, #220e0f 99.59%);
+  background: linear-gradient(to right, #e50914 -0.08%, #c94ff5 81.14%, #5b79f1 99.92%);
   box-shadow: 8px 5px 16px 0 rgba(0, 0, 0, 0.37);
+}
+
+.body-color {
+  background: radial-gradient(
+    300% 100% at center top,
+    rgba(169, 185, 250, 0.15) 0%,
+    rgba(251, 251, 251, 0) 25%
+  );
 }
