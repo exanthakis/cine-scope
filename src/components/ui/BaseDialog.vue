@@ -8,13 +8,13 @@ defineEmits(['close'])
 </script>
 
 <template>
-  <teleport to="body">
+  <Teleport to="body">
     <div
       v-if="show"
       @click="$emit('close')"
       class="fixed top-0 left-0 h-screen w-full bg-film-tertiary/75 z-10"
     ></div>
-    <transition name="dialog">
+    <Transition name="dialog">
       <dialog
         open
         v-if="show"
@@ -32,6 +32,6 @@ defineEmits(['close'])
           <slot name="actions"></slot>
         </menu>
       </dialog>
-    </transition>
-  </teleport>
+    </Transition>
+  </Teleport>
 </template>

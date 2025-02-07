@@ -12,6 +12,7 @@ const props = defineProps<MovieDetailsProps>()
 const id = computed(() => props.id)
 const router = useRouter()
 const openFavModal = ref(false)
+const isExpanded = ref(false)
 
 const getMovieData = async () => {
   try {
@@ -84,6 +85,10 @@ const toggleFavModal = () => {
 const addToFavorite = (id: number) => {
   console.log('add to favorite, id: ', id)
 }
+
+const toggleReadMore = () => {
+  isExpanded.value = !isExpanded.value
+}
 </script>
 
 <template>
@@ -151,9 +156,27 @@ const addToFavorite = (id: number) => {
                 </span>
               </div>
               <!-- overview -->
-              <p class="max-w-xl mx-auto mt-4 mb-8 ml-0 text-lg text-gray-300">
-                {{ movieDetails.overview }}
-              </p>
+
+              <div class="max-w-xl mx-auto mt-4 mb-8 ml-0 text-lg text-gray-300">
+                <div class="max-h-[20vh] hide-scrollbar overflow-scroll">
+                  <Transition name="fade-text" mode="out-in">
+                    <p v-if="isExpanded && movieDetails.overview" class="inline">
+                      {{ movieDetails.overview }}
+                    </p>
+                    <p v-else-if="!isExpanded && movieDetails.overview" class="inline">
+                      {{ movieDetails?.overview.slice(0, 120) + '...' }}
+                    </p>
+                  </Transition>
+                </div>
+
+                <button
+                  v-if="movieDetails && movieDetails.overview && movieDetails.overview.length > 120"
+                  @click="toggleReadMore"
+                  class="font-semibold hover:underline cursor-pointer"
+                >
+                  {{ isExpanded ? 'Read Less' : 'Read More' }}
+                </button>
+              </div>
 
               <a :href="'https://www.imdb.com/title/' + imdbLink + '/'" target="_blank"
                 ><img alt="Imdb logo" class="logo" src="@/assets/imdb.svg" width="60" height="40"
@@ -167,7 +190,7 @@ const addToFavorite = (id: number) => {
         <template #default>
           <div class="flex justify-between items-center z-10 w-full pr-4">
             <h5 class="text-film-secondary z-10">⭐ Add to Favorites</h5>
-            <BaseButton class="!px-7" :mode="'primary'" :isLink="false" @click="toggleFavModal">
+            <BaseButton class="!px-11" :mode="'primary'" :isLink="false" @click="toggleFavModal">
               Add Now
             </BaseButton>
           </div>
@@ -225,3 +248,23 @@ const addToFavorite = (id: number) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.fade-text-enter-from,
+.fade-text-leave-to {
+  opacity: 0;
+}
+
+.fade-text-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-text-enter-to,
+.fade-text-leave-from {
+  opacity: 1;
+}
+
+.fade-text-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+</style>
