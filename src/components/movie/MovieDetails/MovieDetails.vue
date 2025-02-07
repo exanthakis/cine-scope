@@ -188,9 +188,16 @@ const toggleReadMore = () => {
 
       <FavoritesBadge class="absolute bottom-15">
         <template #default>
-          <div class="flex justify-between items-center z-10 w-full pr-4">
+          <div
+            class="flex flex-col sm:flex-row justify-between items-center gap-4 z-10 w-full pr-0 sm:pr-4"
+          >
             <h5 class="text-film-secondary z-10">⭐ Add to Favorites</h5>
-            <BaseButton class="!px-11" :mode="'primary'" :isLink="false" @click="toggleFavModal">
+            <BaseButton
+              class="!px-11 w-full sm:w-fit"
+              :mode="'primary'"
+              :isLink="false"
+              @click="toggleFavModal"
+            >
               Add Now
             </BaseButton>
           </div>
