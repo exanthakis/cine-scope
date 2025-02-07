@@ -146,14 +146,13 @@ const toggleReadMore = () => {
               <div class="mt-4 text-[#a3a3a3] font-normal">
                 <span class="inline-block">{{ movieDetails.release_date?.split('-')[0] }}</span>
                 <span class="text-[#a3a3a3] mx-1 my-0"> | </span>
-                <span class="inline-block">
-                  <span class="absolute left-[-9999px] top-[-9999px]">Maturity Rating:</span>
-                  <span class="border border-[#a1a1a1] p-1">{{ rating }}+</span>
-                  <span class="text-[#a3a3a3] mx-1 my-0"> | </span>
-                  <span class="inline-block">{{ duration }}</span>
-                  <span class="text-[#a3a3a3] mx-1 my-0"> | </span>
-                  <span>{{ formattedGenres }}</span>
-                </span>
+
+                <span class="absolute left-[-9999px] top-[-9999px]">Maturity Rating:</span>
+                <span class="border border-[#a1a1a1] p-1">{{ rating }}+</span>
+                <span class="text-[#a3a3a3] mx-1 my-0"> | </span>
+                <span class="inline-block">{{ duration }}</span>
+                <span class="text-[#a3a3a3] mx-1 my-0"> | </span>
+                <span>{{ formattedGenres }}</span>
               </div>
               <!-- overview -->
 
