@@ -2,28 +2,29 @@
 import MovieService from '@/services/MovieService'
 import type { MovieDetailsProps } from '@/types/component-types'
 import type { MovieDetails } from '@/types/movie-details'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import MovieDetailsItem from './MovieDetailsItem.vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import type { AxiosError } from 'axios'
 import FavoritesBadge from '@/components/FavoritesBadge.vue'
+import SimilarMovies from '../SimilarMovies.vue'
 
 const props = defineProps<MovieDetailsProps>()
-const id = computed(() => props.id)
+const route = useRoute()
 const router = useRouter()
 const openFavModal = ref(false)
 const isExpanded = ref(false)
+const movieDetails = ref<MovieDetails | null>(null)
+const id = computed(() => props.id)
 
 const getMovieData = async () => {
   try {
-    const movieDetails = await MovieService.getMovieData(id.value)
-
-    // Flicker Delay to display skeleton
-    await new Promise((res) => setTimeout(res, 1000))
-    return movieDetails.data
+    const response = await MovieService.getMovieData(id.value)
+    await new Promise((res) => setTimeout(res, 1000)) // Flicker Delay to display skeleton
+    return response.data
   } catch (err) {
     const error = err as AxiosError
-    if (error && error.response && error.response.status == 404) {
+    if (error.response?.status === 404) {
       router.push({ name: '404-resource', params: { resource: 'movie' } })
     } else {
       router.push({ name: 'network-error' })
@@ -31,68 +32,59 @@ const getMovieData = async () => {
   }
 }
 
-const movieDetails: MovieDetails = await getMovieData()
+movieDetails.value = await getMovieData()
 
-const rating = computed(() =>
-  movieDetails.vote_average ? movieDetails.vote_average.toFixed(1) : 0,
+// Re-Fetch Data When Route Changes (On click at similar movies section)
+watch(
+  () => route.params.id,
+  async (newId) => {
+    if (newId) movieDetails.value = await getMovieData()
+  },
 )
 
-console.log(movieDetails)
+const rating = computed(() => movieDetails.value?.vote_average?.toFixed(1) ?? 'N/A')
 
 const duration = computed(() => {
-  if (movieDetails.runtime) {
-    const hours = Math.floor(movieDetails.runtime / 60)
-    const remainingMinutes = movieDetails.runtime % 60
-    return `${hours}h${hours !== 1 ? 's' : ''} ${remainingMinutes}m`
-  }
-  return 0
+  const runtime = movieDetails.value?.runtime
+  if (!runtime) return 'Unknown'
+  const hours = Math.floor(runtime / 60)
+  const minutes = runtime % 60
+  return `${hours}h ${minutes}m`
 })
 
-const imdbLink = computed(() => (movieDetails.imdb_id ? movieDetails.imdb_id : 0))
+const imdbLink = computed(() => `https://www.imdb.com/title/${movieDetails.value?.imdb_id}/`)
 
-const formattedGenres = computed(() => {
-  return movieDetails.genres ? movieDetails.genres.map((genre) => genre.name).join(' - ') : ''
-})
-const adultContent = computed(() => {
-  return movieDetails.adult ? 'Yes' : 'No'
-})
+const formattedGenres = computed(
+  () => movieDetails.value?.genres?.map((g) => g.name).join(' - ') ?? 'N/A',
+)
 
-const spokenLanguages = computed(() => {
-  return movieDetails.spoken_languages
-    ? movieDetails.spoken_languages.map((lang) => lang.english_name).join(', ')
-    : ''
-})
+const adultContent = computed(() => (movieDetails.value?.adult ? 'Yes' : 'No'))
 
-const productionCountries = computed(() => {
-  return movieDetails.production_countries
-    ? movieDetails.production_countries.map((country) => country.name).join(', ')
-    : ''
-})
+const spokenLanguages = computed(
+  () => movieDetails.value?.spoken_languages?.map((l) => l.english_name).join(', ') ?? 'N/A',
+)
 
-const originCountry = computed(() => {
-  return movieDetails.origin_country
-    ? movieDetails.origin_country.map((country) => country).join(', ')
-    : ''
-})
+const productionCountries = computed(
+  () => movieDetails.value?.production_countries?.map((c) => c.name).join(', ') ?? 'N/A',
+)
+
+const originCountry = computed(
+  () => movieDetails.value?.origin_country?.map((country) => country).join(', ') ?? 'N/A',
+)
 
 const toggleFavModal = () => {
-  if (openFavModal.value === false) document.documentElement.style.overflow = 'hidden'
-  else document.documentElement.style.overflow = 'auto'
-
   openFavModal.value = !openFavModal.value
+  document.documentElement.style.overflow = openFavModal.value ? 'hidden' : 'auto'
 }
 
 const addToFavorite = (id: number) => {
   console.log('add to favorite, id: ', id)
 }
-
-const toggleReadMore = () => {
-  isExpanded.value = !isExpanded.value
-}
+const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
 </script>
 
 <template>
-  <div class="w-full bg-[#181818] relative text-white">
+  <div v-if="movieDetails" class="w-full bg-[#181818] relative text-white">
     <BaseDialog
       :show="!!openFavModal"
       title="Do you want to add the movie to your favorites?"
@@ -177,7 +169,7 @@ const toggleReadMore = () => {
                 </button>
               </div>
 
-              <a :href="'https://www.imdb.com/title/' + imdbLink + '/'" target="_blank"
+              <a :href="imdbLink" target="_blank"
                 ><img alt="Imdb logo" class="logo" src="@/assets/imdb.svg" width="60" height="40"
               /></a>
             </div>
@@ -204,7 +196,7 @@ const toggleReadMore = () => {
       </FavoritesBadge>
     </div>
   </div>
-  <div class="pt-20 bg-[#181818] w-full px-[5vw]">
+  <div v-if="movieDetails" class="pt-20 bg-[#181818] w-full px-[5vw]">
     <div class="container pb-5">
       <div v-if="movieDetails.tagline">
         <div class="hook-hr h-0.5 mb-4"></div>
@@ -250,6 +242,10 @@ const toggleReadMore = () => {
             </template>
           </MovieDetailsItem>
         </div>
+      </div>
+
+      <div v-if="movieDetails.id" class="py-10">
+        <SimilarMovies :id="movieDetails.id" />
       </div>
     </div>
   </div>

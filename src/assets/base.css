@@ -121,3 +121,8 @@ nav .active {
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Edge */
 }
+
+.no-rounded div,
+img {
+  border-radius: 0 !important;
+}
