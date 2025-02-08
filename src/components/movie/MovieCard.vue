@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MovieCardProps } from '@/types/component-types'
 
-defineProps<MovieCardProps>()
+const { id, title, imgUrl = '', hideFav = false } = defineProps<MovieCardProps>()
 
 const onFavoriteClick = () => {
   console.log('clicked')
@@ -18,6 +18,7 @@ const onFavoriteClick = () => {
         :alt="title"
       />
       <div
+        v-if="!hideFav"
         class="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-end p-1 duration-200 opacity-0 group-hover:opacity-100 bg-film-tertiary/35 transition-normal"
       >
         <button

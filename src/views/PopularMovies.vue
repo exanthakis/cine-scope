@@ -46,11 +46,15 @@ onMounted(() => {
         :key="movie.id"
         :id="movie.id"
         :title="movie.title"
-        :date="movie.release_date"
         :imgUrl="movie.poster_path"
       />
     </div>
 
-    <MoviePagination :page="page" :hasNextPage="hasNextPage" route="popular-list" />
+    <MoviePagination
+      :total-pages="totalPages"
+      :page="page"
+      route="popular-list"
+      :hasNextPage="hasNextPage"
+    />
   </main>
 </template>

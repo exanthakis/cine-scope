@@ -1,8 +1,8 @@
 export interface MovieCardProps {
   id: number
   title: string
-  date: string
   imgUrl?: string
+  hideFav?: boolean
 }
 
 export interface MovieDetailsProps {

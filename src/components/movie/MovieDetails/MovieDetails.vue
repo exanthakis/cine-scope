@@ -244,7 +244,7 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
         </div>
       </div>
 
-      <div v-if="movieDetails.id" class="py-10">
+      <div v-if="movieDetails.id" class="pb-10">
         <SimilarMovies :id="movieDetails.id" />
       </div>
     </div>

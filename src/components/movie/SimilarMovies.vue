@@ -5,6 +5,11 @@ import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import MovieCard from './MovieCard.vue'
 import type { Movie } from '@/types/api'
+import { BREAKPOINTS } from '@/constants/general'
+import { FreeMode } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
+import 'swiper/css/free-mode'
 
 interface SimilarMoviesProps {
   id: number
@@ -49,19 +54,22 @@ watch(
     <p v-else-if="!isLoading && similarMovies?.length === 0">Sorry, we couldn't find any results</p>
     <div v-else class="mt-6">
       <h2 class="text-3xl text-white mb-2.5 mt-5">More Like This</h2>
-      <div
-        class="grid grid-cols-1 gap-4 py-7 mx-auto max-2xl xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+      <Swiper
+        :breakpoints="BREAKPOINTS"
+        :spaceBetween="10"
+        :freeMode="true"
+        :pagination="false"
+        :modules="[FreeMode]"
       >
-        <MovieCard
-          v-for="movie in similarMovies"
-          :key="movie.id"
-          :id="movie?.id"
-          :title="movie.title"
-          :date="movie.release_date"
-          :imgUrl="movie.poster_path"
-          class="no-rounded"
-        />
-      </div>
+        <SwiperSlide v-for="movie in similarMovies" :key="movie.id"
+          ><MovieCard
+            :id="movie?.id"
+            :title="movie.title"
+            :hide-fav="true"
+            :imgUrl="movie.poster_path"
+            class="no-rounded !min-h-auto"
+        /></SwiperSlide>
+      </Swiper>
     </div>
   </div>
 </template>

@@ -87,7 +87,6 @@ watch([page], getSearchResults)
           :key="movie.id"
           :id="movie.id"
           :title="movie.title"
-          :date="movie.release_date"
           :imgUrl="movie.poster_path"
         />
       </div>

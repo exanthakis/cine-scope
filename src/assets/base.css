@@ -126,3 +126,7 @@ nav .active {
 img {
   border-radius: 0 !important;
 }
+
+.no-rounded div {
+  min-height: auto;
+}
