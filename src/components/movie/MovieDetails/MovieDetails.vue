@@ -115,14 +115,14 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
     </BaseDialog>
 
     <div
-      class="w-full relative bg-center bg-cover min-h-[70vh] px-[5vw] h-[80vh] gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
+      class="w-full relative bg-center bg-cover min-h-[70vh] px-[5vw] h-[80vh] bg-gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
       :style="{
         backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}')`,
         backgroundPosition: '50% top',
       }"
     >
       <div
-        class="container flex items-center justify-start h-full py-12 bg-opacity-50 gradient-left after:z-[-1] after:absolute after:content-[''] after:left-0 after:right[-200px] after:top-0 after:w-[60%] after:h-full"
+        class="container flex items-center justify-start h-full py-12 bg-opacity-50 bg-gradient-left after:z-[-1] after:absolute after:content-[''] after:left-0 after:right[-200px] after:top-0 after:w-[60%] after:h-full"
       >
         <div class="text-start z-100">
           <div class="pl-0 pr-4 mx-auto">
@@ -149,7 +149,7 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
               <!-- overview -->
 
               <div class="max-w-xl mx-auto mt-4 mb-8 ml-0 text-lg text-gray-300">
-                <div class="max-h-[20vh] hide-scrollbar overflow-scroll">
+                <div class="max-h-[20vh] scrollbar-0 overflow-scroll">
                   <Transition name="fade-text" mode="out-in">
                     <p v-if="isExpanded && movieDetails.overview" class="inline">
                       {{ movieDetails.overview }}
@@ -199,11 +199,11 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
   <div v-if="movieDetails" class="pt-20 bg-[#181818] w-full px-[5vw]">
     <div class="container pb-5">
       <div v-if="movieDetails.tagline">
-        <div class="hook-hr h-0.5 mb-4"></div>
+        <div class="bg-linear-hr h-0.5 mb-4"></div>
         <div class="max-w-xl mx-auto text-base text-[#a3a3a3] text-center">
           {{ movieDetails.tagline }}
         </div>
-        <div class="hook-hr h-0.5 mt-4"></div>
+        <div class="bg-linear-hr h-0.5 mt-4"></div>
       </div>
 
       <div class="py-10">

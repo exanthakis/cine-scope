@@ -35,3 +35,25 @@ defineEmits(['close'])
     </Transition>
   </Teleport>
 </template>
+
+<style scoped>
+.dialog-enter-from,
+.dialog-leave-to {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.dialog-enter-to,
+.dialog-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.dialog-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.dialog-leave-active {
+  transition: all 0.3s ease-in;
+}
+</style>

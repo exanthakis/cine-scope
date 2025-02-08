@@ -23,3 +23,10 @@ import TheLogo from '../ui/TheLogo.vue'
     </nav>
   </header>
 </template>
+
+<style scoped>
+nav .active {
+  font-weight: bolder;
+  color: #fff;
+}
+</style>

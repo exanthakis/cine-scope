@@ -67,7 +67,7 @@ watch(
             :title="movie.title"
             :hide-fav="true"
             :imgUrl="movie.poster_path"
-            class="no-rounded !min-h-auto"
+            class="rounded-0-child !min-h-auto"
         /></SwiperSlide>
       </Swiper>
     </div>

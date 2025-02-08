@@ -9,7 +9,7 @@ const handleInput = () => {
 
 <template>
   <div
-    class="m-8 relative search-input rounded-[7px] p-0.5 text-film-tertiary w-full justify-center shadow-xl mx-[5vw]"
+    class="m-8 relative bg-search-input rounded-[7px] p-0.5 text-film-tertiary w-full justify-center shadow-xl mx-[5vw]"
   >
     <div class="py-2 px-3 w-full bg-film-secondary rounded-[5px] flex gap-4">
       <img

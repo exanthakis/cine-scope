@@ -1,12 +1,9 @@
 :root {
-  --color-text: #000;
+  --color-text: #fff;
 }
 
 * {
   box-sizing: border-box;
-  /* margin: 0;
-  padding: 0; */
-  /* font-weight: normal; */
 }
 
 body {
@@ -19,7 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.gradient-left::after {
+.bg-gradient-left::after {
   background: linear-gradient(
     90deg,
     #181818 10%,
@@ -43,7 +40,7 @@ body {
   z-index: 1;
 }
 
-.gradient-bottom::after {
+.bg-gradient-bottom::after {
   background: linear-gradient(
     0deg,
     #181818 0,
@@ -66,21 +63,15 @@ body {
   z-index: 1;
 }
 
-.hook-hr {
+.bg-linear-hr {
   background: linear-gradient(90deg, #777 0, rgba(51, 51, 51, 0.5) 50%, #777);
 }
 
-nav .active {
-  font-weight: bolder;
-  color: #fff;
-}
-
-.search-input {
+.bg-search-input {
   background: linear-gradient(to right, #e50914 -0.08%, #c94ff5 81.14%, #5b79f1 99.92%);
-  box-shadow: 8px 5px 16px 0 rgba(0, 0, 0, 0.37);
 }
 
-.body-color {
+.bg-radial-white {
   background: radial-gradient(
     300% 100% at center top,
     rgba(169, 185, 250, 0.15) 0%,
@@ -88,45 +79,25 @@ nav .active {
   );
 }
 
-.secondary-gradient {
+.bg-gradient-red {
   background: linear-gradient(90deg, #6c1f41 -3.05%, #220e0f 99.59%);
 }
 
-.dialog-enter-from,
-.dialog-leave-to {
-  opacity: 0;
-  transform: scale(0.8);
-}
-
-.dialog-enter-to,
-.dialog-leave-from {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.dialog-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.dialog-leave-active {
-  transition: all 0.3s ease-in;
-}
-
-.hide-scrollbar {
+.scrollbar-0 {
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
 
-.hide-scrollbar::-webkit-scrollbar {
+.scrollbar-0::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Edge */
 }
 
-.no-rounded div,
+.rounded-0-child div,
 img {
   border-radius: 0 !important;
 }
 
-.no-rounded div {
+.rounded-0-child div {
   min-height: auto;
 }
