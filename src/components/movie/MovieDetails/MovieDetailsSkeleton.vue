@@ -33,6 +33,10 @@ import AnimatedPlaceholder from '@/components/ui/AnimatedPlaceholder.vue'
           </div>
         </div>
       </div>
+
+      <div class="absolute bottom-2 w-[80%] z-10">
+        <AnimatedPlaceholder class="max-w-[100%] h-14" />
+      </div>
     </div>
   </div>
   <div class="pt-20 bg-[#181818] w-full px-[5vw] sm:px-[10vw]">
