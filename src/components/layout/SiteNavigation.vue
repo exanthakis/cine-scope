@@ -4,9 +4,9 @@ import TheLogo from '../ui/TheLogo.vue'
 </script>
 
 <template>
-  <header class="flex justify-center w-full !px-[5vw] shadow-lg bg-film-tertiary">
+  <header class="w-full px-[5vw] sm:px-[10vw] shadow-lg bg-film-tertiary">
     <nav
-      class="container flex flex-col items-center justify-between w-full gap-4 py-4 font-light text-gray-400 sm:flex-row"
+      class="flex flex-col items-center justify-between w-full gap-4 py-4 font-light text-gray-400 sm:flex-row"
     >
       <TheLogo />
       <ul class="flex items-center gap-3">

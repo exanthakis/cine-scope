@@ -50,10 +50,10 @@ watch(
 </script>
 <template>
   <div>
+    <h2 class="text-3xl text-white mb-2.5 mt-5">More Like This</h2>
     <div v-if="isLoading">loading..</div>
     <p v-else-if="!isLoading && similarMovies?.length === 0">Sorry, we couldn't find any results</p>
     <div v-else class="mt-6">
-      <h2 class="text-3xl text-white mb-2.5 mt-5">More Like This</h2>
       <Swiper
         :breakpoints="BREAKPOINTS"
         :spaceBetween="10"

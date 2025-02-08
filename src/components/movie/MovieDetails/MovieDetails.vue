@@ -115,7 +115,7 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
     </BaseDialog>
 
     <div
-      class="w-full relative bg-center bg-cover min-h-[70vh] px-[5vw] h-[80vh] bg-gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
+      class="w-full relative bg-center bg-cover min-h-[70vh] px-[5vw] sm:px-[10vw] h-[80vh] bg-gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
       :style="{
         backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}')`,
         backgroundPosition: '50% top',
@@ -196,7 +196,7 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
       </FavoritesBadge>
     </div>
   </div>
-  <div v-if="movieDetails" class="pt-20 bg-[#181818] w-full px-[5vw]">
+  <div v-if="movieDetails" class="pt-20 bg-[#181818] w-full px-[5vw] sm:px-[10vw]">
     <div class="container pb-5">
       <div v-if="movieDetails.tagline">
         <div class="bg-linear-hr h-0.5 mb-4"></div>
