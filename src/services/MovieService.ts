@@ -1,13 +1,5 @@
-import axios from 'axios'
-
-const apiClient = axios.create({
-  baseURL: 'https://api.themoviedb.org/3',
-  withCredentials: false,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-})
+import { DEFAULT_LANGUAGE } from '@/constants/general'
+import { apiClient } from '@/lib/http'
 
 const getPopularMovies = (page: string) => {
   return apiClient.get(
@@ -17,7 +9,12 @@ const getPopularMovies = (page: string) => {
 
 const getMovieData = (id: string) => {
   return apiClient.get(
-    '/movie/' + id + '?api_key=' + import.meta.env.VITE_TMDB_API_KEY + '&language=en-US',
+    '/movie/' +
+      id +
+      '?api_key=' +
+      import.meta.env.VITE_TMDB_API_KEY +
+      '&language=' +
+      DEFAULT_LANGUAGE,
   )
 }
 
@@ -27,7 +24,9 @@ const getSimilarMovies = (id: string) => {
       id +
       '/similar?api_key=' +
       import.meta.env.VITE_TMDB_API_KEY +
-      '&language=en-US&page=1',
+      '&language=' +
+      DEFAULT_LANGUAGE +
+      '&page=1',
   )
 }
 
