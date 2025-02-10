@@ -8,6 +8,8 @@ import { useRoute, useRouter } from 'vue-router'
 import type { AxiosError } from 'axios'
 import FavoritesBadge from '@/components/FavoritesBadge.vue'
 import SimilarMovies from '../SimilarMovies.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
+import CreditsWrapper from '@/components/credits/CreditsWrapper.vue'
 
 const props = defineProps<MovieDetailsProps>()
 const route = useRoute()
@@ -174,7 +176,7 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
               </div>
 
               <a :href="imdbLink" target="_blank"
-                ><img alt="Imdb logo" class="logo" src="@/assets/imdb.svg" width="60" height="40"
+                ><img alt="Imdb logo" src="@/assets/imdb.svg" width="60" height="40"
               /></a>
             </div>
           </div>
@@ -242,9 +244,7 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
         </div>
       </div>
 
-      <div class="pb-10">
-        <h2 class="text-3xl text-white mb-2.5 mt-5">Cast - Crew</h2>
-      </div>
+      <CreditsWrapper :cast="movieDetails.credits.cast" :crew="movieDetails.credits.crew" />
 
       <div v-if="movieDetails.id" class="pb-10">
         <SimilarMovies :id="movieDetails.id" />

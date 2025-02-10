@@ -13,12 +13,12 @@ type Cast = {
   profile_path?: string
 }
 
-type Credit = Omit<Cast, 'cast_id' | 'character' | 'order'> & {
+type Crew = Omit<Cast, 'cast_id' | 'character' | 'order'> & {
   department?: string
   job?: string
 }
 
 export type Credits = {
-  cast: Credit[]
-  crew: Cast[]
+  cast: Cast[]
+  crew: Crew[]
 }

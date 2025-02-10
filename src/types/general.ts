@@ -14,3 +14,14 @@ export interface BaseButtonProps {
   isLink: boolean
   to?: string
 }
+
+export interface CreditsListProps {
+  credits: AvatarTextProps[]
+  type: string
+}
+export interface AvatarTextProps {
+  id?: number
+  name?: string
+  title?: string
+  path?: string
+}

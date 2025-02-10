@@ -5,7 +5,7 @@ import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import MovieCard from './MovieCard.vue'
 import type { Movie } from '@/types/movie'
-import { BREAKPOINTS } from '@/constants/general'
+import { MOVIES_SLIDER_BREAKPOINTS } from '@/constants/general'
 import { FreeMode } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
@@ -55,7 +55,7 @@ watch(
     <p v-else-if="!isLoading && similarMovies?.length === 0">Sorry, we couldn't find any results</p>
     <div v-else class="mt-6">
       <Swiper
-        :breakpoints="BREAKPOINTS"
+        :breakpoints="MOVIES_SLIDER_BREAKPOINTS"
         :spaceBetween="10"
         :freeMode="true"
         :pagination="false"
