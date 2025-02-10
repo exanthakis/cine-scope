@@ -72,6 +72,10 @@ const originCountry = computed(
   () => movieDetails.value?.origin_country?.map((country) => country).join(', ') ?? 'N/A',
 )
 
+const prodCompanies = computed(
+  () => movieDetails.value?.production_companies?.map((cmp) => cmp.name).join(', ') ?? 'N/A',
+)
+
 const toggleFavModal = () => {
   openFavModal.value = !openFavModal.value
   document.documentElement.style.overflow = openFavModal.value ? 'hidden' : 'auto'
@@ -231,14 +235,8 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
         <div class="mt-4">
           <MovieDetailsItem>
             <template #header>Production Companies</template>
-            <template #default v-if="movieDetails && movieDetails.production_companies">
-              <template v-for="prodCmp in movieDetails.production_companies" :key="prodCmp.id">
-                <img
-                  class="mt-2 rounded-lg h-9"
-                  :src="`https://image.tmdb.org/t/p/original${prodCmp.logo_path}`"
-                  :alt="prodCmp.name"
-                />
-              </template>
+            <template #default>
+              {{ prodCompanies }}
             </template>
           </MovieDetailsItem>
         </div>
