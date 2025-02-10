@@ -101,3 +101,16 @@ body {
 .rounded-0-child div {
   min-height: auto;
 }
+
+::-webkit-scrollbar {
+  width: 0.65rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d5dee6;
+  border-radius: 3rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #2d2d2d;
+}
