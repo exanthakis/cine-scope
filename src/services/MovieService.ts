@@ -14,7 +14,8 @@ const getMovieData = (id: string) => {
       '?api_key=' +
       import.meta.env.VITE_TMDB_API_KEY +
       '&language=' +
-      DEFAULT_LANGUAGE,
+      DEFAULT_LANGUAGE +
+      '&append_to_response=credits,videos,watch/providers',
   )
 }
 

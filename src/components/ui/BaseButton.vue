@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BaseButtonProps } from '@/types/component-types'
+import type { BaseButtonProps } from '@/types/general'
 import { computed } from 'vue'
 
 const { to = '/', mode, isLink } = defineProps<BaseButtonProps>()

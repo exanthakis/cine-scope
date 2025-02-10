@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MovieService from '@/services/MovieService'
-import type { MovieDetailsProps } from '@/types/component-types'
-import type { MovieDetails } from '@/types/movie-details'
+import type { MovieDetailsProps } from '@/types/general'
+import type { MovieDetails } from '@/types/movie'
 import { computed, ref, watch } from 'vue'
 import MovieDetailsItem from './MovieDetailsItem.vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -240,6 +240,10 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
             </template>
           </MovieDetailsItem>
         </div>
+      </div>
+
+      <div class="pb-10">
+        <h2 class="text-3xl text-white mb-2.5 mt-5">Cast - Crew</h2>
       </div>
 
       <div v-if="movieDetails.id" class="pb-10">

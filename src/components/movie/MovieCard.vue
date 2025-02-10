@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MovieCardProps } from '@/types/component-types'
+import type { MovieCardProps } from '@/types/general'
 
 const { id, title, imgUrl = '', hideFav = false } = defineProps<MovieCardProps>()
 
