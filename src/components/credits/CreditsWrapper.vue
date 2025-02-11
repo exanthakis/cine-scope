@@ -7,7 +7,7 @@ import type { Credits } from '@/types/cast'
 
 const { cast: castInfo, crew: crewInfo } = defineProps<Credits>()
 
-const currentTab = ref<keyof typeof tabs>('Cast')
+const currentTab = ref<'Cast' | 'Crew'>('Cast')
 
 const cast = computed<AvatarTextProps[]>(() => {
   const castList =
@@ -33,11 +33,12 @@ const crew = computed<AvatarTextProps[]>(() => {
   return filterUniqueById(crewList)
 })
 
-const tabs = {
+const tabs = computed(() => ({
   Cast: { component: CreditsList, props: { credits: cast.value, type: 'Cast' } },
   Crew: { component: CreditsList, props: { credits: crew.value, type: 'Crew' } },
-}
-const currentComponent = computed(() => tabs[currentTab.value])
+}))
+
+const currentComponent = computed(() => tabs.value[currentTab.value])
 </script>
 
 <template>
@@ -57,5 +58,3 @@ const currentComponent = computed(() => tabs[currentTab.value])
     <component :is="currentComponent.component" v-bind="currentComponent.props"></component>
   </div>
 </template>
-
-<style lang="scss" scoped></style>

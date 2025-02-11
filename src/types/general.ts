@@ -1,3 +1,5 @@
+import type { Genre } from './movie'
+
 export interface MovieCardProps {
   id: number
   title: string
@@ -24,4 +26,17 @@ export interface AvatarTextProps {
   name?: string
   title?: string
   path?: string
+}
+
+export interface MovieDetailsHeroProps {
+  id?: number
+  backdrop_path?: string | null
+  homepage?: string | null
+  title?: string
+  release_date?: string
+  vote_average?: number | null
+  runtime?: number | null
+  genres?: Genre[]
+  overview?: string | null
+  imdb_id?: string | null
 }

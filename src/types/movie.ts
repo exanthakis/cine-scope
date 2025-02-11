@@ -24,7 +24,7 @@ interface Collection {
   backdrop_path: string | null
 }
 
-interface Genre {
+export interface Genre {
   id: number
   name: string
 }
