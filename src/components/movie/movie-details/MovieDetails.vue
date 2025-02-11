@@ -62,6 +62,18 @@ const originCountry = computed(
 const prodCompanies = computed(
   () => movieDetails.value?.production_companies?.map((cmp) => cmp.name).join(', ') ?? 'N/A',
 )
+
+const trailerKey = computed((): string => {
+  const ytTrailers = movieDetails.value?.videos?.results.filter(
+    (el) =>
+      el.type?.toLowerCase() === 'trailer' &&
+      el.site?.toLowerCase() === 'youtube' &&
+      el.key &&
+      el.official,
+  )
+  if (ytTrailers && ytTrailers.length > 0 && ytTrailers[0].key) return ytTrailers[0].key
+  return ''
+})
 </script>
 
 <template>
@@ -77,6 +89,7 @@ const prodCompanies = computed(
       :genres="movieDetails.genres"
       :overview="movieDetails.overview"
       :imdb_id="movieDetails.imdb_id"
+      :trailerKey="trailerKey"
     />
   </div>
   <div v-if="movieDetails" class="pt-20 bg-[#181818] w-full px-[5vw] sm:px-[15vw]">
