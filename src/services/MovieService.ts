@@ -23,7 +23,7 @@ const getSimilarMovies = (id: string) => {
   return apiClient.get(
     '/movie/' +
       id +
-      '/similar?api_key=' +
+      '/recommendations?api_key=' +
       import.meta.env.VITE_TMDB_API_KEY +
       '&language=' +
       DEFAULT_LANGUAGE +
