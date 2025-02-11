@@ -15,7 +15,7 @@ const handleInput = () => {
       <img
         alt="Imdb logo"
         class="logo bg-film-secondary"
-        src="@/assets/search.svg"
+        src="@/assets/icons/search.svg"
         width="24"
         height="24"
       />

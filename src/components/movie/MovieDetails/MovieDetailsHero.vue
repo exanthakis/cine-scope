@@ -119,7 +119,7 @@ const addToFavorite = (id: number) => {
             </div>
 
             <a :href="imdbLink" target="_blank"
-              ><img alt="Imdb logo" src="@/assets/imdb.svg" width="60" height="40"
+              ><img alt="Imdb logo" src="@/assets/icons/imdb.svg" width="60" height="40"
             /></a>
           </div>
         </div>
