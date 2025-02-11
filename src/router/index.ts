@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MovieDetailsView from '@/views/MovieDetailsView.vue'
 import NetworkError from '@/views/NetworkError.vue'
 import HomeView from '@/views/HomeView.vue'
-import PopularMovies from '@/views/PopularMovies.vue'
+import PopularMovies from '@/views/PopularMoviesView.vue'
 import NotFound from '@/views/NotFound.vue'
 
 const router = createRouter({
