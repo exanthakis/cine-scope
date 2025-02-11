@@ -72,10 +72,12 @@ const handleVideoPlay = () => {
       <div
         :style="cursorCircle"
         :class="[
-          'pointer-events-none select-none top-0 left-0 fixed w-15 h-15 rounded-full bg-film-secondary z-10 backface-hidden transition-opacity duration-500 ease-out',
+          'pointer-events-none select-none top-0 left-0 fixed w-20 h-20 rounded-full bg-film-secondary z-10 backface-hidden transition-opacity duration-500 ease-out flex justify-center items-center',
           isHovered ? 'opacity-0 ' : '',
         ]"
-      ></div>
+      >
+        <img src="@/assets/icons/play.svg" alt="play-video-icon" class="w-2.5 h-2.5 rotate-90" />
+      </div>
     </div>
     <BaseDialog
       :show="!!openFavModal"
