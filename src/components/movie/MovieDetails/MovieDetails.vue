@@ -121,14 +121,14 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
     </BaseDialog>
 
     <div
-      class="w-full relative bg-center bg-cover min-h-[70vh] px-[5vw] sm:px-[15vw] h-[80vh] bg-gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
+      class="w-full relative bg-center bg-cover min-h-[70vh] px-[5vw] sm:px-[15vw] h-[80vh] before:bg-[rgba(0,0,0,0.6)] before:absolute sm:before:content-none before:content-[''] before:z-0 before:h-full before:w-full before:left-0 before:top-0 bg-gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
       :style="{
         backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}')`,
         backgroundPosition: '50% top',
       }"
     >
       <div
-        class="container flex items-center justify-start h-full py-12 bg-opacity-50 bg-gradient-left after:z-[-1] after:absolute after:content-[''] after:left-0 after:right[-200px] after:top-0 after:w-[60%] after:h-full"
+        class="container flex items-center justify-start h-full py-12 bg-opacity-50 after:content-none sm:after:content-[''] bg-gradient-left after:z-[-1] after:absolute after:left-0 after:right[-200px] after:top-0 after:w-[60%] after:h-full"
       >
         <div class="text-start z-100">
           <div class="pl-0 pr-4 mx-auto">
