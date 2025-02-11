@@ -15,8 +15,10 @@ const route = useRoute()
 const router = useRouter()
 const movieDetails = ref<MovieDetails | null>(null)
 const id = computed(() => props.id)
+const isLoading = ref(false)
 
 const getMovieData = async () => {
+  isLoading.value = true
   try {
     const response = await MovieService.getMovieData(id.value)
     await new Promise((res) => setTimeout(res, 1000)) // Flicker Delay to display skeleton
@@ -28,6 +30,8 @@ const getMovieData = async () => {
     } else {
       router.push({ name: 'network-error' })
     }
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -117,7 +121,11 @@ const prodCompanies = computed(
         </div>
       </div>
 
-      <CreditsWrapper :cast="movieDetails.credits.cast" :crew="movieDetails.credits.crew" />
+      <CreditsWrapper
+        :isLoading="isLoading"
+        :cast="movieDetails.credits.cast"
+        :crew="movieDetails.credits.crew"
+      />
 
       <div v-if="movieDetails.id" class="pb-10">
         <SimilarMovies :id="movieDetails.id" />

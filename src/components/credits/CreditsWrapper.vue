@@ -5,7 +5,7 @@ import { computed, ref } from 'vue'
 import CreditsList from './CreditsList.vue'
 import type { Credits } from '@/types/cast'
 
-const { cast: castInfo, crew: crewInfo } = defineProps<Credits>()
+const { cast: castInfo, crew: crewInfo, isLoading } = defineProps<Credits>()
 
 const currentTab = ref<'Cast' | 'Crew'>('Cast')
 
@@ -34,8 +34,8 @@ const crew = computed<AvatarTextProps[]>(() => {
 })
 
 const tabs = computed(() => ({
-  Cast: { component: CreditsList, props: { credits: cast.value, type: 'Cast' } },
-  Crew: { component: CreditsList, props: { credits: crew.value, type: 'Crew' } },
+  Cast: { component: CreditsList, props: { credits: cast.value, type: 'Cast', isLoading } },
+  Crew: { component: CreditsList, props: { credits: crew.value, type: 'Crew', isLoading } },
 }))
 
 const currentComponent = computed(() => tabs.value[currentTab.value])

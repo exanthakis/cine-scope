@@ -15,8 +15,8 @@ defineProps<AvatarTextProps>()
     <img v-else alt="Imdb logo" class="w-25 h-25" src="@/assets/placeholder-avatar.svg" />
 
     <div class="font-medium text-white text-center">
-      <div>{{ name }}</div>
-      <div class="text-sm text-gray-500 dark:text-gray-400">{{ title }}</div>
+      <h5>{{ name }}</h5>
+      <p class="text-sm text-gray-400">{{ title }}</p>
     </div>
   </div>
 </template>

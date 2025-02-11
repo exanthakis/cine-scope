@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import { CREDITS_SLIDER_BREAKPOINTS } from '@/constants/general'
+import AvatarTextSkeleton from '../ui/AvatarTextSkeleton.vue'
 
 defineProps<CreditsListProps>()
 </script>
@@ -19,9 +20,10 @@ defineProps<CreditsListProps>()
     :modules="[FreeMode]"
     :scrollbar="{ draggable: true }"
   >
-    <SwiperSlide v-for="credit in credits" :key="credit.id" class="width-fit"
-      ><AvatarText :="credit"
-    /></SwiperSlide>
+    <SwiperSlide v-for="credit in credits" :key="credit.id" class="width-fit">
+      <AvatarText v-if="!isLoading" :="credit" />
+      <AvatarTextSkeleton v-else />
+    </SwiperSlide>
   </Swiper>
 </template>
 

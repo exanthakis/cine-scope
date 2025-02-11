@@ -21,4 +21,5 @@ type Crew = Omit<Cast, 'cast_id' | 'character' | 'order'> & {
 export type Credits = {
   cast: Cast[]
   crew: Crew[]
+  isLoading: boolean
 }
