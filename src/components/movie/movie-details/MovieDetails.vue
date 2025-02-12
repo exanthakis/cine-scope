@@ -77,71 +77,73 @@ const trailerKey = computed((): string => {
 </script>
 
 <template>
-  <div v-if="movieDetails" class="relative w-full bg-[#181818] text-white">
-    <MovieDetailsHero
-      :id="movieDetails.id"
-      :backdrop_path="movieDetails.backdrop_path"
-      :homepage="movieDetails.homepage"
-      :title="movieDetails.title"
-      :release_date="movieDetails.release_date"
-      :vote_average="movieDetails.runtime"
-      :runtime="movieDetails.runtime"
-      :genres="movieDetails.genres"
-      :overview="movieDetails.overview"
-      :imdb_id="movieDetails.imdb_id"
-      :trailerKey="trailerKey"
-    />
-  </div>
-  <div v-if="movieDetails" class="w-full bg-[#181818] px-[5vw] pt-20 md:px-[8vw] lg:px-[15vw]">
-    <div class="container pb-5">
-      <div v-if="movieDetails.tagline">
-        <div class="bg-linear-hr mb-4 h-0.5"></div>
-        <div class="mx-auto max-w-xl text-center text-base text-[#a3a3a3]">
-          {{ movieDetails.tagline }}
-        </div>
-        <div class="bg-linear-hr mt-4 h-0.5"></div>
-      </div>
-
-      <div class="py-10">
-        <h2 class="mt-5 mb-2.5 text-3xl text-white">More Details</h2>
-        <div
-          class="max-2xl mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        >
-          <MovieDetailsItem>
-            <template #header>Audio</template>
-            <template #default>{{ spokenLanguages }}</template>
-          </MovieDetailsItem>
-          <MovieDetailsItem>
-            <template #header>Adult Content</template>
-            <template #default>{{ adultContent }}</template>
-          </MovieDetailsItem>
-          <MovieDetailsItem>
-            <template #header>Production Countries</template>
-            <template #default>{{ productionCountries }}</template>
-          </MovieDetailsItem>
-          <MovieDetailsItem>
-            <template #header>Origin Country</template>
-            <template #default>{{ originCountry }}</template>
-          </MovieDetailsItem>
-        </div>
-        <div class="mt-4">
-          <MovieDetailsItem>
-            <template #header>Production Companies</template>
-            <template #default>
-              {{ prodCompanies }}
-            </template>
-          </MovieDetailsItem>
-        </div>
-      </div>
-
-      <CreditsWrapper
-        :isLoading="isLoading"
-        :cast="movieDetails.credits.cast"
-        :crew="movieDetails.credits.crew"
+  <div v-if="movieDetails" class="w-full bg-[#181818]">
+    <div class="relative text-white">
+      <MovieDetailsHero
+        :id="movieDetails.id"
+        :backdrop_path="movieDetails.backdrop_path"
+        :homepage="movieDetails.homepage"
+        :title="movieDetails.title"
+        :release_date="movieDetails.release_date"
+        :vote_average="movieDetails.runtime"
+        :runtime="movieDetails.runtime"
+        :genres="movieDetails.genres"
+        :overview="movieDetails.overview"
+        :imdb_id="movieDetails.imdb_id"
+        :trailerKey="trailerKey"
       />
+    </div>
+    <div class="px-[5vw] pt-20 md:px-[8vw] lg:px-[15vw]">
+      <div class="container pb-5">
+        <div v-if="movieDetails.tagline">
+          <div class="bg-linear-hr mb-4 h-0.5"></div>
+          <div class="mx-auto max-w-xl text-center text-base text-[#a3a3a3]">
+            {{ movieDetails.tagline }}
+          </div>
+          <div class="bg-linear-hr mt-4 h-0.5"></div>
+        </div>
 
-      <div v-if="movieDetails.id" class="pb-10">
-        <SimilarMovies :id="movieDetails.id" />
+        <div class="py-10">
+          <h2 class="mt-5 mb-2.5 text-3xl text-white">More Details</h2>
+          <div
+            class="max-2xl mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          >
+            <MovieDetailsItem>
+              <template #header>Audio</template>
+              <template #default>{{ spokenLanguages }}</template>
+            </MovieDetailsItem>
+            <MovieDetailsItem>
+              <template #header>Adult Content</template>
+              <template #default>{{ adultContent }}</template>
+            </MovieDetailsItem>
+            <MovieDetailsItem>
+              <template #header>Production Countries</template>
+              <template #default>{{ productionCountries }}</template>
+            </MovieDetailsItem>
+            <MovieDetailsItem>
+              <template #header>Origin Country</template>
+              <template #default>{{ originCountry }}</template>
+            </MovieDetailsItem>
+          </div>
+          <div class="mt-4">
+            <MovieDetailsItem>
+              <template #header>Production Companies</template>
+              <template #default>
+                {{ prodCompanies }}
+              </template>
+            </MovieDetailsItem>
+          </div>
+        </div>
+
+        <CreditsWrapper
+          :isLoading="isLoading"
+          :cast="movieDetails.credits.cast"
+          :crew="movieDetails.credits.crew"
+        />
+
+        <div v-if="movieDetails.id" class="pb-10">
+          <SimilarMovies :id="movieDetails.id" />
+        </div>
       </div>
     </div>
   </div>
