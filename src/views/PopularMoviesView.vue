@@ -2,7 +2,7 @@
 import MovieCard from '@/components/movie/MovieCard.vue'
 import MoviePagination from '@/components/movie/MoviePagination.vue'
 import MovieService from '@/services/MovieService'
-import type { Movie } from '@/types/api'
+import type { Movie } from '@/types/movie'
 import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -39,7 +39,7 @@ onMounted(() => {
 <template>
   <main class="container">
     <div
-      class="grid grid-cols-1 gap-4 px-5 py-10 mx-auto max-2xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+      class="max-2xl mx-auto grid grid-cols-1 gap-4 px-5 py-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
     >
       <MovieCard
         v-for="movie in movies"
