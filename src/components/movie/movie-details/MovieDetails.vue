@@ -92,7 +92,7 @@ const trailerKey = computed((): string => {
       :trailerKey="trailerKey"
     />
   </div>
-  <div v-if="movieDetails" class="w-full bg-[#181818] px-[5vw] pt-20 sm:px-[15vw]">
+  <div v-if="movieDetails" class="w-full bg-[#181818] px-[5vw] pt-20 md:px-[8vw] lg:px-[15vw]">
     <div class="container pb-5">
       <div v-if="movieDetails.tagline">
         <div class="bg-linear-hr mb-4 h-0.5"></div>

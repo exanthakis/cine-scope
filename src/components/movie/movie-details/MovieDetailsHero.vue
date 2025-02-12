@@ -61,7 +61,7 @@ const handleVideoPlay = () => {
     @mousemove="moveCursor"
     @mouseenter="() => (hideCursor = false)"
     @mouseleave="() => (hideCursor = true)"
-    class="bg-gradient-bottom relative h-[80vh] min-h-[70vh] w-full cursor-none bg-cover bg-center px-[5vw] before:absolute before:top-0 before:left-0 before:z-0 before:h-full before:w-full before:bg-[rgba(0,0,0,0.6)] before:content-[''] after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-[''] sm:px-[15vw] sm:before:content-none"
+    class="bg-gradient-bottom relative h-[80vh] min-h-[70vh] w-full cursor-none bg-cover bg-center px-[5vw] before:absolute before:top-0 before:left-0 before:z-0 before:h-full before:w-full before:bg-[rgba(0,0,0,0.6)] before:content-[''] after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-[''] sm:before:content-none md:px-[8vw] lg:px-[15vw]"
     :style="{
       backgroundImage: `url('https://image.tmdb.org/t/p/original${backdrop_path}')`,
       backgroundPosition: '50% top',
