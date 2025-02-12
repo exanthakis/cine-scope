@@ -40,4 +40,5 @@ export interface MovieDetailsHeroProps {
   genres?: Genre[]
   overview?: string | null
   imdb_id?: string | null
+  trailerKey: string
 }
