@@ -48,8 +48,8 @@ const moveCursor = (e: { clientX: number; clientY: number }) => {
   yEl.value = e.clientY - 15
 }
 
-const handleVideoPlay = () => {
-  if (!isHovered.value && trailerKey) {
+const handleVideoPlay = (device: string) => {
+  if ((!isHovered.value && trailerKey) || (device === 'sm' && trailerKey)) {
     window.open(`https://www.youtube.com/watch?v=${trailerKey}`)
   }
 }
@@ -57,28 +57,31 @@ const handleVideoPlay = () => {
 
 <template>
   <div
-    @click="handleVideoPlay"
+    @click="() => handleVideoPlay('')"
     @mousemove="moveCursor"
     @mouseenter="() => (hideCursor = false)"
     @mouseleave="() => (hideCursor = true)"
-    class="bg-gradient-bottom relative h-[80vh] min-h-[70vh] w-full cursor-none bg-cover bg-center px-[5vw] before:absolute before:top-0 before:left-0 before:z-0 before:h-full before:w-full before:bg-[rgba(0,0,0,0.6)] before:content-[''] after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-[''] sm:before:content-none md:px-[8vw] lg:px-[15vw]"
+    class="bg-gradient-bottom pointer-events-none relative h-[80vh] min-h-[70vh] w-full cursor-none bg-cover bg-center px-[5vw] before:absolute before:top-0 before:left-0 before:z-0 before:h-full before:w-full before:bg-[rgba(0,0,0,0.6)] before:content-[''] after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-[''] sm:before:content-none md:pointer-events-auto md:px-[8vw] lg:px-[15vw]"
     :style="{
       backgroundImage: `url('https://image.tmdb.org/t/p/original${backdrop_path}')`,
       backgroundPosition: '50% top',
     }"
   >
     <!-- Custom video cursor that appears on hero cmp hover -->
-    <div :class="{ 'hidden opacity-0': hideCursor }">
-      <div
-        :style="cursorCircle"
-        :class="[
-          'bg-film-secondary pointer-events-none fixed top-0 left-0 z-10 flex h-20 w-20 items-center justify-center rounded-full transition-opacity duration-500 ease-out backface-hidden select-none',
-          isHovered ? 'opacity-0' : '',
-        ]"
-      >
-        <img src="@/assets/icons/play.svg" alt="play-video-icon" class="h-2.5 w-2.5 rotate-90" />
+    <div class="hidden md:block">
+      <div :class="{ 'hidden h-0 w-0 opacity-0': hideCursor }">
+        <div
+          :style="cursorCircle"
+          :class="[
+            'bg-film-secondary pointer-events-none fixed top-0 left-0 z-10 flex h-20 w-20 items-center justify-center rounded-full transition-opacity duration-500 ease-out backface-hidden select-none',
+            isHovered ? 'h-0 w-0 opacity-0' : '',
+          ]"
+        >
+          <img src="@/assets/icons/play.svg" alt="play-video-icon" class="h-2.5 w-2.5 rotate-90" />
+        </div>
       </div>
     </div>
+
     <BaseDialog
       :show="!!openFavModal"
       title="Do you want to add the movie to your favorites?"
@@ -117,7 +120,7 @@ const handleVideoPlay = () => {
       >
         <div class="mx-auto pr-4 pl-0">
           <div class="mx-auto max-w-4xl text-start">
-            <span class="py-2.5 text-2xl font-semibold text-gray-200 uppercase">
+            <span class="pointer-events-auto py-2.5 text-2xl font-semibold text-gray-200 uppercase">
               <a v-if="homepage" :href="homepage" target="_blank">
                 {{ title }}
               </a>
@@ -153,22 +156,35 @@ const handleVideoPlay = () => {
               <button
                 v-if="overview && overview.length > 120"
                 @click="toggleReadMore"
-                class="cursor-pointer font-semibold hover:underline"
+                class="pointer-events-auto cursor-pointer font-semibold hover:underline"
               >
                 {{ isExpanded ? 'Read Less' : 'Read More' }}
               </button>
             </div>
 
-            <a :href="imdbLink" target="_blank"
-              ><img alt="Imdb logo" src="@/assets/icons/imdb.svg" width="60" height="40"
-            /></a>
+            <div class="flex items-center justify-start gap-4">
+              <a :href="imdbLink" target="_blank " class="pointer-events-auto"
+                ><img alt="Imdb logo" src="@/assets/icons/imdb.svg" width="60" height="40"
+              /></a>
+              <div
+                class="pointer-events-auto z-2 flex w-fit items-center gap-3 rounded-full bg-white px-3 py-1.5 md:hidden"
+                @click="() => handleVideoPlay('sm')"
+              >
+                <span class="text-film-tertiary font-bold"> Trailer</span>
+                <img
+                  src="@/assets/icons/play.svg"
+                  alt="play-video-icon"
+                  class="h-2.5 w-2.5 rotate-90"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <FavoritesBadge
-      class="absolute bottom-15 cursor-auto"
+      class="pointer-events-auto absolute bottom-15 cursor-auto"
       @mouseenter="() => (isHovered = true)"
       @mouseleave="() => (isHovered = false)"
     >
