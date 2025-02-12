@@ -3,10 +3,10 @@ import AnimatedPlaceholder from './AnimatedPlaceholder.vue'
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-4 justify-center w-full">
-    <AnimatedPlaceholder class="w-25 h-25 rounded-full object-cover object-center" />
-    <div class="font-medium text-white text-center">
-      <AnimatedPlaceholder class="w-15 h-10" />
+  <div class="flex w-full flex-col items-center justify-center gap-4">
+    <AnimatedPlaceholder class="h-25 w-25 rounded-full object-cover object-center" />
+    <div class="text-center font-medium text-white">
+      <AnimatedPlaceholder class="h-10 w-15" />
     </div>
   </div>
 </template>

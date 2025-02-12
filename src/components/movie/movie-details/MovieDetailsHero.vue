@@ -61,7 +61,7 @@ const handleVideoPlay = () => {
     @mousemove="moveCursor"
     @mouseenter="() => (hideCursor = false)"
     @mouseleave="() => (hideCursor = true)"
-    class="w-full cursor-none relative bg-center bg-cover min-h-[70vh] px-[5vw] sm:px-[15vw] h-[80vh] before:bg-[rgba(0,0,0,0.6)] before:absolute sm:before:content-none before:content-[''] before:z-0 before:h-full before:w-full before:left-0 before:top-0 bg-gradient-bottom after:z-[-1] after:absolute after:content-[''] after:left-0 after:h-full after:w-full after:top-0"
+    class="bg-gradient-bottom relative h-[80vh] min-h-[70vh] w-full cursor-none bg-cover bg-center px-[5vw] before:absolute before:top-0 before:left-0 before:z-0 before:h-full before:w-full before:bg-[rgba(0,0,0,0.6)] before:content-[''] after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-[''] sm:px-[15vw] sm:before:content-none"
     :style="{
       backgroundImage: `url('https://image.tmdb.org/t/p/original${backdrop_path}')`,
       backgroundPosition: '50% top',
@@ -72,11 +72,11 @@ const handleVideoPlay = () => {
       <div
         :style="cursorCircle"
         :class="[
-          'pointer-events-none select-none top-0 left-0 fixed w-20 h-20 rounded-full bg-film-secondary z-10 backface-hidden transition-opacity duration-500 ease-out flex justify-center items-center',
-          isHovered ? 'opacity-0 ' : '',
+          'bg-film-secondary pointer-events-none fixed top-0 left-0 z-10 flex h-20 w-20 items-center justify-center rounded-full transition-opacity duration-500 ease-out backface-hidden select-none',
+          isHovered ? 'opacity-0' : '',
         ]"
       >
-        <img src="@/assets/icons/play.svg" alt="play-video-icon" class="w-2.5 h-2.5 rotate-90" />
+        <img src="@/assets/icons/play.svg" alt="play-video-icon" class="h-2.5 w-2.5 rotate-90" />
       </div>
     </div>
     <BaseDialog
@@ -108,16 +108,16 @@ const handleVideoPlay = () => {
       </template>
     </BaseDialog>
     <div
-      class="container cursor-auto flex items-center justify-start h-full py-12 bg-opacity-50 after:content-none sm:after:content-[''] bg-gradient-left after:z-[-1] after:absolute after:left-0 after:right[-200px] after:top-0 after:w-[60%] after:h-full"
+      class="bg-opacity-50 bg-gradient-left after:right[-200px] container flex h-full cursor-auto items-center justify-start py-12 after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-[60%] after:content-none sm:after:content-['']"
     >
       <div
-        class="text-start z-100"
+        class="z-100 text-start"
         @mouseenter="() => (isHovered = true)"
         @mouseleave="() => (isHovered = false)"
       >
-        <div class="pl-0 pr-4 mx-auto">
-          <div class="max-w-4xl mx-auto text-start">
-            <span class="font-semibold text-gray-200 text-2xl uppercase py-2.5">
+        <div class="mx-auto pr-4 pl-0">
+          <div class="mx-auto max-w-4xl text-start">
+            <span class="py-2.5 text-2xl font-semibold text-gray-200 uppercase">
               <a v-if="homepage" :href="homepage" target="_blank">
                 {{ title }}
               </a>
@@ -125,21 +125,21 @@ const handleVideoPlay = () => {
             </span>
 
             <!-- info metadata -->
-            <div class="mt-4 text-[#a3a3a3] font-normal">
+            <div class="mt-4 font-normal text-[#a3a3a3]">
               <span class="inline-block">{{ release_date?.split('-')[0] }}</span>
-              <span class="text-[#a3a3a3] mx-1 my-0"> | </span>
+              <span class="mx-1 my-0 text-[#a3a3a3]"> | </span>
 
-              <span class="absolute left-[-9999px] top-[-9999px]">Maturity Rating:</span>
+              <span class="absolute top-[-9999px] left-[-9999px]">Maturity Rating:</span>
               <span class="border border-[#a1a1a1] p-1">{{ rating }}+</span>
-              <span class="text-[#a3a3a3] mx-1 my-0"> | </span>
+              <span class="mx-1 my-0 text-[#a3a3a3]"> | </span>
               <span class="inline-block">{{ duration }}</span>
-              <span class="text-[#a3a3a3] mx-1 my-0"> | </span>
+              <span class="mx-1 my-0 text-[#a3a3a3]"> | </span>
               <span>{{ formattedGenres }}</span>
             </div>
             <!-- overview -->
 
-            <div class="max-w-xl mx-auto mt-4 mb-8 ml-0 text-lg text-gray-300">
-              <div class="max-h-[20vh] scrollbar-0 overflow-scroll">
+            <div class="mx-auto mt-4 mb-8 ml-0 max-w-xl text-lg text-gray-300">
+              <div class="scrollbar-0 max-h-[20vh] overflow-scroll">
                 <Transition name="fade-text" mode="out-in">
                   <p v-if="isExpanded && overview" class="inline">
                     {{ overview }}
@@ -153,7 +153,7 @@ const handleVideoPlay = () => {
               <button
                 v-if="overview && overview.length > 120"
                 @click="toggleReadMore"
-                class="font-semibold hover:underline cursor-pointer"
+                class="cursor-pointer font-semibold hover:underline"
               >
                 {{ isExpanded ? 'Read Less' : 'Read More' }}
               </button>
@@ -174,11 +174,11 @@ const handleVideoPlay = () => {
     >
       <template #default>
         <div
-          class="flex flex-col sm:flex-row justify-between items-center gap-4 z-10 w-full pr-0 sm:pr-4"
+          class="z-10 flex w-full flex-col items-center justify-between gap-4 pr-0 sm:flex-row sm:pr-4"
         >
           <h5 class="text-film-secondary z-10">⭐ Add to Favorites</h5>
           <BaseButton
-            class="!px-11 w-full sm:w-fit"
+            class="w-full !px-11 sm:w-fit"
             :mode="'primary'"
             :isLink="false"
             @click="toggleFavModal"

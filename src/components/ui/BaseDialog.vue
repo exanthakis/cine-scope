@@ -12,13 +12,13 @@ defineEmits(['close'])
     <div
       v-if="show"
       @click="$emit('close')"
-      class="fixed top-0 left-0 h-screen w-full bg-film-tertiary/75 z-10"
+      class="bg-film-tertiary/75 fixed top-0 left-0 z-10 h-screen w-full"
     ></div>
     <Transition name="dialog">
       <dialog
         open
         v-if="show"
-        class="fixed top-[20vh] left-0 r-0 w-[90%] rounded-xs ml-auto mr-auto max-w-xl z-100 border-0 shadow-xl p-4 m-0 overflow-hidden bg-film-secondary"
+        class="r-0 bg-film-secondary fixed top-[20vh] left-0 z-100 m-0 mr-auto ml-auto w-[90%] max-w-xl overflow-hidden rounded-xs border-0 p-4 shadow-xl"
       >
         <header class="">
           <slot name="header">

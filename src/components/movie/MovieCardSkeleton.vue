@@ -3,8 +3,8 @@ import AnimatedPlaceholder from '../ui/AnimatedPlaceholder.vue'
 </script>
 <template>
   <div
-    class="relative h-full w-full min-h-[595px] sm:min-h-[40vh] mx-auto overflow-hidden transition duration-200 transform rounded-sm group hover:scale-105"
+    class="group relative mx-auto h-full min-h-[595px] w-full transform overflow-hidden rounded-sm transition duration-200 hover:scale-105 sm:min-h-[40vh]"
   >
-    <AnimatedPlaceholder class="max-w-[100%] h-full w-full" />
+    <AnimatedPlaceholder class="h-full w-full max-w-[100%]" />
   </div>
 </template>

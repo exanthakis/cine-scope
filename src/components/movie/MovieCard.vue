@@ -10,19 +10,19 @@ const onFavoriteClick = () => {
 <template>
   <RouterLink :to="{ name: 'movie-details', params: { id } }">
     <div
-      class="relative min-h-[40vh] h-full w-full mx-auto overflow-hidden transition duration-200 transform rounded-sm group hover:scale-105"
+      class="group relative mx-auto h-full min-h-[40vh] w-full transform overflow-hidden rounded-sm transition duration-200 hover:scale-105"
     >
       <img
-        class="h-full rounded-lg shadow-lg w-full"
+        class="h-full w-full rounded-lg shadow-lg"
         :src="`https://image.tmdb.org/t/p/w500${imgUrl}`"
         :alt="title"
       />
       <div
         v-if="!hideFav"
-        class="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-end p-1 duration-200 opacity-0 group-hover:opacity-100 bg-film-tertiary/35 transition-normal"
+        class="bg-film-tertiary/35 absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-end p-1 opacity-0 transition-normal duration-200 group-hover:opacity-100"
       >
         <button
-          class="absolute z-10 flex items-center justify-center w-8 h-8 rounded-full cursor-pointer bg-film-tertiary top-2 right-2"
+          class="bg-film-tertiary absolute top-2 right-2 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full"
           @click.stop.prevent="onFavoriteClick"
         >
           🤍

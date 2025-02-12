@@ -37,13 +37,13 @@ const visiblePages = computed(() => {
 </script>
 
 <template>
-  <div class="mt-12 text-sm leading-6 max-w-2xl mx-auto">
-    <div class="flex items-center mb-10 font-semibold text-slate-700 justify-center">
+  <div class="mx-auto mt-12 max-w-2xl text-sm leading-6">
+    <div class="mb-10 flex items-center justify-center font-semibold text-slate-700">
       <RouterLink
         id="page-prev"
         :class="[
-          'flex items-center group hover:text-slate-900 pr-2 sm:pr-4 text-lg',
-          page === 1 ? 'opacity-25 pointer-events-none ' : '',
+          'group flex items-center pr-2 text-lg hover:text-slate-900 sm:pr-4',
+          page === 1 ? 'pointer-events-none opacity-25' : '',
         ]"
         :to="{ name: route, query: { page: page - 1 } }"
         rel="prev"
@@ -94,8 +94,8 @@ const visiblePages = computed(() => {
         :to="{ name: route, query: { page: page + 1 } }"
         rel="next"
         :class="[
-          'flex items-center  group hover:text-slate-900 pl-2 sm:pl-4 text-lg',
-          !hasNextPage ? 'opacity-25 pointer-events-none ' : '',
+          'group flex items-center pl-2 text-lg hover:text-slate-900 sm:pl-4',
+          !hasNextPage ? 'pointer-events-none opacity-25' : '',
         ]"
       >
         &#62;</RouterLink
