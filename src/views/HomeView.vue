@@ -4,7 +4,7 @@ import MovieCardSkeleton from '@/components/movie/MovieCardSkeleton.vue'
 import MoviePagination from '@/components/movie/MoviePagination.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import MovieService from '@/services/MovieService'
-import type { Movie } from '@/types/api'
+import type { Movie } from '@/types/movie'
 import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -59,19 +59,19 @@ watch([page], getSearchResults)
 
 <template>
   <main class="container">
-    <div class="flex w-full justify-center align-center mx-auto max-w-2xl">
+    <div class="align-center mx-auto flex w-full max-w-2xl justify-center">
       <SearchInput v-model:searchQuery="searchQuery" @get-search-results="getSearchResults" />
     </div>
     <div
       v-if="isLoading"
-      class="grid grid-cols-1 gap-4 px-5 py-10 mx-auto max-2xl xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+      class="max-2xl mx-auto grid grid-cols-1 gap-4 px-5 py-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
     >
       <MovieCardSkeleton v-for="res in movieResults?.length" :key="res" />
     </div>
     <p v-else-if="!isLoading && searchError">{{ searchError }}</p>
     <p
       v-else-if="!isLoading && totalResults === 0 && searchQuery.trim().length > 0"
-      class="text-lg font-bold text-center"
+      class="text-center text-lg font-bold"
     >
       Sorry, we couldn't find any results
     </p>
@@ -80,7 +80,7 @@ watch([page], getSearchResults)
         Total results found: <span class="font-bold">{{ totalResults }}</span>
       </p>
       <div
-        class="grid grid-cols-1 gap-4 py-7 mx-auto max-2xl xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+        class="max-2xl mx-auto grid grid-cols-1 gap-4 py-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
       >
         <MovieCard
           v-for="movie in movieResults"
