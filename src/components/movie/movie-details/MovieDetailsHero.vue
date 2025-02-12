@@ -68,7 +68,7 @@ const handleVideoPlay = (device: string) => {
     }"
   >
     <!-- Custom video cursor that appears on hero cmp hover -->
-    <div class="hidden md:block">
+    <div class="hidden lg:block">
       <div :class="{ 'hidden h-0 w-0 opacity-0': hideCursor }">
         <div
           :style="cursorCircle"
@@ -167,7 +167,7 @@ const handleVideoPlay = (device: string) => {
                 ><img alt="Imdb logo" src="@/assets/icons/imdb.svg" width="60" height="40"
               /></a>
               <div
-                class="pointer-events-auto z-2 flex w-fit items-center gap-3 rounded-full bg-white px-3 py-1.5 md:hidden"
+                class="pointer-events-auto z-2 flex w-fit items-center gap-3 rounded-full bg-white px-3 py-1.5 lg:hidden"
                 @click="() => handleVideoPlay('sm')"
               >
                 <span class="text-film-tertiary font-bold"> Trailer</span>
