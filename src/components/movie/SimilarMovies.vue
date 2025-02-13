@@ -3,13 +3,9 @@ import MovieService from '@/services/MovieService'
 import type { AxiosError } from 'axios'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import MovieCard from './MovieCard.vue'
 import type { Movie } from '@/types/movie'
 import { MOVIES_SLIDER_BREAKPOINTS } from '@/constants/general'
-import { FreeMode } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/css'
-import 'swiper/css/free-mode'
+import MovieSlider from './MovieSlider.vue'
 
 interface SimilarMoviesProps {
   id: number
@@ -54,22 +50,7 @@ watch(
     <div v-if="isLoading">loading..</div>
     <p v-else-if="!isLoading && similarMovies?.length === 0">Sorry, we couldn't find any results</p>
     <div v-else class="mt-6">
-      <Swiper
-        :breakpoints="MOVIES_SLIDER_BREAKPOINTS"
-        :spaceBetween="10"
-        :freeMode="true"
-        :pagination="false"
-        :modules="[FreeMode]"
-      >
-        <SwiperSlide v-for="movie in similarMovies" :key="movie.id"
-          ><MovieCard
-            :id="movie?.id"
-            :title="movie.title"
-            :hide-fav="true"
-            :imgUrl="movie.poster_path"
-            class="rounded-0-child !min-h-auto"
-        /></SwiperSlide>
-      </Swiper>
+      <MovieSlider :movies="similarMovies || []" :breakpoints="MOVIES_SLIDER_BREAKPOINTS" />
     </div>
   </div>
 </template>

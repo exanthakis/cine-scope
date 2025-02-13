@@ -58,7 +58,7 @@ watch([page], getSearchResults)
 </script>
 
 <template>
-  <main class="container">
+  <main class="!bg-radial-white container">
     <div class="align-center mx-auto flex w-full max-w-2xl justify-center">
       <SearchInput v-model:searchQuery="searchQuery" @get-search-results="getSearchResults" />
     </div>

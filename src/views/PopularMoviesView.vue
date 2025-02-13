@@ -1,60 +1,74 @@
 <script setup lang="ts">
-import MovieCard from '@/components/movie/MovieCard.vue'
-import MoviePagination from '@/components/movie/MoviePagination.vue'
 import MovieService from '@/services/MovieService'
 import type { Movie } from '@/types/movie'
-import { computed, onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import MovieSlider from '@/components/movie/MovieSlider.vue'
 
-const props = defineProps(['page'])
-const movies = ref<Movie[] | null>(null)
-const totalPages = ref(0)
-
+const movies = ref<Movie[]>([])
+const netflixMovies = ref<Movie[]>([])
+const disneyMovies = ref<Movie[]>([])
+const loading = ref(true)
 const router = useRouter()
-const page = computed(() => props.page)
 
-const hasNextPage = computed(() => {
-  return page.value < totalPages.value
-})
+onMounted(async () => {
+  try {
+    const [popularResponse, netflixResponse, disneyResponse] = await Promise.all([
+      MovieService.getPopularMovies('1'),
+      MovieService.getMoviesByProvider('8'), // Netflix
+      MovieService.getMoviesByProvider('337'), // Disney+
+    ])
+    await new Promise((res) => setTimeout(res, 1000))
 
-onMounted(() => {
-  watchEffect(() => {
-    movies.value = null
-    MovieService.getPopularMovies(page.value)
-      .then((response) => {
-        if (response.status === 200) {
-          movies.value = response.data.results
-          totalPages.value = response.data.total_pages
-        } else throw new Error('Could not retrieve data!')
-      })
-      .catch((error) => {
-        router.push({ name: 'network-error' })
+    if (popularResponse.status === 200) movies.value = popularResponse.data.results || []
+    else throw new Error('Could not retrieve Popular movies!')
 
-        console.error(error)
-      })
-  })
+    if (netflixResponse.status === 200) netflixMovies.value = netflixResponse.data.results || []
+    else throw new Error('Could not retrieve Netflix movies!')
+
+    if (disneyResponse.status === 200) disneyMovies.value = disneyResponse.data.results || []
+    else throw new Error('Could not retrieve Disney movies!')
+  } catch (error) {
+    router.push({ name: 'network-error' })
+    console.error(error)
+  } finally {
+    loading.value = false
+  }
 })
 </script>
 
 <template>
-  <main class="container">
-    <div
-      class="max-2xl mx-auto grid grid-cols-1 gap-4 px-5 py-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-    >
-      <MovieCard
-        v-for="movie in movies"
-        :key="movie.id"
-        :id="movie.id"
-        :title="movie.title"
-        :imgUrl="movie.poster_path"
-      />
-    </div>
+  <main class="min-h-[calc(100vh-60px)] w-full bg-[#181818] pb-15">
+    <div class="px-[5vw] md:px-[8vw] lg:px-[15vw]">
+      <!-- Show Loading Spinner -->
+      <div v-if="loading" class="flex h-[50vh] items-center justify-center">
+        <span class="animate-pulse text-lg text-white">Loading movies...</span>
+      </div>
 
-    <MoviePagination
-      :total-pages="totalPages"
-      :page="page"
-      route="popular-list"
-      :hasNextPage="hasNextPage"
-    />
+      <div v-else>
+        <section class="mt-10">
+          <h2 class="mt-5 mb-4 w-full border-b border-gray-500/55 pb-2 text-2xl text-white">
+            Popular movies
+          </h2>
+          <MovieSlider :movies="movies" />
+        </section>
+
+        <section class="mt-10">
+          <div class="mt-5 mb-4 flex w-full items-center border-b border-gray-500/55 pb-2">
+            <img src="@/assets/images/netflix.png" alt="play-video-icon" class="h-5 w-18" />
+            <h2 class="pl-2 text-2xl text-white">movies</h2>
+          </div>
+          <MovieSlider :movies="netflixMovies" />
+        </section>
+
+        <section class="mt-10">
+          <div class="mt-5 mb-4 flex w-full items-center border-b border-gray-500/55 pb-2">
+            <img src="@/assets/images/disney.png" alt="play-video-icon" class="h-10 w-17" />
+            <h2 class="pl-2 text-2xl text-white">movies</h2>
+          </div>
+          <MovieSlider :movies="disneyMovies" />
+        </section>
+      </div>
+    </div>
   </main>
 </template>

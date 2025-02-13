@@ -4,7 +4,7 @@ import SiteNavigation from './components/layout/SiteNavigation.vue'
 
 <template>
   <div
-    class="relative flex flex-col items-center max-7xl min-h-[100vh] bg-radial-white text-film-tertiary"
+    class="max-7xl bg-radial-white text-film-tertiary relative flex min-h-[100vh] flex-col items-center"
   >
     <SiteNavigation />
 

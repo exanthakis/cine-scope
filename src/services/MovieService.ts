@@ -7,6 +7,16 @@ const getPopularMovies = (page: string) => {
   )
 }
 
+const getMoviesByProvider = (id: string) => {
+  return apiClient.get(
+    '/discover/movie?api_key=' +
+      import.meta.env.VITE_TMDB_API_KEY +
+      '&sort_by=vote_count.desc&with_watch_providers=' +
+      id +
+      '&watch_region=US',
+  )
+}
+
 const getMovieData = (id: string) => {
   return apiClient.get(
     '/movie/' +
@@ -42,4 +52,10 @@ export const searchMovies = async (query: string, page: string) => {
   )
 }
 
-export default { getPopularMovies, getMovieData, getSimilarMovies, searchMovies }
+export default {
+  getPopularMovies,
+  getMoviesByProvider,
+  getMovieData,
+  getSimilarMovies,
+  searchMovies,
+}

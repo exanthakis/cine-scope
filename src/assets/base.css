@@ -93,15 +93,6 @@ body {
   display: none; /* Chrome, Safari, Edge */
 }
 
-.rounded-0-child > div,
-.rounded-0-child > div > img {
-  border-radius: 0 !important;
-}
-
-.rounded-0-child div {
-  min-height: auto;
-}
-
 ::-webkit-scrollbar {
   width: 0.65rem;
 }

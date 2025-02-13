@@ -10,7 +10,7 @@ const onFavoriteClick = () => {
 <template>
   <RouterLink :to="{ name: 'movie-details', params: { id } }">
     <div
-      class="group relative mx-auto h-full min-h-[40vh] w-full transform overflow-hidden rounded-sm transition duration-200 hover:scale-105"
+      class="group relative mx-auto h-full w-full transform overflow-hidden rounded-sm transition duration-200 hover:scale-105"
     >
       <img
         class="h-full w-full rounded-lg shadow-lg"
