@@ -85,7 +85,7 @@ const trailerKey = computed((): string => {
         :homepage="movieDetails.homepage"
         :title="movieDetails.title"
         :release_date="movieDetails.release_date"
-        :vote_average="movieDetails.runtime"
+        :vote_average="movieDetails.vote_average"
         :runtime="movieDetails.runtime"
         :genres="movieDetails.genres"
         :overview="movieDetails.overview"

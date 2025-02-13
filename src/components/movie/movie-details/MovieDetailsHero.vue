@@ -8,7 +8,7 @@ const { vote_average, runtime, genres, imdb_id, trailerKey } = defineProps<Movie
 
 const isExpanded = ref(false)
 const openFavModal = ref(false)
-const rating = computed(() => vote_average?.toFixed(1) ?? 'N/A')
+const rating = computed(() => (vote_average ? Math.round(vote_average * 10) : 'N/A'))
 
 const duration = computed(() => {
   const runtimeval = runtime
@@ -133,7 +133,7 @@ const handleVideoPlay = (device: string) => {
               <span class="mx-1 my-0 text-[#a3a3a3]"> | </span>
 
               <span class="absolute top-[-9999px] left-[-9999px]">Maturity Rating:</span>
-              <span class="border border-[#a1a1a1] p-1">{{ rating }}+</span>
+              <span class="border border-[#a1a1a1] p-1">{{ rating }}%</span>
               <span class="mx-1 my-0 text-[#a3a3a3]"> | </span>
               <span class="inline-block">{{ duration }}</span>
               <span class="mx-1 my-0 text-[#a3a3a3]"> | </span>
