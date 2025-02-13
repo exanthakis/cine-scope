@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MovieDetailsView from '@/views/MovieDetailsView.vue'
 import NetworkError from '@/views/NetworkError.vue'
 import HomeView from '@/views/HomeView.vue'
-import PopularMovies from '@/views/PopularMoviesView.vue'
+
 import NotFound from '@/views/NotFound.vue'
 
 const router = createRouter({
@@ -17,22 +16,19 @@ const router = createRouter({
     {
       path: '/popular',
       name: 'popular-list',
-      component: PopularMovies,
+      component: () => import('@/views/PopularMoviesView.vue'),
       props: (route) => ({ page: parseInt(route.query.page?.toString() || '1') }),
     },
     {
       path: '/movies/:id',
       name: 'movie-details',
       props: true,
-      component: MovieDetailsView,
+      component: () => import('@/views/MovieDetailsView.vue'),
     },
     {
       path: '/favorites',
       name: 'favorites',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/FavoritesView.vue'),
+      component: () => import('@/views/FavoritesView.vue'),
     },
     {
       path: '/404/:resource',
