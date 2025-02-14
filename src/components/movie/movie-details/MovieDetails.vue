@@ -77,7 +77,7 @@ const trailerKey = computed((): string => {
 </script>
 
 <template>
-  <div v-if="movieDetails" class="w-full bg-[#181818]">
+  <div v-if="movieDetails" class="w-full bg-[#10141e]">
     <div class="relative text-white">
       <MovieDetailsHero
         :id="movieDetails.id"

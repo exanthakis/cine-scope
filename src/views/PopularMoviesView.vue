@@ -4,6 +4,7 @@ import type { Movie } from '@/types/movie'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import MovieSlider from '@/components/movie/MovieSlider.vue'
+import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 
 const movies = ref<Movie[]>([])
 const netflixMovies = ref<Movie[]>([])
@@ -38,11 +39,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="min-h-[calc(100vh-60px)] w-full bg-[#181818] pb-15">
+  <main class="min-h-[calc(100vh-60px)] w-full bg-[#10141e] pb-15">
     <div class="px-[5vw] md:px-[8vw] lg:px-[15vw]">
-      <!-- Show Loading Spinner -->
       <div v-if="loading" class="flex h-[50vh] items-center justify-center">
-        <span class="animate-pulse text-lg text-white">Loading movies...</span>
+        <BaseSpinner />
       </div>
 
       <div v-else>

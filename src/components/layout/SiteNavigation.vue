@@ -4,7 +4,7 @@ import TheLogo from '../ui/TheLogo.vue'
 </script>
 
 <template>
-  <header class="w-full bg-[#181818] px-[5vw] shadow-lg md:px-[8vw] lg:px-[15vw]">
+  <header class="w-full bg-[#10141e] px-[5vw] shadow-lg backdrop-blur md:px-[8vw] lg:px-[15vw]">
     <nav
       class="flex w-full flex-col items-center justify-between gap-4 py-4 font-light text-gray-400 sm:flex-row"
     >
@@ -20,6 +20,7 @@ import TheLogo from '../ui/TheLogo.vue'
           <RouterLink :to="{ name: 'favorites' }">Favorites</RouterLink>
         </li>
       </ul>
+      <div>dark/light</div>
     </nav>
   </header>
 </template>
