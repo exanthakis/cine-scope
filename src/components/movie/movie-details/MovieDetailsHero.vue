@@ -81,7 +81,7 @@ const handleVideoPlay = (device: string) => {
     <div
       :class="[
         `absolute inset-0 h-[80vh] min-h-[70vh] w-full bg-cover before:absolute before:h-full before:w-full before:animate-pulse before:bg-[rgba(255,255,255,0.2)] before:content-['']`,
-        isHeroImgLoaded ? 'loaded before:content-none' : '',
+        isHeroImgLoaded ? 'before:content-none' : '',
       ]"
       :style="{
         backgroundImage: `url('https://image.tmdb.org/t/p/w45${backdrop_path}')`,
