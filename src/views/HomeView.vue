@@ -77,7 +77,8 @@ watch([page], getSearchResults)
     </p>
     <div v-else class="px-5">
       <p v-if="totalResults && totalResults > 0" class="text-left">
-        Total results found: <span class="font-bold">{{ totalResults }}</span>
+        Found: <span class="font-bold">{{ totalResults }}</span> results for
+        <span class="font-bold">'{{ searchQuery }}'.</span>
       </p>
       <div
         class="max-2xl mx-auto grid grid-cols-1 gap-4 py-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
