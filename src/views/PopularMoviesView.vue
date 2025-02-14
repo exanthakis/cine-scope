@@ -5,7 +5,9 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import MovieSlider from '@/components/movie/MovieSlider.vue'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
+import MovieCard from '@/components/movie/MovieCard.vue'
 
+const trendingMovies = ref<Movie[]>([])
 const movies = ref<Movie[]>([])
 const netflixMovies = ref<Movie[]>([])
 const disneyMovies = ref<Movie[]>([])
@@ -14,12 +16,17 @@ const router = useRouter()
 
 onMounted(async () => {
   try {
-    const [popularResponse, netflixResponse, disneyResponse] = await Promise.all([
-      MovieService.getPopularMovies('1'),
+    const [trendingResponse, popularResponse, netflixResponse, disneyResponse] = await Promise.all([
+      MovieService.getTrendingMovies(),
+      MovieService.getPopularMovies('1'), //1st page only
       MovieService.getMoviesByProvider('8'), // Netflix
       MovieService.getMoviesByProvider('337'), // Disney+
     ])
     await new Promise((res) => setTimeout(res, 1000))
+
+    if (trendingResponse.status === 200)
+      trendingMovies.value = trendingResponse.data.results.slice(0, 6) || [] // Get only the first 6 movies
+    else throw new Error('Could not retrieve Trending movies!')
 
     if (popularResponse.status === 200) movies.value = popularResponse.data.results || []
     else throw new Error('Could not retrieve Popular movies!')
@@ -46,6 +53,25 @@ onMounted(async () => {
       </div>
 
       <div v-else>
+        <section class="mt-10">
+          <div class="mt-5 mb-4 w-full border-b border-gray-500/55 pb-2">
+            <h2 class="relative w-fit text-2xl text-white">
+              Trending movies
+              <span
+                class="bg-film-primary absolute top-0 -right-5 inline-flex h-2 w-2 animate-ping rounded-full opacity-75"
+              ></span>
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-6">
+            <MovieCard
+              v-for="trendingMovie in trendingMovies"
+              :key="trendingMovie.id"
+              :id="trendingMovie.id"
+              :title="trendingMovie.title"
+              :imgUrl="trendingMovie.poster_path"
+            />
+          </div>
+        </section>
         <section class="mt-10">
           <h2 class="mt-5 mb-4 w-full border-b border-gray-500/55 pb-2 text-2xl text-white">
             Popular movies

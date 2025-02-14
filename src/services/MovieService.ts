@@ -7,6 +7,10 @@ const getPopularMovies = (page: string) => {
   )
 }
 
+const getTrendingMovies = () => {
+  return apiClient.get('/trending/movie/day?api_key=' + import.meta.env.VITE_TMDB_API_KEY)
+}
+
 const getMoviesByProvider = (id: string) => {
   return apiClient.get(
     '/discover/movie?api_key=' +
@@ -54,6 +58,7 @@ export const searchMovies = async (query: string, page: string) => {
 
 export default {
   getPopularMovies,
+  getTrendingMovies,
   getMoviesByProvider,
   getMovieData,
   getSimilarMovies,
