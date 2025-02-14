@@ -21,7 +21,6 @@ const getMovieData = async () => {
   isLoading.value = true
   try {
     const response = await MovieService.getMovieData(id.value)
-    await new Promise((res) => setTimeout(res, 1000)) // Flicker Delay to display skeleton
     return response.data
   } catch (err) {
     const error = err as AxiosError
