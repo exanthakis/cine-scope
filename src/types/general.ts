@@ -42,3 +42,13 @@ export interface MovieDetailsHeroProps {
   imdb_id?: string | null
   trailerKey: string
 }
+
+export interface MovieFilter {
+  genres?: number[]
+  providers?: string[]
+  releaseYear?: number
+}
+
+export interface SelectedFilters {
+  genres: number[]
+}

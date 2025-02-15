@@ -45,14 +45,27 @@ const getSimilarMovies = (id: string) => {
   )
 }
 
-export const searchMovies = async (query: string, page: string) => {
+export const searchMovies = async (query: string, genres: string, page: string) => {
+  const filter = query.trim() ? '/search' : '/discover'
   return apiClient.get(
-    '/search/movie?api_key=' +
+    filter +
+      '/movie?api_key=' +
       import.meta.env.VITE_TMDB_API_KEY +
       '&query=' +
       encodeURIComponent(query) +
+      '&with_genres=' +
+      genres +
       '&page=' +
       page,
+  )
+}
+
+const getGenres = () => {
+  return apiClient.get(
+    '/genre/movie/list?api_key=' +
+      import.meta.env.VITE_TMDB_API_KEY +
+      '&language=' +
+      DEFAULT_LANGUAGE,
   )
 }
 
@@ -63,4 +76,5 @@ export default {
   getMovieData,
   getSimilarMovies,
   searchMovies,
+  getGenres,
 }

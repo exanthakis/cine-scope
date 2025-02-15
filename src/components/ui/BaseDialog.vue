@@ -18,7 +18,7 @@ defineEmits(['close'])
       <dialog
         open
         v-if="show"
-        class="r-0 bg-film-secondary fixed top-[20vh] left-0 z-100 m-0 mr-auto ml-auto w-[90%] max-w-xl overflow-hidden rounded-xs border-0 p-4 shadow-xl"
+        class="bg-film-secondary fixed top-[20vh] right-0 left-0 z-100 m-0 mr-auto ml-auto w-[90%] max-w-xl overflow-hidden rounded-xs border-0 p-4 shadow-xl"
       >
         <header class="">
           <slot name="header">
