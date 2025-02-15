@@ -80,7 +80,7 @@ const handleVideoPlay = (device: string) => {
     <!-- Hero image lazy loading with blur animation-->
     <div
       :class="[
-        `absolute inset-0 h-[79vh] min-h-[69vh] w-full bg-cover before:absolute before:h-full before:w-full before:animate-pulse before:bg-[rgba(255,255,255,0.2)] before:content-['']`,
+        `absolute inset-0 h-[80vh] min-h-[70vh] w-full bg-cover before:absolute before:h-full before:w-full before:animate-pulse before:bg-[rgba(255,255,255,0.2)] before:content-['']`,
         isHeroImgLoaded ? 'before:content-none' : '',
       ]"
       :style="{
