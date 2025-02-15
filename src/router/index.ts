@@ -17,7 +17,6 @@ const router = createRouter({
       path: '/popular',
       name: 'popular-list',
       component: () => import('@/views/PopularMoviesView.vue'),
-      props: (route) => ({ page: parseInt(route.query.page?.toString() || '1') }),
     },
     {
       path: '/movies/:id',
