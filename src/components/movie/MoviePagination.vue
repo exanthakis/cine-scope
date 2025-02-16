@@ -14,7 +14,7 @@ const router = useRouter()
 const { page, route, totalPages } = defineProps<MoviePaginationProps>()
 
 const goToPage = (pageNumber: number) => {
-  router.push({ name: route, query: { page: pageNumber } })
+  router.push({ name: route, query: { ...router.currentRoute.value.query, page: pageNumber } })
 }
 
 const visiblePages = computed(() => {

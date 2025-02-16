@@ -45,7 +45,7 @@ const getSimilarMovies = (id: string) => {
   )
 }
 
-export const searchMovies = async (query: string, genres: string, page: string) => {
+export const searchMovies = async (query: string, genres: string, page: number) => {
   const filter = query.trim() ? '/search' : '/discover'
   return apiClient.get(
     filter +

@@ -10,9 +10,14 @@ import MovieService from '@/services/MovieService'
 import type { MovieFilter, SelectedFilters } from '@/types/general'
 import { type Genre, type Movie } from '@/types/movie'
 import { computed, onMounted, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
-const props = defineProps(['page'])
+interface HomeViewProps {
+  page: number
+  genres: string
+}
+
+const props = defineProps<HomeViewProps>()
 const totalPages = ref(0)
 const totalResults = ref(null)
 const searchQuery = ref('')
@@ -21,11 +26,12 @@ const movieResults = ref<Movie[] | null>(null)
 const isLoading = ref(false)
 const searchError = ref<string | null>(null)
 const showFilters = ref(false)
-const genres = ref<Genre[] | null>(null)
+const genresResult = ref<Genre[] | null>(null)
 const selectedFilters = ref<SelectedFilters>({
   genres: [],
 })
 const router = useRouter()
+const route = useRoute()
 
 const page = computed(() => props.page)
 
@@ -76,11 +82,11 @@ const getSearchResults = async () => {
 watch([page, withGenres, searchQuery], getSearchResults)
 
 onMounted(() => {
-  genres.value = null
+  genresResult.value = null
   MovieService.getGenres()
     .then((response) => {
       if (response.status === 200) {
-        genres.value = response.data.genres
+        genresResult.value = response.data.genres
       } else throw new Error('Could not retrieve data!')
     })
     .catch((error) => {
@@ -106,13 +112,28 @@ const handleFiltersData = (data: MovieFilter) => {
 }
 
 const genreFilterName = (id: number): string => {
-  if (!genres.value || genres.value.length === 0) return 'Unknown Genre'
-  return genres.value.find((el) => el.id === id)?.name ?? 'Unknown Genre'
+  if (!genresResult.value || genresResult.value.length === 0) return 'Unknown Genre'
+  return genresResult.value.find((el) => el.id === id)?.name ?? 'Unknown Genre'
 }
 
-const handleGenreFilterChange = (id: number) => {
+const handleGenreBadgeClick = (id: number) => {
   selectedFilters.value.genres = selectedFilters.value.genres.filter((el) => el !== id)
 }
+
+const resetFilters = () => {
+  selectedFilters.value.genres = []
+  toggleFiltersDisplay()
+}
+
+watch(withGenres, () => {
+  router.replace({
+    name: 'movie-list',
+    query: {
+      ...route.query,
+      genres: withGenres.value ?? undefined,
+    },
+  })
+})
 </script>
 
 <template>
@@ -120,7 +141,11 @@ const handleGenreFilterChange = (id: number) => {
     <div class="align-center mx-auto flex w-full max-w-2xl justify-center">
       <BaseDialog :show="!!showFilters" title="Filters" @close="toggleFiltersDisplay">
         <template #default>
-          <FiltersForm @submit-filters-form="handleFiltersData" :genres="genres" />
+          <FiltersForm
+            @submit-filters-form="handleFiltersData"
+            @reset-filters="resetFilters"
+            :genres="genresResult"
+          />
         </template>
         <template #actions>
           <!-- <div class="flex gap-3 pb-0">test actions</div> -->
@@ -160,7 +185,7 @@ const handleGenreFilterChange = (id: number) => {
             v-for="filter in selectedFilters.genres"
             :key="filter"
             :title="genreFilterName(filter)"
-            @close="handleGenreFilterChange(filter)"
+            @close="handleGenreBadgeClick(filter)"
           />
         </span>
       </p>

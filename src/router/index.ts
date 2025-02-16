@@ -11,7 +11,10 @@ const router = createRouter({
       path: '/',
       name: 'movie-list',
       component: HomeView,
-      props: (route) => ({ page: parseInt(route.query.page?.toString() || '1') }),
+      props: (route) => ({
+        page: parseInt(route.query.page?.toString() || '1'),
+        genres: route.query.page?.toString() || '1',
+      }),
     },
     {
       path: '/popular',
