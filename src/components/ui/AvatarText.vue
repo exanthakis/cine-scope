@@ -12,7 +12,12 @@ defineProps<AvatarTextProps>()
       :src="`https://image.tmdb.org/t/p/original/${path}`"
       :alt="title"
     />
-    <img v-else alt="Imdb logo" class="h-25 w-25" src="@/assets/icons/placeholder-avatar.svg" />
+    <img
+      v-else
+      alt="Avatar placeholder"
+      class="h-25 w-25"
+      src="@/assets/icons/placeholder-avatar.svg"
+    />
 
     <div class="text-center font-medium text-white">
       <h5>{{ name }}</h5>

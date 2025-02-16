@@ -17,7 +17,7 @@ defineEmits(['close'])
       @click="$emit('close')"
     >
       <span class="sr-only">Remove badge</span>
-      <img alt="close" src="@/assets/icons/close.svg" />
+      <img alt="Remove icon" src="@/assets/icons/close.svg" />
     </button>
   </span>
 </template>

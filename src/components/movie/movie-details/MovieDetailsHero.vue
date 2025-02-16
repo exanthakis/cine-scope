@@ -92,7 +92,7 @@ const handleVideoPlay = (device: string) => {
       <img
         ref="heroImg"
         :src="`https://image.tmdb.org/t/p/original${backdrop_path}`"
-        alt="bg-image"
+        alt="Movie details background image"
         :class="[
           'pointer-events-none h-full w-full cursor-none bg-cover bg-center object-cover object-top opacity-0 transition-opacity duration-200 ease-in-out',
           isHeroImgLoaded ? '!opacity-100' : '',
@@ -114,7 +114,7 @@ const handleVideoPlay = (device: string) => {
           >
             <img
               src="@/assets/icons/play.svg"
-              alt="play-video-icon"
+              alt="Play video icon"
               class="h-2.5 w-2.5 rotate-90"
               loading="lazy"
             />
@@ -220,7 +220,7 @@ const handleVideoPlay = (device: string) => {
                   <span class="text-film-tertiary font-bold"> Trailer</span>
                   <img
                     src="@/assets/icons/play.svg"
-                    alt="play-video-icon"
+                    alt="Play video icon"
                     class="h-2.5 w-2.5 rotate-90"
                     loading="lazy"
                   />

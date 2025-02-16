@@ -81,7 +81,7 @@ onMounted(async () => {
 
         <section class="mt-10">
           <div class="mt-5 mb-4 flex w-full items-center border-b border-gray-500/55 pb-2">
-            <img src="@/assets/images/netflix.png" alt="play-video-icon" class="h-5 w-18" />
+            <img src="@/assets/images/netflix.png" alt="Netflix logo" class="h-5 w-18" />
             <h2 class="pl-2 text-2xl text-white">movies</h2>
           </div>
           <MovieSlider :movies="netflixMovies" />
@@ -89,7 +89,7 @@ onMounted(async () => {
 
         <section class="mt-10">
           <div class="mt-5 mb-4 flex w-full items-center border-b border-gray-500/55 pb-2">
-            <img src="@/assets/images/disney.png" alt="play-video-icon" class="h-10 w-17" />
+            <img src="@/assets/images/disney.png" alt="Disney logo" class="h-10 w-17" />
             <h2 class="pl-2 text-2xl text-white">movies</h2>
           </div>
           <MovieSlider :movies="disneyMovies" />
