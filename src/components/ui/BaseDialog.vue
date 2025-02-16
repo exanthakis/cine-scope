@@ -20,7 +20,7 @@ defineEmits(['close'])
         v-if="show"
         class="bg-film-secondary fixed top-[20vh] right-0 left-0 z-100 m-0 mr-auto ml-auto w-[90%] max-w-xl overflow-hidden rounded-xs border-0 p-4 shadow-xl"
       >
-        <header class="">
+        <header>
           <slot name="header">
             <h2 class="text-2xl">{{ title }}</h2>
           </slot>
