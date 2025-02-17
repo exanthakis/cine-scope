@@ -52,7 +52,8 @@ export const searchMovies = async (
   releaseYear: ReleaseYear,
   page: number,
 ) => {
-  const filter = query.trim() ? '/search' : '/discover'
+  const isSearch = query.trim().length > 0
+  const filter = isSearch ? '/search' : '/discover'
   const releaseYearParam =
     filter === '/search' && releaseYear.lte
       ? '&primary_release_year=' + releaseYear.lte

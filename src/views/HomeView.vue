@@ -40,16 +40,6 @@ const hasNextPage = computed(() => {
   return page.value < totalPages.value
 })
 
-const withGenres = computed(() =>
-  selectedFilters.value.genres ? selectedFilters.value.genres.join('|') : '',
-)
-
-const fullReleaseYear = computed(() =>
-  selectedFilters.value.releaseYear
-    ? selectedFilters.value.releaseYear.gte + '|' + selectedFilters.value.releaseYear.lte
-    : '',
-)
-
 const getSearchResults = async () => {
   if (queryTimeout.value) clearTimeout(queryTimeout.value)
 
@@ -97,7 +87,21 @@ const getSearchResults = async () => {
   }, 1500)
 }
 
-watch([page, withGenres, searchQuery, fullReleaseYear], getSearchResults)
+// Filters General
+
+const toggleFiltersDisplay = () => {
+  showFilters.value = !showFilters.value
+  document.documentElement.style.overflow = showFilters.value ? 'hidden' : 'auto'
+}
+
+const handleFiltersData = (data: MovieFilter) => {
+  console.log('filters data', data)
+  toggleFiltersDisplay()
+  selectedFilters.value.genres = data.genres || []
+  selectedFilters.value.releaseYear = data.releaseYear || []
+}
+
+// Genre Filter
 
 onMounted(() => {
   genresResult.value = null
@@ -114,34 +118,9 @@ onMounted(() => {
     })
 })
 
-const handleFiltersDisplay = () => {
-  showFilters.value = true
-}
-
-const toggleFiltersDisplay = () => {
-  showFilters.value = !showFilters.value
-  document.documentElement.style.overflow = showFilters.value ? 'hidden' : 'auto'
-}
-
-const handleFiltersData = (data: MovieFilter) => {
-  console.log('filters data', data)
-  toggleFiltersDisplay()
-  selectedFilters.value.genres = data.genres || []
-  selectedFilters.value.releaseYear = data.releaseYear || []
-}
-
-const releaseYear = computed((): ReleaseYear => {
-  if (selectedFilters.value.releaseYear && selectedFilters.value.releaseYear.lte) {
-    return {
-      lte: `${selectedFilters.value.releaseYear?.lte}-12-31`,
-      gte: `${selectedFilters.value.releaseYear?.gte}-01-01`,
-    }
-  }
-  return {
-    lte: '',
-    gte: '',
-  }
-})
+const withGenres = computed(() =>
+  selectedFilters.value.genres ? selectedFilters.value.genres.join('|') : '',
+)
 
 const genreFilterName = (id: number): string => {
   if (!genresResult.value || genresResult.value.length === 0) return 'Unknown Genre'
@@ -156,6 +135,35 @@ const resetFilters = () => {
   selectedFilters.value.genres = []
   toggleFiltersDisplay()
 }
+
+// Release Year Filter
+
+const releaseYear = computed((): ReleaseYear => {
+  if (selectedFilters.value.releaseYear && selectedFilters.value.releaseYear.lte) {
+    return {
+      lte: `${selectedFilters.value.releaseYear?.lte}-12-31`,
+      gte: `${selectedFilters.value.releaseYear?.gte}-01-01`,
+    }
+  }
+  return {
+    lte: '',
+    gte: '',
+  }
+})
+
+const fullReleaseYear = computed(() =>
+  selectedFilters.value.releaseYear
+    ? selectedFilters.value.releaseYear.gte + '|' + selectedFilters.value.releaseYear.lte
+    : '',
+)
+
+const yearFilterTitle = computed(() =>
+  selectedFilters.value.releaseYear?.gte
+    ? `${selectedFilters.value.releaseYear.gte} - ${selectedFilters.value.releaseYear.lte ?? ''}`
+    : (selectedFilters.value.releaseYear?.lte ?? ''),
+)
+
+watch([page, withGenres, searchQuery, fullReleaseYear], getSearchResults)
 
 watch(withGenres, () => {
   router.replace({
@@ -187,7 +195,7 @@ watch(withGenres, () => {
       <SearchInput
         v-model:searchQuery="searchQuery"
         @get-search-results="getSearchResults"
-        @on-filter-show="handleFiltersDisplay"
+        @on-filter-show="showFilters = true"
       />
     </div>
     <div
@@ -222,11 +230,7 @@ watch(withGenres, () => {
           />
           <BaseBadge
             v-if="selectedFilters.releaseYear"
-            :title="
-              selectedFilters.releaseYear?.gte
-                ? selectedFilters.releaseYear?.gte + ' - ' + selectedFilters.releaseYear?.lte
-                : selectedFilters.releaseYear?.lte
-            "
+            :title="yearFilterTitle"
             @close="selectedFilters.releaseYear = null"
           />
         </span>
