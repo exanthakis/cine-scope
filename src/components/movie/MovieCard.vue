@@ -31,7 +31,7 @@ const onFavoriteClick = () => {
       <div
         v-if="imgUrl"
         :class="[
-          `inset-0 h-full w-full bg-cover before:absolute before:h-full before:w-full before:animate-pulse before:bg-[rgba(255,255,255,0.2)] before:content-['']`,
+          `h-full w-full bg-cover before:absolute before:h-full before:w-full before:animate-pulse before:bg-[rgba(255,255,255,0.2)] before:content-['']`,
           isHeroImgLoaded ? 'before:content-none' : '',
         ]"
         :style="{
