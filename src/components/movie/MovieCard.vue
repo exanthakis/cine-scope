@@ -1,7 +1,23 @@
 <script setup lang="ts">
 import type { MovieCardProps } from '@/types/general'
+import { onMounted, ref } from 'vue'
 
 const { id, title, imgUrl = '', hideFav = false } = defineProps<MovieCardProps>()
+
+const isHeroImgLoaded = ref(false)
+const movieImg = ref<HTMLImageElement | null>(null)
+
+onMounted(() => {
+  if (movieImg.value) {
+    if (movieImg.value.complete) {
+      isHeroImgLoaded.value = true
+    } else {
+      movieImg.value.addEventListener('load', () => {
+        isHeroImgLoaded.value = true
+      })
+    }
+  }
+})
 
 const onFavoriteClick = () => {
   console.log('clicked')
@@ -12,16 +28,33 @@ const onFavoriteClick = () => {
     <div
       class="group relative mx-auto h-full w-full transform overflow-hidden rounded-sm transition duration-200 hover:scale-105"
     >
-      <img
+      <div
         v-if="imgUrl"
-        class="h-full w-full rounded-lg shadow-lg"
-        :src="`https://image.tmdb.org/t/p/w500${imgUrl}`"
-        :alt="title"
-      />
+        :class="[
+          `inset-0 h-full w-full bg-cover before:absolute before:h-full before:w-full before:animate-pulse before:bg-[rgba(255,255,255,0.2)] before:content-['']`,
+          isHeroImgLoaded ? 'before:content-none' : '',
+        ]"
+        :style="{
+          backgroundImage: `url('https://image.tmdb.org/t/p/w45${imgUrl}')`,
+          backgroundPosition: 'top',
+          backgroundSize: 'cover',
+        }"
+      >
+        <img
+          ref="movieImg"
+          :src="`https://image.tmdb.org/t/p/w500${imgUrl}`"
+          :alt="title"
+          :class="[
+            'h-full w-full rounded-lg bg-cover bg-center object-cover object-top opacity-0 shadow-lg transition-opacity duration-200 ease-in-out',
+            isHeroImgLoaded ? '!opacity-100' : '',
+          ]"
+          loading="lazy"
+        />
+      </div>
       <div class="h-full" v-else>
         <img
           alt="Movie image placeholder"
-          class="h-full w-full rounded-lg shadow-lg"
+          class="h-full w-full rounded-lg bg-cover bg-center object-cover object-top shadow-lg"
           src="@/assets/images/no-image-placeholder.png"
         />
 
