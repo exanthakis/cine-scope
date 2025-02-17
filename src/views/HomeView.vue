@@ -175,10 +175,10 @@ watch(withGenres, () => {
         v-if="movieResults?.length && movieResults?.length > 0"
         class="flex justify-start text-left"
       >
-        Found:
-        <span class="pr-2"
-          ><b>{{ totalResults }}</b> results for:</span
-        >
+        Found&nbsp;
+        <span class="pr-2">
+          <b>{{ totalResults }}</b> results for:
+        </span>
         <BaseBadge v-if="searchQuery.trim()" :title="searchQuery" @close="searchQuery = ''" />
         <span class="flex justify-start gap-2 pl-2">
           <BaseBadge
