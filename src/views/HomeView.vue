@@ -44,19 +44,6 @@ const withGenres = computed(() =>
   selectedFilters.value.genres ? selectedFilters.value.genres.join('|') : '',
 )
 
-const releaseYear = computed((): ReleaseYear => {
-  if (selectedFilters.value.releaseYear) {
-    return {
-      lte: `${selectedFilters.value.releaseYear?.lte}-12-31`,
-      gte: `${selectedFilters.value.releaseYear?.gte}-01-01`,
-    }
-  }
-  return {
-    lte: '',
-    gte: '',
-  }
-})
-
 const fullReleaseYear = computed(() =>
   selectedFilters.value.releaseYear
     ? selectedFilters.value.releaseYear.gte + '|' + selectedFilters.value.releaseYear.lte
@@ -76,11 +63,15 @@ const getSearchResults = async () => {
   searchError.value = null
   totalResults.value = null
 
-  // Remove release year range filter since search api does not accept a range but only a single year value
+  // Remove genres filters when is typed a search query since search api does not accept genres filter.
   // TODO: Show an alert
-  if (searchQuery.value.trim() && fullReleaseYear.value.trim()) {
-    selectedFilters.value.releaseYear = null
+  if (searchQuery.value.trim()) {
+    selectedFilters.value.genres = []
   }
+
+  // Remove release year range filter when is typed a search query and we have set a range value through range slider. (releaseYear?.gte = 0 when we use single range slider)
+  if (searchQuery.value.trim() && selectedFilters.value.releaseYear?.gte)
+    selectedFilters.value.releaseYear = null
 
   queryTimeout.value = setTimeout(async () => {
     isLoading.value = true
@@ -138,6 +129,19 @@ const handleFiltersData = (data: MovieFilter) => {
   selectedFilters.value.genres = data.genres || []
   selectedFilters.value.releaseYear = data.releaseYear || []
 }
+
+const releaseYear = computed((): ReleaseYear => {
+  if (selectedFilters.value.releaseYear && selectedFilters.value.releaseYear.lte) {
+    return {
+      lte: `${selectedFilters.value.releaseYear?.lte}-12-31`,
+      gte: `${selectedFilters.value.releaseYear?.gte}-01-01`,
+    }
+  }
+  return {
+    lte: '',
+    gte: '',
+  }
+})
 
 const genreFilterName = (id: number): string => {
   if (!genresResult.value || genresResult.value.length === 0) return 'Unknown Genre'
