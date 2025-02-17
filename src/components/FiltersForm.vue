@@ -64,7 +64,7 @@ const updateSingleRange = (range: number) => {
 
 <template>
   <form @submit.prevent="handleSubmitForm">
-    <div>
+    <div v-if="!searchQuery.trim()" class="pb-6">
       <h2 class="text-dark mb-4 text-xl">Genres</h2>
       <div v-if="genres" class="flex flex-wrap gap-2">
         <div v-for="genre in genres" :key="genre.id">
@@ -88,7 +88,7 @@ const updateSingleRange = (range: number) => {
         </div>
       </div>
     </div>
-    <div class="pt-6">
+    <div>
       <h2 class="text-dark mb-4 text-xl">Release Year</h2>
       <RangeSlider
         v-if="!searchQuery.trim()"
