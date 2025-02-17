@@ -46,9 +46,14 @@ export interface MovieDetailsHeroProps {
 export interface MovieFilter {
   genres?: number[]
   providers?: string[]
-  releaseYear?: number
+  releaseYear: ReleaseYear
 }
 
+export interface ReleaseYear {
+  lte: string
+  gte: string
+}
 export interface SelectedFilters {
   genres: number[]
+  releaseYear: ReleaseYear | null
 }

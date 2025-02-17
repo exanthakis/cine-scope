@@ -1,0 +1,97 @@
+<script setup lang="ts">
+import { computed, ref, watch, watchEffect } from 'vue'
+
+interface RangeSliderProps {
+  initialMin: number
+  initialMax: number
+  min: number
+  max: number
+  step: number
+}
+const { min, max, step, initialMax, initialMin } = defineProps<RangeSliderProps>()
+const emits = defineEmits(['updateRange'])
+
+const minValue = ref(initialMin)
+const maxValue = ref(initialMax)
+const progressRef = ref<HTMLDivElement | null>(null)
+
+const handleMin = (e: Event) => {
+  const newValue = Number((e.target as HTMLInputElement).value)
+  if (newValue <= maxValue.value) {
+    minValue.value = newValue
+  }
+}
+
+const handleMax = (e: Event) => {
+  const newValue = Number((e.target as HTMLInputElement).value)
+  if (newValue >= minValue.value) {
+    maxValue.value = newValue
+  }
+}
+
+watchEffect(() => {
+  if (progressRef.value) {
+    const minPercent = ((minValue.value - min) / (max - min)) * 100
+    const maxPercent = ((maxValue.value - min) / (max - min)) * 100
+
+    progressRef.value.style.left = minPercent + '%'
+    progressRef.value.style.right = 100 - maxPercent + '%'
+  }
+})
+
+watch([minValue, maxValue], () => {
+  emits('updateRange', { min: minValue.value, max: maxValue.value })
+})
+
+const disableMinThumb = computed(() => minValue.value >= maxValue.value)
+const disableMaxThumb = computed(() => maxValue.value <= minValue.value)
+</script>
+
+<template>
+  <div class="flex flex-col rounded-lg bg-white px-0 py-4">
+    <div class="mb-6 flex items-center justify-between">
+      <div class="rounded-md">
+        <span class="p-2 font-semibold"> Min</span>
+        <input type="number" v-model="minValue" class="w-24 rounded-md border border-gray-400" />
+      </div>
+      <div class=" ">
+        <span class="p-2 font-semibold"> Max</span>
+        <input type="number" v-model="maxValue" class="w-24 rounded-md border border-gray-400" />
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <div class="relative h-1 overflow-hidden rounded-md bg-gray-300">
+        <div class="progress bg-film-primary absolute h-1 rounded" ref="progressRef"></div>
+      </div>
+
+      <div class="relative">
+        <input
+          type="range"
+          :min="min"
+          :step="step"
+          :max="max"
+          :value="minValue"
+          @input="handleMin"
+          :class="[
+            'range-min pointer-events-none absolute -top-1 h-1 w-full appearance-none bg-transparent',
+            disableMinThumb ? 'disabled-thumb' : '',
+          ]"
+        />
+
+        <input
+          type="range"
+          :min="min"
+          :step="step"
+          :max="max"
+          :value="maxValue"
+          @input="handleMax"
+          :class="[
+            'range-max pointer-events-none absolute -top-1 h-1 w-full appearance-none bg-transparent',
+            disableMaxThumb ? 'disabled-thumb' : '',
+          ]"
+        />
+      </div>
+    </div>
+  </div>
+</template>

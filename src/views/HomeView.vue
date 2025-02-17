@@ -7,7 +7,7 @@ import SearchInput from '@/components/SearchInput.vue'
 import BaseBadge from '@/components/ui/BaseBadge.vue'
 import BaseDialog from '@/components/ui/BaseDialog.vue'
 import MovieService from '@/services/MovieService'
-import type { MovieFilter, SelectedFilters } from '@/types/general'
+import type { MovieFilter, ReleaseYear, SelectedFilters } from '@/types/general'
 import { type Genre, type Movie } from '@/types/movie'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -29,6 +29,7 @@ const showFilters = ref(false)
 const genresResult = ref<Genre[] | null>(null)
 const selectedFilters = ref<SelectedFilters>({
   genres: [],
+  releaseYear: null,
 })
 const router = useRouter()
 const route = useRoute()
@@ -43,10 +44,29 @@ const withGenres = computed(() =>
   selectedFilters.value.genres ? selectedFilters.value.genres.join('|') : '',
 )
 
+const releaseYear = computed((): ReleaseYear => {
+  if (selectedFilters.value.releaseYear) {
+    return {
+      lte: `${selectedFilters.value.releaseYear?.lte}-12-31`,
+      gte: `${selectedFilters.value.releaseYear?.gte}-01-01`,
+    }
+  }
+  return {
+    lte: '',
+    gte: '',
+  }
+})
+
+const fullReleaseYear = computed(() =>
+  selectedFilters.value.releaseYear
+    ? selectedFilters.value.releaseYear.gte + '|' + selectedFilters.value.releaseYear.lte
+    : '',
+)
+
 const getSearchResults = async () => {
   if (queryTimeout.value) clearTimeout(queryTimeout.value)
 
-  if (!searchQuery.value.trim() && !withGenres.value.trim()) {
+  if (!searchQuery.value.trim() && !withGenres.value.trim() && !fullReleaseYear.value.trim()) {
     movieResults.value = null
     totalResults.value = null
     totalPages.value = 0
@@ -56,12 +76,19 @@ const getSearchResults = async () => {
   searchError.value = null
   totalResults.value = null
 
+  // Remove release year range filter since search api does not accept a range but only a single year value
+  // TODO: Show an alert
+  if (searchQuery.value.trim() && fullReleaseYear.value.trim()) {
+    selectedFilters.value.releaseYear = null
+  }
+
   queryTimeout.value = setTimeout(async () => {
     isLoading.value = true
     try {
       const movieDetails = await MovieService.searchMovies(
         searchQuery.value,
         withGenres.value,
+        releaseYear.value,
         page.value,
       )
       totalResults.value = movieDetails.data.total_results
@@ -79,7 +106,7 @@ const getSearchResults = async () => {
   }, 1500)
 }
 
-watch([page, withGenres, searchQuery], getSearchResults)
+watch([page, withGenres, searchQuery, fullReleaseYear], getSearchResults)
 
 onMounted(() => {
   genresResult.value = null
@@ -109,6 +136,7 @@ const handleFiltersData = (data: MovieFilter) => {
   console.log('filters data', data)
   toggleFiltersDisplay()
   selectedFilters.value.genres = data.genres || []
+  selectedFilters.value.releaseYear = data.releaseYear || []
 }
 
 const genreFilterName = (id: number): string => {
@@ -145,6 +173,7 @@ watch(withGenres, () => {
             @submit-filters-form="handleFiltersData"
             @reset-filters="resetFilters"
             :genres="genresResult"
+            :searchQuery="searchQuery"
           />
         </template>
         <template #actions>
@@ -186,6 +215,15 @@ watch(withGenres, () => {
             :key="filter"
             :title="genreFilterName(filter)"
             @close="handleGenreBadgeClick(filter)"
+          />
+          <BaseBadge
+            v-if="selectedFilters.releaseYear"
+            :title="
+              selectedFilters.releaseYear?.gte
+                ? selectedFilters.releaseYear?.gte + ' - ' + selectedFilters.releaseYear?.lte
+                : selectedFilters.releaseYear?.lte
+            "
+            @close="selectedFilters.releaseYear = null"
           />
         </span>
       </p>

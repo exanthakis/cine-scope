@@ -1,0 +1,36 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+interface SingleRangeSliderProps {
+  initialValue: number
+  min: number
+  max: number
+  step: number
+}
+const { min, max, step, initialValue } = defineProps<SingleRangeSliderProps>()
+const emit = defineEmits(['updateSingleRange'])
+
+const rangeVal = ref(initialValue)
+
+const handleInputChange = (e: Event) => {
+  const newValue = Number((e.target as HTMLInputElement).value)
+  rangeVal.value = newValue
+  emit('updateSingleRange', newValue)
+}
+</script>
+
+<template>
+  <label for="default-range" class="mb-2 block text-sm font-medium text-gray-900">{{
+    rangeVal
+  }}</label>
+  <input
+    id="default-range"
+    type="range"
+    :value="rangeVal"
+    @input="handleInputChange"
+    class="range-min h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200"
+    :min="min"
+    :step="step"
+    :max="max"
+  />
+</template>

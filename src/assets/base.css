@@ -108,3 +108,25 @@ body {
 ::-webkit-scrollbar-track {
   background-color: #2d2d2d;
 }
+
+.range-min,
+.range-max {
+  pointer-events: none;
+}
+
+.range-min::-webkit-slider-thumb,
+.range-max::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #181818;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.disabled-thumb::-webkit-slider-thumb {
+  pointer-events: none;
+  background: #ccc;
+  cursor: not-allowed;
+}

@@ -1,5 +1,6 @@
 import { DEFAULT_LANGUAGE } from '@/constants/general'
 import { apiClient } from '@/lib/http'
+import type { ReleaseYear } from '@/types/general'
 
 const getPopularMovies = (page: string) => {
   return apiClient.get(
@@ -45,14 +46,29 @@ const getSimilarMovies = (id: string) => {
   )
 }
 
-export const searchMovies = async (query: string, genres: string, page: number) => {
+export const searchMovies = async (
+  query: string,
+  genres: string,
+  releaseYear: ReleaseYear,
+  page: number,
+) => {
   const filter = query.trim() ? '/search' : '/discover'
+  const releaseYearParam =
+    filter === '/search' && releaseYear.lte
+      ? '&primary_release_year=' + releaseYear.lte
+      : filter === '/discover' && releaseYear.lte && releaseYear.gte
+        ? '&primary_release_date.gte=' +
+          releaseYear.gte +
+          '&primary_release_date.lte=' +
+          releaseYear.lte
+        : ''
+
   return apiClient.get(
     filter +
       '/movie?api_key=' +
       import.meta.env.VITE_TMDB_API_KEY +
-      '&query=' +
-      encodeURIComponent(query) +
+      (query.trim() ? '&query=' + encodeURIComponent(query) : '') +
+      releaseYearParam +
       '&with_genres=' +
       genres +
       '&page=' +
