@@ -58,7 +58,7 @@ const onFavoriteClick = () => {
           src="@/assets/images/no-image-placeholder.png"
         />
 
-        <span class="absolute inset-0 top-2 text-center font-bold">{{ title }}</span>
+        <span class="absolute inset-0 top-2 p-2 text-center font-bold">{{ title }}</span>
       </div>
 
       <div
