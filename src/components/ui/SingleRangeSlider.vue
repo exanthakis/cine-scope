@@ -20,7 +20,7 @@ const handleInputChange = (e: Event) => {
 </script>
 
 <template>
-  <label for="default-range" class="mb-2 block text-sm font-medium text-gray-900">{{
+  <label for="default-range" class="text-film-secondary mb-2 block text-sm font-medium">{{
     rangeVal
   }}</label>
   <input

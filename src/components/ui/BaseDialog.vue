@@ -2,6 +2,7 @@
 interface BaseDialogProps {
   show: boolean
   title: string
+  classes?: string
 }
 defineProps<BaseDialogProps>()
 defineEmits(['close'])
@@ -18,7 +19,10 @@ defineEmits(['close'])
       <dialog
         open
         v-if="show"
-        class="bg-film-secondary fixed top-[20vh] right-0 left-0 z-100 m-0 mr-auto ml-auto w-[90%] max-w-xl overflow-hidden rounded-xs border-0 p-4 shadow-xl"
+        :class="[
+          'bg-film-secondary fixed top-[20vh] right-0 left-0 z-100 m-0 mr-auto ml-auto w-[90%] max-w-xl overflow-hidden rounded-xs border-0 p-4 shadow-xl',
+          classes,
+        ]"
       >
         <header>
           <slot name="header">

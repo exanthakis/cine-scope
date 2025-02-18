@@ -48,7 +48,7 @@ const disableMaxThumb = computed(() => maxValue.value <= minValue.value)
 </script>
 
 <template>
-  <div class="flex flex-col rounded-lg bg-white px-0 py-4">
+  <div class="flex flex-col rounded-lg bg-transparent px-0 pb-4">
     <div class="mb-6 flex items-center justify-between">
       <div class="rounded-md">
         <span class="p-2 font-semibold"> Min</span>
@@ -61,8 +61,8 @@ const disableMaxThumb = computed(() => maxValue.value <= minValue.value)
     </div>
 
     <div class="mb-4">
-      <div class="relative h-1 overflow-hidden rounded-md bg-gray-300">
-        <div class="progress bg-film-primary absolute h-1 rounded" ref="progressRef"></div>
+      <div class="relative h-1 overflow-hidden rounded-md bg-[#232731]">
+        <div class="progress absolute h-1 rounded bg-gray-300" ref="progressRef"></div>
       </div>
 
       <div class="relative">

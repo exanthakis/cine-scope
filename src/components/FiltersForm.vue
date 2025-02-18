@@ -111,7 +111,7 @@ watch(
           <label
             :for="genre.id + genre.name"
             :class="[
-              'cursor-pointer rounded-2xl bg-[#10141e] px-3 py-1 text-white',
+              'cursor-pointer rounded-2xl bg-[#232731] px-3 py-1 text-white',
               selectedGenres.includes(genre.id) ? 'bg-film-primary' : '',
             ]"
             >{{ genre.name }}</label
@@ -147,7 +147,7 @@ watch(
         <img src="@/assets/icons/language.svg" alt="Release year icon" class="size-6" />
         <h2 class="text-dark text-xl">Language</h2>
       </div>
-      <div class="styleSelect w-full overflow-hidden rounded-full !bg-[#10141e]">
+      <div class="styleSelect w-full overflow-hidden rounded-full !bg-[#232731]">
         <select
           id="referrer"
           name="referrer"
@@ -167,7 +167,7 @@ watch(
     </div>
     <div class="-mb-5 pt-10">
       <BaseButton
-        class="mr-4 cursor-pointer !rounded-full"
+        class="!bg-film-secondary !text-film-tertiary mr-4 cursor-pointer !rounded-full"
         mode="secondary"
         :isLink="false"
         @click="$emit('resetFilters')"

@@ -204,7 +204,12 @@ watch([withGenres, fullReleaseYear, selectedLanguage], () => {
 <template>
   <main class="!bg-radial-white container">
     <div class="align-center mx-auto flex w-full max-w-2xl justify-center">
-      <BaseDialog :show="!!showFilters" title="Filters" @close="toggleFiltersDisplay">
+      <BaseDialog
+        :show="!!showFilters"
+        title="Filters"
+        @close="toggleFiltersDisplay"
+        classes="!bg-[#10141e] text-film-secondary"
+      >
         <template #default>
           <FiltersForm
             @submit-filters-form="handleFiltersData"
