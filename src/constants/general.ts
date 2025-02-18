@@ -27,10 +27,13 @@ const LANGUAGES = [
   { code: 'zh', name: 'Chinese' },
 ]
 
+const FULL_NAME = 'Xanthakis Emmanouil'
+
 export {
   TMDB_API_BASE_URL,
   DEFAULT_LANGUAGE,
   MOVIES_SLIDER_BREAKPOINTS,
   CREDITS_SLIDER_BREAKPOINTS,
   LANGUAGES,
+  FULL_NAME,
 }
