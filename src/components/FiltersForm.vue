@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MovieFilter } from '@/types/general'
+import type { MovieFilter, ReleaseYear } from '@/types/general'
 import type { Genre } from '@/types/movie'
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
@@ -20,17 +20,35 @@ const minSelected = ref(1920)
 const maxSelected = ref(2020)
 const singleRangeSelected = ref(2020)
 
-// Runs once on mount to initialize `selectedGenres`
+const extractYears = (str: string): ReleaseYear => {
+  const [firstYear, secondYear] = str.split('|').map((y) => y || null)
+  return { lte: firstYear || '', gte: secondYear || '' }
+}
+
+// Runs once on mount to initialize `selectedGenres` & `minSelected`, `maxSelected`, `singleRangeSelected`
 watch(
-  () => route.query.genres,
-  (newGenres) => {
+  () => [route.query.genres, route.query.year],
+  ([newGenres, newYear]) => {
     if (!newGenres) {
       selectedGenres.value = []
-      return
+    } else {
+      const genreString = Array.isArray(newGenres) ? newGenres[0] : newGenres
+      selectedGenres.value = genreString ? genreString.split('|').map(Number) : []
     }
 
-    const genreString = Array.isArray(newGenres) ? newGenres[0] : newGenres
-    selectedGenres.value = genreString ? genreString.split('|').map(Number) : []
+    // Handle Release Year
+    if (newYear) {
+      const yearString = Array.isArray(newYear) ? newYear[0] : newYear
+      if (yearString) {
+        const { lte, gte } = extractYears(yearString)
+        if (lte.trim() && gte.trim()) {
+          minSelected.value = parseInt(lte)
+          maxSelected.value = parseInt(gte)
+        } else {
+          singleRangeSelected.value = parseInt(gte)
+        }
+      }
+    }
   },
   { immediate: true },
 )
@@ -95,8 +113,8 @@ const updateSingleRange = (range: number) => {
         :min="1900"
         :max="currentYear"
         :step="1"
-        :initialMin="1920"
-        :initialMax="2020"
+        :initialMin="minSelected"
+        :initialMax="maxSelected"
         @update-range="updateRange"
       />
       <SingleRangeSlider
@@ -104,7 +122,7 @@ const updateSingleRange = (range: number) => {
         :min="1900"
         :max="currentYear"
         :step="1"
-        :initialValue="currentYear"
+        :initialValue="singleRangeSelected"
         @update-single-range="updateSingleRange"
       />
     </div>

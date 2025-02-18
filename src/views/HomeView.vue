@@ -15,6 +15,7 @@ import { useRoute, useRouter } from 'vue-router'
 interface HomeViewProps {
   page: number
   genres: string
+  year: number
 }
 
 const props = defineProps<HomeViewProps>()
@@ -133,6 +134,7 @@ const handleGenreBadgeClick = (id: number) => {
 
 const resetFilters = () => {
   selectedFilters.value.genres = []
+  selectedFilters.value.releaseYear = null
   toggleFiltersDisplay()
 }
 
@@ -165,12 +167,13 @@ const yearFilterTitle = computed(() =>
 
 watch([page, withGenres, searchQuery, fullReleaseYear], getSearchResults)
 
-watch(withGenres, () => {
+watch([withGenres, fullReleaseYear], () => {
   router.replace({
     name: 'movie-list',
     query: {
       ...route.query,
       genres: withGenres.value ?? undefined,
+      year: fullReleaseYear.value ?? undefined,
     },
   })
 })
