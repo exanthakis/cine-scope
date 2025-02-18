@@ -170,11 +170,7 @@ const yearFilterTitle = computed(() =>
 )
 
 const removeYearsFilter = () => {
-  if (
-    selectedFilters.value.releaseYear &&
-    selectedFilters.value.releaseYear.gte &&
-    selectedFilters.value.releaseYear.lte
-  ) {
+  if (selectedFilters.value.releaseYear && selectedFilters.value.releaseYear.lte) {
     selectedFilters.value.releaseYear.gte = ''
     selectedFilters.value.releaseYear.lte = ''
   }
@@ -218,9 +214,7 @@ watch([withGenres, fullReleaseYear, selectedLanguage], () => {
             :searchQuery="searchQuery"
           />
         </template>
-        <template #actions>
-          <!-- <div class="flex gap-3 pb-0">test actions</div> -->
-        </template>
+        <template #actions> </template>
       </BaseDialog>
       <SearchInput
         v-model:searchQuery="searchQuery"
