@@ -52,11 +52,19 @@ const disableMaxThumb = computed(() => maxValue.value <= minValue.value)
     <div class="mb-6 flex items-center justify-between">
       <div class="rounded-md">
         <span class="p-2 font-semibold"> Min</span>
-        <input type="number" v-model="minValue" class="w-24 rounded-md border border-gray-400" />
+        <input
+          type="number"
+          v-model="minValue"
+          class="w-24 rounded-md border border-gray-400 px-2 py-1"
+        />
       </div>
       <div class=" ">
         <span class="p-2 font-semibold"> Max</span>
-        <input type="number" v-model="maxValue" class="w-24 rounded-md border border-gray-400" />
+        <input
+          type="number"
+          v-model="maxValue"
+          class="w-24 rounded-md border border-gray-400 px-2 py-1"
+        />
       </div>
     </div>
 

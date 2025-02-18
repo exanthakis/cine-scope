@@ -152,7 +152,7 @@ watch(
           id="referrer"
           name="referrer"
           v-model="selectedLanguage"
-          class="text-film-secondary w-full bg-transparent px-5 py-2"
+          class="text-film-secondary w-full cursor-pointer bg-transparent px-5 py-2"
         >
           <option
             v-for="lang in LANGUAGES"
