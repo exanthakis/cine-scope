@@ -169,6 +169,17 @@ const yearFilterTitle = computed(() =>
     : (selectedFilters.value.releaseYear?.lte ?? ''),
 )
 
+const removeYearsFilter = () => {
+  if (
+    selectedFilters.value.releaseYear &&
+    selectedFilters.value.releaseYear.gte &&
+    selectedFilters.value.releaseYear.lte
+  ) {
+    selectedFilters.value.releaseYear.gte = ''
+    selectedFilters.value.releaseYear.lte = ''
+  }
+}
+
 // Language filter
 const selectedLanguage = computed(() => selectedFilters.value.language)
 const selectedFullLanguage = computed(() =>
@@ -231,7 +242,7 @@ watch([withGenres, fullReleaseYear, selectedLanguage], () => {
         class="flex justify-start text-left"
       >
         Found&nbsp;
-        <span class="pr-2">
+        <span>
           <b>{{ totalResults }}</b> results for:
         </span>
         <BaseBadge v-if="searchQuery.trim()" :title="searchQuery" @close="searchQuery = ''" />
@@ -242,11 +253,7 @@ watch([withGenres, fullReleaseYear, selectedLanguage], () => {
             :title="genreFilterName(filter)"
             @close="handleGenreBadgeClick(filter)"
           />
-          <BaseBadge
-            v-if="selectedFilters.releaseYear"
-            :title="yearFilterTitle"
-            @close="selectedFilters.releaseYear = null"
-          />
+          <BaseBadge v-if="yearFilterTitle" :title="yearFilterTitle" @close="removeYearsFilter" />
           <BaseBadge
             v-if="selectedFilters.language"
             :title="selectedFullLanguage?.name || selectedLanguage"
