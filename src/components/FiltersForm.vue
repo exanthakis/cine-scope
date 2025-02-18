@@ -83,7 +83,10 @@ const updateSingleRange = (range: number) => {
 <template>
   <form @submit.prevent="handleSubmitForm">
     <div v-if="!searchQuery.trim()" class="pb-6">
-      <h2 class="text-dark mb-4 text-xl">Genres</h2>
+      <div class="mb-4 flex items-center gap-2">
+        <img src="@/assets/icons/genres.svg" alt="Release year icon" class="size-6" />
+        <h2 class="text-dark text-xl">Genres</h2>
+      </div>
       <div v-if="genres" class="flex flex-wrap gap-2">
         <div v-for="genre in genres" :key="genre.id">
           <input
@@ -107,7 +110,10 @@ const updateSingleRange = (range: number) => {
       </div>
     </div>
     <div>
-      <h2 class="text-dark mb-4 text-xl">Release Year</h2>
+      <div class="mb-4 flex items-center gap-2">
+        <img src="@/assets/icons/release-year.svg" alt="Release year icon" class="size-6" />
+        <h2 class="text-dark text-xl">Release Year</h2>
+      </div>
       <RangeSlider
         v-if="!searchQuery.trim()"
         :min="1900"
