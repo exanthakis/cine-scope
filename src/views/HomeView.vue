@@ -96,7 +96,6 @@ const getSearchResults = async () => {
 
 const toggleFiltersDisplay = () => {
   showFilters.value = !showFilters.value
-  document.documentElement.style.overflow = showFilters.value ? 'hidden' : 'auto'
 }
 
 const handleFiltersData = (data: MovieFilter) => {
@@ -195,6 +194,11 @@ watch([withGenres, fullReleaseYear, selectedLanguage], () => {
     },
   })
 })
+
+watch(
+  [showFilters],
+  () => (document.documentElement.style.overflow = showFilters.value ? 'hidden' : 'auto'),
+)
 </script>
 
 <template>
