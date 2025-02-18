@@ -16,9 +16,21 @@ const CREDITS_SLIDER_BREAKPOINTS = {
   1024: { slidesPerView: 8.3 },
 }
 
+const LANGUAGES = [
+  { code: 'en', name: 'English' },
+  { code: 'es', name: 'Spanish' },
+  { code: 'fr', name: 'French' },
+  { code: 'de', name: 'German' },
+  { code: 'it', name: 'Italian' },
+  { code: 'ja', name: 'Japanese' },
+  { code: 'ko', name: 'Korean' },
+  { code: 'zh', name: 'Chinese' },
+]
+
 export {
   TMDB_API_BASE_URL,
   DEFAULT_LANGUAGE,
   MOVIES_SLIDER_BREAKPOINTS,
   CREDITS_SLIDER_BREAKPOINTS,
+  LANGUAGES,
 }

@@ -6,6 +6,7 @@ import MoviePagination from '@/components/movie/MoviePagination.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import BaseBadge from '@/components/ui/BaseBadge.vue'
 import BaseDialog from '@/components/ui/BaseDialog.vue'
+import { LANGUAGES } from '@/constants/general'
 import MovieService from '@/services/MovieService'
 import type { MovieFilter, ReleaseYear, SelectedFilters } from '@/types/general'
 import { type Genre, type Movie } from '@/types/movie'
@@ -16,6 +17,7 @@ interface HomeViewProps {
   page: number
   genres: string
   year: number
+  lang: string
 }
 
 const props = defineProps<HomeViewProps>()
@@ -31,6 +33,7 @@ const genresResult = ref<Genre[] | null>(null)
 const selectedFilters = ref<SelectedFilters>({
   genres: [],
   releaseYear: null,
+  language: '',
 })
 const router = useRouter()
 const route = useRoute()
@@ -71,6 +74,7 @@ const getSearchResults = async () => {
         searchQuery.value,
         withGenres.value,
         releaseYear.value,
+        selectedLanguage.value,
         page.value,
       )
       totalResults.value = movieDetails.data.total_results
@@ -100,10 +104,10 @@ const handleFiltersData = (data: MovieFilter) => {
   toggleFiltersDisplay()
   selectedFilters.value.genres = data.genres || []
   selectedFilters.value.releaseYear = data.releaseYear || []
+  selectedFilters.value.language = data.language
 }
 
 // Genre Filter
-
 onMounted(() => {
   genresResult.value = null
   MovieService.getGenres()
@@ -135,11 +139,11 @@ const handleGenreBadgeClick = (id: number) => {
 const resetFilters = () => {
   selectedFilters.value.genres = []
   selectedFilters.value.releaseYear = null
+  selectedFilters.value.language = ''
   toggleFiltersDisplay()
 }
 
 // Release Year Filter
-
 const releaseYear = computed((): ReleaseYear => {
   if (selectedFilters.value.releaseYear && selectedFilters.value.releaseYear.lte) {
     return {
@@ -165,15 +169,22 @@ const yearFilterTitle = computed(() =>
     : (selectedFilters.value.releaseYear?.lte ?? ''),
 )
 
-watch([page, withGenres, searchQuery, fullReleaseYear], getSearchResults)
+// Language filter
+const selectedLanguage = computed(() => selectedFilters.value.language)
+const selectedFullLanguage = computed(() =>
+  LANGUAGES.find((el) => el.code === selectedFilters.value.language),
+)
 
-watch([withGenres, fullReleaseYear], () => {
+watch([page, withGenres, searchQuery, fullReleaseYear, selectedLanguage], getSearchResults)
+
+watch([withGenres, fullReleaseYear, selectedLanguage], () => {
   router.replace({
     name: 'movie-list',
     query: {
       ...route.query,
       genres: withGenres.value ?? undefined,
       year: fullReleaseYear.value ?? undefined,
+      lang: selectedLanguage.value ?? undefined,
     },
   })
 })
@@ -235,6 +246,11 @@ watch([withGenres, fullReleaseYear], () => {
             v-if="selectedFilters.releaseYear"
             :title="yearFilterTitle"
             @close="selectedFilters.releaseYear = null"
+          />
+          <BaseBadge
+            v-if="selectedFilters.language"
+            :title="selectedFullLanguage?.name || selectedLanguage"
+            @close="selectedFilters.language = ''"
           />
         </span>
       </p>

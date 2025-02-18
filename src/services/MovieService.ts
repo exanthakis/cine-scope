@@ -50,6 +50,7 @@ export const searchMovies = async (
   query: string,
   genres: string,
   releaseYear: ReleaseYear,
+  language: string,
   page: number,
 ) => {
   const isSearch = query.trim().length > 0
@@ -71,6 +72,7 @@ export const searchMovies = async (
       (query.trim() ? '&query=' + encodeURIComponent(query) : '') +
       releaseYearParam +
       (genres && '&with_genres=' + genres) +
+      (language && '&language=' + language) +
       '&page=' +
       page,
   )

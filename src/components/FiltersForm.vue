@@ -6,6 +6,7 @@ import { useRoute } from 'vue-router'
 import BaseButton from './ui/BaseButton.vue'
 import RangeSlider from './ui/RangeSlider.vue'
 import SingleRangeSlider from './ui/SingleRangeSlider.vue'
+import { LANGUAGES } from '@/constants/general'
 
 interface FiltersForm {
   genres: Genre[] | null
@@ -19,16 +20,45 @@ const selectedGenres = ref<number[]>([])
 const minSelected = ref(1920)
 const maxSelected = ref(2020)
 const singleRangeSelected = ref(2020)
+const selectedLanguage = ref('en')
 
 const extractYears = (str: string): ReleaseYear => {
   const [firstYear, secondYear] = str.split('|').map((y) => y || null)
   return { lte: firstYear || '', gte: secondYear || '' }
 }
 
+const handleSubmitForm = () => {
+  const results: MovieFilter = {
+    genres: [],
+    releaseYear: {
+      lte: '',
+      gte: '',
+    },
+    language: 'en',
+  }
+  results.genres = selectedGenres.value
+  results.releaseYear = {
+    lte: !searchQuery.trim() ? maxSelected.value.toString() : singleRangeSelected.value.toString(),
+    gte: !searchQuery.trim() ? minSelected.value.toString() : '',
+  }
+  results.language = selectedLanguage.value
+  emits('submitFiltersForm', results)
+}
+
+const currentYear = computed(() => new Date().getFullYear())
+
+const updateRange = (range: { min: number; max: number }) => {
+  minSelected.value = range.min
+  maxSelected.value = range.max
+}
+const updateSingleRange = (range: number) => {
+  singleRangeSelected.value = range
+}
+
 // Runs once on mount to initialize `selectedGenres` & `minSelected`, `maxSelected`, `singleRangeSelected`
 watch(
-  () => [route.query.genres, route.query.year],
-  ([newGenres, newYear]) => {
+  () => [route.query.genres, route.query.year, route.query.lang],
+  ([newGenres, newYear, newLang]) => {
     if (!newGenres) {
       selectedGenres.value = []
     } else {
@@ -49,35 +79,15 @@ watch(
         }
       }
     }
+
+    // Handle Language
+    if (newLang) {
+      const langString = Array.isArray(newLang) ? newLang[0] : newLang
+      if (langString) selectedLanguage.value = langString
+    }
   },
   { immediate: true },
 )
-
-const handleSubmitForm = () => {
-  const results: MovieFilter = {
-    genres: [],
-    releaseYear: {
-      lte: '',
-      gte: '',
-    },
-  }
-  results.genres = selectedGenres.value
-  results.releaseYear = {
-    lte: !searchQuery.trim() ? maxSelected.value.toString() : singleRangeSelected.value.toString(),
-    gte: !searchQuery.trim() ? minSelected.value.toString() : '',
-  }
-  emits('submitFiltersForm', results)
-}
-
-const currentYear = computed(() => new Date().getFullYear())
-
-const updateRange = (range: { min: number; max: number }) => {
-  minSelected.value = range.min
-  maxSelected.value = range.max
-}
-const updateSingleRange = (range: number) => {
-  singleRangeSelected.value = range
-}
 </script>
 
 <template>
@@ -132,7 +142,30 @@ const updateSingleRange = (range: number) => {
         @update-single-range="updateSingleRange"
       />
     </div>
-    <div class="-mb-5 pt-8">
+    <div class="pt-2">
+      <div class="mb-4 flex items-center gap-2">
+        <img src="@/assets/icons/language.svg" alt="Release year icon" class="size-6" />
+        <h2 class="text-dark text-xl">Language</h2>
+      </div>
+      <div class="styleSelect w-full overflow-hidden rounded-full !bg-[#10141e]">
+        <select
+          id="referrer"
+          name="referrer"
+          v-model="selectedLanguage"
+          class="text-film-secondary w-full bg-transparent px-5 py-2"
+        >
+          <option
+            v-for="lang in LANGUAGES"
+            :key="lang.code"
+            :value="lang.code"
+            class="bg-[#10141e]"
+          >
+            {{ lang.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="-mb-5 pt-10">
       <BaseButton
         class="mr-4 cursor-pointer !rounded-full"
         mode="secondary"
@@ -147,3 +180,17 @@ const updateSingleRange = (range: number) => {
     </div>
   </form>
 </template>
+
+<style scoped>
+.styleSelect {
+  background: url('@/assets/icons/down.svg') no-repeat right;
+  background-size: 18px 18px;
+  background-position-x: 95%;
+}
+
+.styleSelect select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+</style>
