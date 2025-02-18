@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MovieFilter, ReleaseYear } from '@/types/general'
 import type { Genre } from '@/types/movie'
-import { computed, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import BaseButton from './ui/BaseButton.vue'
 import RangeSlider from './ui/RangeSlider.vue'
@@ -12,8 +12,10 @@ interface FiltersForm {
   genres: Genre[] | null
   searchQuery: string
 }
+
 const emits = defineEmits(['submitFiltersForm', 'resetFilters'])
 const { searchQuery } = defineProps<FiltersForm>()
+const BaseTooltip = defineAsyncComponent(() => import('./ui/BaseTooltip.vue'))
 
 const route = useRoute()
 const selectedGenres = ref<number[]>([])
@@ -143,9 +145,16 @@ watch(
       />
     </div>
     <div class="pt-2">
-      <div class="mb-4 flex items-center gap-2">
+      <div class="relative mb-4 flex items-center gap-2">
         <img src="@/assets/icons/language.svg" alt="Release year icon" class="size-4" />
         <h2 class="text-dark text-xl">Language</h2>
+        <BaseTooltip>
+          <template #content>
+            Language of the movie's metadata (title, overview, etc.), not necessarily the spoken
+            language in the movie.
+          </template>
+          <template #default><img src="@/assets/icons/info.svg" class="size-5" /></template>
+        </BaseTooltip>
       </div>
       <div class="styleSelect w-full overflow-hidden rounded-full !bg-[#232731]">
         <select
