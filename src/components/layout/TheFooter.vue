@@ -19,7 +19,7 @@ const year = new Date().getFullYear()
         <div class="flex items-center justify-start text-gray-400">
           Film data courtesy of
           <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer" class="pl-2">
-            <img src="@/assets/icons/tmdb.svg" class="h-6 w-15" />
+            <img src="@/assets/icons/tmdb.svg" class="h-6 w-12" />
           </a>
         </div>
         <div class="mt-0 flex items-center gap-4 sm:justify-center">
