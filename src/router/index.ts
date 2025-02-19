@@ -13,9 +13,6 @@ const router = createRouter({
       component: HomeView,
       props: (route) => ({
         page: parseInt(route.query.page?.toString() || '1'),
-        genres: route.query.page?.toString() || '1',
-        year: parseInt(route.query.page?.toString() || ''),
-        lang: route.query.page?.toString() || '',
       }),
     },
     {

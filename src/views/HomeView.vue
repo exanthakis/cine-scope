@@ -15,9 +15,6 @@ import { useRoute, useRouter } from 'vue-router'
 
 interface HomeViewProps {
   page: number
-  genres: string
-  year: number
-  lang: string
 }
 
 const props = defineProps<HomeViewProps>()
@@ -202,7 +199,7 @@ watch(
 </script>
 
 <template>
-  <main class="!bg-radial-white container">
+  <main class="!bg-radial-white w-full">
     <div class="align-center mx-auto flex w-full max-w-2xl justify-center">
       <BaseDialog
         :show="!!showFilters"
@@ -228,7 +225,7 @@ watch(
     </div>
     <div
       v-if="isLoading"
-      class="max-2xl mx-auto grid grid-cols-1 gap-4 px-5 py-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+      class="mx-auto grid grid-cols-1 gap-4 px-[5vw] py-10 sm:grid-cols-2 md:grid-cols-3 md:px-[8vw] lg:grid-cols-4 lg:px-[15vw] xl:grid-cols-5"
     >
       <MovieCardSkeleton v-for="res in movieResults?.length" :key="res" />
     </div>
@@ -239,13 +236,13 @@ watch(
     >
       Sorry, we couldn't find any results
     </p>
-    <div v-else class="px-5">
+    <div class="px-[5vw] md:px-[8vw] lg:px-[15vw]" v-else>
       <p
         v-if="movieResults?.length && movieResults?.length > 0"
         class="flex justify-start text-left"
       >
         Found&nbsp;
-        <span>
+        <span class="pr-2">
           <b>{{ totalResults }}</b> results for:
         </span>
         <BaseBadge v-if="searchQuery.trim()" :title="searchQuery" @close="searchQuery = ''" />
