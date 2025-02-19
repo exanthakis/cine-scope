@@ -200,7 +200,7 @@ watch(
 
 <template>
   <main class="!bg-radial-white w-full">
-    <div class="align-center mx-auto flex w-full max-w-2xl justify-center">
+    <div class="align-center mx-auto flex w-full justify-center">
       <BaseDialog
         :show="!!showFilters"
         title="Filters"
@@ -221,6 +221,7 @@ watch(
         v-model:searchQuery="searchQuery"
         @get-search-results="getSearchResults"
         @on-filter-show="showFilters = true"
+        @clear-search-query="searchQuery = ''"
       />
     </div>
     <div
