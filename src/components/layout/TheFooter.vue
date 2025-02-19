@@ -16,7 +16,7 @@ const year = new Date().getFullYear()
         <span class="text-center text-sm text-gray-400">
           &copy; {{ year }} by {{ FULL_NAME }}
         </span>
-        <div class="flex items-center justify-start text-gray-400">
+        <div class="flex items-center justify-start text-sm text-gray-400">
           Film data courtesy of
           <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer" class="pl-2">
             <img src="@/assets/icons/tmdb.svg" class="h-6 w-12" />
