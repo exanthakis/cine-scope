@@ -130,3 +130,8 @@ body {
   background: #ccc;
   cursor: not-allowed;
 }
+
+nav .active {
+  font-weight: bolder;
+  color: #fff;
+}

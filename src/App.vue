@@ -5,7 +5,7 @@ import TheFooter from './components/layout/TheFooter.vue'
 
 <template>
   <div
-    class="max-7xl bg-radial-white text-film-tertiary relative flex min-h-[100vh] flex-col items-center"
+    class="max-7xl bg-radial-white text-film-tertiary relative flex min-h-[100vh] flex-col items-center overflow-hidden"
   >
     <SiteNavigation />
     <RouterView />
