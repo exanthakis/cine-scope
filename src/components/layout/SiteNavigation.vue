@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import TheLogo from '../ui/TheLogo.vue'
-import { ref } from 'vue'
-import MobileNav from './MobileNav.vue'
+import { defineAsyncComponent, ref } from 'vue'
+import { useWindowResize } from '@/hooks/useWindowResize'
+
+const { width } = useWindowResize()
+const MobileNav = defineAsyncComponent(() => import('./MobileNav.vue'))
 
 const open = ref(false)
 </script>
@@ -51,7 +54,7 @@ const open = ref(false)
       </svg>
       <span className="sr-only">Open menu</span>
     </button>
-    <MobileNav :open="open" @close="open = false" />
+    <MobileNav v-if="width < 768" :open="open" @close="open = false" />
   </header>
 </template>
 
