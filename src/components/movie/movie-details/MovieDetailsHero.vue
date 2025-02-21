@@ -246,8 +246,8 @@ const handleVideoPlay = (device: string) => {
               Add Now
             </BaseButton>
           </div>
-        </template> </FavoritesBadge
-      >Mouse position is at: {{ x }}, {{ y }}
+        </template>
+      </FavoritesBadge>
     </div>
   </div>
 </template>
