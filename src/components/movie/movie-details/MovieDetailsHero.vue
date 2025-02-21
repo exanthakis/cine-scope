@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import FavoritesBadge from '@/components/FavoritesBadge.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
+import { useMouse } from '@/hooks/useMouse'
 import type { MovieDetailsHeroProps } from '@/types/general'
 import { computed, onMounted, ref } from 'vue'
 
@@ -11,6 +12,7 @@ const openFavModal = ref(false)
 const rating = computed(() => (vote_average ? Math.round(vote_average * 10) : 'N/A'))
 const isHeroImgLoaded = ref(false)
 const heroImg = ref<HTMLImageElement | null>(null)
+const heroWrapper = ref<HTMLDivElement | null>(null)
 
 onMounted(() => {
   if (heroImg.value) {
@@ -31,6 +33,7 @@ const duration = computed(() => {
   const minutes = runtimeval % 60
   return `${hours}h ${minutes}m`
 })
+const { x, y } = useMouse(heroWrapper, 15)
 
 const imdbLink = computed(() => `https://www.imdb.com/title/${imdb_id}/`)
 
@@ -47,20 +50,13 @@ const addToFavorite = (id: number) => {
   console.log('add to favorite, id: ', id)
 }
 
-const xEl = ref(0)
-const yEl = ref(0)
 const isHovered = ref(false)
 const hideCursor = ref(true)
 
 const cursorCircle = computed(
   () =>
-    `transform: translateX(${xEl.value}px) translateY(${yEl.value}px) translateZ(0) translate3d(0, 0, 0);`,
+    `transform: translateX(${x.value}px) translateY(${y.value}px) translateZ(0) translate3d(0, 0, 0);`,
 )
-
-const moveCursor = (e: { clientX: number; clientY: number }) => {
-  xEl.value = e.clientX - 15
-  yEl.value = e.clientY - 15
-}
 
 const handleVideoPlay = (device: string) => {
   if ((!isHovered.value && trailerKey) || (device === 'sm' && trailerKey)) {
@@ -71,8 +67,8 @@ const handleVideoPlay = (device: string) => {
 
 <template>
   <div
+    ref="heroWrapper"
     @click="() => handleVideoPlay('')"
-    @mousemove="moveCursor"
     @mouseenter="() => (hideCursor = false)"
     @mouseleave="() => (hideCursor = true)"
     class="bg-gradient-bottom pointer-events-none relative h-[80vh] min-h-[70vh] w-full cursor-none before:absolute before:top-0 before:left-0 before:z-2 before:h-full before:w-full before:bg-[rgba(0,0,0,0.6)] before:content-[''] after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-[''] sm:before:content-none md:pointer-events-auto"
@@ -250,8 +246,8 @@ const handleVideoPlay = (device: string) => {
               Add Now
             </BaseButton>
           </div>
-        </template>
-      </FavoritesBadge>
+        </template> </FavoritesBadge
+      >Mouse position is at: {{ x }}, {{ y }}
     </div>
   </div>
 </template>
