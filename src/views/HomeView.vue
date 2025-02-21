@@ -178,6 +178,7 @@ const selectedFullLanguage = computed(() =>
   LANGUAGES.find((el) => el.code === selectedFilters.value.language),
 )
 
+// Watchers
 watch([page, withGenres, searchQuery, fullReleaseYear, selectedLanguage], getSearchResults)
 
 watch([withGenres, fullReleaseYear, selectedLanguage], () => {

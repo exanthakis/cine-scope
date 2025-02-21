@@ -36,7 +36,7 @@ const onFavoriteClick = () => {
 }
 </script>
 <template>
-  <RouterLink :to="{ name: 'movie-details', params: { id } }">
+  <RouterLink :to="{ name: 'movie-details', params: { id }, query: { t: title } }">
     <div
       class="group relative mx-auto h-full w-full transform overflow-hidden rounded-sm transition duration-200 hover:scale-105"
     >
