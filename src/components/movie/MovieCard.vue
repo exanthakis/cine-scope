@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { useFavoritesStore } from '@/stores/favorites'
 import type { MovieCardProps } from '@/types/general'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const { id, title, imgUrl = '', hideFav = false } = defineProps<MovieCardProps>()
 
 const isHeroImgLoaded = ref(false)
 const movieImg = ref<HTMLImageElement | null>(null)
+const favoritesStore = useFavoritesStore()
 
 onMounted(() => {
   if (movieImg.value) {
@@ -19,8 +21,18 @@ onMounted(() => {
   }
 })
 
+const isFavorite = computed(() => favoritesStore.isFavorite(id))
+
 const onFavoriteClick = () => {
-  console.log('clicked')
+  const movie: MovieCardProps = {
+    id,
+    title,
+    imgUrl,
+    hideFav,
+  }
+
+  if (isFavorite.value) favoritesStore.removeMovie(movie)
+  else favoritesStore.addMovie(movie)
 }
 </script>
 <template>
@@ -66,10 +78,10 @@ const onFavoriteClick = () => {
         class="bg-film-tertiary/35 absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-end p-1 opacity-0 transition-normal duration-200 group-hover:opacity-100"
       >
         <button
-          class="bg-film-tertiary absolute top-2 right-2 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full"
+          class="bg-film-tertiary absolute top-2 right-2 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition"
           @click.stop.prevent="onFavoriteClick"
         >
-          🤍
+          {{ isFavorite ? '❤️' : '🤍' }}
         </button>
       </div>
     </div>

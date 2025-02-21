@@ -1,5 +1,26 @@
+<script setup lang="ts">
+import MovieCard from '@/components/movie/MovieCard.vue'
+import { useFavoritesStore } from '@/stores/favorites'
+
+const favoritesStore = useFavoritesStore()
+</script>
+
 <template>
-  <div class="about">
-    <h1>This is the favorites page</h1>
+  <div class="px-[5vw] md:px-[8vw] lg:px-[15vw]">
+    <h5 v-if="favoritesStore.movies.length === 0" class="text-film-tertiary p-5 text-lg font-bold">
+      No favorite movies found.
+    </h5>
+    <div
+      v-else
+      class="max-2xl mx-auto grid grid-cols-1 gap-4 py-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+    >
+      <MovieCard
+        v-for="movie in favoritesStore.movies"
+        :key="movie.id"
+        :id="movie.id"
+        :title="movie.title"
+        :imgUrl="movie.imgUrl"
+      />
+    </div>
   </div>
 </template>
