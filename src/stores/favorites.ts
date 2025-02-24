@@ -1,9 +1,11 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { type MovieCardProps } from '@/types/general'
 
 export const useFavoritesStore = defineStore('favorites', () => {
   const movies = ref<MovieCardProps[]>([])
+
+  const totalFavorites = computed(() => movies.value.length)
 
   const addMovie = (movie: MovieCardProps) => {
     const movieExists = movies.value?.find((el) => el.id === movie.id)
@@ -22,5 +24,5 @@ export const useFavoritesStore = defineStore('favorites', () => {
     return !!movieExists
   }
 
-  return { movies, addMovie, removeMovie, isFavorite }
+  return { movies, totalFavorites, addMovie, removeMovie, isFavorite }
 })

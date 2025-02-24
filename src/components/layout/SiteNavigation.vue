@@ -1,13 +1,32 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import TheLogo from '../ui/TheLogo.vue'
-import { defineAsyncComponent, ref } from 'vue'
+import { defineAsyncComponent, ref, watch } from 'vue'
 import { useWindowResize } from '@/hooks/useWindowResize'
+import { useFavoritesStore } from '@/stores/favorites'
 
+// Mobile navigation
 const { width } = useWindowResize()
 const MobileNav = defineAsyncComponent(() => import('./MobileNav.vue'))
-
 const open = ref(false)
+
+// Favorites animation
+const favoritesStore = useFavoritesStore()
+const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
+const scaleEffect = ref(false)
+
+watch(
+  () => favoritesStore.totalFavorites,
+  () => {
+    scaleEffect.value = true
+
+    if (queryTimeout.value) clearTimeout(queryTimeout.value)
+
+    queryTimeout.value = setTimeout(() => {
+      scaleEffect.value = false
+    }, 300)
+  },
+)
 </script>
 
 <template>
@@ -25,8 +44,17 @@ const open = ref(false)
         <li class="nav transition">
           <RouterLink :to="{ name: 'popular-list' }">Popular</RouterLink>
         </li>
-        <li class="nav transition">
-          <RouterLink :to="{ name: 'favorites' }">Favorites</RouterLink>
+        <li class="nav relative transition">
+          <RouterLink :to="{ name: 'favorites' }"
+            >Favorites
+            <div
+              v-if="favoritesStore.totalFavorites > 0"
+              class="bg-film-primary absolute -end-6 -top-2 inline-flex h-6 w-6 scale-100 items-center justify-center rounded-full border-2 border-[#10141e] text-xs font-bold text-white"
+              :class="scaleEffect ? 'scale-140 transition duration-200 ease-in' : ''"
+            >
+              {{ favoritesStore.totalFavorites }}
+            </div>
+          </RouterLink>
         </li>
       </ul>
       <div class="hidden md:flex">dark/light</div>
