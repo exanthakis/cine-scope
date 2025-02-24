@@ -4,19 +4,9 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 import { useMouse } from '@/hooks/useMouse'
 import { useFavoritesStore } from '@/stores/favorites'
 import type { MovieCardProps, MovieDetailsHeroProps } from '@/types/general'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 
-const {
-  vote_average,
-  runtime,
-  genres,
-  imdb_id,
-  trailerKey,
-  id,
-  title,
-  backdrop_path,
-  poster_path,
-} = defineProps<MovieDetailsHeroProps>()
+const props = defineProps<MovieDetailsHeroProps>()
 
 // Hero img lazy load
 const isHeroImgLoaded = ref(false)
@@ -37,18 +27,18 @@ onMounted(() => {
 
 // Hero movie texts
 const isExpanded = ref(false)
-const rating = computed(() => (vote_average ? Math.round(vote_average * 10) : 'N/A'))
+const rating = computed(() => (props.vote_average ? Math.round(props.vote_average * 10) : 'N/A'))
 const duration = computed(() => {
-  const runtimeval = runtime
+  const runtimeval = props.runtime
   if (!runtimeval) return 'Unknown'
   const hours = Math.floor(runtimeval / 60)
   const minutes = runtimeval % 60
   return `${hours}h ${minutes}m`
 })
 
-const imdbLink = computed(() => `https://www.imdb.com/title/${imdb_id}/`)
+const imdbLink = computed(() => `https://www.imdb.com/title/${props.imdb_id}/`)
 
-const formattedGenres = computed(() => genres?.map((g) => g.name).join(' - ') ?? 'N/A')
+const formattedGenres = computed(() => props.genres?.map((g) => g.name).join(' - ') ?? 'N/A')
 
 const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
 
@@ -63,15 +53,15 @@ const cursorCircle = computed(
 )
 
 const handleVideoPlay = (device: string) => {
-  if ((!isHovered.value && trailerKey) || (device === 'sm' && trailerKey)) {
-    window.open(`https://www.youtube.com/watch?v=${trailerKey}`)
+  if ((!isHovered.value && props.trailerKey) || (device === 'sm' && props.trailerKey)) {
+    window.open(`https://www.youtube.com/watch?v=${props.trailerKey}`)
   }
 }
 
 // Favorites logic
 const openFavModal = ref(false)
 const favoritesStore = useFavoritesStore()
-const isMovieFavorite = computed(() => (id ? favoritesStore.isFavorite(id) : false))
+const isMovieFavorite = computed(() => (props.id ? favoritesStore.isFavorite(props.id) : false))
 
 const toggleFavModal = () => {
   openFavModal.value = !openFavModal.value
@@ -79,11 +69,10 @@ const toggleFavModal = () => {
 }
 
 const addToFavorite = (id: number) => {
-  console.log('add to favorite, id: ', id)
   const movie: MovieCardProps = {
     id,
-    title: title ?? '',
-    imgUrl: poster_path ?? '',
+    title: props.title ?? '',
+    imgUrl: props.poster_path ?? '',
     hideFav: false,
   }
 
@@ -100,7 +89,7 @@ const favoriteDialogText = computed(() => {
     btnLabel: `${action} Now`,
     title: `${action} to Favorites`,
     heading: `Do you want to ${action.toLowerCase()} the movie ${action === 'Add' ? 'to' : 'from'} your favorites?`,
-    body: `Are you sure you want to ${action.toLowerCase()} ${title} ${action === 'Add' ? 'to' : 'from'} your favorites? This will ${
+    body: `Are you sure you want to ${action.toLowerCase()} ${props.title} ${action === 'Add' ? 'to' : 'from'} your favorites? This will ${
       action === 'Add'
         ? 'save the movie to your list, allowing you to easily find and watch it later'
         : 'remove it from your list'
@@ -108,6 +97,15 @@ const favoriteDialogText = computed(() => {
     confirm: `Click "Confirm" to ${action.toLowerCase()} it now, or "Close" if you change your mind.`,
   }
 })
+
+watch(
+  () => props.id,
+  () => {
+    isHeroImgLoaded.value = false
+    heroImg.value = null
+    heroWrapper.value = null
+  },
+)
 </script>
 
 <template>
