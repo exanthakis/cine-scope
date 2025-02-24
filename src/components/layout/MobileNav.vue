@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { useFavoritesStore } from '@/stores/favorites'
+
 interface MobileNavProps {
   open: boolean
 }
 
 defineProps<MobileNavProps>()
 defineEmits(['close'])
+
+const favoritesStore = useFavoritesStore()
 </script>
 
 <template>
@@ -62,13 +66,21 @@ defineEmits(['close'])
         </li>
         <li
           :class="[
-            'text-2xl opacity-0 transition-[opacity] duration-1000 ease-in-out',
+            'relative text-2xl opacity-0 transition-[opacity] duration-1000 ease-in-out',
             open ? 'opacity-100' : 'opacity-0',
           ]"
           :style="{ transitionDelay: open ? '300ms' : '0ms' }"
           @click="$emit('close')"
         >
-          <RouterLink :to="{ name: 'favorites' }">Favorites</RouterLink>
+          <RouterLink :to="{ name: 'favorites' }"
+            >Favorites
+            <div
+              v-if="favoritesStore.totalFavorites > 0"
+              class="bg-film-primary absolute -end-6 -top-2 inline-flex h-6 w-6 scale-100 items-center justify-center rounded-full border-2 border-[#10141e] text-xs font-bold text-white"
+            >
+              {{ favoritesStore.totalFavorites }}
+            </div></RouterLink
+          >
         </li>
       </ul>
     </nav>

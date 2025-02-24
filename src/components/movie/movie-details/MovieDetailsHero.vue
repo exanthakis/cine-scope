@@ -190,7 +190,7 @@ watch(
         class="bg-opacity-50 bg-gradient-left after:right[-200px] container flex h-full items-center justify-start py-12 after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-[60%] after:content-none sm:after:content-['']"
       >
         <div
-          class="z-100 cursor-auto text-start"
+          class="z-3 cursor-auto text-start"
           @mouseenter="() => (isHovered = true)"
           @mouseleave="() => (isHovered = false)"
         >
