@@ -9,6 +9,7 @@ export interface MovieCardProps {
 
 export interface MovieDetailsProps {
   id: string
+  t?: string
 }
 
 export interface BaseButtonProps {
