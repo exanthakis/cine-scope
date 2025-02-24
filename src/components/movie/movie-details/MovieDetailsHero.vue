@@ -2,14 +2,23 @@
 import FavoritesBadge from '@/components/FavoritesBadge.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import { useMouse } from '@/hooks/useMouse'
-import type { MovieDetailsHeroProps } from '@/types/general'
+import { useFavoritesStore } from '@/stores/favorites'
+import type { MovieCardProps, MovieDetailsHeroProps } from '@/types/general'
 import { computed, onMounted, ref } from 'vue'
 
-const { vote_average, runtime, genres, imdb_id, trailerKey } = defineProps<MovieDetailsHeroProps>()
+const {
+  vote_average,
+  runtime,
+  genres,
+  imdb_id,
+  trailerKey,
+  id,
+  title,
+  backdrop_path,
+  poster_path,
+} = defineProps<MovieDetailsHeroProps>()
 
-const isExpanded = ref(false)
-const openFavModal = ref(false)
-const rating = computed(() => (vote_average ? Math.round(vote_average * 10) : 'N/A'))
+// Hero img lazy load
 const isHeroImgLoaded = ref(false)
 const heroImg = ref<HTMLImageElement | null>(null)
 const heroWrapper = ref<HTMLDivElement | null>(null)
@@ -26,6 +35,9 @@ onMounted(() => {
   }
 })
 
+// Hero movie texts
+const isExpanded = ref(false)
+const rating = computed(() => (vote_average ? Math.round(vote_average * 10) : 'N/A'))
 const duration = computed(() => {
   const runtimeval = runtime
   if (!runtimeval) return 'Unknown'
@@ -33,7 +45,6 @@ const duration = computed(() => {
   const minutes = runtimeval % 60
   return `${hours}h ${minutes}m`
 })
-const { x, y } = useMouse(heroWrapper, 15)
 
 const imdbLink = computed(() => `https://www.imdb.com/title/${imdb_id}/`)
 
@@ -41,15 +52,8 @@ const formattedGenres = computed(() => genres?.map((g) => g.name).join(' - ') ??
 
 const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
 
-const toggleFavModal = () => {
-  openFavModal.value = !openFavModal.value
-  document.documentElement.style.overflow = openFavModal.value ? 'hidden' : 'auto'
-}
-
-const addToFavorite = (id: number) => {
-  console.log('add to favorite, id: ', id)
-}
-
+// Cursor logic
+const { x, y } = useMouse(heroWrapper, 15)
 const isHovered = ref(false)
 const hideCursor = ref(true)
 
@@ -63,6 +67,47 @@ const handleVideoPlay = (device: string) => {
     window.open(`https://www.youtube.com/watch?v=${trailerKey}`)
   }
 }
+
+// Favorites logic
+const openFavModal = ref(false)
+const favoritesStore = useFavoritesStore()
+const isMovieFavorite = computed(() => (id ? favoritesStore.isFavorite(id) : false))
+
+const toggleFavModal = () => {
+  openFavModal.value = !openFavModal.value
+  document.documentElement.style.overflow = openFavModal.value ? 'hidden' : 'auto'
+}
+
+const addToFavorite = (id: number) => {
+  console.log('add to favorite, id: ', id)
+  const movie: MovieCardProps = {
+    id,
+    title: title ?? '',
+    imgUrl: poster_path ?? '',
+    hideFav: false,
+  }
+
+  if (isMovieFavorite.value) favoritesStore.removeMovie(movie)
+  else favoritesStore.addMovie(movie)
+
+  toggleFavModal()
+}
+
+const favoriteDialogText = computed(() => {
+  const action = isMovieFavorite.value ? 'Remove' : 'Add'
+
+  return {
+    btnLabel: `${action} Now`,
+    title: `${action} to Favorites`,
+    heading: `Do you want to ${action.toLowerCase()} the movie ${action === 'Add' ? 'to' : 'from'} your favorites?`,
+    body: `Are you sure you want to ${action.toLowerCase()} ${title} ${action === 'Add' ? 'to' : 'from'} your favorites? This will ${
+      action === 'Add'
+        ? 'save the movie to your list, allowing you to easily find and watch it later'
+        : 'remove it from your list'
+    }. You can access your favorites anytime from the main navigation.`,
+    confirm: `Click "Confirm" to ${action.toLowerCase()} it now, or "Close" if you change your mind.`,
+  }
+})
 </script>
 
 <template>
@@ -120,16 +165,14 @@ const handleVideoPlay = (device: string) => {
 
       <BaseDialog
         :show="!!openFavModal"
-        title="Do you want to add the movie to your favorites?"
+        :title="favoriteDialogText.heading"
         @close="toggleFavModal"
       >
         <template #default>
           <p>
-            Are you sure you want to add <strong>{{ title }}</strong> to your favorites? This will
-            save the movie to your list, allowing you to easily find and watch it later. You can
-            access your favorites anytime from the main navigation.
+            {{ favoriteDialogText.body }}
           </p>
-          <p class="pt-5">Click 'Confirm' to add it now, or 'Close' if you change your mind.</p>
+          <p class="pt-5"></p>
         </template>
         <template #actions>
           <div class="flex gap-3">
@@ -236,14 +279,14 @@ const handleVideoPlay = (device: string) => {
           <div
             class="z-10 flex w-full flex-col items-center justify-between gap-4 pr-0 sm:flex-row sm:pr-4"
           >
-            <h5 class="text-film-secondary z-10">⭐ Add to Favorites</h5>
+            <h5 class="text-film-secondary z-10">⭐ {{ favoriteDialogText.title }}</h5>
             <BaseButton
               class="w-full !px-11 sm:w-fit"
               :mode="'primary'"
               :isLink="false"
               @click="toggleFavModal"
             >
-              Add Now
+              {{ favoriteDialogText.btnLabel }}
             </BaseButton>
           </div>
         </template>

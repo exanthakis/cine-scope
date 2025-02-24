@@ -33,6 +33,7 @@ export interface AvatarTextProps {
 export interface MovieDetailsHeroProps {
   id?: number
   backdrop_path?: string | null
+  poster_path?: string | null
   homepage?: string | null
   title?: string
   release_date?: string

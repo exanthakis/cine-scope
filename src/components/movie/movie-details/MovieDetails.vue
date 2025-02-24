@@ -90,6 +90,7 @@ const trailerKey = computed((): string => {
         :overview="movieDetails.overview"
         :imdb_id="movieDetails.imdb_id"
         :trailerKey="trailerKey"
+        :poster_path="movieDetails.poster_path"
       />
     </div>
     <div class="px-[5vw] pt-20 md:px-[8vw] lg:px-[15vw]">
