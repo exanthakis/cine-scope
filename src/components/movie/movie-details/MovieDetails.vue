@@ -36,14 +36,6 @@ const getMovieData = async () => {
 
 movieDetails.value = await getMovieData()
 
-// Re-Fetch Data When Route Changes (On click at similar movies section)
-watch(
-  () => route.params.id,
-  async (newId) => {
-    if (newId) movieDetails.value = await getMovieData()
-  },
-)
-
 const spokenLanguages = computed(
   () => movieDetails.value?.spoken_languages?.map((l) => l.english_name).join(', ') ?? 'N/A',
 )
@@ -73,6 +65,14 @@ const trailerKey = computed((): string => {
 })
 
 const providers = computed(() => movieDetails.value?.['watch/providers']?.results['US']?.flatrate)
+
+// Re-Fetch Data When Route Changes (On click at similar movies section)
+watch(
+  () => route.params.id,
+  async (newId) => {
+    if (newId) movieDetails.value = await getMovieData()
+  },
+)
 </script>
 
 <template>
