@@ -6,8 +6,8 @@ export function useMouse(elementRef: Ref<HTMLElement | null>, threshold: number 
   const y = ref(0)
 
   const update = (event: MouseEvent) => {
-    x.value = event.pageX - threshold
-    y.value = event.pageY - threshold
+    x.value = event.clientX - threshold
+    y.value = event.clientY - threshold
   }
 
   onMounted(() => elementRef.value && elementRef.value.addEventListener('mousemove', update))

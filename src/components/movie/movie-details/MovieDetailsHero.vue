@@ -11,7 +11,6 @@ const props = defineProps<MovieDetailsHeroProps>()
 // Hero img lazy load
 const isHeroImgLoaded = ref(false)
 const heroImg = ref<HTMLImageElement | null>(null)
-const heroWrapper = ref<HTMLDivElement | null>(null)
 
 onMounted(() => {
   if (heroImg.value) {
@@ -43,6 +42,7 @@ const formattedGenres = computed(() => props.genres?.map((g) => g.name).join(' -
 const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
 
 // Cursor logic
+const heroWrapper = ref<HTMLDivElement | null>(null)
 const { x, y } = useMouse(heroWrapper, 15)
 const isHovered = ref(false)
 const hideCursor = ref(true)
