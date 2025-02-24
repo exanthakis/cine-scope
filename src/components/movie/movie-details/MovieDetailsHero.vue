@@ -83,12 +83,13 @@ const addToFavorite = (id: number) => {
 
 const favoriteDialogText = computed(() => {
   const action = isMovieFavorite.value ? 'Remove' : 'Add'
+  const toFrom = action === 'Add' ? 'to' : 'from'
 
   return {
     btnLabel: `${action} Now`,
-    title: `${action} ${action === 'Add' ? 'to' : 'from'} Favorites`,
-    heading: `Do you want to ${action.toLowerCase()} the movie ${action === 'Add' ? 'to' : 'from'} your favorites?`,
-    body: `Are you sure you want to ${action.toLowerCase()} ${props.title} ${action === 'Add' ? 'to' : 'from'} your favorites? This will ${
+    title: `${action} ${toFrom} Favorites`,
+    heading: `Do you want to ${action.toLowerCase()} the movie ${toFrom} your favorites?`,
+    body: `Are you sure you want to ${action.toLowerCase()} ${props.title} ${toFrom} your favorites? This will ${
       action === 'Add'
         ? 'save the movie to your list, allowing you to easily find and watch it later'
         : 'remove it from your list'
