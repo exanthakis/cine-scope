@@ -86,7 +86,7 @@ const favoriteDialogText = computed(() => {
 
   return {
     btnLabel: `${action} Now`,
-    title: `${action} to Favorites`,
+    title: `${action} ${action === 'Add' ? 'to' : 'from'} Favorites`,
     heading: `Do you want to ${action.toLowerCase()} the movie ${action === 'Add' ? 'to' : 'from'} your favorites?`,
     body: `Are you sure you want to ${action.toLowerCase()} ${props.title} ${action === 'Add' ? 'to' : 'from'} your favorites? This will ${
       action === 'Add'
