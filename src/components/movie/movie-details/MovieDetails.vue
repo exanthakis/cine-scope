@@ -44,8 +44,6 @@ watch(
   },
 )
 
-const adultContent = computed(() => (movieDetails.value?.adult ? 'Yes' : 'No'))
-
 const spokenLanguages = computed(
   () => movieDetails.value?.spoken_languages?.map((l) => l.english_name).join(', ') ?? 'N/A',
 )
@@ -73,6 +71,8 @@ const trailerKey = computed((): string => {
   if (ytTrailers && ytTrailers.length > 0 && ytTrailers[0].key) return ytTrailers[0].key
   return ''
 })
+
+const providers = computed(() => movieDetails.value?.['watch/providers']?.results['US']?.flatrate)
 </script>
 
 <template>
@@ -112,9 +112,12 @@ const trailerKey = computed((): string => {
               <template #header>Audio</template>
               <template #default>{{ spokenLanguages }}</template>
             </MovieDetailsItem>
+
             <MovieDetailsItem>
-              <template #header>Adult Content</template>
-              <template #default>{{ adultContent }}</template>
+              <template #header>Production Companies</template>
+              <template #default>
+                {{ prodCompanies }}
+              </template>
             </MovieDetailsItem>
             <MovieDetailsItem>
               <template #header>Production Countries</template>
@@ -125,11 +128,22 @@ const trailerKey = computed((): string => {
               <template #default>{{ originCountry }}</template>
             </MovieDetailsItem>
           </div>
-          <div class="mt-4">
-            <MovieDetailsItem>
-              <template #header>Production Companies</template>
-              <template #default>
-                {{ prodCompanies }}
+          <div class="mt-4" v-if="providers">
+            <MovieDetailsItem classes="inline">
+              <template #header>Streaming Services</template>
+              <template #default v-if="providers">
+                <span
+                  class="inline-flex items-center gap-1 pt-2"
+                  v-for="(prov, index) in providers"
+                  :key="prov.provider_id"
+                >
+                  <img
+                    :src="`https://image.tmdb.org/t/p/w45/${prov.logo_path}`"
+                    :alt="prov.provider_name"
+                    class="h-7 w-7 rounded-full"
+                  />
+                  {{ prov.provider_name + (index !== providers?.length - 1 ? ', ' : '') }}
+                </span>
               </template>
             </MovieDetailsItem>
           </div>

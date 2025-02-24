@@ -60,6 +60,22 @@ interface Video {
   type?: string
 }
 
+export interface WatchProvider {
+  provider_id: number
+  provider_name: string
+  logo_path: string
+}
+
+export interface WatchProviderRegion {
+  link: string
+  flatrate?: WatchProvider[]
+  rent?: WatchProvider[]
+  buy?: WatchProvider[]
+}
+export interface WatchProviders {
+  results: Record<string, WatchProviderRegion>
+}
+
 export interface MovieDetails {
   adult?: boolean
   backdrop_path?: string | null
@@ -91,4 +107,5 @@ export interface MovieDetails {
   videos?: {
     results: Video[]
   }
+  'watch/providers'?: WatchProviders
 }
