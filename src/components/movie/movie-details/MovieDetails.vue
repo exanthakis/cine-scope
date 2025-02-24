@@ -95,7 +95,7 @@ const providers = computed(() => movieDetails.value?.['watch/providers']?.result
     </div>
     <div class="px-[5vw] pt-20 md:px-[8vw] lg:px-[15vw]">
       <div class="container pb-5">
-        <div v-if="movieDetails.tagline">
+        <div v-if="movieDetails.tagline" class="pb-10">
           <div class="bg-linear-hr mb-4 h-0.5"></div>
           <div class="mx-auto max-w-xl text-center text-base text-[#a3a3a3]">
             {{ movieDetails.tagline }}
@@ -103,7 +103,7 @@ const providers = computed(() => movieDetails.value?.['watch/providers']?.result
           <div class="bg-linear-hr mt-4 h-0.5"></div>
         </div>
 
-        <div class="py-10">
+        <div class="pb-10">
           <h2 class="mt-5 mb-2.5 text-3xl text-white">More Details</h2>
           <div
             class="max-2xl mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
