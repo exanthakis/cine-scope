@@ -7,6 +7,8 @@ export interface MovieCardProps {
   hideFav?: boolean
 }
 
+export type MovieCardStore = Omit<MovieCardProps, 'hideFav'>
+
 export interface MovieDetailsProps {
   id: string
   t?: string

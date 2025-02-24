@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useFavoritesStore } from '@/stores/favorites'
-import type { MovieCardProps } from '@/types/general'
+import type { MovieCardProps, MovieCardStore } from '@/types/general'
 import { computed, onMounted, ref } from 'vue'
 
 const { id, title, imgUrl = '', hideFav = false } = defineProps<MovieCardProps>()
@@ -24,11 +24,10 @@ onMounted(() => {
 const isFavorite = computed(() => favoritesStore.isFavorite(id))
 
 const onFavoriteClick = () => {
-  const movie: MovieCardProps = {
+  const movie: MovieCardStore = {
     id,
     title,
     imgUrl,
-    hideFav,
   }
 
   if (isFavorite.value) favoritesStore.removeMovie(movie)

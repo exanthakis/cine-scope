@@ -3,7 +3,7 @@ import FavoritesBadge from '@/components/FavoritesBadge.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import { useMouse } from '@/hooks/useMouse'
 import { useFavoritesStore } from '@/stores/favorites'
-import type { MovieCardProps, MovieDetailsHeroProps } from '@/types/general'
+import type { MovieCardStore, MovieDetailsHeroProps } from '@/types/general'
 import { computed, onMounted, ref, watch } from 'vue'
 
 const props = defineProps<MovieDetailsHeroProps>()
@@ -69,11 +69,10 @@ const toggleFavModal = () => {
 }
 
 const addToFavorite = (id: number) => {
-  const movie: MovieCardProps = {
+  const movie: MovieCardStore = {
     id,
     title: props.title ?? '',
     imgUrl: props.poster_path ?? '',
-    hideFav: false,
   }
 
   if (isMovieFavorite.value) favoritesStore.removeMovie(movie)

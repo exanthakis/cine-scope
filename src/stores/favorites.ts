@@ -1,19 +1,19 @@
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
-import { type MovieCardProps } from '@/types/general'
+import { type MovieCardStore } from '@/types/general'
 
 export const useFavoritesStore = defineStore('favorites', () => {
-  const movies = ref<MovieCardProps[]>([])
+  const movies = ref<MovieCardStore[]>(JSON.parse(localStorage.getItem('savedMovies') || '[]'))
 
   const totalFavorites = computed(() => movies.value.length)
 
-  const addMovie = (movie: MovieCardProps) => {
+  const addMovie = (movie: MovieCardStore) => {
     const movieExists = movies.value?.find((el) => el.id === movie.id)
 
     if (!movieExists) movies.value.push(movie)
   }
 
-  const removeMovie = (movie: MovieCardProps) => {
+  const removeMovie = (movie: MovieCardStore) => {
     const updatedFavorites = movies.value.filter((el) => el.id !== movie.id)
     movies.value = updatedFavorites
   }
@@ -23,6 +23,14 @@ export const useFavoritesStore = defineStore('favorites', () => {
 
     return !!movieExists
   }
+
+  watch(
+    movies,
+    (newMovies) => {
+      localStorage.setItem('savedMovies', JSON.stringify(newMovies))
+    },
+    { deep: true },
+  )
 
   return { movies, totalFavorites, addMovie, removeMovie, isFavorite }
 })
