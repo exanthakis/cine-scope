@@ -15,7 +15,6 @@ const applyTheme = () => {
   const html = document.documentElement
   html.classList.remove('light', 'dark')
 
-  console.log(theme.value)
   if (theme.value === 'dark') {
     html.classList.add('dark')
   } else if (theme.value === 'light') {
