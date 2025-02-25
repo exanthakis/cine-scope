@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import FavoritesBadge from '@/components/FavoritesBadge.vue'
 import IconPlay from '@/components/icons/IconPlay.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import { useMouse } from '@/hooks/useMouse'
@@ -269,27 +268,25 @@ watch(
         </div>
       </div>
 
-      <FavoritesBadge
-        class="pointer-events-auto absolute bottom-15 cursor-auto"
+      <div
+        class="bg-gradient-red text-film-secondary shadow-[8px 5px 16px 0 rgba(0,0,0,.37)] pointer-events-auto relative bottom-15 z-2 container mx-auto flex w-full cursor-auto items-center justify-between rounded-sm px-4 py-3"
         @mouseenter="() => (isHovered = true)"
         @mouseleave="() => (isHovered = false)"
       >
-        <template #default>
-          <div
-            class="z-10 flex w-full flex-col items-center justify-between gap-4 pr-0 sm:flex-row sm:pr-4"
+        <div
+          class="z-10 flex w-full flex-col items-center justify-between gap-4 pr-0 sm:flex-row sm:pr-4"
+        >
+          <h5 class="text-film-secondary z-10">⭐ {{ favoriteDialogText.title }}</h5>
+          <BaseButton
+            class="w-full !px-11 sm:w-fit"
+            :mode="'primary'"
+            :isLink="false"
+            @click="toggleFavModal"
           >
-            <h5 class="text-film-secondary z-10">⭐ {{ favoriteDialogText.title }}</h5>
-            <BaseButton
-              class="w-full !px-11 sm:w-fit"
-              :mode="'primary'"
-              :isLink="false"
-              @click="toggleFavModal"
-            >
-              {{ favoriteDialogText.btnLabel }}
-            </BaseButton>
-          </div>
-        </template>
-      </FavoritesBadge>
+            {{ favoriteDialogText.btnLabel }}
+          </BaseButton>
+        </div>
+      </div>
     </div>
   </div>
 </template>
