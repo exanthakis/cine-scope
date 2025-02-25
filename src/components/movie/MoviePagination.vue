@@ -38,11 +38,13 @@ const visiblePages = computed(() => {
 
 <template>
   <div class="mx-auto mt-12 max-w-2xl text-sm leading-6">
-    <div class="mb-10 flex items-center justify-center font-semibold text-slate-700">
+    <div
+      class="mb-10 flex items-center justify-center gap-1 font-semibold text-slate-700 dark:text-slate-100"
+    >
       <RouterLink
         id="page-prev"
         :class="[
-          'group flex items-center pr-2 text-lg hover:text-slate-900 sm:pr-4',
+          'group flex items-center pr-2 text-lg hover:text-slate-900 sm:pr-4 dark:hover:text-slate-400',
           page === 1 ? 'pointer-events-none opacity-25' : '',
         ]"
         :to="{ name: route, query: { page: page - 1 } }"
@@ -53,7 +55,7 @@ const visiblePages = computed(() => {
       <!-- First Page -->
       <BaseButton
         v-if="visiblePages[0] > 1"
-        class="!px-2 sm:!px-3"
+        class="dark:bg-film-secondary dark:text-film-tertiary !px-2 sm:!px-3"
         :mode="page === 1 ? 'primary' : 'secondary'"
         :isLink="false"
         @click="goToPage(1)"
@@ -68,7 +70,7 @@ const visiblePages = computed(() => {
         v-for="p in visiblePages"
         :key="p"
         :mode="p === page ? 'primary' : 'secondary'"
-        class="!px-2 sm:!px-3"
+        class="dark:bg-film-secondary dark:text-film-tertiary !px-2 sm:!px-3"
         :isLink="false"
         @click="goToPage(p)"
       >
@@ -82,7 +84,7 @@ const visiblePages = computed(() => {
       <BaseButton
         v-if="visiblePages[visiblePages.length - 1] < totalPages"
         :mode="'secondary'"
-        class="!px-2 sm:!px-3"
+        class="dark:bg-film-secondary dark:text-film-tertiary !px-2 sm:!px-3"
         :isLink="false"
         @click="goToPage(totalPages)"
       >
@@ -94,7 +96,7 @@ const visiblePages = computed(() => {
         :to="{ name: route, query: { page: page + 1 } }"
         rel="next"
         :class="[
-          'group flex items-center pl-2 text-lg hover:text-slate-900 sm:pl-4',
+          'group flex items-center pl-2 text-lg hover:text-slate-900 sm:pl-4 dark:hover:text-slate-400',
           !hasNextPage ? 'pointer-events-none opacity-25' : '',
         ]"
       >
