@@ -44,7 +44,7 @@ const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
 
 // Cursor logic
 const heroWrapper = ref<HTMLDivElement | null>(null)
-const { x, y } = useMouse(heroWrapper, 15)
+const { x, y, isHovered: isGradientHovered } = useMouse(heroWrapper, 15, 0.4)
 const isHovered = ref(false)
 const hideCursor = ref(true)
 
@@ -148,15 +148,16 @@ watch(
           <div
             :style="cursorCircle"
             :class="[
-              'bg-film-secondary pointer-events-none fixed top-0 left-0 z-10 flex h-20 w-20 items-center justify-center rounded-full transition-opacity duration-500 ease-out backface-hidden select-none',
+              'bg-film-secondary pointer-events-none fixed top-0 left-0 z-10 flex h-20 w-20 items-center justify-center rounded-full transition-[background-color,opacity] duration-500 ease-out backface-hidden select-none',
               isHovered ? 'h-0 w-0 opacity-0' : '',
+              isGradientHovered
+                ? 'dark:bg-film-secondary bg-film-tertiary duration-700 ease-in'
+                : '',
             ]"
           >
-            <img
-              src="@/assets/icons/play.svg"
-              alt="Play video icon"
+            <IconPlay
               class="h-2.5 w-2.5 rotate-90"
-              loading="lazy"
+              :class="isGradientHovered ? 'fill-film-secondary dark:fill-film-tertiary' : ''"
             />
           </div>
         </div>
