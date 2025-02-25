@@ -220,7 +220,6 @@ watch(
       </BaseDialog>
       <SearchInput
         v-model:searchQuery="searchQuery"
-        @get-search-results="getSearchResults"
         @on-filter-show="showFilters = true"
         @clear-search-query="searchQuery = ''"
       />

@@ -2,11 +2,7 @@
 import IconFilter from './icons/IconFilter.vue'
 
 const searchQuery = defineModel<string>('searchQuery')
-const emit = defineEmits(['getSearchResults', 'onFilterShow', 'clearSearchQuery'])
-
-const handleInput = () => {
-  emit('getSearchResults', searchQuery.value)
-}
+const emit = defineEmits(['onFilterShow', 'clearSearchQuery'])
 
 const handleFilterShow = () => {
   emit('onFilterShow')
@@ -27,7 +23,6 @@ const handleFilterShow = () => {
           type="search"
           placeholder="Search for a movie"
           v-model="searchQuery"
-          @input="handleInput"
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"

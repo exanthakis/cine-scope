@@ -13,8 +13,8 @@ interface FiltersForm {
   searchQuery: string
 }
 
-const emits = defineEmits(['submitFiltersForm', 'resetFilters'])
 const { searchQuery } = defineProps<FiltersForm>()
+const emits = defineEmits(['submitFiltersForm', 'resetFilters'])
 const BaseTooltip = defineAsyncComponent(() => import('./ui/BaseTooltip.vue'))
 
 const route = useRoute()
