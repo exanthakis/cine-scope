@@ -5,21 +5,22 @@ import { defineAsyncComponent, ref, watch } from 'vue'
 import { useWindowResize } from '@/hooks/useWindowResize'
 import { useFavoritesStore } from '@/stores/favorites'
 import ThemeSwitch from '../ThemeSwitch.vue'
+import IconMenu from '../icons/IconMenu.vue'
 
 // Mobile navigation
 const { width } = useWindowResize()
 const MobileNav = defineAsyncComponent(() => import('./MobileNav.vue'))
 const open = ref(false)
 
-// Favorites animation
-const favoritesStore = useFavoritesStore()
-const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
-const scaleEffect = ref(false)
-
 const toggleMenu = () => {
   open.value = !open.value
   document.documentElement.style.overflow = open.value ? 'hidden' : 'auto'
 }
+
+// Favorites animation
+const favoritesStore = useFavoritesStore()
+const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
+const scaleEffect = ref(false)
 
 watch(
   () => favoritesStore.totalFavorites,
@@ -72,20 +73,7 @@ watch(
       :aria-expanded="open"
       @click="toggleMenu"
     >
-      <svg
-        class="text-film-secondary size-7 shrink-0"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M3 12H21M3 6H21M3 18H15"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+      <IconMenu class="text-film-secondary size-7 shrink-0" />
       <span className="sr-only">Open menu</span>
     </button>
     <div
