@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import type { BaseButtonProps } from '@/types/general'
-import { computed } from 'vue'
+import { computed, type VNode } from 'vue'
 
 const { to = '/', mode, isLink } = defineProps<BaseButtonProps>()
+defineSlots<{
+  default?: () => VNode | VNode[]
+}>()
 
 const buttonClasses = computed(() => [
   'relative px-6 py-2 text-white no-underline align-middle cursor-pointer text-sm rounded-xs font-bold',

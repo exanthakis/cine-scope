@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import type { VNode } from 'vue'
+
+defineSlots<{
+  default?: () => VNode | VNode[]
+  content?: () => VNode | VNode[]
+}>()
+</script>
+
 <template>
   <div class="has-tooltip">
     <span class="tooltip text-film-tertiary bottom-6 w-fit rounded bg-gray-100 p-1 shadow-lg"

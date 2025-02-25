@@ -1,9 +1,15 @@
 <script setup lang="ts">
+import type { VNode } from 'vue'
+
 interface MovieDetailsItemProps {
   classes?: string
 }
 
 defineProps<MovieDetailsItemProps>()
+defineSlots<{
+  default?: () => VNode | VNode[]
+  header?: () => VNode | VNode[]
+}>()
 </script>
 
 <template>
@@ -14,7 +20,8 @@ defineProps<MovieDetailsItemProps>()
     <span
       class="text-film-tertiary/70 flex w-2/3 flex-wrap gap-10 whitespace-pre-wrap dark:text-white"
       :class="classes"
-      ><slot></slot
-    ></span>
+    >
+      <slot></slot>
+    </span>
   </div>
 </template>

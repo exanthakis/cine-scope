@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { VNode } from 'vue'
+
 interface BaseDialogProps {
   show: boolean
   title: string
@@ -6,6 +8,11 @@ interface BaseDialogProps {
 }
 defineProps<BaseDialogProps>()
 defineEmits(['close'])
+defineSlots<{
+  default?: () => VNode | VNode[]
+  header?: () => VNode | VNode[]
+  actions?: () => VNode | VNode[]
+}>()
 </script>
 
 <template>
