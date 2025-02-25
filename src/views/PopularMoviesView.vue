@@ -46,7 +46,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="min-h-[calc(100vh-60px)] w-full bg-[#10141e] pb-15">
+  <main class="min-h-[calc(100vh-60px)] w-full pb-15">
     <div class="px-[5vw] md:px-[8vw] lg:px-[15vw]">
       <div v-if="loading" class="flex h-[50vh] items-center justify-center">
         <BaseSpinner />
@@ -55,7 +55,7 @@ onMounted(async () => {
       <div v-else>
         <section class="mt-10">
           <div class="mt-5 mb-4 w-full border-b border-gray-500/55 pb-2">
-            <h2 class="relative w-fit text-2xl text-white">
+            <h2 class="text-film-tertiary relative w-fit text-2xl dark:text-white">
               Trending movies
               <span
                 class="bg-film-primary absolute top-0 -right-4 inline-flex h-2 w-2 animate-ping rounded-full opacity-75"
@@ -73,7 +73,9 @@ onMounted(async () => {
           </div>
         </section>
         <section class="mt-10">
-          <h2 class="mt-5 mb-4 w-full border-b border-gray-500/55 pb-2 text-2xl text-white">
+          <h2
+            class="text-film-tertiary mt-5 mb-4 w-full border-b border-gray-500/55 pb-2 text-2xl dark:text-white"
+          >
             Popular movies
           </h2>
           <MovieSlider :movies="movies" />
@@ -82,15 +84,24 @@ onMounted(async () => {
         <section class="mt-10">
           <div class="mt-5 mb-4 flex w-full items-center border-b border-gray-500/55 pb-2">
             <img src="@/assets/images/netflix.png" alt="Netflix logo" class="h-5 w-18" />
-            <h2 class="pl-2 text-2xl text-white">movies</h2>
+            <h2 class="text-film-tertiary pl-2 text-2xl dark:text-white">movies</h2>
           </div>
           <MovieSlider :movies="netflixMovies" />
         </section>
 
         <section class="mt-10">
           <div class="mt-5 mb-4 flex w-full items-center border-b border-gray-500/55 pb-2">
-            <img src="@/assets/images/disney.png" alt="Disney logo" class="h-10 w-17" />
-            <h2 class="pl-2 text-2xl text-white">movies</h2>
+            <img
+              src="@/assets/images/disney-dark.png"
+              alt="Disney logo"
+              class="block h-10 w-17 dark:hidden"
+            />
+            <img
+              src="@/assets/images/disney.png"
+              alt="Disney logo"
+              class="hidden h-10 w-17 dark:block"
+            />
+            <h2 class="text-film-tertiary pl-2 text-2xl dark:text-white">movies</h2>
           </div>
           <MovieSlider :movies="disneyMovies" />
         </section>

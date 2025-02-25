@@ -8,8 +8,12 @@ defineProps<MovieDetailsItemProps>()
 
 <template>
   <div class="m-1 font-normal">
-    <div class="text-base text-[#a3a3a3]"><slot name="header"></slot></div>
-    <span class="flex w-2/3 flex-wrap gap-10 whitespace-pre-wrap text-white" :class="classes"
+    <div class="text-film-tertiary/80 text-base dark:text-[#a3a3a3]">
+      <slot name="header"></slot>
+    </div>
+    <span
+      class="text-film-tertiary/70 flex w-2/3 flex-wrap gap-10 whitespace-pre-wrap dark:text-white"
+      :class="classes"
       ><slot></slot
     ></span>
   </div>

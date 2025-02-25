@@ -195,10 +195,10 @@ watch(
           @mouseenter="() => (isHovered = true)"
           @mouseleave="() => (isHovered = false)"
         >
-          <div class="mx-auto pr-4 pl-0">
+          <div class="w-[70%] pr-4 pl-0 dark:mx-auto dark:w-full">
             <div class="mx-auto max-w-4xl text-start">
               <span
-                class="pointer-events-auto py-2.5 text-2xl font-semibold text-gray-200 uppercase"
+                class="sm:text-film-tertiary/80 pointer-events-auto py-2.5 text-2xl font-semibold text-gray-200 uppercase dark:text-gray-200"
               >
                 <a v-if="homepage" :href="homepage" target="_blank">
                   {{ title }}
@@ -207,20 +207,24 @@ watch(
               </span>
 
               <!-- info metadata -->
-              <div class="mt-4 font-normal text-[#a3a3a3]">
+              <div
+                class="sm:text-film-tertiary/80 mt-4 font-normal text-[#a3a3a3] dark:text-[#a3a3a3]"
+              >
                 <span class="inline-block">{{ release_date?.split('-')[0] }}</span>
-                <span class="mx-1 my-0 text-[#a3a3a3]"> | </span>
+                <span class="mx-1 my-0"> | </span>
 
                 <span class="absolute top-[-9999px] left-[-9999px]">Maturity Rating:</span>
                 <span class="border border-[#a1a1a1] p-1">{{ rating }}%</span>
-                <span class="mx-1 my-0 text-[#a3a3a3]"> | </span>
+                <span class="mx-1 my-0"> | </span>
                 <span class="inline-block">{{ duration }}</span>
-                <span class="mx-1 my-0 text-[#a3a3a3]"> | </span>
+                <span class="mx-1 my-0"> | </span>
                 <span>{{ formattedGenres }}</span>
               </div>
               <!-- overview -->
 
-              <div class="mx-auto mt-4 mb-8 ml-0 max-w-xl text-lg text-gray-300">
+              <div
+                class="sm:text-film-tertiary/70 mx-auto mt-4 mb-8 ml-0 max-w-xl text-lg text-gray-300 dark:text-gray-300"
+              >
                 <div class="scrollbar-0 max-h-[20vh] overflow-scroll">
                   <Transition name="fade-text" mode="out-in">
                     <p v-if="isExpanded && overview" class="inline">
@@ -235,7 +239,7 @@ watch(
                 <button
                   v-if="overview && overview.length > 120"
                   @click="toggleReadMore"
-                  class="pointer-events-auto cursor-pointer font-semibold hover:underline"
+                  class="sm:text-film-tertiary/70 pointer-events-auto cursor-pointer font-semibold text-gray-300 hover:underline dark:text-gray-300"
                 >
                   {{ isExpanded ? 'Read Less' : 'Read More' }}
                 </button>

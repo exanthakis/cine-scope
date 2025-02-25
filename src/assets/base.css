@@ -16,7 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.bg-gradient-left::after {
+.dark .bg-gradient-left::after {
   background: linear-gradient(
     to right,
     #10141e 0%,
@@ -42,7 +42,33 @@ body {
   z-index: 2;
 }
 
-.bg-gradient-bottom::after {
+.bg-gradient-left::after {
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #ffffff 10%,
+    hsla(0, 0%, 100%, 0.98) 20%,
+    hsla(0, 0%, 100%, 0.97) 25%,
+    hsla(0, 0%, 100%, 0.95) 35%,
+    hsla(0, 0%, 100%, 0.94) 40%,
+    hsla(0, 0%, 100%, 0.92) 45%,
+    hsla(0, 0%, 100%, 0.9) 50%,
+    hsla(0, 0%, 100%, 0.87) 55%,
+    hsla(0, 0%, 100%, 0.82) 60%,
+    hsla(0, 0%, 100%, 0.75) 65%,
+    hsla(0, 0%, 100%, 0.63) 70%,
+    hsla(0, 0%, 100%, 0.45) 75%,
+    hsla(0, 0%, 100%, 0.27) 80%,
+    hsla(0, 0%, 100%, 0.15) 85%,
+    hsla(0, 0%, 100%, 0.08) 90%,
+    hsla(0, 0%, 100%, 0.03) 95%,
+    hsla(0, 0%, 100%, 0) 100%
+  );
+
+  z-index: 2;
+}
+
+.dark .bg-gradient-bottom::after {
   background: linear-gradient(
     to top,
     #10141e 0%,
@@ -134,4 +160,30 @@ body {
 nav .active {
   font-weight: bolder;
   color: #fff;
+}
+
+@media only screen and (min-width: 640px) {
+  .bg-gradient-bottom::after {
+    background: linear-gradient(
+      to top,
+      white 0%,
+      white 1.62%,
+      hsla(0, 0%, 100%, 0.987) 3.1%,
+      hsla(0, 0%, 100%, 0.951) 4.5%,
+      hsla(0, 0%, 100%, 0.896) 5.8%,
+      hsla(0, 0%, 100%, 0.825) 7.06%,
+      hsla(0, 0%, 100%, 0.741) 8.24%,
+      hsla(0, 0%, 100%, 0.648) 9.42%,
+      hsla(0, 0%, 100%, 0.55) 10.58%,
+      hsla(0, 0%, 100%, 0.45) 11.76%,
+      hsla(0, 0%, 100%, 0.352) 12.94%,
+      hsla(0, 0%, 100%, 0.259) 14.2%,
+      hsla(0, 0%, 100%, 0.175) 15.5%,
+      hsla(0, 0%, 100%, 0.104) 16.9%,
+      hsla(0, 0%, 100%, 0.049) 18.38%,
+      hsla(0, 0%, 100%, 0.013) 20%,
+      hsla(0, 0%, 100%, 0) 100%
+    );
+    z-index: 1;
+  }
 }

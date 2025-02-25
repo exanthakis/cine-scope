@@ -19,9 +19,9 @@ defineProps<AvatarTextProps>()
       src="@/assets/icons/placeholder-avatar.svg"
     />
 
-    <div class="text-center font-medium text-white">
+    <div class="text-film-tertiary/80 text-center font-medium dark:text-white">
       <h5>{{ name }}</h5>
-      <p class="text-sm text-gray-400">{{ title }}</p>
+      <p class="text-film-tertiary/70 text-sm dark:text-gray-400">{{ title }}</p>
     </div>
   </div>
 </template>
