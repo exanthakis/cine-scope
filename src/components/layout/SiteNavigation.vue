@@ -16,6 +16,11 @@ const favoritesStore = useFavoritesStore()
 const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 const scaleEffect = ref(false)
 
+const toggleMenu = () => {
+  open.value = !open.value
+  document.documentElement.style.overflow = open.value ? 'hidden' : 'auto'
+}
+
 watch(
   () => favoritesStore.totalFavorites,
   () => {
@@ -65,7 +70,7 @@ watch(
       type="button"
       className="fixed right-[5vw] top-0 py-5 text-3xl text-white md:hidden ml-auto"
       :aria-expanded="open"
-      @click="open = true"
+      @click="toggleMenu"
     >
       <svg
         class="text-film-secondary size-7 shrink-0"
@@ -83,7 +88,12 @@ watch(
       </svg>
       <span className="sr-only">Open menu</span>
     </button>
-    <MobileNav v-if="width < 768" :open="open" @close="open = false" />
+    <div
+      v-if="open"
+      @click="toggleMenu"
+      class="bg-film-tertiary/75 fixed top-0 left-0 z-1 h-screen w-full"
+    ></div>
+    <MobileNav v-if="width < 768" :open="open" @close="toggleMenu" />
   </header>
 </template>
 
