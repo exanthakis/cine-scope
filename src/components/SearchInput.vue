@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import IconClose from './icons/IconClose.vue'
 import IconFilter from './icons/IconFilter.vue'
+import IconSearch from './icons/IconSearch.vue'
 
 const searchQuery = defineModel<string>('searchQuery')
 const emit = defineEmits(['onFilterShow', 'clearSearchQuery'])
@@ -24,29 +26,14 @@ const handleFilterShow = () => {
           placeholder="Search for a movie"
           v-model="searchQuery"
         />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
+        <IconSearch
           class="search-icon text-[hsl(214, 8.1%, 61.2%)] transition-[opacity, rotate, visibility] pointer-events-none invisible absolute top-[50%] right-1 h-4 w-4 translate-x-0 translate-y-[-50%] rotate-90 cursor-pointer rounded-sm opacity-0 transition-discrete duration-200"
-        >
-          <path
-            fill="currentColor"
-            fill-rule="evenodd"
-            d="M15.62 17.03a9 9 0 1 1 1.41-1.41l4.68 4.67a1 1 0 0 1-1.42 1.42l-4.67-4.68ZM17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
+        />
         <button
           class="x-icon transition-[opacity, rotate, visibility] pointer-events-none invisible !absolute !top-[50%] !right-1 !h-4 !w-4 !translate-x-0 !translate-y-[-50%] rotate-90 !cursor-pointer rounded-sm transition-discrete duration-200"
           @click="$emit('clearSearchQuery')"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <path
-              fill="currentColor"
-              d="M17.3 18.7a1 1 0 0 0 1.4-1.4L13.42 12l5.3-5.3a1 1 0 0 0-1.42-1.4L12 10.58l-5.3-5.3a1 1 0 0 0-1.4 1.42L10.58 12l-5.3 5.3a1 1 0 1 0 1.42 1.4L12 13.42l5.3 5.3Z"
-            ></path>
-          </svg>
+          <IconClose />
         </button>
       </div>
     </div>
