@@ -200,7 +200,7 @@ watch(
 </script>
 
 <template>
-  <main class="!bg-radial-white w-full">
+  <main class="w-full">
     <div class="align-center mx-auto flex w-full justify-center">
       <BaseDialog
         :show="!!showFilters"
@@ -241,7 +241,7 @@ watch(
     <div class="px-[5vw] md:px-[8vw] lg:px-[15vw]" v-else>
       <p
         v-if="movieResults?.length && movieResults?.length > 0"
-        class="flex justify-start text-left"
+        class="dark:text-film-secondary flex justify-start text-left"
       >
         Found&nbsp;
         <span class="pr-2">

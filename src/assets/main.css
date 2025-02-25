@@ -1,6 +1,8 @@
 @import './base.css';
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-film-primary: #e50914;
   --color-film-secondary: #fff;

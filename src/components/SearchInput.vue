@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import IconFilter from './icons/IconFilter.vue'
+
 const searchQuery = defineModel<string>('searchQuery')
 const emit = defineEmits(['getSearchResults', 'onFilterShow', 'clearSearchQuery'])
 
@@ -13,15 +15,11 @@ const handleFilterShow = () => {
 
 <template>
   <div class="bg-search-input m-8 rounded-[7px] p-0.5">
-    <div class="bg-film-secondary flex w-full gap-4 rounded-[5px] px-3 py-1">
+    <div
+      class="bg-film-secondary dark:text-film-secondary flex w-full gap-4 rounded-[5px] px-3 py-1 dark:bg-gray-900"
+    >
       <span class="flex cursor-pointer items-center" @click="handleFilterShow">
-        <img
-          alt="Movie filter icon"
-          src="@/assets/icons/filter.svg"
-          width="24"
-          height="24"
-          class="min-w-2"
-        />
+        <IconFilter class="h-6 w-6 min-w-2" />
       </span>
       <div class="search-wrapper relative w-full">
         <input

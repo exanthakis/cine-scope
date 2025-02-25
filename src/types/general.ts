@@ -62,3 +62,5 @@ export interface SelectedFilters {
   releaseYear: ReleaseYear | null
   language: string
 }
+
+export type Theme = 'dark' | 'light' | 'system'

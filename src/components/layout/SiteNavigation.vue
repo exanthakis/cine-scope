@@ -4,6 +4,7 @@ import TheLogo from '../ui/TheLogo.vue'
 import { defineAsyncComponent, ref, watch } from 'vue'
 import { useWindowResize } from '@/hooks/useWindowResize'
 import { useFavoritesStore } from '@/stores/favorites'
+import ThemeSwitch from '../ThemeSwitch.vue'
 
 // Mobile navigation
 const { width } = useWindowResize()
@@ -57,7 +58,7 @@ watch(
           </RouterLink>
         </li>
       </ul>
-      <div class="hidden md:flex">dark/light</div>
+      <div class="hidden md:flex"><ThemeSwitch /></div>
     </nav>
 
     <button
