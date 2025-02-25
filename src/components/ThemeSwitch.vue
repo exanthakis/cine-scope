@@ -40,10 +40,10 @@ onMounted(() => {
 
 <template>
   <div
-    class="relative z-0 inline-grid grid-cols-3 gap-0.5 rounded-full bg-white/10 p-0.75 text-white"
+    class="relative z-0 -ml-0.5 inline-grid grid-cols-3 gap-0.5 rounded-full bg-white/10 p-0.75 text-white md:-ml-0"
   >
     <span
-      class="cursor-pointer rounded-full p-1.5 transition duration-500 *:size-7 sm:p-0"
+      class="cursor-pointer rounded-full p-0.5 transition duration-500 *:size-7"
       :class="
         theme === 'system'
           ? 'bg-gray-700 text-white inset-ring ring-transparent inset-ring-white/10'
@@ -56,7 +56,7 @@ onMounted(() => {
       <IconSystem />
     </span>
     <span
-      class="cursor-pointer rounded-full p-1.5 transition duration-500 *:size-7 sm:p-0"
+      class="cursor-pointer rounded-full p-0.5 transition duration-500 *:size-7"
       :class="
         theme === 'light'
           ? 'bg-gray-700 text-white inset-ring ring-transparent inset-ring-white/10'
@@ -69,7 +69,7 @@ onMounted(() => {
       <IconSun />
     </span>
     <span
-      class="cursor-pointer rounded-full p-1.5 transition duration-500 *:size-7 sm:p-0"
+      class="cursor-pointer rounded-full p-0.5 transition duration-500 *:size-7"
       :class="
         theme === 'dark'
           ? 'bg-gray-700 text-white inset-ring ring-transparent inset-ring-white/10'

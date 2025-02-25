@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useFavoritesStore } from '@/stores/favorites'
+import ThemeSwitch from '../ThemeSwitch.vue'
 
 interface MobileNavProps {
   open: boolean
@@ -81,6 +82,16 @@ const favoritesStore = useFavoritesStore()
               {{ favoritesStore.totalFavorites }}
             </div></RouterLink
           >
+        </li>
+        <li
+          :class="[
+            'relative pt-2 text-2xl opacity-0 transition-[opacity] duration-1000 ease-in-out',
+            open ? 'opacity-100' : 'opacity-0',
+          ]"
+          :style="{ transitionDelay: open ? '500ms' : '0ms' }"
+          @click="$emit('close')"
+        >
+          <ThemeSwitch />
         </li>
       </ul>
     </nav>
