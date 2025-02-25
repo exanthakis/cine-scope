@@ -3,11 +3,11 @@ import { filterUniqueById } from '@/lib/utils'
 import type { AvatarTextProps } from '@/types/general'
 import { computed, ref } from 'vue'
 import CreditsList from './CreditsList.vue'
-import type { Credits } from '@/types/cast'
+import type { Credit, CreditsWrapperProps } from '@/types/cast'
 
-const { cast: castInfo, crew: crewInfo, isLoading } = defineProps<Credits>()
+const { cast: castInfo, crew: crewInfo, isLoading } = defineProps<CreditsWrapperProps>()
 
-const currentTab = ref<'Cast' | 'Crew'>('Cast')
+const currentTab = ref<Credit>('Cast')
 
 const cast = computed<AvatarTextProps[]>(() => {
   const castList =

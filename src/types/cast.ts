@@ -18,8 +18,10 @@ type Crew = Omit<Cast, 'cast_id' | 'character' | 'order'> & {
   job?: string
 }
 
-export type Credits = {
+export type CreditsWrapperProps = {
   cast: Cast[]
   crew: Crew[]
   isLoading: boolean
 }
+
+export type Credit = 'Cast' | 'Crew'
