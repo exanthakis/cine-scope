@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import FavoritesBadge from '@/components/FavoritesBadge.vue'
+import IconPlay from '@/components/icons/IconPlay.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import { useMouse } from '@/hooks/useMouse'
 import { useFavoritesStore } from '@/stores/favorites'
@@ -52,7 +53,7 @@ const cursorCircle = computed(
     `transform: translateX(${x.value}px) translateY(${y.value}px) translateZ(0) translate3d(0, 0, 0);`,
 )
 
-const handleVideoPlay = (device: string) => {
+const handleVideoPlay = (device: 'sm' | '') => {
   if ((!isHovered.value && props.trailerKey) || (device === 'sm' && props.trailerKey)) {
     window.open(`https://www.youtube.com/watch?v=${props.trailerKey}`)
   }
@@ -191,11 +192,11 @@ watch(
         class="bg-opacity-50 bg-gradient-left after:right[-200px] container flex h-full items-center justify-start py-12 after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-[60%] after:content-none sm:after:content-['']"
       >
         <div
-          class="z-3 cursor-auto text-start"
+          class="z-3 cursor-auto text-start sm:w-[40%]"
           @mouseenter="() => (isHovered = true)"
           @mouseleave="() => (isHovered = false)"
         >
-          <div class="w-[70%] pr-4 pl-0 dark:mx-auto dark:w-full">
+          <div class="pr-4 pl-0 dark:mx-auto">
             <div class="mx-auto max-w-4xl text-start">
               <span
                 class="sm:text-film-tertiary/80 pointer-events-auto py-2.5 text-2xl font-semibold text-gray-200 uppercase dark:text-gray-200"
@@ -255,16 +256,11 @@ watch(
                     loading="lazy"
                 /></a>
                 <div
-                  class="pointer-events-auto z-2 flex w-fit items-center gap-3 rounded-full bg-white px-3 py-1.5 lg:hidden"
+                  class="dark:text-film-tertiary text-film-tertiary pointer-events-auto z-2 flex w-fit items-center gap-3 rounded-full bg-white px-3 py-1.5 sm:bg-[#10141e] sm:text-white lg:hidden dark:bg-white"
                   @click="() => handleVideoPlay('sm')"
                 >
-                  <span class="text-film-tertiary font-bold"> Trailer</span>
-                  <img
-                    src="@/assets/icons/play.svg"
-                    alt="Play video icon"
-                    class="h-2.5 w-2.5 rotate-90"
-                    loading="lazy"
-                  />
+                  <span class="font-bold"> Trailer</span>
+                  <IconPlay class="dark:fill-film-tertiary h-2.5 w-2.5 rotate-90 sm:fill-white" />
                 </div>
               </div>
             </div>
