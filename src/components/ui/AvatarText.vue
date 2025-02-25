@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { AvatarTextProps } from '@/types/general'
+import IconAvatar from '../icons/IconAvatar.vue'
 
 defineProps<AvatarTextProps>()
 </script>
@@ -12,12 +13,8 @@ defineProps<AvatarTextProps>()
       :src="`https://image.tmdb.org/t/p/original/${path}`"
       :alt="title"
     />
-    <img
-      v-else
-      alt="Avatar placeholder"
-      class="h-25 w-25"
-      src="@/assets/icons/placeholder-avatar.svg"
-    />
+
+    <IconAvatar v-else class="fill-film-tertiary dark:fill-film-secondary h-25 w-25" />
 
     <div class="text-film-tertiary/80 text-center font-medium dark:text-white">
       <h5>{{ name }}</h5>
