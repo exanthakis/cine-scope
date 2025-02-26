@@ -37,7 +37,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    show: false,
+    show: true,
     classes: '',
   },
 }
