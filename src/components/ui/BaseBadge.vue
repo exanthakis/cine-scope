@@ -3,7 +3,9 @@ interface BaseBadgeProps {
   title: string
 }
 defineProps<BaseBadgeProps>()
-defineEmits(['close'])
+defineEmits<{
+  (event: 'close'): void
+}>()
 </script>
 
 <template>

@@ -8,7 +8,9 @@ interface MobileNavProps {
 }
 
 defineProps<MobileNavProps>()
-defineEmits(['close'])
+defineEmits<{
+  (event: 'close'): void
+}>()
 
 const favoritesStore = useFavoritesStore()
 </script>

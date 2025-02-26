@@ -8,7 +8,9 @@ interface SingleRangeSliderProps {
   step: number
 }
 const { min, max, step, initialValue } = defineProps<SingleRangeSliderProps>()
-const emit = defineEmits(['updateSingleRange'])
+const emit = defineEmits<{
+  (event: 'updateSingleRange', range: number): void
+}>()
 
 const rangeVal = ref(initialValue)
 

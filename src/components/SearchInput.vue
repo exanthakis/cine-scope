@@ -4,7 +4,10 @@ import IconFilter from './icons/IconFilter.vue'
 import IconSearch from './icons/IconSearch.vue'
 
 const searchQuery = defineModel<string>('searchQuery')
-const emit = defineEmits(['onFilterShow', 'clearSearchQuery'])
+const emit = defineEmits<{
+  (event: 'onFilterShow'): void
+  (event: 'clearSearchQuery'): void
+}>()
 
 const handleFilterShow = () => {
   emit('onFilterShow')

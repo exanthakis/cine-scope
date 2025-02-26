@@ -7,7 +7,9 @@ interface BaseDialogProps {
   classes?: string
 }
 defineProps<BaseDialogProps>()
-defineEmits(['close'])
+defineEmits<{
+  (event: 'close'): void
+}>()
 defineSlots<{
   default?: () => VNode | VNode[]
   header?: () => VNode | VNode[]

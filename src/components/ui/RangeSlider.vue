@@ -9,7 +9,9 @@ interface RangeSliderProps {
   step: number
 }
 const { min, max, step, initialMax, initialMin } = defineProps<RangeSliderProps>()
-const emits = defineEmits(['updateRange'])
+const emit = defineEmits<{
+  (event: 'updateRange', range: { min: number; max: number }): void
+}>()
 
 const minValue = ref(initialMin)
 const maxValue = ref(initialMax)
@@ -40,7 +42,7 @@ watchEffect(() => {
 })
 
 watch([minValue, maxValue], () => {
-  emits('updateRange', { min: minValue.value, max: maxValue.value })
+  emit('updateRange', { min: minValue.value, max: maxValue.value })
 })
 
 const disableMinThumb = computed(() => minValue.value >= maxValue.value)

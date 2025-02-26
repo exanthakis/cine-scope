@@ -14,7 +14,10 @@ interface FiltersForm {
 }
 
 const { searchQuery } = defineProps<FiltersForm>()
-const emits = defineEmits(['submitFiltersForm', 'resetFilters'])
+const emit = defineEmits<{
+  (event: 'submitFiltersForm', data: MovieFilter): void
+  (event: 'resetFilters'): void
+}>()
 const BaseTooltip = defineAsyncComponent(() => import('./ui/BaseTooltip.vue'))
 
 const route = useRoute()
@@ -44,7 +47,7 @@ const handleSubmitForm = () => {
     gte: !searchQuery.trim() ? minSelected.value.toString() : '',
   }
   results.language = selectedLanguage.value
-  emits('submitFiltersForm', results)
+  emit('submitFiltersForm', results)
 }
 
 const currentYear = computed(() => new Date().getFullYear())
