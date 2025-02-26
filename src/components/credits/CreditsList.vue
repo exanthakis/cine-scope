@@ -6,17 +6,8 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import { CREDITS_SLIDER_BREAKPOINTS } from '@/constants/general'
 import AvatarTextSkeleton from '../ui/AvatarTextSkeleton.vue'
-import type { AvatarTextProps } from '@/types/general'
-import type { Credit } from '@/types/cast'
+import type { CreditsListProps } from '@/types/cast'
 
-export interface CreditsListProps {
-  /** Info about the actor, cast */
-  credits: AvatarTextProps[]
-  /** 'Cast' or 'Crew' */
-  type: Credit
-  /** Loading state */
-  isLoading: boolean
-}
 defineProps<CreditsListProps>()
 </script>
 

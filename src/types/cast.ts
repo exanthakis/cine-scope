@@ -1,3 +1,5 @@
+import type { AvatarTextProps } from './general'
+
 export type Cast = {
   adult?: boolean
   cast_id?: number
@@ -21,6 +23,15 @@ export type Crew = Omit<Cast, 'cast_id' | 'character' | 'order'> & {
 export type CreditsWrapperProps = {
   cast: Cast[]
   crew: Crew[]
+  isLoading: boolean
+}
+
+export interface CreditsListProps {
+  /** Info about the actor, cast */
+  credits: AvatarTextProps[]
+  /** 'Cast' or 'Crew' */
+  type: Credit
+  /** Loading state */
   isLoading: boolean
 }
 
