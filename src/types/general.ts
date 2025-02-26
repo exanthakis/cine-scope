@@ -24,6 +24,11 @@ export interface BaseButtonProps {
   to?: string
 }
 
+export interface BaseDialogProps {
+  show: boolean
+  classes?: string
+}
+
 export interface AvatarTextProps {
   id?: number
   name?: string

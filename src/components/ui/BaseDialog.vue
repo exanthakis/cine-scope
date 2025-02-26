@@ -1,11 +1,7 @@
 <script setup lang="ts">
+import type { BaseDialogProps } from '@/types/general'
 import type { VNode } from 'vue'
 
-interface BaseDialogProps {
-  show: boolean
-  title: string
-  classes?: string
-}
 defineProps<BaseDialogProps>()
 defineEmits<{
   (event: 'close'): void
@@ -34,15 +30,18 @@ defineSlots<{
         ]"
       >
         <header>
-          <slot name="header">
-            <h2 class="text-2xl">{{ title }}</h2>
-          </slot>
+          <slot name="header"></slot>
         </header>
         <section class="py-6">
           <slot></slot>
         </section>
         <menu>
-          <slot name="actions"></slot>
+          <slot name="actions">
+            <!-- Default close btn -->
+            <BaseButton mode="secondary" class="rounded-xs" :isLink="false" @click="$emit('close')">
+              Close
+            </BaseButton>
+          </slot>
         </menu>
       </dialog>
     </Transition>

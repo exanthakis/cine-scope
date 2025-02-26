@@ -162,11 +162,10 @@ watch(
         </div>
       </div>
 
-      <BaseDialog
-        :show="!!openFavModal"
-        :title="favoriteDialogText.heading"
-        @close="toggleFavModal"
-      >
+      <BaseDialog :show="!!openFavModal" @close="toggleFavModal">
+        <template #header>
+          <h2 class="text-2xl">{{ favoriteDialogText.heading }}</h2>
+        </template>
         <template #default>
           <p>
             {{ favoriteDialogText.body }}
@@ -182,9 +181,9 @@ watch(
               @click="addToFavorite(id ? id : -1)"
               >Confirm</BaseButton
             >
-            <BaseButton mode="secondary" class="rounded-xs" :isLink="false" @click="toggleFavModal"
-              >Close</BaseButton
-            >
+            <BaseButton mode="secondary" class="rounded-xs" :isLink="false" @click="toggleFavModal">
+              Close
+            </BaseButton>
           </div>
         </template>
       </BaseDialog>

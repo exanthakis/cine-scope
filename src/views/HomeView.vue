@@ -204,10 +204,12 @@ watch(
     <div class="align-center mx-auto flex w-full justify-center">
       <BaseDialog
         :show="!!showFilters"
-        title="Filters"
         @close="toggleFiltersDisplay"
         classes="!bg-[#10141e] text-film-secondary"
       >
+        <template #header>
+          <h2 class="text-2xl">Filters</h2>
+        </template>
         <template #default>
           <FiltersForm
             @submit-filters-form="handleFiltersData"
@@ -216,7 +218,7 @@ watch(
             :searchQuery="searchQuery"
           />
         </template>
-        <template #actions> </template>
+        <template #actions><span></span></template>
       </BaseDialog>
       <SearchInput
         v-model:searchQuery="searchQuery"
