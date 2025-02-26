@@ -7,8 +7,11 @@ defineEmits<{
   (event: 'close'): void
 }>()
 defineSlots<{
+  /** Main content of the dialog */
   default?: () => VNode | VNode[]
+  /** Header of the dialog */
   header?: () => VNode | VNode[]
+  /** Action buttons  */
   actions?: () => VNode | VNode[]
 }>()
 </script>
