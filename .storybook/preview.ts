@@ -1,5 +1,10 @@
-import type { Preview } from '@storybook/vue3'
+import { type Preview, setup } from '@storybook/vue3'
+import BaseButton from '../src/components/ui/BaseButton.vue'
 import '../src/assets/main.css'
+
+setup((app) => {
+  app.component('BaseButton', BaseButton)
+})
 
 const preview: Preview = {
   parameters: {

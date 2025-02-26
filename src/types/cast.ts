@@ -1,4 +1,4 @@
-type Cast = {
+export type Cast = {
   adult?: boolean
   cast_id?: number
   character?: string
@@ -13,7 +13,7 @@ type Cast = {
   profile_path?: string
 }
 
-type Crew = Omit<Cast, 'cast_id' | 'character' | 'order'> & {
+export type Crew = Omit<Cast, 'cast_id' | 'character' | 'order'> & {
   department?: string
   job?: string
 }
