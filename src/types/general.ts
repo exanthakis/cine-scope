@@ -20,11 +20,6 @@ export interface BaseButtonProps {
   to?: string
 }
 
-export interface CreditsListProps {
-  credits: AvatarTextProps[]
-  type: string
-  isLoading: boolean
-}
 export interface AvatarTextProps {
   id?: number
   name?: string

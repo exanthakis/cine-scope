@@ -34,8 +34,14 @@ const crew = computed<AvatarTextProps[]>(() => {
 })
 
 const tabs = computed(() => ({
-  Cast: { component: CreditsList, props: { credits: cast.value, type: 'Cast', isLoading } },
-  Crew: { component: CreditsList, props: { credits: crew.value, type: 'Crew', isLoading } },
+  Cast: {
+    component: CreditsList,
+    props: { credits: cast.value, type: 'Cast' as Credit, isLoading },
+  },
+  Crew: {
+    component: CreditsList,
+    props: { credits: crew.value, type: 'Crew' as Credit, isLoading },
+  },
 }))
 
 const currentComponent = computed(() => tabs.value[currentTab.value])
