@@ -14,6 +14,10 @@ export interface MovieDetailsProps {
   t?: string
 }
 
+export interface BaseBadgeProps {
+  title: string
+}
+
 export interface BaseButtonProps {
   mode: 'primary' | 'secondary'
   isLink: boolean

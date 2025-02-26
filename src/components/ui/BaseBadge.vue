@@ -1,7 +1,6 @@
 <script setup lang="ts">
-interface BaseBadgeProps {
-  title: string
-}
+import type { BaseBadgeProps } from '@/types/general'
+
 defineProps<BaseBadgeProps>()
 defineEmits<{
   (event: 'close'): void
