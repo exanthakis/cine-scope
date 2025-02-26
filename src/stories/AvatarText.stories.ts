@@ -3,7 +3,7 @@ import type { AvatarTextProps } from '@/types/general'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'BaseComponents/AvatarText',
+  title: 'UI/AvatarText',
   component: AvatarText,
   tags: ['autodocs'],
   argTypes: {

@@ -3,7 +3,7 @@ import type { BaseButtonProps } from '@/types/general'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'BaseComponents/BaseButton',
+  title: 'UI/BaseButton',
   component: BaseButton,
   tags: ['autodocs'],
   argTypes: {

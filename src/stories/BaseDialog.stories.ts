@@ -4,7 +4,7 @@ import { fn } from '@storybook/test'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'BaseComponents/BaseDialog',
+  title: 'UI/BaseDialog',
   component: BaseDialog,
   tags: ['autodocs'],
   argTypes: {

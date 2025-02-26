@@ -4,7 +4,7 @@ import { fn } from '@storybook/test'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
-  title: 'BaseComponents/BaseBadge',
+  title: 'UI/BaseBadge',
   component: BaseBadge,
   tags: ['autodocs'],
   argTypes: {
