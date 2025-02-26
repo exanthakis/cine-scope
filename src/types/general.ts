@@ -68,3 +68,11 @@ export interface SelectedFilters {
 }
 
 export type Theme = 'dark' | 'light' | 'system'
+
+export interface RangeSliderProps {
+  initialMin: number
+  initialMax: number
+  min: number
+  max: number
+  step: number
+}

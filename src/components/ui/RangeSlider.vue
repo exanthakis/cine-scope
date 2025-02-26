@@ -1,13 +1,7 @@
 <script setup lang="ts">
+import type { RangeSliderProps } from '@/types/general'
 import { computed, ref, watch, watchEffect } from 'vue'
 
-interface RangeSliderProps {
-  initialMin: number
-  initialMax: number
-  min: number
-  max: number
-  step: number
-}
 const { min, max, step, initialMax, initialMin } = defineProps<RangeSliderProps>()
 const emit = defineEmits<{
   (event: 'updateRange', range: { min: number; max: number }): void
