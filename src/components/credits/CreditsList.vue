@@ -35,5 +35,3 @@ defineProps<CreditsListProps>()
     </SwiperSlide>
   </Swiper>
 </template>
-
-<style lang="scss" scoped></style>
