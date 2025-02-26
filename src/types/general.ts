@@ -76,3 +76,10 @@ export interface RangeSliderProps {
   max: number
   step: number
 }
+
+export interface SingleRangeSliderProps {
+  initialValue: number
+  min: number
+  max: number
+  step: number
+}

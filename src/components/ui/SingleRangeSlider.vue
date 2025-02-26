@@ -1,12 +1,7 @@
 <script setup lang="ts">
+import type { SingleRangeSliderProps } from '@/types/general'
 import { ref } from 'vue'
 
-interface SingleRangeSliderProps {
-  initialValue: number
-  min: number
-  max: number
-  step: number
-}
 const { min, max, step, initialValue } = defineProps<SingleRangeSliderProps>()
 const emit = defineEmits<{
   (event: 'updateSingleRange', range: number): void
