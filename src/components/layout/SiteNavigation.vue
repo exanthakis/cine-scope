@@ -56,7 +56,7 @@ watch(
             >Favorites
             <div
               v-if="favoritesStore.totalFavorites > 0"
-              class="bg-film-primary border-blue-navy absolute -end-6 -top-2 inline-flex h-6 w-6 scale-100 items-center justify-center rounded-full border-2 text-xs font-bold text-white"
+              class="bg-red-netflix border-blue-navy absolute -end-6 -top-2 inline-flex h-6 w-6 scale-100 items-center justify-center rounded-full border-2 text-xs font-bold text-white"
               :class="scaleEffect ? 'scale-140 transition duration-200 ease-in' : ''"
             >
               {{ favoritesStore.totalFavorites }}

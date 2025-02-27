@@ -58,7 +58,7 @@ onMounted(async () => {
             <h2 class="text-black-primary relative w-fit text-2xl dark:text-white">
               Trending movies
               <span
-                class="bg-film-primary absolute top-0 -right-4 inline-flex h-2 w-2 animate-ping rounded-full opacity-75"
+                class="bg-red-netflix absolute top-0 -right-4 inline-flex h-2 w-2 animate-ping rounded-full opacity-75"
               ></span>
             </h2>
           </div>

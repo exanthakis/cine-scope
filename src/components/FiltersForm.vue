@@ -111,7 +111,7 @@ watch(
             :for="genre.id + genre.name"
             :class="[
               'cursor-pointer rounded-2xl bg-[#232731] px-3 py-1 text-white',
-              selectedGenres.includes(genre.id) ? 'bg-film-primary' : '',
+              selectedGenres.includes(genre.id) ? 'bg-red-netflix' : '',
             ]"
             >{{ genre.name }}</label
           >
