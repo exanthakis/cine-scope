@@ -95,3 +95,7 @@ export interface FiltersForm {
   genres: Genre[] | null
   searchQuery: string
 }
+
+export interface MobileNavProps {
+  open: boolean
+}

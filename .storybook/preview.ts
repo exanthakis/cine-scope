@@ -19,9 +19,6 @@ const router = createRouter({
       component: {
         template: '<div>Mock Home Page</div>',
       },
-      meta: {
-        title: 'Home Page',
-      },
     },
     {
       path: '/movies/:id',
@@ -29,8 +26,19 @@ const router = createRouter({
       component: {
         template: '<div>Mock Movie Details Page</div>',
       },
-      meta: {
-        title: 'Movie Details',
+    },
+    {
+      path: '/popular',
+      name: 'popular-list',
+      component: {
+        template: '<div>Mock Popular Page</div>',
+      },
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: {
+        template: '<div>Mock Favorites Page</div>',
       },
     },
     {

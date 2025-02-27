@@ -2,10 +2,7 @@
 import { useFavoritesStore } from '@/stores/favorites'
 import ThemeSwitch from '../ThemeSwitch.vue'
 import IconClose from '../icons/IconClose.vue'
-
-interface MobileNavProps {
-  open: boolean
-}
+import type { MobileNavProps } from '@/types/general'
 
 defineProps<MobileNavProps>()
 defineEmits<{
