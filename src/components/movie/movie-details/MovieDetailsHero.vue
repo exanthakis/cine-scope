@@ -134,16 +134,16 @@ watch(
           <div
             :style="cursorCircle"
             :class="[
-              'bg-film-secondary pointer-events-none fixed top-0 left-0 z-10 flex h-20 w-20 items-center justify-center rounded-full transition-[background-color,opacity] duration-500 ease-out backface-hidden select-none',
+              'bg-white-primary pointer-events-none fixed top-0 left-0 z-10 flex h-20 w-20 items-center justify-center rounded-full transition-[background-color,opacity] duration-500 ease-out backface-hidden select-none',
               isHovered ? 'h-0 w-0 opacity-0' : '',
               isGradientHovered
-                ? 'dark:bg-film-secondary bg-film-tertiary duration-700 ease-in'
+                ? 'dark:bg-white-primary bg-film-tertiary duration-700 ease-in'
                 : '',
             ]"
           >
             <IconPlay
               class="h-2.5 w-2.5 rotate-90"
-              :class="isGradientHovered ? 'fill-film-secondary dark:fill-film-tertiary' : ''"
+              :class="isGradientHovered ? 'fill-white-primary dark:fill-film-tertiary' : ''"
             />
           </div>
         </div>
@@ -255,14 +255,14 @@ watch(
       </div>
 
       <div
-        class="bg-gradient-red text-film-secondary shadow-[8px 5px 16px 0 rgba(0,0,0,.37)] pointer-events-auto relative bottom-15 z-2 container mx-auto flex w-full cursor-auto items-center justify-between rounded-sm px-4 py-3"
+        class="bg-gradient-red text-white-primary shadow-[8px 5px 16px 0 rgba(0,0,0,.37)] pointer-events-auto relative bottom-15 z-2 container mx-auto flex w-full cursor-auto items-center justify-between rounded-sm px-4 py-3"
         @mouseenter="() => (isHovered = true)"
         @mouseleave="() => (isHovered = false)"
       >
         <div
           class="z-10 flex w-full flex-col items-center justify-between gap-4 pr-0 sm:flex-row sm:pr-4"
         >
-          <h5 class="text-film-secondary z-10">⭐ {{ favoriteDialogText.title }}</h5>
+          <h5 class="text-white-primary z-10">⭐ {{ favoriteDialogText.title }}</h5>
           <BaseButton
             class="w-full !px-11 sm:w-fit"
             :mode="'primary'"

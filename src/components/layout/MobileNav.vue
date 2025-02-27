@@ -25,7 +25,7 @@ const favoritesStore = useFavoritesStore()
       :aria-expanded="open"
       @click="$emit('close')"
     >
-      <IconClose class="text-film-secondary size-7 shrink-0" />
+      <IconClose class="text-white-primary size-7 shrink-0" />
       <span className="sr-only">Close menu</span>
     </button>
 

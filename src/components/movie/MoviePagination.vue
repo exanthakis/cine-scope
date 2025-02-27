@@ -49,7 +49,7 @@ const visiblePages = computed(() => {
       <!-- First Page -->
       <BaseButton
         v-if="visiblePages[0] > 1"
-        class="dark:bg-film-secondary dark:text-film-tertiary !px-2 sm:!px-3"
+        class="dark:bg-white-primary dark:text-film-tertiary !px-2 sm:!px-3"
         :mode="page === 1 ? 'primary' : 'secondary'"
         :isLink="false"
         @click="goToPage(1)"
@@ -64,7 +64,7 @@ const visiblePages = computed(() => {
         v-for="p in visiblePages"
         :key="p"
         :mode="p === page ? 'primary' : 'secondary'"
-        class="dark:bg-film-secondary dark:text-film-tertiary !px-2 sm:!px-3"
+        class="dark:bg-white-primary dark:text-film-tertiary !px-2 sm:!px-3"
         :isLink="false"
         @click="goToPage(p)"
       >
@@ -78,7 +78,7 @@ const visiblePages = computed(() => {
       <BaseButton
         v-if="visiblePages[visiblePages.length - 1] < totalPages"
         :mode="'secondary'"
-        class="dark:bg-film-secondary dark:text-film-tertiary !px-2 sm:!px-3"
+        class="dark:bg-white-primary dark:text-film-tertiary !px-2 sm:!px-3"
         :isLink="false"
         @click="goToPage(totalPages)"
       >

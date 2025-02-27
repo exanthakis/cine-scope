@@ -7,7 +7,7 @@ const { resource = 'page' } = defineProps<NotFoundProps>()
 </script>
 
 <template>
-  <div class="text-film-tertiary dark:text-film-secondary p-6 text-center">
+  <div class="text-film-tertiary dark:text-white-primary p-6 text-center">
     <h1
       class="text-primary-600 dark:text-primary-500 mb-4 text-7xl font-extrabold tracking-tight lg:text-9xl"
     >

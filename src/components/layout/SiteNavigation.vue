@@ -73,7 +73,7 @@ watch(
       :aria-expanded="open"
       @click="toggleMenu"
     >
-      <IconMenu class="text-film-secondary size-7 shrink-0" />
+      <IconMenu class="text-white-primary size-7 shrink-0" />
       <span className="sr-only">Open menu</span>
     </button>
     <div

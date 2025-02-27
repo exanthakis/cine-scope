@@ -205,7 +205,7 @@ watch(
       <BaseDialog
         :show="!!showFilters"
         @close="toggleFiltersDisplay"
-        classes="!bg-blue-navy text-film-secondary"
+        classes="!bg-blue-navy text-white-primary"
       >
         <template #header>
           <h2 class="text-2xl">Filters</h2>
@@ -242,7 +242,7 @@ watch(
     <div class="px-[5vw] md:px-[8vw] lg:px-[15vw]" v-else>
       <p
         v-if="movieResults?.length && movieResults?.length > 0"
-        class="dark:text-film-secondary flex justify-start text-left"
+        class="dark:text-white-primary flex justify-start text-left"
       >
         Found&nbsp;
         <span class="pr-2">

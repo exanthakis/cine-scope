@@ -11,7 +11,7 @@ const favoriteText = computed(() => {
 </script>
 
 <template>
-  <div class="text-film-tertiary dark:text-film-secondary px-[5vw] md:px-[8vw] lg:px-[15vw]">
+  <div class="text-film-tertiary dark:text-white-primary px-[5vw] md:px-[8vw] lg:px-[15vw]">
     <h5 v-if="favoritesStore.totalFavorites === 0" class="pt-10 text-lg">
       No favorite movies found.
     </h5>

@@ -158,7 +158,7 @@ watch(
           id="referrer"
           name="referrer"
           v-model="selectedLanguage"
-          class="text-film-secondary w-full cursor-pointer bg-transparent px-5 py-2"
+          class="text-white-primary w-full cursor-pointer bg-transparent px-5 py-2"
         >
           <option
             v-for="lang in LANGUAGES"
@@ -173,7 +173,7 @@ watch(
     </div>
     <div class="-mb-5 pt-10">
       <BaseButton
-        class="!bg-film-secondary !text-film-tertiary mr-4 cursor-pointer !rounded-full"
+        class="!bg-white-primary !text-film-tertiary mr-4 cursor-pointer !rounded-full"
         mode="secondary"
         :isLink="false"
         type="button"
