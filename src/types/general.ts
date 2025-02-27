@@ -90,3 +90,8 @@ export interface MoviePaginationProps {
   route: string
   hasNextPage: boolean
 }
+
+export interface FiltersForm {
+  genres: Genre[] | null
+  searchQuery: string
+}

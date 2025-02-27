@@ -1,17 +1,11 @@
 <script setup lang="ts">
-import type { MovieFilter, ReleaseYear } from '@/types/general'
-import type { Genre } from '@/types/movie'
+import type { FiltersForm, MovieFilter, ReleaseYear } from '@/types/general'
 import { computed, defineAsyncComponent, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import BaseButton from './ui/BaseButton.vue'
 import RangeSlider from './ui/RangeSlider.vue'
 import SingleRangeSlider from './ui/SingleRangeSlider.vue'
 import { LANGUAGES } from '@/constants/general'
-
-interface FiltersForm {
-  genres: Genre[] | null
-  searchQuery: string
-}
 
 const { searchQuery } = defineProps<FiltersForm>()
 const emit = defineEmits<{
@@ -182,6 +176,7 @@ watch(
         class="!bg-film-secondary !text-film-tertiary mr-4 cursor-pointer !rounded-full"
         mode="secondary"
         :isLink="false"
+        type="button"
         @click="$emit('resetFilters')"
       >
         Clear All
