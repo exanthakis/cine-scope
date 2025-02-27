@@ -9,7 +9,6 @@ const config: StorybookConfig = {
         docs: true,
       },
     },
-    '@storybook/addon-onboarding',
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
   ],
