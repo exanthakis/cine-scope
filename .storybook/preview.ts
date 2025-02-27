@@ -1,12 +1,27 @@
-import { type Preview, setup } from '@storybook/vue3'
-import { createRouter, createWebHistory } from 'vue-router'
+import type { Preview } from '@storybook/vue3'
+import { setup } from '@storybook/vue3'
+import { createPinia } from 'pinia'
+import { createRouter, createMemoryHistory } from 'vue-router'
 import BaseButton from '../src/components/ui/BaseButton.vue'
 import NotFound from '../src/views/NotFound.vue'
 import '../src/assets/main.css'
 
+let done = false
+const pinia = createPinia()
+
 const router = createRouter({
-  history: createWebHistory(),
+  history: createMemoryHistory(),
   routes: [
+    {
+      path: '/movies/:id',
+      name: 'movie-details',
+      component: {
+        template: '<div>Mock Movie Details Page</div>',
+      },
+      meta: {
+        title: 'Movie Details',
+      },
+    },
     {
       path: '/:catchAll(.*)*',
       component: NotFound,
@@ -15,12 +30,19 @@ const router = createRouter({
 })
 
 setup((app) => {
-  app.component('BaseButton', BaseButton)
+  if (!done) {
+    app.use(pinia) // Register Pinia only once to prevent Storybook from overwriting or resetting Pinia on each setup.
+  }
   app.use(router)
+  app.component('BaseButton', BaseButton)
+  done = true
 })
 
 const preview: Preview = {
   parameters: {
+    backgrounds: {
+      default: 'light',
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
