@@ -98,7 +98,7 @@ watch(
         <div v-if="movieDetails.tagline" class="pb-10">
           <div class="bg-linear-hr mb-4 h-0.5"></div>
           <div
-            class="text-black-primary/80 mx-auto max-w-xl text-center text-base dark:text-[#a3a3a3]"
+            class="text-black-primary/80 dark:text-gray-medium mx-auto max-w-xl text-center text-base"
           >
             {{ movieDetails.tagline }}
           </div>

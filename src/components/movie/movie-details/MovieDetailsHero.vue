@@ -195,7 +195,7 @@ watch(
 
               <!-- info metadata -->
               <div
-                class="sm:text-black-primary/80 mt-4 font-normal text-[#a3a3a3] dark:text-[#a3a3a3]"
+                class="sm:text-black-primary/80 text-gray-medium dark:text-gray-medium mt-4 font-normal"
               >
                 <span class="inline-block">{{ release_date?.split('-')[0] }}</span>
                 <span class="mx-1 my-0"> | </span>

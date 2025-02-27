@@ -18,7 +18,7 @@ import AnimatedPlaceholder from '@/components/ui/AnimatedPlaceholder.vue'
               </span>
 
               <!-- info metadata -->
-              <div class="my-4 font-normal text-[#a3a3a3]">
+              <div class="text-gray-medium my-4 font-normal">
                 <span class="inline-block w-full">
                   <span class="absolute top-[-9999px] left-[-9999px]">Maturity Rating:</span>
 

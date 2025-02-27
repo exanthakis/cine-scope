@@ -11,7 +11,7 @@ defineSlots<{
 
 <template>
   <div class="m-1 font-normal">
-    <div class="text-black-primary/80 text-base dark:text-[#a3a3a3]">
+    <div class="text-black-primary/80 dark:text-gray-medium text-base">
       <slot name="header"></slot>
     </div>
     <span
