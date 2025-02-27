@@ -17,6 +17,7 @@ const meta = {
     to: {
       control: 'text',
     },
+    default: { control: 'text', description: 'Default slot content' },
   },
   parameters: {
     layout: 'centered',
@@ -26,7 +27,8 @@ const meta = {
     setup() {
       return { args }
     },
-    template: '<BaseButton v-bind="args">Button</BaseButton>',
+    template:
+      '<BaseButton v-bind="args"><template #default>{{args.default}}</template></BaseButton>',
   }),
 } satisfies Meta<typeof BaseButton>
 
@@ -37,11 +39,13 @@ export const Default: Story = {
   args: {
     mode: 'primary',
     isLink: false,
+    default: 'Button',
   },
 }
 export const Secondary: Story = {
   args: {
     mode: 'secondary',
     isLink: false,
+    default: 'Button',
   },
 }
