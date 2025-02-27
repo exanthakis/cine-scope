@@ -15,7 +15,7 @@ const favoritesStore = useFavoritesStore()
 <template>
   <div
     :class="[
-      'absolute top-0 right-0 bottom-0 left-0 z-1 flex h-fit flex-col items-end justify-between bg-[#10141e] px-[5vw] pt-14 pb-6 transition-transform duration-300 ease-in-out motion-reduce:transition-none md:hidden',
+      'bg-blue-navy absolute top-0 right-0 bottom-0 left-0 z-1 flex h-fit flex-col items-end justify-between px-[5vw] pt-14 pb-6 transition-transform duration-300 ease-in-out motion-reduce:transition-none md:hidden',
       open ? 'translate-y-0' : '-translate-y-[100%]',
     ]"
   >
@@ -65,7 +65,7 @@ const favoritesStore = useFavoritesStore()
             >Favorites
             <div
               v-if="favoritesStore.totalFavorites > 0"
-              class="bg-film-primary absolute -end-6 -top-2 inline-flex h-6 w-6 scale-100 items-center justify-center rounded-full border-2 border-[#10141e] text-xs font-bold text-white"
+              class="bg-film-primary border-blue-navy absolute -end-6 -top-2 inline-flex h-6 w-6 scale-100 items-center justify-center rounded-full border-2 text-xs font-bold text-white"
             >
               {{ favoritesStore.totalFavorites }}
             </div></RouterLink

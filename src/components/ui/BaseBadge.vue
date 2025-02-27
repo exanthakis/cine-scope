@@ -9,7 +9,7 @@ defineEmits<{
 
 <template>
   <span
-    class="inline-flex items-center gap-x-1.5 rounded-full bg-[#10141e] py-1.5 ps-3 pe-2 text-xs font-medium text-white dark:bg-white/10"
+    class="bg-blue-navy inline-flex items-center gap-x-1.5 rounded-full py-1.5 ps-3 pe-2 text-xs font-medium text-white dark:bg-white/10"
   >
     {{ title }}
     <button

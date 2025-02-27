@@ -8,7 +8,7 @@ const year = new Date().getFullYear()
 
 <template>
   <footer
-    class="footer-bg mt-auto w-full bg-[#10141e] px-[5vw] shadow-2xl backdrop-blur md:px-[8vw] lg:px-[15vw]"
+    class="footer-bg bg-blue-navy mt-auto w-full px-[5vw] shadow-2xl backdrop-blur md:px-[8vw] lg:px-[15vw]"
   >
     <div class="container w-full py-6 lg:py-8">
       <hr class="mb-6 border-gray-700 sm:mx-auto lg:mb-8" />

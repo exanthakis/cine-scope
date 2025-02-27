@@ -205,7 +205,7 @@ watch(
       <BaseDialog
         :show="!!showFilters"
         @close="toggleFiltersDisplay"
-        classes="!bg-[#10141e] text-film-secondary"
+        classes="!bg-blue-navy text-film-secondary"
       >
         <template #header>
           <h2 class="text-2xl">Filters</h2>

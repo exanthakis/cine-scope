@@ -242,7 +242,7 @@ watch(
                     loading="lazy"
                 /></a>
                 <div
-                  class="dark:text-film-tertiary text-film-tertiary pointer-events-auto z-2 flex w-fit items-center gap-3 rounded-full bg-white px-3 py-1.5 sm:bg-[#10141e] sm:text-white lg:hidden dark:bg-white"
+                  class="dark:text-film-tertiary text-film-tertiary sm:bg-blue-navy pointer-events-auto z-2 flex w-fit items-center gap-3 rounded-full bg-white px-3 py-1.5 sm:text-white lg:hidden dark:bg-white"
                   @click="() => handleVideoPlay('sm')"
                 >
                   <span class="font-bold"> Trailer</span>

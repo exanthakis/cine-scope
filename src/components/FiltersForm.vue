@@ -164,7 +164,7 @@ watch(
             v-for="lang in LANGUAGES"
             :key="lang.code"
             :value="lang.code"
-            class="bg-[#10141e]"
+            class="bg-blue-navy"
           >
             {{ lang.name }}
           </option>

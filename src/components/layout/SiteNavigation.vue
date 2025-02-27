@@ -38,7 +38,7 @@ watch(
 
 <template>
   <header
-    class="z-10 w-full bg-[#10141e] px-[5vw] shadow-lg backdrop-blur md:px-[8vw] lg:px-[15vw]"
+    class="bg-blue-navy z-10 w-full px-[5vw] shadow-lg backdrop-blur md:px-[8vw] lg:px-[15vw]"
   >
     <nav
       class="flex w-full flex-col items-start justify-between gap-4 py-4 font-light text-gray-400 sm:flex-row sm:items-center"
@@ -56,7 +56,7 @@ watch(
             >Favorites
             <div
               v-if="favoritesStore.totalFavorites > 0"
-              class="bg-film-primary absolute -end-6 -top-2 inline-flex h-6 w-6 scale-100 items-center justify-center rounded-full border-2 border-[#10141e] text-xs font-bold text-white"
+              class="bg-film-primary border-blue-navy absolute -end-6 -top-2 inline-flex h-6 w-6 scale-100 items-center justify-center rounded-full border-2 text-xs font-bold text-white"
               :class="scaleEffect ? 'scale-140 transition duration-200 ease-in' : ''"
             >
               {{ favoritesStore.totalFavorites }}
