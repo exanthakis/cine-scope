@@ -110,7 +110,7 @@ watch(
           <label
             :for="genre.id + genre.name"
             :class="[
-              'cursor-pointer rounded-2xl bg-[#232731] px-3 py-1 text-white',
+              'bg-blue-slate cursor-pointer rounded-2xl px-3 py-1 text-white',
               selectedGenres.includes(genre.id) ? 'bg-red-netflix' : '',
             ]"
             >{{ genre.name }}</label
@@ -153,7 +153,7 @@ watch(
           <template #default><img src="@/assets/icons/info.svg" class="size-5" /></template>
         </BaseTooltip>
       </div>
-      <div class="styleSelect w-full overflow-hidden rounded-full !bg-[#232731]">
+      <div class="styleSelect !bg-blue-slate w-full overflow-hidden rounded-full">
         <select
           id="referrer"
           name="referrer"

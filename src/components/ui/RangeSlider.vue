@@ -65,7 +65,7 @@ const disableMaxThumb = computed(() => maxValue.value <= minValue.value)
     </div>
 
     <div class="mb-4">
-      <div class="relative h-1 overflow-hidden rounded-md bg-[#232731]">
+      <div class="bg-blue-slate relative h-1 overflow-hidden rounded-md">
         <div class="progress absolute h-1 rounded bg-gray-300" ref="progressRef"></div>
       </div>
 
