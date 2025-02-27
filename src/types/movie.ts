@@ -10,6 +10,7 @@ export interface Movie {
   overview: string
   popularity: number
   poster_path: string
+  media_type: string
   release_date: string
   title: string
   video: boolean
@@ -111,4 +112,9 @@ export interface MovieDetails {
     results: Video[]
   }
   'watch/providers'?: WatchProviders
+}
+
+export interface MovieSliderProps {
+  movies: Movie[]
+  breakpoints?: Record<number, { slidesPerView: number }>
 }

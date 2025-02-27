@@ -4,13 +4,8 @@ import { FreeMode } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import MovieCard from '@/components/movie/MovieCard.vue'
-import type { Movie } from '@/types/movie'
+import type { MovieSliderProps } from '@/types/movie'
 import { CREDITS_SLIDER_BREAKPOINTS } from '@/constants/general'
-
-interface MovieSliderProps {
-  movies: Movie[]
-  breakpoints?: Record<number, { slidesPerView: number }>
-}
 
 const { breakpoints = CREDITS_SLIDER_BREAKPOINTS } = defineProps<MovieSliderProps>()
 </script>
