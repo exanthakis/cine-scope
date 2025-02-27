@@ -1,3 +1,4 @@
+import type { MovieDetailsHeroProps } from '@/types/general'
 import type { Movie } from '@/types/movie'
 
 export const mockMovies: Movie[] = [
@@ -362,3 +363,32 @@ export const mockMovies: Movie[] = [
     vote_count: 13141,
   },
 ]
+
+export const mockMovieDetails: MovieDetailsHeroProps = {
+  id: 122,
+  backdrop_path: '/2u7zbn8EudG6kLlBzUYqP8RyFU4.jpg',
+  homepage: 'http://www.lordoftherings.net',
+  title: 'The Lord of the Rings: The Return of the King',
+  release_date: '2003-12-17',
+  vote_average: 8.5,
+  runtime: 201,
+  genres: [
+    {
+      id: 12,
+      name: 'Adventure',
+    },
+    {
+      id: 14,
+      name: 'Fantasy',
+    },
+    {
+      id: 28,
+      name: 'Action',
+    },
+  ],
+  overview:
+    'As armies mass for a final battle that will decide the fate of the world--and powerful, ancient forces of Light and Dark compete to determine the outcome--one member of the Fellowship of the Ring is revealed as the noble heir to the throne of the Kings of Men. Yet, the sole hope for triumph over evil lies with a brave hobbit, Frodo, who, accompanied by his loyal friend Sam and the hideous, wretched Gollum, ventures deep into the very dark heart of Mordor on his seemingly impossible quest to destroy the Ring of Power.​',
+  imdb_id: 'tt0167260',
+  trailerKey: 'zckJCxYxn1g',
+  poster_path: '/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg',
+}

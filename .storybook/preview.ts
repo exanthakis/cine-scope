@@ -3,6 +3,7 @@ import { setup } from '@storybook/vue3'
 import { createPinia } from 'pinia'
 import { createRouter, createMemoryHistory } from 'vue-router'
 import BaseButton from '../src/components/ui/BaseButton.vue'
+import BaseDialog from '../src/components/ui/BaseDialog.vue'
 import NotFound from '../src/views/NotFound.vue'
 import '../src/assets/main.css'
 
@@ -41,6 +42,7 @@ const router = createRouter({
 
 setup((app) => {
   app.component('BaseButton', BaseButton)
+  app.component('BaseDialog', BaseDialog)
   /** Register Pinia only once to prevent Storybook from overwriting or resetting Pinia on each setup. */
   if (!done) {
     app.use(pinia)
