@@ -1,25 +1,12 @@
 <script setup lang="ts">
 import { useFavoritesStore } from '@/stores/favorites'
 import type { MovieCardProps, MovieCardStore } from '@/types/general'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const { id, title, imgUrl = '', hideFav = false } = defineProps<MovieCardProps>()
 
 const isHeroImgLoaded = ref(false)
-const movieImg = ref<HTMLImageElement | null>(null)
 const favoritesStore = useFavoritesStore()
-
-onMounted(() => {
-  if (movieImg.value) {
-    if (movieImg.value.complete) {
-      isHeroImgLoaded.value = true
-    } else {
-      movieImg.value.addEventListener('load', () => {
-        isHeroImgLoaded.value = true
-      })
-    }
-  }
-})
 
 const isFavorite = computed(() => favoritesStore.isFavorite(id))
 
@@ -59,6 +46,7 @@ const onFavoriteClick = () => {
             'h-full w-full rounded-lg bg-cover bg-center object-cover object-top opacity-0 shadow-lg transition-opacity duration-200 ease-in-out',
             isHeroImgLoaded ? '!opacity-100' : '',
           ]"
+          @load="isHeroImgLoaded = true"
           loading="lazy"
         />
       </div>

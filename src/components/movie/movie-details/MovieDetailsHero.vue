@@ -4,25 +4,12 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 import { useMouse } from '@/hooks/useMouse'
 import { useFavoritesStore } from '@/stores/favorites'
 import type { MovieCardStore, MovieDetailsHeroProps } from '@/types/general'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 const props = defineProps<MovieDetailsHeroProps>()
 
 // Hero img lazy load
 const isHeroImgLoaded = ref(false)
-const heroImg = ref<HTMLImageElement | null>(null)
-
-onMounted(() => {
-  if (heroImg.value) {
-    if (heroImg.value.complete) {
-      isHeroImgLoaded.value = true
-    } else {
-      heroImg.value.addEventListener('load', () => {
-        isHeroImgLoaded.value = true
-      })
-    }
-  }
-})
 
 // Hero movie texts
 const isExpanded = ref(false)
@@ -102,7 +89,6 @@ watch(
   () => props.id,
   () => {
     isHeroImgLoaded.value = false
-    heroImg.value = null
     heroWrapper.value = null
   },
 )
@@ -136,6 +122,7 @@ watch(
           'pointer-events-none h-full w-full cursor-none bg-cover bg-center object-cover object-top opacity-0 transition-opacity duration-200 ease-in-out',
           isHeroImgLoaded ? '!opacity-100' : '',
         ]"
+        @load="isHeroImgLoaded = true"
         loading="lazy"
       />
     </div>
