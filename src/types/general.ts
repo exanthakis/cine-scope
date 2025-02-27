@@ -83,3 +83,10 @@ export interface SingleRangeSliderProps {
   max: number
   step: number
 }
+
+export interface MoviePaginationProps {
+  totalPages: number
+  page: number
+  route: string
+  hasNextPage: boolean
+}

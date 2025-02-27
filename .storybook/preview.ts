@@ -13,6 +13,16 @@ const router = createRouter({
   history: createMemoryHistory(),
   routes: [
     {
+      path: '/',
+      name: 'movie-list',
+      component: {
+        template: '<div>Mock Home Page</div>',
+      },
+      meta: {
+        title: 'Home Page',
+      },
+    },
+    {
       path: '/movies/:id',
       name: 'movie-details',
       component: {

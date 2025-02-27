@@ -2,13 +2,7 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import BaseButton from '../ui/BaseButton.vue'
-
-interface MoviePaginationProps {
-  totalPages: number
-  page: number
-  route: string
-  hasNextPage: boolean
-}
+import type { MoviePaginationProps } from '@/types/general'
 
 const router = useRouter()
 const { page, route, totalPages } = defineProps<MoviePaginationProps>()
