@@ -30,11 +30,11 @@ const router = createRouter({
 })
 
 setup((app) => {
+  app.component('BaseButton', BaseButton)
   if (!done) {
     app.use(pinia) // Register Pinia only once to prevent Storybook from overwriting or resetting Pinia on each setup.
   }
   app.use(router)
-  app.component('BaseButton', BaseButton)
   done = true
 })
 
