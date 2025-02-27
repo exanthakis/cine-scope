@@ -137,13 +137,13 @@ watch(
               'bg-white-primary pointer-events-none fixed top-0 left-0 z-10 flex h-20 w-20 items-center justify-center rounded-full transition-[background-color,opacity] duration-500 ease-out backface-hidden select-none',
               isHovered ? 'h-0 w-0 opacity-0' : '',
               isGradientHovered
-                ? 'dark:bg-white-primary bg-film-tertiary duration-700 ease-in'
+                ? 'dark:bg-white-primary bg-black-primary duration-700 ease-in'
                 : '',
             ]"
           >
             <IconPlay
               class="h-2.5 w-2.5 rotate-90"
-              :class="isGradientHovered ? 'fill-white-primary dark:fill-film-tertiary' : ''"
+              :class="isGradientHovered ? 'fill-white-primary dark:fill-black-primary' : ''"
             />
           </div>
         </div>
@@ -185,7 +185,7 @@ watch(
           <div class="pr-4 pl-0 dark:mx-auto">
             <div class="mx-auto max-w-4xl text-start">
               <span
-                class="sm:text-film-tertiary/80 pointer-events-auto py-2.5 text-2xl font-semibold text-gray-200 uppercase dark:text-gray-200"
+                class="sm:text-black-primary/80 pointer-events-auto py-2.5 text-2xl font-semibold text-gray-200 uppercase dark:text-gray-200"
               >
                 <a v-if="homepage" :href="homepage" target="_blank">
                   {{ title }}
@@ -195,7 +195,7 @@ watch(
 
               <!-- info metadata -->
               <div
-                class="sm:text-film-tertiary/80 mt-4 font-normal text-[#a3a3a3] dark:text-[#a3a3a3]"
+                class="sm:text-black-primary/80 mt-4 font-normal text-[#a3a3a3] dark:text-[#a3a3a3]"
               >
                 <span class="inline-block">{{ release_date?.split('-')[0] }}</span>
                 <span class="mx-1 my-0"> | </span>
@@ -210,7 +210,7 @@ watch(
               <!-- overview -->
 
               <div
-                class="sm:text-film-tertiary/70 mx-auto mt-4 mb-8 ml-0 max-w-xl text-lg text-gray-300 dark:text-gray-300"
+                class="sm:text-black-primary/70 mx-auto mt-4 mb-8 ml-0 max-w-xl text-lg text-gray-300 dark:text-gray-300"
               >
                 <div class="scrollbar-0 max-h-[20vh] overflow-scroll">
                   <Transition name="fade-text" mode="out-in">
@@ -226,7 +226,7 @@ watch(
                 <button
                   v-if="overview && overview.length > 120"
                   @click="toggleReadMore"
-                  class="sm:text-film-tertiary/70 pointer-events-auto cursor-pointer font-semibold text-gray-300 hover:underline dark:text-gray-300"
+                  class="sm:text-black-primary/70 pointer-events-auto cursor-pointer font-semibold text-gray-300 hover:underline dark:text-gray-300"
                 >
                   {{ isExpanded ? 'Read Less' : 'Read More' }}
                 </button>
@@ -242,11 +242,11 @@ watch(
                     loading="lazy"
                 /></a>
                 <div
-                  class="dark:text-film-tertiary text-film-tertiary sm:bg-blue-navy pointer-events-auto z-2 flex w-fit items-center gap-3 rounded-full bg-white px-3 py-1.5 sm:text-white lg:hidden dark:bg-white"
+                  class="dark:text-black-primary text-black-primary sm:bg-blue-navy pointer-events-auto z-2 flex w-fit items-center gap-3 rounded-full bg-white px-3 py-1.5 sm:text-white lg:hidden dark:bg-white"
                   @click="() => handleVideoPlay('sm')"
                 >
                   <span class="font-bold"> Trailer</span>
-                  <IconPlay class="dark:fill-film-tertiary h-2.5 w-2.5 rotate-90 sm:fill-white" />
+                  <IconPlay class="dark:fill-black-primary h-2.5 w-2.5 rotate-90 sm:fill-white" />
                 </div>
               </div>
             </div>

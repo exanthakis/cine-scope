@@ -77,7 +77,7 @@ watch(
 
 <template>
   <div v-if="movieDetails" class="bg-white-primary dark:bg-blue-navy w-full">
-    <div class="text-film-tertiary relative dark:text-white">
+    <div class="text-black-primary relative dark:text-white">
       <MovieDetailsHero
         :id="movieDetails.id"
         :backdrop_path="movieDetails.backdrop_path"
@@ -98,7 +98,7 @@ watch(
         <div v-if="movieDetails.tagline" class="pb-10">
           <div class="bg-linear-hr mb-4 h-0.5"></div>
           <div
-            class="text-film-tertiary/80 mx-auto max-w-xl text-center text-base dark:text-[#a3a3a3]"
+            class="text-black-primary/80 mx-auto max-w-xl text-center text-base dark:text-[#a3a3a3]"
           >
             {{ movieDetails.tagline }}
           </div>
@@ -106,7 +106,7 @@ watch(
         </div>
 
         <div class="pb-10">
-          <h2 class="text-film-tertiary mt-5 mb-2.5 text-3xl dark:text-white">More Details</h2>
+          <h2 class="text-black-primary mt-5 mb-2.5 text-3xl dark:text-white">More Details</h2>
           <div
             class="max-2xl mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
           >

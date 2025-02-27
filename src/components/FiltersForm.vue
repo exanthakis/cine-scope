@@ -173,7 +173,7 @@ watch(
     </div>
     <div class="-mb-5 pt-10">
       <BaseButton
-        class="!bg-white-primary !text-film-tertiary mr-4 cursor-pointer !rounded-full"
+        class="!bg-white-primary !text-black-primary mr-4 cursor-pointer !rounded-full"
         mode="secondary"
         :isLink="false"
         type="button"

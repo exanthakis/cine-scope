@@ -21,7 +21,7 @@ defineSlots<{
     <div
       v-if="show"
       @click="$emit('close')"
-      class="bg-film-tertiary/75 fixed top-0 left-0 z-10 h-screen w-full"
+      class="bg-black-primary/75 fixed top-0 left-0 z-10 h-screen w-full"
     ></div>
     <Transition name="dialog">
       <dialog

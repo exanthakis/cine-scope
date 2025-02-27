@@ -79,7 +79,7 @@ watch(
     <div
       v-if="open"
       @click="toggleMenu"
-      class="bg-film-tertiary/75 fixed top-0 left-0 z-1 h-screen w-full"
+      class="bg-black-primary/75 fixed top-0 left-0 z-1 h-screen w-full"
     ></div>
     <MobileNav v-if="width < 768" :open="open" @close="toggleMenu" />
   </header>

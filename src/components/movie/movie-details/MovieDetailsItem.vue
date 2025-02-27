@@ -11,11 +11,11 @@ defineSlots<{
 
 <template>
   <div class="m-1 font-normal">
-    <div class="text-film-tertiary/80 text-base dark:text-[#a3a3a3]">
+    <div class="text-black-primary/80 text-base dark:text-[#a3a3a3]">
       <slot name="header"></slot>
     </div>
     <span
-      class="text-film-tertiary/70 flex w-2/3 flex-wrap gap-10 whitespace-pre-wrap dark:text-white"
+      class="text-black-primary/70 flex w-2/3 flex-wrap gap-10 whitespace-pre-wrap dark:text-white"
       :class="classes"
     >
       <slot></slot>

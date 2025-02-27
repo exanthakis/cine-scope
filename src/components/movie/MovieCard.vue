@@ -62,10 +62,10 @@ const onFavoriteClick = () => {
 
       <div
         v-if="!hideFav"
-        class="bg-film-tertiary/35 absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-end p-1 opacity-0 transition-normal duration-200 group-hover:opacity-100"
+        class="bg-black-primary/35 absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-end p-1 opacity-0 transition-normal duration-200 group-hover:opacity-100"
       >
         <button
-          class="bg-film-tertiary absolute top-2 right-2 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition"
+          class="bg-black-primary absolute top-2 right-2 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition"
           @click.stop.prevent="onFavoriteClick"
         >
           {{ isFavorite ? '❤️' : '🤍' }}

@@ -14,11 +14,11 @@ defineProps<AvatarTextProps>()
       :alt="title"
     />
 
-    <IconAvatar v-else class="fill-film-tertiary dark:fill-white-primary h-25 w-25" />
+    <IconAvatar v-else class="fill-black-primary dark:fill-white-primary h-25 w-25" />
 
-    <div class="text-film-tertiary/80 text-center font-medium dark:text-white">
+    <div class="text-black-primary/80 text-center font-medium dark:text-white">
       <h5>{{ name }}</h5>
-      <p class="text-film-tertiary/70 text-sm dark:text-gray-400">{{ title }}</p>
+      <p class="text-black-primary/70 text-sm dark:text-gray-400">{{ title }}</p>
     </div>
   </div>
 </template>

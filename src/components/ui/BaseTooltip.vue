@@ -9,7 +9,7 @@ defineSlots<{
 
 <template>
   <div class="has-tooltip">
-    <span class="tooltip text-film-tertiary bottom-6 w-fit rounded bg-gray-100 p-1 shadow-lg"
+    <span class="tooltip text-black-primary bottom-6 w-fit rounded bg-gray-100 p-1 shadow-lg"
       ><slot name="content"></slot
     ></span>
     <div class="flex">

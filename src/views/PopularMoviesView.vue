@@ -55,7 +55,7 @@ onMounted(async () => {
       <div v-else>
         <section class="mt-10">
           <div class="mt-5 mb-4 w-full border-b border-gray-500/55 pb-2">
-            <h2 class="text-film-tertiary relative w-fit text-2xl dark:text-white">
+            <h2 class="text-black-primary relative w-fit text-2xl dark:text-white">
               Trending movies
               <span
                 class="bg-film-primary absolute top-0 -right-4 inline-flex h-2 w-2 animate-ping rounded-full opacity-75"
@@ -74,7 +74,7 @@ onMounted(async () => {
         </section>
         <section class="mt-10">
           <h2
-            class="text-film-tertiary mt-5 mb-4 w-full border-b border-gray-500/55 pb-2 text-2xl dark:text-white"
+            class="text-black-primary mt-5 mb-4 w-full border-b border-gray-500/55 pb-2 text-2xl dark:text-white"
           >
             Popular movies
           </h2>
@@ -84,7 +84,7 @@ onMounted(async () => {
         <section class="mt-10">
           <div class="mt-5 mb-4 flex w-full items-center border-b border-gray-500/55 pb-2">
             <img src="@/assets/images/netflix.png" alt="Netflix logo" class="h-5 w-18" />
-            <h2 class="text-film-tertiary pl-2 text-2xl dark:text-white">movies</h2>
+            <h2 class="text-black-primary pl-2 text-2xl dark:text-white">movies</h2>
           </div>
           <MovieSlider :movies="netflixMovies" />
         </section>
@@ -101,7 +101,7 @@ onMounted(async () => {
               alt="Disney logo"
               class="hidden h-10 w-17 dark:block"
             />
-            <h2 class="text-film-tertiary pl-2 text-2xl dark:text-white">movies</h2>
+            <h2 class="text-black-primary pl-2 text-2xl dark:text-white">movies</h2>
           </div>
           <MovieSlider :movies="disneyMovies" />
         </section>

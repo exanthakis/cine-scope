@@ -32,7 +32,7 @@ const meta = {
     setup() {
       return { args }
     },
-    template: '<RangeSlider v-bind="args" class="text-film-tertiary"/>',
+    template: '<RangeSlider v-bind="args" class="text-black-primary"/>',
   }),
   args: {
     onUpdateRange: fn(),
