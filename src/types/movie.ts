@@ -1,4 +1,4 @@
-import type { Credits } from './cast'
+import type { Cast, Crew } from './cast'
 
 export interface Movie {
   adult: boolean
@@ -81,7 +81,10 @@ export interface MovieDetails {
   backdrop_path?: string | null
   belongs_to_collection?: Collection | null
   budget?: number
-  credits: Credits
+  credits: {
+    cast: Cast[]
+    crew: Crew[]
+  }
   genres?: Genre[]
   homepage?: string | null
   id?: number
