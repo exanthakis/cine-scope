@@ -1,9 +1,6 @@
 <script setup lang="ts">
+import type { MovieDetailsItemProps } from '@/types/movie'
 import type { VNode } from 'vue'
-
-interface MovieDetailsItemProps {
-  classes?: string
-}
 
 defineProps<MovieDetailsItemProps>()
 defineSlots<{
