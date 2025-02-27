@@ -3,7 +3,7 @@ import AnimatedPlaceholder from '@/components/ui/AnimatedPlaceholder.vue'
 </script>
 
 <template>
-  <div class="relative w-full bg-[#10141e] text-white">
+  <div class="relative w-full bg-gray-400 text-white dark:bg-[#10141e]">
     <div
       class="bg-gradient-bottom h-[80vh] min-h-[70vh] w-full animate-pulse bg-gradient-to-r from-gray-100 bg-cover bg-center px-[5vw] after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-[''] md:px-[8vw] lg:px-[15vw]"
     >
