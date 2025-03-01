@@ -35,16 +35,18 @@ const visiblePages = computed(() => {
     <div
       class="mb-10 flex items-center justify-center gap-1 font-semibold text-slate-700 dark:text-slate-100"
     >
-      <RouterLink
+      <component
+        :is="page === 1 ? 'span' : 'RouterLink'"
+        :to="page === 1 ? '' : { name: route, query: { page: page - 1 } }"
+        rel="prev"
         id="page-prev"
         :class="[
           'group flex items-center pr-2 text-lg hover:text-slate-900 sm:pr-4 dark:hover:text-slate-400',
-          page === 1 ? 'pointer-events-none opacity-25' : '',
+          page === 1 ? 'cursor-not-allowed opacity-25' : '',
         ]"
-        :to="{ name: route, query: { page: page - 1 } }"
-        rel="prev"
-        >&#60;
-      </RouterLink>
+      >
+        &#60;
+      </component>
 
       <!-- First Page -->
       <BaseButton
@@ -85,17 +87,18 @@ const visiblePages = computed(() => {
         {{ totalPages }}
       </BaseButton>
 
-      <RouterLink
-        id="page-next"
-        :to="{ name: route, query: { page: page + 1 } }"
+      <component
+        :is="!hasNextPage ? 'span' : 'RouterLink'"
+        :to="!hasNextPage ? '' : { name: route, query: { page: page + 1 } }"
         rel="next"
+        id="page-next"
         :class="[
           'group flex items-center pl-2 text-lg hover:text-slate-900 sm:pl-4 dark:hover:text-slate-400',
-          !hasNextPage ? 'pointer-events-none opacity-25' : '',
+          !hasNextPage ? 'cursor-not-allowed opacity-25' : '',
         ]"
       >
-        &#62;</RouterLink
-      >
+        &#62;
+      </component>
     </div>
   </div>
 </template>
