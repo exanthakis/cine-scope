@@ -134,11 +134,11 @@ watch(
           <div
             :style="cursorCircle"
             :class="[
-              'bg-white-primary pointer-events-none fixed top-0 left-0 z-10 flex h-20 w-20 items-center justify-center rounded-full transition-[background-color,opacity] duration-500 ease-out backface-hidden select-none',
+              'pointer-events-none fixed top-0 left-0 z-10 flex h-20 w-20 items-center justify-center rounded-full transition-[background-color,opacity] duration-500 ease-out backface-hidden select-none',
               isHovered ? 'h-0 w-0 opacity-0' : '',
               isGradientHovered
                 ? 'dark:bg-white-primary bg-black-primary duration-700 ease-in'
-                : '',
+                : 'bg-white-primary',
             ]"
           >
             <IconPlay
