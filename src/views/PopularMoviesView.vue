@@ -22,7 +22,6 @@ onMounted(async () => {
       MovieService.getMoviesByProvider('8'), // Netflix
       MovieService.getMoviesByProvider('337'), // Disney+
     ])
-    await new Promise((res) => setTimeout(res, 1000))
 
     if (trendingResponse.status === 200)
       trendingMovies.value = trendingResponse.data.results.slice(0, 6) || [] // Get only the first 6 movies
