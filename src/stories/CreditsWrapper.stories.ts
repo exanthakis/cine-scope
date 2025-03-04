@@ -32,5 +32,6 @@ export const Default: Story = {
     cast: mockCreditsCast,
     crew: mockCreditsCrew,
     isLoading: false,
+    id: 1,
   },
 }

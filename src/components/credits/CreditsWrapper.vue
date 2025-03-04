@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { filterUniqueById } from '@/lib/utils'
 import type { AvatarTextProps } from '@/types/general'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import CreditsList from './CreditsList.vue'
 import type { Credit, CreditsWrapperProps } from '@/types/cast'
 
-const { cast: castInfo, crew: crewInfo, isLoading } = defineProps<CreditsWrapperProps>()
+const props = defineProps<CreditsWrapperProps>()
 
 const currentTab = ref<Credit>('Cast')
 
 const cast = computed<AvatarTextProps[]>(() => {
   const castList =
-    castInfo?.map((castItem) => ({
+    props.cast?.map((castItem) => ({
       id: castItem.id,
       name: castItem.name,
       title: castItem.character,
@@ -23,7 +23,7 @@ const cast = computed<AvatarTextProps[]>(() => {
 
 const crew = computed<AvatarTextProps[]>(() => {
   const crewList =
-    crewInfo?.map((crewItem) => ({
+    props.crew?.map((crewItem) => ({
       id: crewItem.id,
       name: crewItem.name,
       title: crewItem.job,
@@ -36,15 +36,22 @@ const crew = computed<AvatarTextProps[]>(() => {
 const tabs = computed(() => ({
   Cast: {
     component: CreditsList,
-    props: { credits: cast.value, type: 'Cast' as Credit, isLoading },
+    props: { credits: cast.value, type: 'Cast' as Credit, isLoading: props.isLoading },
   },
   Crew: {
     component: CreditsList,
-    props: { credits: crew.value, type: 'Crew' as Credit, isLoading },
+    props: { credits: crew.value, type: 'Crew' as Credit, isLoading: props.isLoading },
   },
 }))
 
 const currentComponent = computed(() => tabs.value[currentTab.value])
+
+watch(
+  () => props.id,
+  () => {
+    if (props.id) return (currentTab.value = 'Cast')
+  },
+)
 </script>
 
 <template>

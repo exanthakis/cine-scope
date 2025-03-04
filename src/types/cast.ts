@@ -21,6 +21,7 @@ export type Crew = Omit<Cast, 'cast_id' | 'character' | 'order'> & {
 }
 
 export type CreditsWrapperProps = {
+  id?: number
   cast: Cast[]
   crew: Crew[]
   isLoading: boolean

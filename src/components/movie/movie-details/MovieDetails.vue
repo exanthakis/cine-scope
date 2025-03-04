@@ -152,6 +152,7 @@ watch(
         </div>
 
         <CreditsWrapper
+          :id="movieDetails.id"
           :isLoading="isLoading"
           :cast="movieDetails.credits.cast"
           :crew="movieDetails.credits.crew"
