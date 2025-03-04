@@ -90,6 +90,7 @@ watch(
   () => {
     isHeroImgLoaded.value = false
     heroWrapper.value = null
+    isExpanded.value = false
   },
 )
 </script>
