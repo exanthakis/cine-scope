@@ -31,3 +31,9 @@ const { breakpoints = CREDITS_SLIDER_BREAKPOINTS } = defineProps<MovieSliderProp
     </SwiperSlide>
   </Swiper>
 </template>
+
+<style scoped>
+.swiper-slide {
+  height: auto !important;
+}
+</style>
