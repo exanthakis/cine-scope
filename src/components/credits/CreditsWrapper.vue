@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { filterUniqueById } from '@/lib/utils'
-import type { AvatarTextProps } from '@/types/general'
+import type { CreditsArr } from '@/types/general'
 import { computed, ref, watch } from 'vue'
 import CreditsList from './CreditsList.vue'
 import type { Credit, CreditsWrapperProps } from '@/types/cast'
@@ -9,7 +9,7 @@ const props = defineProps<CreditsWrapperProps>()
 
 const currentTab = ref<Credit>('Cast')
 
-const cast = computed<AvatarTextProps[]>(() => {
+const cast = computed<CreditsArr[]>(() => {
   const castList =
     props.cast?.map((castItem) => ({
       id: castItem.id,
@@ -21,7 +21,7 @@ const cast = computed<AvatarTextProps[]>(() => {
   return filterUniqueById(castList)
 })
 
-const crew = computed<AvatarTextProps[]>(() => {
+const crew = computed<CreditsArr[]>(() => {
   const crewList =
     props.crew?.map((crewItem) => ({
       id: crewItem.id,

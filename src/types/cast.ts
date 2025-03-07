@@ -1,4 +1,4 @@
-import type { AvatarTextProps } from './general'
+import type { CreditsArr } from './general'
 
 export type Cast = {
   adult?: boolean
@@ -29,7 +29,7 @@ export type CreditsWrapperProps = {
 
 export interface CreditsListProps {
   /** Info about the actor, cast */
-  credits: AvatarTextProps[]
+  credits: CreditsArr[]
   /** 'Cast' or 'Crew' */
   type: Credit
   /** Loading state */

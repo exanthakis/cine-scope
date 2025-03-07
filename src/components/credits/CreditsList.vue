@@ -21,7 +21,7 @@ defineProps<CreditsListProps>()
     :scrollbar="{ draggable: true }"
   >
     <SwiperSlide v-for="credit in credits" :key="credit.id" class="width-fit">
-      <AvatarText v-if="!isLoading" :="credit" />
+      <AvatarText v-if="!isLoading" :name="credit.name" :title="credit.title" :path="credit.path" />
       <AvatarTextSkeleton v-else />
     </SwiperSlide>
   </Swiper>

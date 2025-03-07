@@ -29,12 +29,13 @@ export interface BaseDialogProps {
   classes?: string
 }
 
-export interface AvatarTextProps {
+export interface CreditsArr {
   id?: number
   name?: string
   title?: string
   path?: string
 }
+export type AvatarTextProps = Omit<CreditsArr, 'id'>
 
 export interface MovieDetailsHeroProps {
   id?: number
