@@ -4,7 +4,7 @@ const DEFAULT_LANGUAGE = 'en-US'
 
 const MOVIES_SLIDER_BREAKPOINTS = {
   0: { slidesPerView: 2.5 },
-  640: { slidesPerView: 13.5 },
+  640: { slidesPerView: 3.5 },
   768: { slidesPerView: 4.5 },
   1024: { slidesPerView: 6.5 },
 }
@@ -12,7 +12,7 @@ const MOVIES_SLIDER_BREAKPOINTS = {
 const CREDITS_SLIDER_BREAKPOINTS = {
   0: { slidesPerView: 3.5 },
   640: { slidesPerView: 4.5 },
-  768: { slidesPerView: 6.3 },
+  768: { slidesPerView: 5.3 },
   1024: { slidesPerView: 8.3 },
 }
 
