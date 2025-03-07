@@ -1,5 +1,3 @@
-import type { CreditsArr } from './general'
-
 export type Cast = {
   adult?: boolean
   cast_id?: number
@@ -24,15 +22,6 @@ export type CreditsWrapperProps = {
   id?: number
   cast: Cast[]
   crew: Crew[]
-  isLoading: boolean
-}
-
-export interface CreditsListProps {
-  /** Info about the actor, cast */
-  credits: CreditsArr[]
-  /** 'Cast' or 'Crew' */
-  type: Credit
-  /** Loading state */
   isLoading: boolean
 }
 

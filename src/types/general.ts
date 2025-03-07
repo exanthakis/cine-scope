@@ -33,8 +33,9 @@ export interface CreditsArr {
   id?: number
   name?: string
   title?: string
-  path?: string
+  poster_path?: string
 }
+
 export type AvatarTextProps = Omit<CreditsArr, 'id'>
 
 export interface MovieDetailsHeroProps {

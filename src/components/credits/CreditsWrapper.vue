@@ -2,8 +2,11 @@
 import { filterUniqueById } from '@/lib/utils'
 import type { CreditsArr } from '@/types/general'
 import { computed, ref, watch } from 'vue'
-import CreditsList from './CreditsList.vue'
 import type { Credit, CreditsWrapperProps } from '@/types/cast'
+import SwiperSlider from '@/components/ui/SwiperSlider.vue'
+import AvatarText from '@/components/ui/AvatarText.vue'
+import AvatarTextSkeleton from '@/components/ui/AvatarTextSkeleton.vue'
+import { CREDITS_SLIDER_BREAKPOINTS } from '@/constants/general'
 
 const props = defineProps<CreditsWrapperProps>()
 
@@ -15,7 +18,7 @@ const cast = computed<CreditsArr[]>(() => {
       id: castItem.id,
       name: castItem.name,
       title: castItem.character,
-      path: castItem.profile_path,
+      poster_path: castItem.profile_path,
     })) ?? []
 
   return filterUniqueById(castList)
@@ -27,7 +30,7 @@ const crew = computed<CreditsArr[]>(() => {
       id: crewItem.id,
       name: crewItem.name,
       title: crewItem.job,
-      path: crewItem.profile_path,
+      poster_path: crewItem.profile_path,
     })) ?? []
 
   return filterUniqueById(crewList)
@@ -35,12 +38,12 @@ const crew = computed<CreditsArr[]>(() => {
 
 const tabs = computed(() => ({
   Cast: {
-    component: CreditsList,
-    props: { credits: cast.value, type: 'Cast' as Credit, isLoading: props.isLoading },
+    component: SwiperSlider,
+    props: { data: cast.value, breakpoints: CREDITS_SLIDER_BREAKPOINTS },
   },
   Crew: {
-    component: CreditsList,
-    props: { credits: crew.value, type: 'Crew' as Credit, isLoading: props.isLoading },
+    component: SwiperSlider,
+    props: { data: crew.value, breakpoints: CREDITS_SLIDER_BREAKPOINTS },
   },
 }))
 
@@ -68,6 +71,11 @@ watch(
       </BaseButton>
     </div>
 
-    <component :is="currentComponent.component" v-bind="currentComponent.props"></component>
+    <component :is="currentComponent.component" :="currentComponent.props">
+      <template #default="{ title, poster_path }">
+        <AvatarText v-if="!isLoading" :name="'name'" :title="title" :poster_path="poster_path" />
+        <AvatarTextSkeleton v-else />
+      </template>
+    </component>
   </div>
 </template>

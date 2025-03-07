@@ -5,7 +5,8 @@ import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { Movie } from '@/types/movie'
 import { MOVIES_SLIDER_BREAKPOINTS } from '@/constants/general'
-import MovieSlider from './MovieSlider.vue'
+import SwiperSlider from '@/components/ui/SwiperSlider.vue'
+import MovieCard from '@/components/movie/MovieCard.vue'
 
 interface SimilarMoviesProps {
   id: number
@@ -50,7 +51,19 @@ watch(
     <div v-if="isLoading">loading..</div>
     <p v-else-if="!isLoading && similarMovies?.length === 0">Sorry, we couldn't find any results</p>
     <div v-else class="mt-6">
-      <MovieSlider :movies="similarMovies || []" :breakpoints="MOVIES_SLIDER_BREAKPOINTS" />
+      <SwiperSlider :data="similarMovies || []" :breakpoints="MOVIES_SLIDER_BREAKPOINTS">
+        <template #default="{ id, title, poster_path }">
+          <template v-if="id && title">
+            <MovieCard
+              :id="id"
+              :title="title"
+              :imgUrl="poster_path"
+              :hide-fav="true"
+              class="!min-h-[10vh]"
+            />
+          </template>
+        </template>
+      </SwiperSlider>
     </div>
   </div>
 </template>

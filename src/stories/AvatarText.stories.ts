@@ -13,7 +13,7 @@ const meta = {
     title: {
       control: 'text',
     },
-    path: {
+    poster_path: {
       control: 'text',
     },
   },
@@ -36,6 +36,6 @@ export const Default: Story = {
   args: {
     name: 'Daniel Radcliffe',
     title: 'Harry Potter',
-    path: '/iPg0J9UzAlPj1fLEJNllpW9IhGe.jpg',
+    poster_path: '/iPg0J9UzAlPj1fLEJNllpW9IhGe.jpg',
   },
 }

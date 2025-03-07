@@ -113,12 +113,6 @@ export interface MovieDetails {
   }
   'watch/providers'?: WatchProviders
 }
-
-export interface MovieSliderProps {
-  movies: Movie[]
-  breakpoints?: Record<number, { slidesPerView: number }>
-}
-
 export interface MovieDetailsItemProps {
   classes?: string
 }

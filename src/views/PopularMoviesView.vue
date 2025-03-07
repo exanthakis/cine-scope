@@ -3,9 +3,9 @@ import MovieService from '@/services/MovieService'
 import type { Movie } from '@/types/movie'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import MovieSlider from '@/components/movie/MovieSlider.vue'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 import MovieCard from '@/components/movie/MovieCard.vue'
+import SwiperSlider from '@/components/ui/SwiperSlider.vue'
 
 const trendingMovies = ref<Movie[]>([])
 const movies = ref<Movie[]>([])
@@ -77,7 +77,19 @@ onMounted(async () => {
           >
             Popular movies
           </h2>
-          <MovieSlider :movies="movies" />
+          <SwiperSlider :data="movies">
+            <template #default="{ id, title, poster_path }">
+              <template v-if="id && title">
+                <MovieCard
+                  :id="id"
+                  :title="title"
+                  :imgUrl="poster_path"
+                  :hide-fav="true"
+                  class="!min-h-[10vh]"
+                />
+              </template>
+            </template>
+          </SwiperSlider>
         </section>
 
         <section class="mt-10">
@@ -85,7 +97,19 @@ onMounted(async () => {
             <img src="@/assets/images/netflix.png" alt="Netflix logo" class="h-5 w-18" />
             <h2 class="text-black-primary pl-2 text-2xl dark:text-white">movies</h2>
           </div>
-          <MovieSlider :movies="netflixMovies" />
+          <SwiperSlider :data="netflixMovies">
+            <template #default="{ id, title, poster_path }">
+              <template v-if="id && title">
+                <MovieCard
+                  :id="id"
+                  :title="title"
+                  :imgUrl="poster_path"
+                  :hide-fav="true"
+                  class="!min-h-[10vh]"
+                />
+              </template>
+            </template>
+          </SwiperSlider>
         </section>
 
         <section class="mt-10">
@@ -102,7 +126,19 @@ onMounted(async () => {
             />
             <h2 class="text-black-primary pl-2 text-2xl dark:text-white">movies</h2>
           </div>
-          <MovieSlider :movies="disneyMovies" />
+          <SwiperSlider :data="disneyMovies">
+            <template #default="{ id, title, poster_path }">
+              <div v-if="id && title">
+                <MovieCard
+                  :id="id"
+                  :title="title"
+                  :imgUrl="poster_path"
+                  :hide-fav="true"
+                  class="!min-h-[10vh]"
+                />
+              </div>
+            </template>
+          </SwiperSlider>
         </section>
       </div>
     </div>

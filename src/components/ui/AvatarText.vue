@@ -8,9 +8,9 @@ defineProps<AvatarTextProps>()
 <template>
   <div class="flex w-full flex-col items-center justify-center gap-4">
     <img
-      v-if="path"
+      v-if="poster_path"
       class="h-25 w-25 rounded-full object-cover object-center"
-      :src="`https://image.tmdb.org/t/p/original/${path}`"
+      :src="`https://image.tmdb.org/t/p/original/${poster_path}`"
       :alt="title"
     />
 
