@@ -101,3 +101,8 @@ export interface FiltersForm {
 export interface MobileNavProps {
   open: boolean
 }
+
+export type SwiperSliderProps<T> = {
+  data: T
+  breakpoints?: Record<number, { slidesPerView: number }>
+}

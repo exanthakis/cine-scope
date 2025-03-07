@@ -5,12 +5,8 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import { CREDITS_SLIDER_BREAKPOINTS } from '@/constants/general'
 import type { Movie } from '@/types/movie'
-import type { CreditsArr } from '@/types/general'
+import type { CreditsArr, SwiperSliderProps } from '@/types/general'
 
-type SwiperSliderProps<T> = {
-  data: T
-  breakpoints?: Record<number, { slidesPerView: number }>
-}
 const { breakpoints = CREDITS_SLIDER_BREAKPOINTS, data } =
   defineProps<SwiperSliderProps<Movie[] | CreditsArr[]>>()
 
