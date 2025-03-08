@@ -77,7 +77,7 @@ onMounted(async () => {
           >
             Popular movies
           </h2>
-          <SwiperSlider :data="movies">
+          <SwiperSlider :data="movies" :navigation="false">
             <template #default="{ id, title, poster_path }">
               <template v-if="id && title">
                 <MovieCard
@@ -97,7 +97,7 @@ onMounted(async () => {
             <img src="@/assets/images/netflix.png" alt="Netflix logo" class="h-5 w-18" />
             <h2 class="text-black-primary pl-2 text-2xl dark:text-white">movies</h2>
           </div>
-          <SwiperSlider :data="netflixMovies">
+          <SwiperSlider :data="netflixMovies" :navigation="false">
             <template #default="{ id, title, poster_path }">
               <template v-if="id && title">
                 <MovieCard
@@ -126,7 +126,7 @@ onMounted(async () => {
             />
             <h2 class="text-black-primary pl-2 text-2xl dark:text-white">movies</h2>
           </div>
-          <SwiperSlider :data="disneyMovies">
+          <SwiperSlider :data="disneyMovies" :navigation="false">
             <template #default="{ id, title, poster_path }">
               <div v-if="id && title">
                 <MovieCard

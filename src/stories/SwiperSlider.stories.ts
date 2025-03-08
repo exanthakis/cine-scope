@@ -16,6 +16,9 @@ const meta = {
     breakpoints: {
       control: 'object',
     },
+    navigation: {
+      control: 'boolean',
+    },
   },
   render: (args: SwiperSliderProps<Movie[] | CreditsArr[]>) => ({
     components: { SwiperSlider, MovieCard },

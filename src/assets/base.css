@@ -187,3 +187,40 @@ nav .active {
     z-index: 1;
   }
 }
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  color: #e50914;
+  font-size: 2rem !important;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  height: 102% !important;
+  top: 0 !important;
+  background-color: #10141e;
+  width: 100%;
+  margin-top: 0 !important;
+  width: 4% !important;
+}
+
+.swiper-button-next {
+  right: 0 !important;
+}
+.swiper-button-prev {
+  left: 0 !important;
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  opacity: 1 !important;
+  cursor: auto;
+  pointer-events: none;
+}
+
+.swiper-button-prev.swiper-button-disabled::after,
+.swiper-button-next.swiper-button-disabled::after {
+  opacity: 0.3;
+}

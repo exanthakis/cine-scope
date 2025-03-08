@@ -1,18 +1,25 @@
 <script setup lang="ts">
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { FreeMode } from 'swiper/modules'
+import { FreeMode, Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
 import { CREDITS_SLIDER_BREAKPOINTS } from '@/constants/general'
 import type { Movie } from '@/types/movie'
 import type { CreditsArr, SwiperSliderProps } from '@/types/general'
+import { computed } from 'vue'
 
-const { breakpoints = CREDITS_SLIDER_BREAKPOINTS, data } =
-  defineProps<SwiperSliderProps<Movie[] | CreditsArr[]>>()
+const {
+  breakpoints = CREDITS_SLIDER_BREAKPOINTS,
+  navigation = true,
+  data,
+} = defineProps<SwiperSliderProps<Movie[] | CreditsArr[]>>()
 
 defineSlots<{
   default: (props: { id?: number; title?: string; poster_path?: string }) => void
 }>()
+
+const slidesOffset = computed(() => (navigation ? 60 : 0))
 </script>
 
 <template>
@@ -20,9 +27,11 @@ defineSlots<{
     :breakpoints="breakpoints"
     :spaceBetween="10"
     :freeMode="true"
-    :navigation="true"
-    :modules="[FreeMode]"
+    :navigation="navigation"
+    :modules="[FreeMode, Navigation]"
     :scrollbar="{ draggable: true }"
+    :slidesOffsetBefore="slidesOffset"
+    :slidesOffsetAfter="slidesOffset"
     v-if="data.length > 0"
   >
     <SwiperSlide v-for="el in data" :key="el.id" class="width-fit">

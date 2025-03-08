@@ -105,4 +105,5 @@ export interface MobileNavProps {
 export type SwiperSliderProps<T> = {
   data: T
   breakpoints?: Record<number, { slidesPerView: number }>
+  navigation?: boolean
 }
