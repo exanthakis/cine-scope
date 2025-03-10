@@ -29,7 +29,7 @@ const onFavoriteClick = () => {
 <template>
   <RouterLink :to="{ name: 'movie-details', params: { id }, query: { t: title } }">
     <div
-      class="group before:outline-blue-navy relative mx-auto h-full w-full transform rounded-md transition duration-200 before:absolute before:inset-0 before:rounded-sm before:border-3 before:border-solid before:border-transparent before:opacity-0 before:outline-3 before:outline-offset-3 before:transition-opacity before:duration-300 before:content-[''] hover:scale-105 dark:before:outline-white"
+      class="group before:outline-blue-navy relative mx-auto h-full w-full transform rounded-md transition duration-400 before:absolute before:inset-0 before:rounded-sm before:border-3 before:border-solid before:border-transparent before:opacity-0 before:outline-3 before:outline-offset-3 before:transition-opacity before:duration-300 before:content-[''] hover:scale-105 dark:before:outline-white"
       :class="config.hideOutline ? 'hover:before:opacity-0' : 'hover:before:opacity-100'"
     >
       <div

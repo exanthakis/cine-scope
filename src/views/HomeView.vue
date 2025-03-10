@@ -44,7 +44,6 @@ const hasNextPage = computed(() => {
 })
 
 const getSearchResults = async () => {
-  console.log('CALL getSearchResults')
   if (queryTimeout.value) clearTimeout(queryTimeout.value)
 
   if (!searchQuery.value.trim() && !withGenres.value.trim() && !fullReleaseYear.value.trim()) {
