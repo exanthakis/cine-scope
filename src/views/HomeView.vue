@@ -15,6 +15,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 interface HomeViewProps {
   page: number
+  genres: string
 }
 
 const props = defineProps<HomeViewProps>()
@@ -36,12 +37,14 @@ const router = useRouter()
 const route = useRoute()
 
 const page = computed(() => props.page)
+const genres = computed(() => props.genres)
 
 const hasNextPage = computed(() => {
   return page.value < totalPages.value
 })
 
 const getSearchResults = async () => {
+  console.log('CALL getSearchResults')
   if (queryTimeout.value) clearTimeout(queryTimeout.value)
 
   if (!searchQuery.value.trim() && !withGenres.value.trim() && !fullReleaseYear.value.trim()) {
@@ -105,6 +108,8 @@ const handleFiltersData = (data: MovieFilter) => {
 
 // Genre Filter
 onMounted(() => {
+  if (genres.value) selectedFilters.value.genres = [parseInt(genres.value)] //Initialize with genres from movie details hero click
+
   genresResult.value = null
   MovieService.getGenres()
     .then((response) => {

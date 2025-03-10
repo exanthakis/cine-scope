@@ -24,8 +24,6 @@ const duration = computed(() => {
 
 const imdbLink = computed(() => `https://www.imdb.com/title/${props.imdb_id}/`)
 
-const formattedGenres = computed(() => props.genres?.map((g) => g.name).join(' - ') ?? 'N/A')
-
 const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
 
 // Cursor logic
@@ -206,7 +204,13 @@ watch(
                 <span class="mx-1 my-0"> | </span>
                 <span class="inline-block">{{ duration }}</span>
                 <span class="mx-1 my-0"> | </span>
-                <span>{{ formattedGenres }}</span>
+                <RouterLink
+                  v-for="(genre, idx) in genres"
+                  :key="genre.id"
+                  :to="{ name: 'movie-list', query: { genres: genre.id } }"
+                >
+                  {{ genre.name }}{{ genres && idx !== genres.length - 1 ? ' - ' : '' }}
+                </RouterLink>
               </div>
               <!-- overview -->
 

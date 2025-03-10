@@ -13,6 +13,7 @@ const router = createRouter({
       component: HomeView,
       props: (route) => ({
         page: parseInt(route.query.page?.toString() || '1'),
+        genres: route.query.genres?.toString() || '',
       }),
       meta: {
         title: 'Home',
