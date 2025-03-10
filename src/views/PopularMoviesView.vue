@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 import MovieCard from '@/components/movie/MovieCard.vue'
 import SwiperSlider from '@/components/ui/SwiperSlider.vue'
+import { MOVIES_SLIDER_BREAKPOINTS } from '@/constants/general'
 
 const trendingMovies = ref<Movie[]>([])
 const movies = ref<Movie[]>([])
@@ -61,13 +62,16 @@ onMounted(async () => {
               ></span>
             </h2>
           </div>
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-6">
+          <div class="grid grid-cols-2 gap-9 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6">
             <MovieCard
-              v-for="trendingMovie in trendingMovies"
+              v-for="(trendingMovie, idx) in trendingMovies"
               :key="trendingMovie.id"
               :id="trendingMovie.id"
               :title="trendingMovie.title"
               :imgUrl="trendingMovie.poster_path"
+              :config="{
+                num: idx + 1,
+              }"
             />
           </div>
         </section>
@@ -77,7 +81,7 @@ onMounted(async () => {
           >
             Popular movies
           </h2>
-          <SwiperSlider :data="movies" :navigation="false">
+          <SwiperSlider :data="movies" :navigation="false" :breakpoints="MOVIES_SLIDER_BREAKPOINTS">
             <template #default="{ id, title, poster_path }">
               <template v-if="id && title">
                 <MovieCard
@@ -100,7 +104,11 @@ onMounted(async () => {
             <img src="@/assets/images/netflix.png" alt="Netflix logo" class="h-5 w-18" />
             <h2 class="text-black-primary pl-2 text-2xl dark:text-white">movies</h2>
           </div>
-          <SwiperSlider :data="netflixMovies" :navigation="false">
+          <SwiperSlider
+            :data="netflixMovies"
+            :navigation="false"
+            :breakpoints="MOVIES_SLIDER_BREAKPOINTS"
+          >
             <template #default="{ id, title, poster_path }">
               <template v-if="id && title">
                 <MovieCard
@@ -132,7 +140,11 @@ onMounted(async () => {
             />
             <h2 class="text-black-primary pl-2 text-2xl dark:text-white">movies</h2>
           </div>
-          <SwiperSlider :data="disneyMovies" :navigation="false">
+          <SwiperSlider
+            :data="disneyMovies"
+            :navigation="false"
+            :breakpoints="MOVIES_SLIDER_BREAKPOINTS"
+          >
             <template #default="{ id, title, poster_path }">
               <div v-if="id && title">
                 <MovieCard

@@ -7,6 +7,7 @@ export interface MovieCardProps {
   config?: {
     hideFav?: boolean
     hideOutline?: boolean
+    num?: number | null
   }
 }
 

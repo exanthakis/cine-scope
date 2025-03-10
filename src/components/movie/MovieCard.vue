@@ -7,7 +7,7 @@ const {
   id,
   title,
   imgUrl = '',
-  config = { hideFav: false, hideOutline: false },
+  config = { hideFav: false, hideOutline: false, num: null },
 } = defineProps<MovieCardProps>()
 
 const isHeroImgLoaded = ref(false)
@@ -77,6 +77,13 @@ const onFavoriteClick = () => {
           {{ isFavorite ? '❤️' : '🤍' }}
         </button>
       </div>
+
+      <span
+        v-if="isHeroImgLoaded && config.num"
+        class="card-number absolute -bottom-3 z-2 inline-block text-[4rem] leading-none font-bold shadow-2xl [text-shadow:0_0_1.5rem_rgba(0,0,0,0.5)] before:absolute before:content-[''] before:[-webkit-text-fill-color:rgb(0,0,0)] before:[-webkit-text-stroke:0] sm:bottom-0 sm:-left-5 sm:text-[5rem]"
+      >
+        {{ config.num }}
+      </span>
     </div>
   </RouterLink>
 </template>
