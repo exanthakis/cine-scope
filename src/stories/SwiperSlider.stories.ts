@@ -32,7 +32,10 @@ const meta = {
             :id="id"
             :title="title"
             :imgUrl="poster_path"
-            :hide-fav="true"
+            :config="{
+                hideFav: true,
+                hideOutline: true,
+              }"
             class="!min-h-[10vh]"
           />
         </template>

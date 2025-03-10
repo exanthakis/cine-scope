@@ -16,8 +16,8 @@ const meta = {
     imgUrl: {
       control: 'text',
     },
-    hideFav: {
-      control: 'boolean',
+    config: {
+      control: 'object',
     },
   },
 
@@ -41,6 +41,6 @@ export const Default: Story = {
     id: 672,
     title: 'Harry Potter and the Chamber of Secrets',
     imgUrl: '/yHzyPJrVqlTySQ9mc379yxrLBYQ.jpg',
-    hideFav: false,
+    config: { hideFav: false, hideOutline: false },
   },
 }

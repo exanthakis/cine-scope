@@ -228,7 +228,7 @@ watch(
     </div>
     <div
       v-if="isLoading"
-      class="mx-auto grid grid-cols-1 gap-4 px-[5vw] py-10 sm:grid-cols-2 md:grid-cols-3 md:px-[8vw] lg:grid-cols-4 lg:px-[15vw] xl:grid-cols-5"
+      class="mx-auto grid grid-cols-1 gap-6 px-[5vw] py-10 sm:grid-cols-2 md:grid-cols-3 md:px-[8vw] lg:grid-cols-4 lg:px-[15vw] xl:grid-cols-5"
     >
       <MovieCardSkeleton v-for="res in movieResults?.length" :key="res" />
     </div>
@@ -265,7 +265,7 @@ watch(
         </span>
       </p>
       <div
-        class="max-2xl mx-auto grid grid-cols-1 gap-4 py-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+        class="max-2xl mx-auto grid grid-cols-1 gap-6 py-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
       >
         <MovieCard
           v-for="movie in movieResults"

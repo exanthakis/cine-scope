@@ -4,7 +4,10 @@ export interface MovieCardProps {
   id: number
   title: string
   imgUrl?: string
-  hideFav?: boolean
+  config?: {
+    hideFav?: boolean
+    hideOutline?: boolean
+  }
 }
 
 export type MovieCardStore = Omit<MovieCardProps, 'hideFav'>

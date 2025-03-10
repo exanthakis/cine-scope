@@ -3,7 +3,12 @@ import { useFavoritesStore } from '@/stores/favorites'
 import type { MovieCardProps, MovieCardStore } from '@/types/general'
 import { computed, ref } from 'vue'
 
-const { id, title, imgUrl = '', hideFav = false } = defineProps<MovieCardProps>()
+const {
+  id,
+  title,
+  imgUrl = '',
+  config = { hideFav: false, hideOutline: false },
+} = defineProps<MovieCardProps>()
 
 const isHeroImgLoaded = ref(false)
 const favoritesStore = useFavoritesStore()
@@ -24,12 +29,13 @@ const onFavoriteClick = () => {
 <template>
   <RouterLink :to="{ name: 'movie-details', params: { id }, query: { t: title } }">
     <div
-      class="group relative mx-auto h-full w-full transform overflow-hidden rounded-sm transition duration-200 hover:scale-105"
+      class="group before:outline-blue-navy relative mx-auto h-full w-full transform rounded-md transition duration-200 before:absolute before:inset-0 before:rounded-sm before:border-3 before:border-solid before:border-transparent before:opacity-0 before:outline-3 before:outline-offset-3 before:transition-opacity before:duration-300 before:content-[''] hover:scale-105 dark:before:outline-white"
+      :class="config.hideOutline ? 'hover:before:opacity-0' : 'hover:before:opacity-100'"
     >
       <div
         v-if="imgUrl"
         :class="[
-          `h-full w-full bg-cover before:absolute before:h-full before:w-full before:animate-pulse before:bg-[rgba(255,255,255,0.2)] before:content-['']`,
+          `h-full w-full rounded-md bg-cover before:absolute before:h-full before:w-full before:animate-pulse before:bg-[rgba(255,255,255,0.2)] before:content-['']`,
           isHeroImgLoaded ? 'before:content-none' : '',
         ]"
         :style="{
@@ -50,7 +56,7 @@ const onFavoriteClick = () => {
           loading="lazy"
         />
       </div>
-      <div class="h-full" v-else>
+      <div class="h-full rounded-md" v-else>
         <img
           alt="Movie image placeholder"
           class="h-full w-full rounded-lg bg-cover bg-center object-cover object-top shadow-lg"
@@ -61,8 +67,8 @@ const onFavoriteClick = () => {
       </div>
 
       <div
-        v-if="!hideFav"
-        class="bg-black-primary/35 absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-end p-1 opacity-0 transition-normal duration-200 group-hover:opacity-100"
+        v-if="!config.hideFav"
+        class="bg-black-primary/35 absolute top-0 right-0 bottom-0 left-0 flex flex-col justify-end rounded-md p-1 opacity-0 transition-normal duration-200 group-hover:opacity-100"
       >
         <button
           class="bg-black-primary absolute top-2 right-2 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition"
