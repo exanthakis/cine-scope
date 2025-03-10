@@ -41,6 +41,6 @@ export const Default: Story = {
     id: 672,
     title: 'Harry Potter and the Chamber of Secrets',
     imgUrl: '/yHzyPJrVqlTySQ9mc379yxrLBYQ.jpg',
-    config: { hideFav: false, hideOutline: false },
+    config: { hideFav: false, hideOutline: false, num: 1 },
   },
 }
