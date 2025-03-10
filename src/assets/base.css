@@ -211,12 +211,12 @@ nav .active {
 
 .dark .card-number {
   color: #10141e;
-  -webkit-text-stroke: 0.2rem #fff;
+  -webkit-text-stroke: 0.1rem #fff;
 }
 
 .card-number {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  -webkit-text-stroke: 0.2rem rgb(16, 20, 30);
+  -webkit-text-stroke: 0.1rem rgb(16, 20, 30);
   color: #fff;
 }
 
