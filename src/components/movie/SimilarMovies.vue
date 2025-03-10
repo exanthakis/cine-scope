@@ -6,16 +6,17 @@ import { useRoute, useRouter } from 'vue-router'
 import type { Movie } from '@/types/movie'
 import { MOVIES_SLIDER_BREAKPOINTS } from '@/constants/general'
 import SwiperSlider from '@/components/ui/SwiperSlider.vue'
+import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 import MovieCard from '@/components/movie/MovieCard.vue'
 
 interface SimilarMoviesProps {
-  id: number
+  id?: number
 }
-const { id } = defineProps<SimilarMoviesProps>()
+const props = defineProps<SimilarMoviesProps>()
 const route = useRoute()
 const router = useRouter()
 const similarMovies = ref<Movie[] | null>(null)
-const movieId = computed(() => (id ? id.toString() : ''))
+const movieId = computed(() => (props.id ? props.id.toString() : ''))
 const isLoading = ref(false)
 
 const getSimilarMovies = async () => {
@@ -32,6 +33,7 @@ const getSimilarMovies = async () => {
       router.push({ name: 'network-error' })
     }
   } finally {
+    await new Promise((res) => setTimeout(res, 1000))
     isLoading.value = false
   }
 }
@@ -48,10 +50,15 @@ watch(
 <template>
   <div>
     <h2 class="text-black-primary mt-5 mb-2.5 text-3xl dark:text-white">More Like This</h2>
-    <div v-if="isLoading">loading..</div>
-    <p v-else-if="!isLoading && similarMovies?.length === 0">Sorry, we couldn't find any results</p>
-    <div v-else class="mt-6">
-      <SwiperSlider :data="similarMovies || []" :breakpoints="MOVIES_SLIDER_BREAKPOINTS">
+    <div v-if="isLoading || !similarMovies"><BaseSpinner /></div>
+    <p
+      v-else-if="!isLoading && similarMovies?.length === 0"
+      class="text-blue-navy text-center dark:text-white"
+    >
+      Sorry, we couldn't find any results
+    </p>
+    <div v-else-if="similarMovies && similarMovies.length > 0" class="mt-6">
+      <SwiperSlider :data="similarMovies" :breakpoints="MOVIES_SLIDER_BREAKPOINTS">
         <template #default="{ id, title, poster_path }">
           <template v-if="id && title">
             <MovieCard

@@ -9,6 +9,7 @@ import type { AxiosError } from 'axios'
 import SimilarMovies from '../SimilarMovies.vue'
 import CreditsWrapper from '@/components/credits/CreditsWrapper.vue'
 import MovieDetailsHero from './MovieDetailsHero.vue'
+import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 
 const props = defineProps<MovieDetailsProps>()
 const route = useRoute()
@@ -76,8 +77,8 @@ watch(
 </script>
 
 <template>
-  <div v-if="movieDetails" class="bg-white-primary dark:bg-blue-navy w-full">
-    <div class="text-black-primary relative dark:text-white">
+  <div class="bg-white-primary dark:bg-blue-navy w-full">
+    <div class="text-black-primary relative dark:text-white" v-if="movieDetails">
       <MovieDetailsHero
         :id="movieDetails.id"
         :backdrop_path="movieDetails.backdrop_path"
@@ -95,7 +96,7 @@ watch(
     </div>
     <div class="px-[5vw] pt-20 md:px-[8vw] lg:px-[15vw]">
       <div class="container pb-5">
-        <div v-if="movieDetails.tagline" class="pb-10">
+        <div v-if="movieDetails && movieDetails.tagline" class="pb-10">
           <div class="bg-linear-hr mb-4 h-0.5"></div>
           <div
             class="text-black-primary/80 dark:text-gray-medium mx-auto max-w-xl text-center text-base"
@@ -152,14 +153,17 @@ watch(
         </div>
 
         <CreditsWrapper
-          :id="movieDetails.id"
+          :id="movieDetails?.id"
           :isLoading="isLoading"
-          :cast="movieDetails.credits.cast"
-          :crew="movieDetails.credits.crew"
+          :cast="movieDetails?.credits.cast"
+          :crew="movieDetails?.credits.crew"
         />
 
-        <div v-if="movieDetails.id" class="pb-10">
-          <SimilarMovies :id="movieDetails.id" />
+        <div v-if="isLoading" class="flex items-center justify-center py-10">
+          <BaseSpinner />
+        </div>
+        <div v-else class="pb-10">
+          <SimilarMovies :id="movieDetails?.id" />
         </div>
       </div>
     </div>
