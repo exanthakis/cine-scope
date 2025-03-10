@@ -6,6 +6,7 @@ import { useWindowResize } from '@/hooks/useWindowResize'
 import { useFavoritesStore } from '@/stores/favorites'
 import ThemeSwitch from '../ThemeSwitch.vue'
 import IconMenu from '../icons/IconMenu.vue'
+import { DEVICE_BREAKPOINTS } from '@/constants/general'
 
 // Mobile navigation
 const { width } = useWindowResize()
@@ -81,7 +82,7 @@ watch(
       @click="toggleMenu"
       class="bg-black-primary/75 fixed top-0 left-0 z-1 h-screen w-full"
     ></div>
-    <MobileNav v-if="width < 768" :open="open" @close="toggleMenu" />
+    <MobileNav v-if="width < DEVICE_BREAKPOINTS.MEDIUM" :open="open" @close="toggleMenu" />
   </header>
 </template>
 

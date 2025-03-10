@@ -4,7 +4,7 @@ import { FreeMode, Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
-import { CREDITS_SLIDER_BREAKPOINTS } from '@/constants/general'
+import { CREDITS_SLIDER_BREAKPOINTS, DEVICE_BREAKPOINTS } from '@/constants/general'
 import type { Movie } from '@/types/movie'
 import type { CreditsArr, SwiperSliderProps } from '@/types/general'
 import { computed } from 'vue'
@@ -22,7 +22,9 @@ defineSlots<{
 
 const { width } = useWindowResize()
 
-const slidesOffset = computed(() => (navigation && width.value >= 768 ? 60 : 0))
+const slidesOffset = computed(() =>
+  navigation && width.value >= DEVICE_BREAKPOINTS.MEDIUM ? 60 : 0,
+)
 </script>
 
 <template>

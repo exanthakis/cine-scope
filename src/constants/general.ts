@@ -2,18 +2,26 @@ const TMDB_API_BASE_URL = 'https://api.themoviedb.org/3'
 
 const DEFAULT_LANGUAGE = 'en-US'
 
+export const DEVICE_BREAKPOINTS = {
+  SMALL: 640, //40rem
+  MEDIUM: 768, //48rem
+  LARGE: 1024, //64rem
+  EXTRA_LARGE: 1280, //80rem
+  EXTRA_LARGE2: 1536, //96rem
+}
+
 const MOVIES_SLIDER_BREAKPOINTS = {
   0: { slidesPerView: 2.5 },
-  640: { slidesPerView: 3.5 },
-  768: { slidesPerView: 4.5 },
-  1024: { slidesPerView: 6.5 },
+  [DEVICE_BREAKPOINTS.SMALL]: { slidesPerView: 3.5 },
+  [DEVICE_BREAKPOINTS.MEDIUM]: { slidesPerView: 4.5 },
+  [DEVICE_BREAKPOINTS.LARGE]: { slidesPerView: 6.5 },
 }
 
 const CREDITS_SLIDER_BREAKPOINTS = {
   0: { slidesPerView: 3.5 },
-  640: { slidesPerView: 4.5 },
-  768: { slidesPerView: 5.3 },
-  1024: { slidesPerView: 8.3 },
+  [DEVICE_BREAKPOINTS.SMALL]: { slidesPerView: 4.5 },
+  [DEVICE_BREAKPOINTS.MEDIUM]: { slidesPerView: 5.3 },
+  [DEVICE_BREAKPOINTS.LARGE]: { slidesPerView: 8.3 },
 }
 
 const LANGUAGES = [
