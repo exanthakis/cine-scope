@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { filterUniqueById } from '@/lib/utils'
 import type { CreditsArr } from '@/types/general'
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import type { Credit, CreditsWrapperProps } from '@/types/cast'
 import SwiperSlider from '@/components/ui/SwiperSlider.vue'
 import AvatarText from '@/components/ui/AvatarText.vue'
@@ -49,10 +49,18 @@ const tabs = computed(() => ({
 
 const currentComponent = computed(() => tabs.value[currentTab.value])
 
+const updateCurrentTab = () => {
+  currentTab.value = tabs.value?.Cast?.props?.data?.length > 0 ? 'Cast' : 'Crew'
+}
+
+onMounted(() => {
+  updateCurrentTab()
+})
+
 watch(
   () => props.id,
-  () => {
-    if (props.id) return (currentTab.value = 'Cast')
+  (newId) => {
+    if (newId) updateCurrentTab()
   },
 )
 </script>
@@ -60,15 +68,16 @@ watch(
 <template>
   <div class="pb-10">
     <div class="mt-5 mb-7">
-      <BaseButton
-        v-for="(_, tab) in tabs"
-        :key="tab"
-        :mode="currentTab === tab ? 'primary' : 'secondary'"
-        :isLink="false"
-        @click="currentTab = tab"
-      >
-        {{ tab }}
-      </BaseButton>
+      <template v-for="(cmp, tab) in tabs" :key="tab">
+        <BaseButton
+          v-if="cmp.props.data.length > 0"
+          :mode="currentTab === tab ? 'primary' : 'secondary'"
+          :isLink="false"
+          @click="currentTab = tab"
+        >
+          {{ tab }}
+        </BaseButton>
+      </template>
     </div>
 
     <component :is="currentComponent.component" :="currentComponent.props">
