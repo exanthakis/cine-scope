@@ -8,6 +8,7 @@ import { CREDITS_SLIDER_BREAKPOINTS } from '@/constants/general'
 import type { Movie } from '@/types/movie'
 import type { CreditsArr, SwiperSliderProps } from '@/types/general'
 import { computed } from 'vue'
+import { useWindowResize } from '@/hooks/useWindowResize'
 
 const {
   breakpoints = CREDITS_SLIDER_BREAKPOINTS,
@@ -19,7 +20,9 @@ defineSlots<{
   default: (props: { id?: number; title?: string; poster_path?: string }) => void
 }>()
 
-const slidesOffset = computed(() => (navigation ? 60 : 0))
+const { width } = useWindowResize()
+
+const slidesOffset = computed(() => (navigation && width.value >= 768 ? 60 : 0))
 </script>
 
 <template>
