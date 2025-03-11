@@ -35,7 +35,7 @@ export interface BaseDialogProps {
 
 export interface CreditsArr {
   id?: number
-  name?: string
+  original_title?: string
   title?: string
   poster_path?: string
 }

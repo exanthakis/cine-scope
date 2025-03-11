@@ -7,7 +7,7 @@ const meta = {
   component: AvatarText,
   tags: ['autodocs'],
   argTypes: {
-    name: {
+    original_title: {
       control: 'text',
     },
     title: {
@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    name: 'Daniel Radcliffe',
+    original_title: 'Daniel Radcliffe',
     title: 'Harry Potter',
     poster_path: '/iPg0J9UzAlPj1fLEJNllpW9IhGe.jpg',
   },

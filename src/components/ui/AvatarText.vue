@@ -17,7 +17,7 @@ defineProps<AvatarTextProps>()
     <IconAvatar v-else class="fill-black-primary dark:fill-white-primary h-25 w-25" />
 
     <div class="text-black-primary/80 text-center font-medium dark:text-white">
-      <h5>{{ name }}</h5>
+      <h5>{{ original_title }}</h5>
       <p class="text-black-primary/70 text-sm dark:text-gray-400">{{ title }}</p>
     </div>
   </div>

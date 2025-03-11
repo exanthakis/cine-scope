@@ -17,7 +17,12 @@ const {
 } = defineProps<SwiperSliderProps<Movie[] | CreditsArr[]>>()
 
 defineSlots<{
-  default: (props: { id?: number; title?: string; poster_path?: string }) => void
+  default: (props: {
+    id?: number
+    title?: string
+    poster_path?: string
+    original_title?: string
+  }) => void
 }>()
 
 const { width } = useWindowResize()
@@ -40,7 +45,12 @@ const slidesOffset = computed(() =>
     v-if="data.length > 0"
   >
     <SwiperSlide v-for="el in data" :key="el.id" class="width-fit">
-      <slot :id="el.id" :title="el.title" :poster_path="el.poster_path"></slot>
+      <slot
+        :id="el.id"
+        :title="el.title"
+        :poster_path="el.poster_path"
+        :original_title="el.original_title"
+      ></slot>
     </SwiperSlide>
   </Swiper>
 </template>
