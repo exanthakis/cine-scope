@@ -12,6 +12,7 @@ defineProps<AvatarTextProps>()
       class="h-25 w-25 rounded-full object-cover object-center"
       :src="`https://image.tmdb.org/t/p/original/${poster_path}`"
       :alt="title"
+      loading="lazy"
     />
 
     <IconAvatar v-else class="fill-black-primary dark:fill-white-primary h-25 w-25" />

@@ -79,17 +79,18 @@ watch(
         </BaseButton>
       </template>
     </div>
-
-    <component :is="currentComponent.component" :="currentComponent.props">
-      <template #default="{ title, poster_path, original_title }">
-        <AvatarText
-          v-if="!isLoading"
-          :original_title="original_title"
-          :title="title"
-          :poster_path="poster_path"
-        />
-        <AvatarTextSkeleton v-else />
-      </template>
-    </component>
+    <KeepAlive>
+      <component :is="currentComponent.component" :="currentComponent.props">
+        <template #default="{ title, poster_path, original_title }">
+          <AvatarText
+            v-if="!isLoading"
+            :original_title="original_title"
+            :title="title"
+            :poster_path="poster_path"
+          />
+          <AvatarTextSkeleton v-else />
+        </template>
+      </component>
+    </KeepAlive>
   </div>
 </template>
