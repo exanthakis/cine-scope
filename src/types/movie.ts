@@ -10,7 +10,7 @@ export interface Movie {
   overview: string
   popularity: number
   poster_path: string
-  media_type: string
+  media_type?: string
   release_date: string
   title: string
   video: boolean

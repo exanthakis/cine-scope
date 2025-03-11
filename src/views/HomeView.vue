@@ -7,6 +7,7 @@ import SearchInput from '@/components/SearchInput.vue'
 import BaseBadge from '@/components/ui/BaseBadge.vue'
 import BaseDialog from '@/components/ui/BaseDialog.vue'
 import { LANGUAGES } from '@/constants/general'
+import { mockMovies } from '@/mocks/movies'
 import MovieService from '@/services/MovieService'
 import type { MovieFilter, ReleaseYear, SelectedFilters } from '@/types/general'
 import { type Genre, type Movie } from '@/types/movie'
@@ -20,7 +21,7 @@ interface HomeViewProps {
 
 const props = defineProps<HomeViewProps>()
 const totalPages = ref(0)
-const totalResults = ref(null)
+const totalResults = ref<number | null>(null)
 const searchQuery = ref('')
 const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 const movieResults = ref<Movie[] | null>(null)
@@ -243,11 +244,17 @@ watch(
     >
       Sorry, we couldn't find any results
     </p>
-    <div class="px-[5vw] md:px-[8vw] lg:px-[15vw]" v-else>
-      <p
-        v-if="movieResults?.length && movieResults?.length > 0"
-        class="dark:text-white-primary flex justify-start text-left"
-      >
+    <div
+      class="px-[5vw] md:px-[8vw] lg:px-[15vw]"
+      v-else-if="
+        !isLoading &&
+        totalResults &&
+        totalResults > 0 &&
+        movieResults?.length &&
+        movieResults?.length > 0
+      "
+    >
+      <p class="dark:text-white-primary flex justify-start text-left">
         Found&nbsp;
         <span class="pr-2">
           <b>{{ totalResults }}</b> results for:
@@ -288,5 +295,27 @@ watch(
       :has-next-page="hasNextPage"
       route="movie-list"
     />
+    <section class="px-[5vw] pb-10 md:px-[8vw] lg:px-[15vw]">
+      <div class="mt-5 mb-4 w-full border-b border-gray-500/55 pb-2">
+        <h2 class="text-black-primary relative w-fit text-2xl dark:text-white">
+          Creator's Selections
+          <span
+            class="bg-red-netflix absolute top-0 -right-4 inline-flex h-2 w-2 animate-ping rounded-full opacity-75"
+          ></span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-2 gap-9 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5">
+        <MovieCard
+          v-for="(trendingMovie, idx) in mockMovies"
+          :key="trendingMovie.id"
+          :id="trendingMovie.id"
+          :title="trendingMovie.title"
+          :imgUrl="trendingMovie.poster_path"
+          :config="{
+            num: idx + 1,
+          }"
+        />
+      </div>
+    </section>
   </main>
 </template>
