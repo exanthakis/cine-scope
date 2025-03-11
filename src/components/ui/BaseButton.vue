@@ -2,7 +2,7 @@
 import type { BaseButtonProps } from '@/types/general'
 import { computed, type VNode } from 'vue'
 
-const { to = '/', mode, isLink } = defineProps<BaseButtonProps>()
+const { to = '', mode } = defineProps<BaseButtonProps>()
 defineSlots<{
   default?: () => VNode | VNode[]
 }>()
@@ -16,7 +16,7 @@ const buttonClasses = computed(() => [
 </script>
 
 <template>
-  <button v-if="!isLink" :class="buttonClasses">
+  <button v-if="!to || !to.trim()" :class="buttonClasses">
     <slot></slot>
   </button>
   <RouterLink v-else :to="to" :class="buttonClasses">

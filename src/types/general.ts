@@ -24,7 +24,6 @@ export interface BaseBadgeProps {
 
 export interface BaseButtonProps {
   mode: 'primary' | 'secondary'
-  isLink: boolean
   to?: string
 }
 

@@ -72,7 +72,6 @@ watch(
         <BaseButton
           v-if="cmp.props.data.length > 0"
           :mode="currentTab === tab ? 'primary' : 'secondary'"
-          :isLink="false"
           @click="currentTab = tab"
         >
           {{ tab }}

@@ -11,9 +11,6 @@ const meta = {
       control: 'radio',
       options: ['primary', 'secondary'],
     },
-    isLink: {
-      control: 'boolean',
-    },
     to: {
       control: 'text',
     },
@@ -38,14 +35,12 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     mode: 'primary',
-    isLink: false,
     default: 'Button',
   },
 }
 export const Secondary: Story = {
   args: {
     mode: 'secondary',
-    isLink: false,
     default: 'Button',
   },
 }

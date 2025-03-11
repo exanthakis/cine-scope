@@ -41,7 +41,7 @@ defineSlots<{
         <menu>
           <slot name="actions">
             <!-- Default close btn -->
-            <BaseButton mode="secondary" class="rounded-xs" :isLink="false" @click="$emit('close')">
+            <BaseButton mode="secondary" class="rounded-xs" @click="$emit('close')">
               Close
             </BaseButton>
           </slot>

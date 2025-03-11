@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import BaseButton from '../ui/BaseButton.vue'
 import type { MoviePaginationProps } from '@/types/general'
 
 const router = useRouter()
@@ -53,7 +52,6 @@ const visiblePages = computed(() => {
         v-if="visiblePages[0] > 1"
         class="dark:bg-white-primary dark:text-black-primary !px-2 sm:!px-3"
         :mode="page === 1 ? 'primary' : 'secondary'"
-        :isLink="false"
         @click="goToPage(1)"
       >
         1
@@ -67,7 +65,6 @@ const visiblePages = computed(() => {
         :key="p"
         :mode="p === page ? 'primary' : 'secondary'"
         class="dark:bg-white-primary dark:text-black-primary !px-2 sm:!px-3"
-        :isLink="false"
         @click="goToPage(p)"
       >
         {{ p }}
@@ -81,7 +78,6 @@ const visiblePages = computed(() => {
         v-if="visiblePages[visiblePages.length - 1] < totalPages"
         :mode="'secondary'"
         class="dark:bg-white-primary dark:text-black-primary !px-2 sm:!px-3"
-        :isLink="false"
         @click="goToPage(totalPages)"
       >
         {{ totalPages }}

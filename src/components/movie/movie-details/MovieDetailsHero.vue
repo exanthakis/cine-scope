@@ -160,14 +160,10 @@ watch(
         </template>
         <template #actions>
           <div class="flex gap-3">
-            <BaseButton
-              mode="primary"
-              class="rounded-xs"
-              :isLink="false"
-              @click="addToFavorite(id ? id : -1)"
+            <BaseButton mode="primary" class="rounded-xs" @click="addToFavorite(id ? id : -1)"
               >Confirm</BaseButton
             >
-            <BaseButton mode="secondary" class="rounded-xs" :isLink="false" @click="toggleFavModal">
+            <BaseButton mode="secondary" class="rounded-xs" @click="toggleFavModal">
               Close
             </BaseButton>
           </div>
@@ -268,12 +264,7 @@ watch(
           class="z-10 flex w-full flex-col items-center justify-between gap-4 pr-0 sm:flex-row sm:pr-4"
         >
           <h5 class="text-white-primary z-10">⭐ {{ favoriteDialogText.title }}</h5>
-          <BaseButton
-            class="w-full !px-11 sm:w-fit"
-            :mode="'primary'"
-            :isLink="false"
-            @click="toggleFavModal"
-          >
+          <BaseButton class="w-full !px-11 sm:w-fit" :mode="'primary'" @click="toggleFavModal">
             {{ favoriteDialogText.btnLabel }}
           </BaseButton>
         </div>

@@ -2,7 +2,6 @@
 import type { FiltersForm, MovieFilter, ReleaseYear } from '@/types/general'
 import { computed, defineAsyncComponent, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import BaseButton from './ui/BaseButton.vue'
 import RangeSlider from './ui/RangeSlider.vue'
 import SingleRangeSlider from './ui/SingleRangeSlider.vue'
 import { LANGUAGES } from '@/constants/general'
@@ -175,13 +174,12 @@ watch(
       <BaseButton
         class="!bg-white-primary !text-black-primary mr-4 cursor-pointer !rounded-full"
         mode="secondary"
-        :isLink="false"
         type="button"
         @click="$emit('resetFilters')"
       >
         Clear All
       </BaseButton>
-      <BaseButton type="submit" class="cursor-pointer !rounded-full" mode="primary" :isLink="false">
+      <BaseButton type="submit" class="cursor-pointer !rounded-full" mode="primary">
         Save
       </BaseButton>
     </div>
