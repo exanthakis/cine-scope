@@ -5,13 +5,11 @@ import BaseBadge from '../ui/BaseBadge.vue'
 describe('BaseBadge', () => {
   it('should render the title of the badge correctly', () => {
     const title = 'Test title'
-
     const wrapper = mount(BaseBadge, {
       props: {
         title,
       },
     })
-
     expect(wrapper.text()).toContain(title)
   })
 
@@ -25,6 +23,10 @@ describe('BaseBadge', () => {
     })
 
     await wrapper.find('button').trigger('click')
-    expect(wrapper.emitted('close')).toBeTruthy()
+
+    const closeEvent = wrapper.emitted('close')
+
+    expect(closeEvent).toBeTruthy()
+    expect(closeEvent).toHaveLength(1)
   })
 })
