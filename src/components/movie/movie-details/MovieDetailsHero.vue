@@ -6,23 +6,36 @@ import { useFavoritesStore } from '@/stores/favorites'
 import type { MovieCardStore, MovieDetailsHeroProps } from '@/types/general'
 import { computed, ref, watch } from 'vue'
 
-const props = defineProps<MovieDetailsHeroProps>()
+const {
+  id,
+  backdrop_path,
+  homepage,
+  title,
+  release_date,
+  poster_path,
+  vote_average,
+  runtime,
+  genres,
+  overview,
+  imdb_id,
+  trailerKey,
+} = defineProps<MovieDetailsHeroProps>()
 
 // Hero img lazy load
 const isHeroImgLoaded = ref(false)
 
 // Hero movie texts
 const isExpanded = ref(false)
-const rating = computed(() => (props.vote_average ? Math.round(props.vote_average * 10) : 'N/A'))
+const rating = computed(() => (vote_average ? Math.round(vote_average * 10) : 'N/A'))
 const duration = computed(() => {
-  const runtimeval = props.runtime
+  const runtimeval = runtime
   if (!runtimeval) return 'Unknown'
   const hours = Math.floor(runtimeval / 60)
   const minutes = runtimeval % 60
   return `${hours}h ${minutes}m`
 })
 
-const imdbLink = computed(() => `https://www.imdb.com/title/${props.imdb_id}/`)
+const imdbLink = computed(() => `https://www.imdb.com/title/${imdb_id}/`)
 
 const toggleReadMore = () => (isExpanded.value = !isExpanded.value)
 
@@ -38,15 +51,15 @@ const cursorCircle = computed(
 )
 
 const handleVideoPlay = (device: 'sm' | '') => {
-  if ((!isHovered.value && props.trailerKey) || (device === 'sm' && props.trailerKey)) {
-    window.open(`https://www.youtube.com/watch?v=${props.trailerKey}`)
+  if ((!isHovered.value && trailerKey) || (device === 'sm' && trailerKey)) {
+    window.open(`https://www.youtube.com/watch?v=${trailerKey}`)
   }
 }
 
 // Favorites logic
 const openFavModal = ref(false)
 const favoritesStore = useFavoritesStore()
-const isMovieFavorite = computed(() => (props.id ? favoritesStore.isFavorite(props.id) : false))
+const isMovieFavorite = computed(() => (id ? favoritesStore.isFavorite(id) : false))
 
 const toggleFavModal = () => {
   openFavModal.value = !openFavModal.value
@@ -56,8 +69,8 @@ const toggleFavModal = () => {
 const addToFavorite = (id: number) => {
   const movie: MovieCardStore = {
     id,
-    title: props.title ?? '',
-    imgUrl: props.poster_path ?? '',
+    title: title ?? '',
+    imgUrl: poster_path ?? '',
   }
 
   if (isMovieFavorite.value) favoritesStore.removeMovie(movie)
@@ -74,7 +87,7 @@ const favoriteDialogText = computed(() => {
     btnLabel: `${action} Now`,
     title: `${action} ${toFrom} Favorites`,
     heading: `Do you want to ${action.toLowerCase()} the movie ${toFrom} your favorites?`,
-    body: `Are you sure you want to ${action.toLowerCase()} ${props.title} ${toFrom} your favorites? This will ${
+    body: `Are you sure you want to ${action.toLowerCase()} ${title} ${toFrom} your favorites? This will ${
       action === 'Add'
         ? 'save the movie to your list, allowing you to easily find and watch it later'
         : 'remove it from your list'
@@ -84,7 +97,7 @@ const favoriteDialogText = computed(() => {
 })
 
 watch(
-  () => props.id,
+  () => id,
   () => {
     isHeroImgLoaded.value = false
     heroWrapper.value = null
