@@ -8,13 +8,13 @@ import AvatarText from '@/components/ui/AvatarText.vue'
 import AvatarTextSkeleton from '@/components/ui/AvatarTextSkeleton.vue'
 import { CREDITS_SLIDER_BREAKPOINTS } from '@/constants/general'
 
-const props = defineProps<CreditsWrapperProps>()
+const { id, cast, crew } = defineProps<CreditsWrapperProps>()
 
 const currentTab = ref<Credit>('Cast')
 
-const cast = computed<CreditsArr[]>(() => {
+const castArr = computed<CreditsArr[]>(() => {
   const castList =
-    props.cast?.map((castItem) => ({
+    cast?.map((castItem) => ({
       id: castItem.id,
       original_title: castItem.name,
       title: castItem.character,
@@ -24,9 +24,9 @@ const cast = computed<CreditsArr[]>(() => {
   return filterUniqueById(castList)
 })
 
-const crew = computed<CreditsArr[]>(() => {
+const crewArr = computed<CreditsArr[]>(() => {
   const crewList =
-    props.crew?.map((crewItem) => ({
+    crew?.map((crewItem) => ({
       id: crewItem.id,
       original_title: crewItem.name,
       title: crewItem.job,
@@ -39,11 +39,11 @@ const crew = computed<CreditsArr[]>(() => {
 const tabs = computed(() => ({
   Cast: {
     component: SwiperSlider,
-    props: { data: cast.value, breakpoints: CREDITS_SLIDER_BREAKPOINTS },
+    props: { data: castArr.value, breakpoints: CREDITS_SLIDER_BREAKPOINTS },
   },
   Crew: {
     component: SwiperSlider,
-    props: { data: crew.value, breakpoints: CREDITS_SLIDER_BREAKPOINTS },
+    props: { data: crewArr.value, breakpoints: CREDITS_SLIDER_BREAKPOINTS },
   },
 }))
 
@@ -58,7 +58,7 @@ onMounted(() => {
 })
 
 watch(
-  () => props.id,
+  () => id,
   (newId) => {
     if (newId) updateCurrentTab()
   },

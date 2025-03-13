@@ -7,7 +7,7 @@ import MovieDetailsItem from './MovieDetailsItem.vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { AxiosError } from 'axios'
 import SimilarMovies from '../SimilarMovies.vue'
-import CreditsWrapper from '@/components/credits/CreditsWrapper.vue'
+import CreditsWrapper from '@/components/CreditsWrapper.vue'
 import MovieDetailsHero from './MovieDetailsHero.vue'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 

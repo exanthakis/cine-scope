@@ -1,4 +1,4 @@
-import CreditsWrapper from '@/components/credits/CreditsWrapper.vue'
+import CreditsWrapper from '@/components/CreditsWrapper.vue'
 import { mockCreditsCast, mockCreditsCrew } from '@/mocks/credits'
 import type { CreditsWrapperProps } from '@/types/cast'
 import type { Meta, StoryObj } from '@storybook/vue3'
