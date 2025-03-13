@@ -11,17 +11,16 @@ import CreditsWrapper from '@/components/CreditsWrapper.vue'
 import MovieDetailsHero from './MovieDetailsHero.vue'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 
-const props = defineProps<MovieDetailsProps>()
+const { id } = defineProps<MovieDetailsProps>()
 const route = useRoute()
 const router = useRouter()
 const movieDetails = ref<MovieDetails | null>(null)
-const id = computed(() => props.id)
 const isLoading = ref(false)
 
 const getMovieData = async () => {
   isLoading.value = true
   try {
-    const response = await MovieService.getMovieData(id.value)
+    const response = await MovieService.getMovieData(id)
     return response.data
   } catch (err) {
     const error = err as AxiosError
