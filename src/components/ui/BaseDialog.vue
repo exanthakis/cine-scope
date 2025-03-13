@@ -21,6 +21,7 @@ defineSlots<{
     <div
       v-if="show"
       @click="$emit('close')"
+      id="backdrop"
       class="bg-black-primary/75 fixed top-0 left-0 z-10 h-screen w-full"
     ></div>
     <Transition name="dialog">
@@ -32,13 +33,13 @@ defineSlots<{
           classes,
         ]"
       >
-        <header>
+        <header id="header-slot">
           <slot name="header"></slot>
         </header>
-        <section class="py-6">
+        <section class="py-6" id="default-slot">
           <slot></slot>
         </section>
-        <menu>
+        <menu id="actions-slot">
           <slot name="actions">
             <!-- Default close btn -->
             <BaseButton mode="secondary" class="rounded-xs" @click="$emit('close')">
