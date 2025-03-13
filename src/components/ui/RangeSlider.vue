@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { RangeSliderProps } from '@/types/general'
-import { computed, ref, watch, watchEffect } from 'vue'
+import { computed, onWatcherCleanup, ref, watchEffect } from 'vue'
 
 const { min, max, step, initialMax, initialMin } = defineProps<RangeSliderProps>()
 const emit = defineEmits<{
@@ -11,10 +11,14 @@ const minValue = ref(initialMin)
 const maxValue = ref(initialMax)
 const progressRef = ref<HTMLDivElement | null>(null)
 
+const disableMinThumb = computed(() => minValue.value >= maxValue.value)
+const disableMaxThumb = computed(() => maxValue.value <= minValue.value)
+
 const handleMin = (e: Event) => {
   const newValue = Number((e.target as HTMLInputElement).value)
   if (newValue <= maxValue.value) {
     minValue.value = newValue
+    emit('updateRange', { min: minValue.value, max: maxValue.value })
   }
 }
 
@@ -22,6 +26,7 @@ const handleMax = (e: Event) => {
   const newValue = Number((e.target as HTMLInputElement).value)
   if (newValue >= minValue.value) {
     maxValue.value = newValue
+    emit('updateRange', { min: minValue.value, max: maxValue.value })
   }
 }
 
@@ -33,14 +38,14 @@ watchEffect(() => {
     progressRef.value.style.left = minPercent + '%'
     progressRef.value.style.right = 100 - maxPercent + '%'
   }
-})
 
-watch([minValue, maxValue], () => {
-  emit('updateRange', { min: minValue.value, max: maxValue.value })
+  onWatcherCleanup(() => {
+    if (progressRef.value) {
+      progressRef.value.style.left = ''
+      progressRef.value.style.right = ''
+    }
+  })
 })
-
-const disableMinThumb = computed(() => minValue.value >= maxValue.value)
-const disableMaxThumb = computed(() => maxValue.value <= minValue.value)
 </script>
 
 <template>
@@ -51,6 +56,7 @@ const disableMaxThumb = computed(() => maxValue.value <= minValue.value)
         <input
           type="number"
           v-model="minValue"
+          @input="emit('updateRange', { min: minValue, max: maxValue })"
           class="w-24 rounded-md border border-gray-400 px-2 py-1"
         />
       </div>
@@ -59,6 +65,7 @@ const disableMaxThumb = computed(() => maxValue.value <= minValue.value)
         <input
           type="number"
           v-model="maxValue"
+          @input="emit('updateRange', { min: minValue, max: maxValue })"
           class="w-24 rounded-md border border-gray-400 px-2 py-1"
         />
       </div>
