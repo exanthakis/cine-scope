@@ -16,7 +16,10 @@ const year = new Date().getFullYear()
         class="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between sm:gap-2"
       >
         <span class="text-center text-sm text-gray-400">
-          &copy; {{ year }} by {{ FULL_NAME }}
+          &copy; {{ year }} by
+          <a href="https://emmanouelxanthakis.com/" target="_blank" rel="noreferrer">
+            {{ FULL_NAME }}
+          </a>
         </span>
         <div class="flex items-center justify-start text-sm text-gray-400">
           Film data courtesy of
