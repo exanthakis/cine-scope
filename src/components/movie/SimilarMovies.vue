@@ -12,11 +12,11 @@ import MovieCard from '@/components/movie/MovieCard.vue'
 interface SimilarMoviesProps {
   id?: number
 }
-const props = defineProps<SimilarMoviesProps>()
+const { id } = defineProps<SimilarMoviesProps>()
 const route = useRoute()
 const router = useRouter()
 const similarMovies = ref<Movie[] | null>(null)
-const movieId = computed(() => (props.id ? props.id.toString() : ''))
+const movieId = computed(() => (id ? id.toString() : ''))
 const isLoading = ref(false)
 
 const getSimilarMovies = async () => {
