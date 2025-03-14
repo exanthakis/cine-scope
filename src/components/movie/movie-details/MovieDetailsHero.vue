@@ -112,7 +112,7 @@ watch(
     @click="() => handleVideoPlay('')"
     @mouseenter="() => (hideCursor = false)"
     @mouseleave="() => (hideCursor = true)"
-    class="bg-gradient-bottom pointer-events-none relative h-[80vh] min-h-[70vh] w-full cursor-none before:absolute before:top-0 before:left-0 before:z-2 before:h-full before:w-full before:bg-[rgba(0,0,0,0.8)] before:content-[''] after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-[''] sm:before:content-none md:pointer-events-auto"
+    class="bg-gradient-bottom pointer-events-none relative h-[80vh] min-h-[70vh] w-full cursor-none before:absolute before:top-0 before:left-0 before:z-2 before:h-full before:w-full before:bg-[rgba(0,0,0,0.6)] before:content-[''] after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-[''] sm:before:content-none md:pointer-events-auto"
   >
     <!-- Hero image lazy loading with blur animation-->
     <div
