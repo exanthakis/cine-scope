@@ -26,7 +26,7 @@ const year = new Date().getFullYear()
             This product uses the TMDB API but is not endorsed or certified by TMDB.</span
           >
           <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer" class="pl-2">
-            <img src="@/assets/icons/tmdb.svg" class="h-9 w-17" />
+            <img src="@/assets/icons/tmdb.svg" class="h-9 w-18" />
           </a>
         </div>
         <div class="mt-0 flex items-center gap-4 sm:justify-center">
