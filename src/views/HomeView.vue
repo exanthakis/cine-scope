@@ -232,7 +232,7 @@ watch(
     </div>
     <div
       v-if="isLoading"
-      class="mx-auto grid grid-cols-1 gap-6 px-[5vw] py-10 sm:grid-cols-2 md:grid-cols-3 md:px-[8vw] lg:grid-cols-4 lg:px-[15vw] xl:grid-cols-5"
+      class="mx-auto grid grid-cols-2 gap-9 px-[5vw] py-10 sm:grid-cols-2 md:grid-cols-3 md:px-[8vw] lg:grid-cols-4 lg:px-[15vw] xl:grid-cols-5"
     >
       <MovieCardSkeleton v-for="res in movieResults?.length" :key="res" />
     </div>
@@ -253,7 +253,7 @@ watch(
         movieResults?.length > 0
       "
     >
-      <p class="dark:text-white-primary flex justify-start text-left">
+      <p class="dark:text-white-primary flex justify-start pb-4 text-left">
         Found&nbsp;
         <span class="pr-2">
           <b>{{ totalResults }}</b> results for:
@@ -275,7 +275,7 @@ watch(
         </span>
       </p>
       <div
-        class="max-2xl mx-auto grid grid-cols-1 gap-6 py-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+        class="max-2xl mx-auto grid grid-cols-2 gap-9 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
       >
         <MovieCard
           v-for="movie in movieResults"
@@ -303,7 +303,9 @@ watch(
           ></span>
         </h2>
       </div>
-      <div class="grid grid-cols-2 gap-9 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5">
+      <div
+        class="grid grid-cols-2 gap-9 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+      >
         <MovieCard
           v-for="(trendingMovie, idx) in mockMovies"
           :key="trendingMovie.id"
