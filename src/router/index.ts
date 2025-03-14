@@ -83,7 +83,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.params.id ? `${to.query.t || 'Movie Details'}` : to.meta.title} | CineQuest`
+  document.title = `${to.params.id ? `${to.query.t || 'Movie Details'}` : to.meta.title} | CineScope`
   next()
 })
 
