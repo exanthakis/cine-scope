@@ -11,17 +11,19 @@ const year = new Date().getFullYear()
     class="footer-bg bg-blue-navy mt-auto w-full px-[5vw] shadow-2xl backdrop-blur md:px-[8vw] lg:px-[15vw]"
   >
     <div class="container w-full py-6 lg:py-8">
-      <hr class="mb-6 border-gray-700 sm:mx-auto lg:mb-8" />
+      <hr class="mb-6 border-gray-700 lg:mx-auto lg:mb-8" />
       <div
-        class="flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between sm:gap-2"
+        class="flex flex-col items-center justify-center gap-4 lg:flex-row lg:justify-between lg:gap-2"
       >
-        <span class="text-center text-sm text-gray-400">
+        <span class="text-md text-center text-gray-400">
           &copy; {{ year }} by
           <a href="https://emmanouelxanthakis.com/" target="_blank" rel="noreferrer">
             {{ FULL_NAME }}
           </a>
         </span>
-        <div class="flex flex-col items-center justify-start text-sm text-gray-400">
+        <div
+          class="text-md order-1 flex flex-col items-center justify-start text-gray-400 lg:order-0"
+        >
           <span class="pb-4 text-center">
             This product uses the TMDB API but is not endorsed or certified by TMDB.</span
           >
@@ -29,7 +31,7 @@ const year = new Date().getFullYear()
             <img src="@/assets/icons/tmdb.svg" class="h-9 w-18" />
           </a>
         </div>
-        <div class="mt-0 flex items-center gap-4 sm:justify-center">
+        <div class="mt-0 flex items-center gap-4 lg:justify-center">
           <a
             href="https://github.com/exanthakis"
             target="_blank"
