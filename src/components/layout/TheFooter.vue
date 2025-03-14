@@ -21,10 +21,12 @@ const year = new Date().getFullYear()
             {{ FULL_NAME }}
           </a>
         </span>
-        <div class="flex items-center justify-start text-sm text-gray-400">
-          Film data courtesy of
+        <div class="flex flex-col items-center justify-start text-sm text-gray-400">
+          <span class="pb-4 text-center">
+            This product uses the TMDB API but is not endorsed or certified by TMDB.</span
+          >
           <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer" class="pl-2">
-            <img src="@/assets/icons/tmdb.svg" class="h-6 w-12" />
+            <img src="@/assets/icons/tmdb.svg" class="h-9 w-17" />
           </a>
         </div>
         <div class="mt-0 flex items-center gap-4 sm:justify-center">
