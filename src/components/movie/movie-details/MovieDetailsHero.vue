@@ -226,7 +226,7 @@ watch(
               <div
                 class="sm:text-black-primary/70 mx-auto mt-4 mb-8 ml-0 max-w-xl text-base text-gray-300 sm:text-lg dark:text-gray-300"
               >
-                <div class="scrollbar-0 max-h-[20vh] overflow-scroll">
+                <div class="scrollbar-0 pointer-events-auto max-h-[20vh] overflow-scroll">
                   <Transition name="fade-text" mode="out-in">
                     <p v-if="isExpanded && overview" class="inline">
                       {{ overview }}
