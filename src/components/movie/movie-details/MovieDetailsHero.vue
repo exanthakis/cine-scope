@@ -193,7 +193,7 @@ watch(
           <div class="pr-4 pl-0 dark:mx-auto">
             <div class="mx-auto max-w-4xl text-start">
               <span
-                class="sm:text-black-primary/80 pointer-events-auto py-2.5 text-2xl font-semibold text-gray-200 uppercase dark:text-gray-200"
+                class="sm:text-black-primary/80 pointer-events-auto py-2.5 text-xl font-semibold text-gray-200 uppercase sm:text-2xl dark:text-gray-200"
               >
                 <a v-if="homepage" :href="homepage" target="_blank">
                   {{ title }}
@@ -203,7 +203,7 @@ watch(
 
               <!-- info metadata -->
               <div
-                class="sm:text-black-primary/80 text-gray-medium dark:text-gray-medium mt-4 font-normal"
+                class="sm:text-black-primary/80 text-gray-medium dark:text-gray-medium mt-4 text-sm font-normal sm:text-base"
               >
                 <span class="inline-block">{{ release_date?.split('-')[0] }}</span>
                 <span class="mx-1 my-0"> | </span>
@@ -224,7 +224,7 @@ watch(
               <!-- overview -->
 
               <div
-                class="sm:text-black-primary/70 mx-auto mt-4 mb-8 ml-0 max-w-xl text-lg text-gray-300 dark:text-gray-300"
+                class="sm:text-black-primary/70 mx-auto mt-4 mb-8 ml-0 max-w-xl text-base text-gray-300 sm:text-lg dark:text-gray-300"
               >
                 <div class="scrollbar-0 max-h-[20vh] overflow-scroll">
                   <Transition name="fade-text" mode="out-in">
