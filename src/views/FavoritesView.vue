@@ -20,7 +20,7 @@ const favoriteText = computed(() => {
         Found <b>{{ favoritesStore.totalFavorites }}</b> {{ favoriteText }}
       </h5>
       <div
-        class="max-2xl mx-auto grid grid-cols-1 gap-6 pb-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+        class="max-2xl mx-auto grid grid-cols-2 gap-9 pb-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
       >
         <MovieCard
           v-for="movie in favoritesStore.movies"
