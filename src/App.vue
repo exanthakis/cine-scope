@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SiteNavigation from './components/layout/SiteNavigation.vue'
 import TheFooter from './components/layout/TheFooter.vue'
+import { Analytics } from '@vercel/analytics/react'
 </script>
 
 <template>
@@ -10,5 +11,6 @@ import TheFooter from './components/layout/TheFooter.vue'
     <SiteNavigation />
     <RouterView />
     <TheFooter />
+    <Analytics />
   </div>
 </template>
