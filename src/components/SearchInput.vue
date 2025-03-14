@@ -24,7 +24,7 @@ const handleFilterShow = () => {
       </span>
       <div class="search-wrapper relative w-full">
         <input
-          class="w-40 border-none p-1 text-sm transition-[width] duration-200 outline-none not-placeholder-shown:w-90 focus:w-55 sm:w-43 sm:focus:w-90"
+          class="w-40 border-none p-1 text-sm transition-[width] duration-200 outline-none not-placeholder-shown:w-60 focus:w-55 sm:w-43 sm:not-placeholder-shown:w-90 sm:focus:w-90"
           type="search"
           placeholder="Search for a movie"
           v-model="searchQuery"
