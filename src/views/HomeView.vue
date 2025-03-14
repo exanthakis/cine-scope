@@ -253,25 +253,29 @@ watch(
         movieResults?.length > 0
       "
     >
-      <p class="dark:text-white-primary flex justify-start pb-4 text-left">
-        Found&nbsp;
-        <span class="pr-2">
+      <p
+        class="dark:text-white-primary flex flex-col justify-start gap-2 pb-4 text-left sm:flex-row"
+      >
+        <span class="sm:text-nowrap">
+          Found
           <b>{{ totalResults }}</b> results for:
         </span>
-        <BaseBadge v-if="searchQuery.trim()" :title="searchQuery" @close="searchQuery = ''" />
-        <span class="flex justify-start gap-2 pl-2">
-          <BaseBadge
-            v-for="filter in selectedFilters.genres"
-            :key="filter"
-            :title="genreFilterName(filter)"
-            @close="handleGenreBadgeClick(filter)"
-          />
-          <BaseBadge v-if="yearFilterTitle" :title="yearFilterTitle" @close="removeYearsFilter" />
-          <BaseBadge
-            v-if="selectedFilters.language"
-            :title="selectedFullLanguage?.name || selectedLanguage"
-            @close="selectedFilters.language = ''"
-          />
+        <span class="flex flex-wrap justify-start gap-2 sm:pl-2">
+          <BaseBadge v-if="searchQuery.trim()" :title="searchQuery" @close="searchQuery = ''" />
+          <span class="flex flex-wrap justify-start gap-2">
+            <BaseBadge
+              v-for="filter in selectedFilters.genres"
+              :key="filter"
+              :title="genreFilterName(filter)"
+              @close="handleGenreBadgeClick(filter)"
+            />
+            <BaseBadge v-if="yearFilterTitle" :title="yearFilterTitle" @close="removeYearsFilter" />
+            <BaseBadge
+              v-if="selectedFilters.language"
+              :title="selectedFullLanguage?.name || selectedLanguage"
+              @close="selectedFilters.language = ''"
+            />
+          </span>
         </span>
       </p>
       <div
