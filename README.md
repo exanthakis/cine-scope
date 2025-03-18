@@ -46,3 +46,13 @@ echo "VITE_TMDB_API_KEY=xxxxxxxx" > .env.local
 # Start the development server
 npm run dev
 ```
+
+## 🤝 Contributing
+
+Contributions are welcome! If you'd like to improve CineScope, feel free to fork the repository, create a feature branch, and submit a pull request.
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
