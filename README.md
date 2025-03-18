@@ -1,39 +1,48 @@
-# cine-scope
+# 🎬 CineScope
 
-This template should help get you started developing with Vue 3 in Vite.
+**[Live Website](https://cine-scope-olive.vercel.app/)**
 
-## Recommended IDE Setup
+## 📌 About
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+CineScope is a dynamic movie-hub web application designed to help users discover, explore, and track their favorite films effortlessly. Powered by Vue 3 and TMDB, CineScope provides an intuitive platform to browse top-rated and trending movies while offering detailed insights into any film of interest—all in one place!
 
-## Type Support for `.vue` Imports in TS
+### ✨ Features
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- 🔍 **Advanced Movie Search** – Find films based on genres, release date, language, and more.
+- 🎞 **Comprehensive Film Details** – Access in-depth information, including cast, crew, synopsis, ratings, and trailers.
+- 🔥 **Trending & Top-Rated Movies** – Stay updated with what’s popular in the film industry.
+- 📌 **Personalized Watchlist** – Keep track of movies you want to watch.
 
-## Customize configuration
+## 🛠 Tech Stack
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+CineScope is built using modern web technologies for performance and scalability:
 
-## Project Setup
+- ⚡ **Vue 3** (Composition API with `<script setup>`)
+- 🏷 **TypeScript**
+- 📦 **Pinia** – State Management
+- 🚏 **Vue Router** – Navigation
+- 🎨 **Tailwind CSS** – Styling
+- 🔗 **Axios** – API Calls
+- 📖 **Storybook** – UI Component Development
+- 🧪 **Vitest & Vue Test Utils** – Testing
+
+## 🚀 Installation & Setup
+
+To run CineScope locally, follow these steps:
 
 ```sh
+# Clone the repository
+git clone https://github.com/your-username/cinescope.git
+
+# Navigate to the project directory
+cd cinescope
+
+# Install dependencies
 npm install
-```
 
-### Compile and Hot-Reload for Development
+# Create a .env.local file and add your TMDB API key
+echo "VITE_TMDB_API_KEY=xxxxxxxx" > .env.local
 
-```sh
+# Start the development server
 npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
