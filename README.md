@@ -1,4 +1,4 @@
-# 🎬 CineScope
+# CineScope
 
 **[Live Website](https://cine-scope-olive.vercel.app/)**
 
@@ -6,25 +6,25 @@
 
 CineScope is a dynamic movie-hub web application designed to help users discover, explore, and track their favorite films effortlessly. Powered by Vue 3 and TMDB, CineScope provides an intuitive platform to browse top-rated and trending movies while offering detailed insights into any film of interest—all in one place!
 
-### ✨ Features
+### Features
 
-- 🔍 **Advanced Movie Search** – Find films based on genres, release date, language, and more.
-- 🎞 **Comprehensive Film Details** – Access in-depth information, including cast, crew, synopsis, ratings, and trailers.
-- 🔥 **Trending & Top-Rated Movies** – Stay updated with what’s popular in the film industry.
-- 📌 **Personalized Watchlist** – Keep track of movies you want to watch.
+- **Advanced Movie Search** – Find films based on genres, release date, language, and more.
+- **Comprehensive Film Details** – Access in-depth information, including cast, crew, synopsis, ratings, and trailers.
+- **Trending & Top-Rated Movies** – Stay updated with what’s popular in the film industry.
+- **Personalized Watchlist** – Keep track of movies you want to watch.
 
 ## 🛠 Tech Stack
 
 CineScope is built using modern web technologies for performance and scalability:
 
-- ⚡ **Vue 3** (Composition API with `<script setup>`)
-- 🏷 **TypeScript**
-- 📦 **Pinia** – State Management
-- 🚏 **Vue Router** – Navigation
-- 🎨 **Tailwind CSS** – Styling
-- 🔗 **Axios** – API Calls
-- 📖 **Storybook** – UI Component Development
-- 🧪 **Vitest & Vue Test Utils** – Testing
+- **Vue 3** (Composition API with `<script setup>`)
+- **TypeScript**
+- **Pinia** – State Management
+- **Vue Router** – Navigation
+- **Tailwind CSS** – Styling
+- **Axios** – API Calls
+- **Storybook** – UI Component Development
+- **Vitest & Vue Test Utils** – Testing
 
 ## 🚀 Installation & Setup
 
