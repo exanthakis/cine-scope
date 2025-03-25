@@ -66,7 +66,7 @@ watch(
 </script>
 
 <template>
-  <div class="pb-3 sm:pb-10">
+  <div class="pb-10">
     <div class="mt-5 mb-7">
       <template v-for="(cmp, tab) in tabs" :key="tab">
         <BaseButton
