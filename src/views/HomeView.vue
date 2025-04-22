@@ -86,6 +86,7 @@ const getSearchResults = async () => {
     } finally {
       // Flicker Delay to display skeleton
       await new Promise((res) => setTimeout(res, 1000))
+      queryTimeout.value = null
       isLoading.value = false
     }
   }, 1500)
