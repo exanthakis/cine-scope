@@ -239,7 +239,7 @@ watch(
     <p v-else-if="!isLoading && searchError">{{ searchError }}</p>
     <p
       v-else-if="!isLoading && totalResults === 0 && searchQuery.trim().length > 0"
-      class="text-center text-lg font-bold"
+      class="text-blue-navy text-center text-lg font-bold dark:text-white"
     >
       Sorry, we couldn't find any results
     </p>
