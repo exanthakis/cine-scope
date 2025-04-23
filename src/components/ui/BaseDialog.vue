@@ -35,6 +35,15 @@ defineSlots<{
       >
         <header id="header-slot">
           <slot name="header"></slot>
+          <span
+            v-show="classes !== 'favorites'"
+            @click="$emit('close')"
+            :class="[
+              `absolute top-4 right-4 z-[11] flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border-2 border-[#1c1c1c] bg-[#f7f8f8] text-[#f7f8f8]`,
+            ]"
+          >
+            <img alt="Close modal icon" class="size-3.5" src="@/assets/icons/close.svg" />
+          </span>
         </header>
         <section class="py-6" id="default-slot">
           <slot></slot>

@@ -161,7 +161,7 @@ watch(
         </div>
       </div>
 
-      <BaseDialog :show="!!openFavModal" @close="toggleFavModal">
+      <BaseDialog :show="!!openFavModal" classes="favorites" @close="toggleFavModal">
         <template #header>
           <h2 class="text-2xl">{{ favoriteDialogText.heading }}</h2>
         </template>
