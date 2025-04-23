@@ -52,18 +52,20 @@ watchEffect(() => {
   <div class="flex flex-col rounded-lg bg-transparent px-0 pb-4">
     <div class="mb-6 flex items-center justify-between">
       <div class="rounded-md">
-        <span class="p-2 font-semibold"> Min</span>
+        <label for="release-year-min" class="p-2 font-semibold"> Min</label>
         <input
           type="number"
+          id="release-year-min"
           v-model="minValue"
           @input="emit('updateRange', { min: minValue, max: maxValue })"
           class="w-24 rounded-md border border-gray-400 px-2 py-1"
         />
       </div>
       <div class=" ">
-        <span class="p-2 font-semibold"> Max</span>
+        <label for="release-year-max" class="p-2 font-semibold"> Max</label>
         <input
           type="number"
+          id="release-year-max"
           v-model="maxValue"
           @input="emit('updateRange', { min: minValue, max: maxValue })"
           class="w-24 rounded-md border border-gray-400 px-2 py-1"
@@ -88,6 +90,7 @@ watchEffect(() => {
             'range-min pointer-events-none absolute -top-1 h-1 w-full appearance-none bg-transparent',
             disableMinThumb ? 'disabled-thumb' : '',
           ]"
+          aria-label="Release year min button"
         />
 
         <input
@@ -101,6 +104,7 @@ watchEffect(() => {
             'range-max pointer-events-none absolute -top-1 h-1 w-full appearance-none bg-transparent',
             disableMaxThumb ? 'disabled-thumb' : '',
           ]"
+          aria-label="Release year max button"
         />
       </div>
     </div>
