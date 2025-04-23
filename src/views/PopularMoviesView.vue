@@ -62,7 +62,7 @@ onMounted(async () => {
               ></span>
             </h2>
           </div>
-          <div class="grid grid-cols-2 gap-9 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6">
+          <div class="grid grid-cols-2 gap-9 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
             <MovieCard
               v-for="(trendingMovie, idx) in trendingMovies"
               :key="trendingMovie.id"
