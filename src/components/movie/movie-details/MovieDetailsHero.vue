@@ -139,7 +139,7 @@ watch(
       />
     </div>
 
-    <div class="h-full px-[5vw] md:px-[8vw] lg:px-[15vw]">
+    <div class="mx-auto h-full max-w-5xl px-10 md:max-w-4xl lg:max-w-7xl">
       <!-- Custom video cursor that appears on hero cmp hover -->
       <div class="hidden lg:block">
         <div :class="{ 'hidden h-0 w-0 opacity-0': hideCursor }">
@@ -269,7 +269,7 @@ watch(
       </div>
 
       <div
-        class="bg-gradient-red text-white-primary shadow-[8px 5px 16px 0 rgba(0,0,0,.37)] pointer-events-auto relative bottom-15 z-2 container mx-auto flex w-full cursor-auto items-center justify-between rounded-sm px-4 py-3"
+        class="bg-gradient-red text-white-primary shadow-[8px 5px 16px 0 rgba(0,0,0,.37)] pointer-events-auto relative bottom-15 z-2 container mx-auto flex w-[80%] cursor-auto items-center justify-between rounded-sm px-4 py-3"
         @mouseenter="() => (isHovered = true)"
         @mouseleave="() => (isHovered = false)"
       >

@@ -39,7 +39,7 @@ watch(
 
 <template>
   <header
-    class="bg-blue-navy z-10 w-full px-[5vw] shadow-lg backdrop-blur md:px-[8vw] lg:px-[15vw]"
+    class="bg-blue-navy z-10 mx-auto w-full max-w-5xl px-10 shadow-lg backdrop-blur md:max-w-4xl lg:max-w-7xl"
   >
     <nav
       class="flex w-full flex-col items-start justify-between gap-4 py-4 font-light text-gray-400 sm:flex-row sm:items-center"

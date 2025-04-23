@@ -233,7 +233,7 @@ watch(
     </div>
     <div
       v-if="isLoading"
-      class="mx-auto grid grid-cols-2 gap-9 px-[5vw] py-10 sm:grid-cols-2 md:grid-cols-3 md:px-[8vw] lg:grid-cols-4 lg:px-[15vw] xl:grid-cols-5"
+      class="mx-auto grid max-w-5xl grid-cols-2 gap-9 px-10 py-10 sm:grid-cols-2 md:max-w-4xl md:grid-cols-3 md:px-[8vw] lg:max-w-7xl lg:grid-cols-4"
     >
       <MovieCardSkeleton v-for="res in movieResults?.length" :key="res" />
     </div>
@@ -245,7 +245,7 @@ watch(
       Sorry, we couldn't find any results
     </p>
     <div
-      class="px-[5vw] md:px-[8vw] lg:px-[15vw]"
+      class="mx-auto max-w-5xl px-10 md:max-w-4xl lg:max-w-7xl"
       v-else-if="
         !isLoading &&
         totalResults &&
@@ -299,7 +299,7 @@ watch(
       :has-next-page="hasNextPage"
       route="movie-list"
     />
-    <section class="px-[5vw] pb-10 md:px-[8vw] lg:px-[15vw]">
+    <section class="mx-auto max-w-5xl px-10 pb-10 md:max-w-4xl lg:max-w-7xl">
       <div class="mt-5 mb-4 w-full border-b border-gray-500/55 pb-2">
         <h2 class="text-black-primary relative w-fit text-2xl dark:text-white">
           Creator's Selections

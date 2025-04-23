@@ -5,10 +5,10 @@ import AnimatedPlaceholder from '@/components/ui/AnimatedPlaceholder.vue'
 <template>
   <div class="dark:bg-blue-navy relative w-full bg-gray-400 text-white">
     <div
-      class="bg-gradient-bottom h-[80vh] min-h-[70vh] w-full animate-pulse bg-gradient-to-r from-gray-100 bg-cover bg-center px-[5vw] after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-[''] md:px-[8vw] lg:px-[15vw]"
+      class="bg-gradient-bottom mx-auto h-[80vh] min-h-[70vh] w-full animate-pulse bg-gradient-to-r from-gray-100 bg-cover bg-center after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-['']"
     >
       <div
-        class="bg-opacity-50 bg-gradient-left after:right[-200px] container flex h-full items-center justify-start py-12 after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-[60%] after:content-['']"
+        class="bg-opacity-50 bg-gradient-left after:right[-200px] container mx-auto flex h-full max-w-5xl items-center justify-start px-10 py-12 after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-[60%] after:content-[''] md:max-w-4xl lg:max-w-7xl"
       >
         <div class="z-100 w-[30%] text-start">
           <div class="mx-auto pr-4 pl-0">
@@ -34,13 +34,15 @@ import AnimatedPlaceholder from '@/components/ui/AnimatedPlaceholder.vue'
         </div>
       </div>
 
-      <div class="absolute bottom-2 z-10 w-[80%]">
-        <AnimatedPlaceholder class="h-14 max-w-[100%]" />
+      <div
+        class="absolute right-0 bottom-2 left-0 z-10 mx-auto w-[80%] max-w-5xl px-10 md:max-w-4xl lg:max-w-7xl"
+      >
+        <AnimatedPlaceholder class="mx-auto h-14 max-w-[80%]" />
       </div>
     </div>
   </div>
-  <div class="bg-blue-navy w-full px-[5vw] pt-20 md:px-[8vw] lg:px-[15vw]">
-    <div class="container pb-5">
+  <div class="bg-blue-navy w-full pt-20">
+    <div class="mx-auto max-w-5xl px-10 pb-5 md:max-w-4xl lg:max-w-7xl">
       <AnimatedPlaceholder class="mb-8 h-10 max-w-[100%]" />
     </div>
   </div>
