@@ -47,7 +47,7 @@ onMounted(async () => {
 
 <template>
   <main class="min-h-[calc(100vh-60px)] w-full pb-15">
-    <div class="mx-auto max-w-5xl px-10 md:max-w-4xl lg:max-w-7xl">
+    <div class="mx-auto max-w-5xl px-5 sm:px-10 md:max-w-4xl lg:max-w-7xl">
       <div v-if="loading" class="flex h-[50vh] items-center justify-center">
         <BaseSpinner />
       </div>

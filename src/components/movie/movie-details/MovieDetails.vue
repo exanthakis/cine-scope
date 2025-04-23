@@ -93,7 +93,7 @@ watch(
         :poster_path="movieDetails.poster_path"
       />
     </div>
-    <div class="mx-auto max-w-5xl px-10 pt-20 md:max-w-4xl lg:max-w-7xl">
+    <div class="mx-auto max-w-5xl px-5 pt-20 sm:px-10 md:max-w-4xl lg:max-w-7xl">
       <div class="container pb-5">
         <div v-if="movieDetails && movieDetails.tagline" class="pb-10">
           <div class="bg-linear-hr mb-4 h-0.5"></div>

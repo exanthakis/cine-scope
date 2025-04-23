@@ -15,7 +15,7 @@ const favoritesStore = useFavoritesStore()
 <template>
   <div
     :class="[
-      'bg-blue-navy absolute top-0 right-0 bottom-0 left-0 z-1 flex h-fit flex-col items-end justify-between px-[5vw] pt-14 pb-6 transition-transform duration-300 ease-in-out motion-reduce:transition-none md:hidden',
+      'bg-blue-navy absolute top-0 right-0 bottom-0 left-0 z-1 flex h-fit flex-col items-end justify-between px-5 pt-14 pb-6 transition-transform duration-300 ease-in-out motion-reduce:transition-none md:hidden',
       open ? 'translate-y-0' : '-translate-y-[100%]',
     ]"
   >

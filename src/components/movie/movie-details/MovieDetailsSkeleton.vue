@@ -8,7 +8,7 @@ import AnimatedPlaceholder from '@/components/ui/AnimatedPlaceholder.vue'
       class="bg-gradient-bottom mx-auto h-[80vh] min-h-[70vh] w-full animate-pulse bg-gradient-to-r from-gray-100 bg-cover bg-center after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-full after:content-['']"
     >
       <div
-        class="bg-opacity-50 bg-gradient-left after:right[-200px] container mx-auto flex h-full max-w-5xl items-center justify-start px-10 py-12 after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-[60%] after:content-[''] md:max-w-4xl lg:max-w-7xl"
+        class="bg-opacity-50 bg-gradient-left after:right[-200px] container mx-auto flex h-full max-w-5xl items-center justify-start px-5 py-12 after:absolute after:top-0 after:left-0 after:z-[-1] after:h-full after:w-[60%] after:content-[''] sm:px-10 md:max-w-4xl lg:max-w-7xl"
       >
         <div class="z-100 w-[30%] text-start">
           <div class="mx-auto pr-4 pl-0">
@@ -35,14 +35,14 @@ import AnimatedPlaceholder from '@/components/ui/AnimatedPlaceholder.vue'
       </div>
 
       <div
-        class="absolute right-0 bottom-2 left-0 z-10 mx-auto w-[80%] max-w-5xl px-10 md:max-w-4xl lg:max-w-7xl"
+        class="absolute right-0 bottom-2 left-0 z-10 mx-auto w-[80%] max-w-5xl px-5 sm:px-10 md:max-w-4xl lg:max-w-7xl"
       >
         <AnimatedPlaceholder class="mx-auto h-14 max-w-[80%]" />
       </div>
     </div>
   </div>
   <div class="bg-blue-navy w-full pt-20">
-    <div class="mx-auto max-w-5xl px-10 pb-5 md:max-w-4xl lg:max-w-7xl">
+    <div class="mx-auto max-w-5xl px-5 pb-5 sm:px-10 md:max-w-4xl lg:max-w-7xl">
       <AnimatedPlaceholder class="mb-8 h-10 max-w-[100%]" />
     </div>
   </div>
