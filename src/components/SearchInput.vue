@@ -36,6 +36,7 @@ const handleFilterShow = () => {
         <button
           class="x-icon transition-[opacity, rotate, visibility] pointer-events-none invisible !absolute !top-[50%] !right-1 !h-4 !w-4 !translate-x-0 !translate-y-[-50%] rotate-90 !cursor-pointer rounded-sm transition-discrete duration-200"
           @click="$emit('clearSearchQuery')"
+          aria-label="Clear input"
         >
           <IconClose />
         </button>
