@@ -209,7 +209,7 @@ watch(
                 <span class="mx-1 my-0"> | </span>
 
                 <span class="absolute top-[-9999px] left-[-9999px]">Maturity Rating:</span>
-                <span class="border border-[#a1a1a1] p-1">{{ rating }}%</span>
+                <span class="my-1 inline-block border border-[#a1a1a1] p-1">{{ rating }}%</span>
                 <span class="mx-1 my-0"> | </span>
                 <span class="inline-block">{{ duration }}</span>
                 <span class="mx-1 my-0"> | </span>
