@@ -58,7 +58,7 @@ const onFavoriteClick = () => {
       </div>
       <div class="h-full rounded-md" v-else>
         <img
-          alt="Movie image placeholder"
+          alt="Movie image default placeholder"
           class="h-full w-full rounded-lg bg-cover bg-center object-cover object-top shadow-lg"
           src="@/assets/images/no-image-placeholder.png"
         />

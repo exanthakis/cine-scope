@@ -92,7 +92,7 @@ watch(
   <form @submit.prevent="handleSubmitForm">
     <div v-if="!searchQuery.trim()" class="pb-6">
       <div class="mb-4 flex items-center gap-2">
-        <img src="@/assets/icons/genres.svg" alt="Release year icon" class="size-4" />
+        <img src="@/assets/icons/genres.svg" alt="Genres icon" class="size-4" />
         <h2 class="text-dark text-xl">Genres</h2>
       </div>
       <div v-if="genres" class="flex flex-wrap gap-2">
@@ -142,14 +142,16 @@ watch(
     </div>
     <div class="pt-2">
       <div class="relative mb-4 flex items-center gap-2">
-        <img src="@/assets/icons/language.svg" alt="Release year icon" class="size-4" />
+        <img src="@/assets/icons/language.svg" alt="Language icon" class="size-4" />
         <h2 class="text-dark text-xl">Language</h2>
         <BaseTooltip>
           <template #content>
             Language of the movie's metadata (title, overview, etc.), not necessarily the spoken
             language in the movie.
           </template>
-          <template #default><img src="@/assets/icons/info.svg" class="size-5" /></template>
+          <template #default>
+            <img src="@/assets/icons/info.svg" class="size-5" alt="Information icon" />
+          </template>
         </BaseTooltip>
       </div>
       <div class="styleSelect !bg-blue-slate w-full overflow-hidden rounded-full">
