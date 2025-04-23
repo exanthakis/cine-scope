@@ -49,6 +49,7 @@ onMounted(() => {
           : ''
       "
       aria-label="System theme"
+      :aria-checked="theme === 'system'"
       role="radio"
       @click="theme = 'system'"
     >
@@ -61,6 +62,7 @@ onMounted(() => {
           ? 'bg-gray-700 text-white inset-ring ring-transparent inset-ring-white/10'
           : ''
       "
+      :aria-checked="theme === 'light'"
       aria-label="Light theme"
       role="radio"
       @click="theme = 'light'"
@@ -74,6 +76,7 @@ onMounted(() => {
           ? 'bg-gray-700 text-white inset-ring ring-transparent inset-ring-white/10'
           : ''
       "
+      :aria-checked="theme === 'dark'"
       aria-label="Dark theme"
       role="radio"
       @click="theme = 'dark'"
