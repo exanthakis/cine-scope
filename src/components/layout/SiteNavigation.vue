@@ -38,11 +38,9 @@ watch(
 </script>
 
 <template>
-  <header
-    class="bg-blue-navy z-10 mx-auto w-full max-w-5xl px-5 shadow-lg backdrop-blur sm:px-10 md:max-w-4xl lg:max-w-7xl"
-  >
+  <header class="bg-blue-navy z-10 w-full shadow-lg backdrop-blur">
     <nav
-      class="flex w-full flex-col items-start justify-between gap-4 py-4 font-light text-gray-400 sm:flex-row sm:items-center"
+      class="mx-auto flex w-full max-w-5xl flex-col items-start justify-between gap-4 px-5 py-4 font-light text-gray-400 sm:flex-row sm:items-center sm:px-10 md:max-w-4xl lg:max-w-7xl"
     >
       <TheLogo />
       <ul class="nav-wrap hidden items-center gap-3 md:flex">
