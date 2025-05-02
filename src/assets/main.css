@@ -13,6 +13,7 @@
   --color-gray-medium: #a3a3a3;
   --color-button-sec-hover: hsla(0, 0%, 59%, 0.3);
   --font-noto-sans: : 'Noto Sans', serif;
+  --breakpoint-3xl: 110rem;
 }
 
 @utility container {

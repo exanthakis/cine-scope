@@ -139,7 +139,9 @@ watch(
       />
     </div>
 
-    <div class="mx-auto h-full max-w-5xl px-5 sm:px-10 md:max-w-4xl lg:max-w-7xl">
+    <div
+      class="3xl:max-w-[100rem] mx-auto h-full max-w-5xl px-5 sm:px-10 md:max-w-4xl lg:max-w-7xl"
+    >
       <!-- Custom video cursor that appears on hero cmp hover -->
       <div class="hidden lg:block">
         <div :class="{ 'hidden h-0 w-0 opacity-0': hideCursor }">
