@@ -17,6 +17,7 @@ body {
 }
 
 .dark .bg-gradient-left::after {
+  opacity: 1;
   background: linear-gradient(
     to right,
     #10141e 0%,
@@ -43,6 +44,7 @@ body {
 }
 
 .bg-gradient-left::after {
+  opacity: 0.7;
   background: linear-gradient(
     to right,
     #f8f9fc 0%,
@@ -184,7 +186,7 @@ nav .active {
 .swiper-button-next {
   height: 102% !important;
   top: 0 !important;
-  background-color: #f8f9fc;
+  background-color: #e5e7eb;
   width: 100%;
   margin-top: 0 !important;
   width: 5% !important;
@@ -222,6 +224,7 @@ nav .active {
 
 @media only screen and (min-width: 640px) {
   .bg-gradient-bottom::after {
+    opacity: 0.7;
     background: linear-gradient(
       to top,
       #f8f9fc 0%,

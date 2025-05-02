@@ -76,7 +76,7 @@ watch(
 </script>
 
 <template>
-  <div class="bg-white-primary dark:bg-blue-navy w-full">
+  <div class="dark:bg-blue-navy w-full bg-gray-200">
     <div class="text-black-primary relative dark:text-white" v-if="movieDetails">
       <MovieDetailsHero
         :id="movieDetails.id"
