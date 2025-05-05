@@ -80,7 +80,7 @@ const onFavoriteClick = () => {
 
       <span
         v-if="isHeroImgLoaded && config.num"
-        class="card-number absolute -bottom-3 z-2 inline-block text-[5rem] leading-none font-bold [text-shadow:0_0_1.5rem_rgba(0,0,0,0.5)] before:absolute before:content-[''] before:[-webkit-text-fill-color:rgb(0,0,0)] before:[-webkit-text-stroke:0.25rem_rgb(255,255,255)] sm:bottom-0 sm:-left-5 sm:before:[-webkit-text-stroke:0]"
+        class="card-number absolute -bottom-3 z-2 inline-block text-[5rem] leading-none font-bold [text-shadow:0_0_1.5rem_rgba(0,0,0,0.5)] before:absolute before:content-[''] before:[-webkit-text-fill-color:rgb(0,0,0)] before:[-webkit-text-stroke:0.25rem_rgb(255,255,255)] sm:bottom-0 sm:-left-5 sm:text-[6rem] sm:before:[-webkit-text-stroke:0]"
       >
         {{ config.num }}
       </span>
