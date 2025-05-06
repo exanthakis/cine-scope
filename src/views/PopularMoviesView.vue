@@ -7,6 +7,7 @@ import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 import MovieCard from '@/components/movie/MovieCard.vue'
 import SwiperSlider from '@/components/ui/SwiperSlider.vue'
 import { MOVIES_SLIDER_BREAKPOINTS } from '@/constants/general'
+import MovieCards from '@/components/movie/MovieCards.vue'
 
 const trendingMovies = ref<Movie[]>([])
 const movies = ref<Movie[]>([])
@@ -25,7 +26,7 @@ onMounted(async () => {
     ])
 
     if (trendingResponse.status === 200)
-      trendingMovies.value = trendingResponse.data.results.slice(0, 6) || [] // Get only the first 6 movies
+      trendingMovies.value = trendingResponse.data.results || [] // Get only the first 6 movies
     else throw new Error('Could not retrieve Trending movies!')
 
     if (popularResponse.status === 200) movies.value = popularResponse.data.results || []
@@ -62,18 +63,8 @@ onMounted(async () => {
               ></span>
             </h2>
           </div>
-          <div class="grid grid-cols-2 gap-9 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
-            <MovieCard
-              v-for="(trendingMovie, idx) in trendingMovies"
-              :key="trendingMovie.id"
-              :id="trendingMovie.id"
-              :title="trendingMovie.title"
-              :imgUrl="trendingMovie.poster_path"
-              :config="{
-                num: idx + 1,
-              }"
-            />
-          </div>
+
+          <MovieCards :movies="trendingMovies" :show-num="true" :limit="6" class="xl:grid-cols-6" />
         </section>
         <section class="mt-10">
           <h2

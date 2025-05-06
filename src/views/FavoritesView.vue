@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MovieCard from '@/components/movie/MovieCard.vue'
+import MovieCards from '@/components/movie/MovieCards.vue'
 import { useFavoritesStore } from '@/stores/favorites'
 import { computed } from 'vue'
 
@@ -21,17 +21,8 @@ const favoriteText = computed(() => {
       <h5 class="pt-10 pb-5 text-lg">
         Found <b>{{ favoritesStore.totalFavorites }}</b> {{ favoriteText }}
       </h5>
-      <div
-        class="max-2xl mx-auto grid grid-cols-2 gap-9 pb-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-      >
-        <MovieCard
-          v-for="movie in favoritesStore.movies"
-          :key="movie.id"
-          :id="movie.id"
-          :title="movie.title"
-          :imgUrl="movie.imgUrl"
-        />
-      </div>
+
+      <MovieCards :movies="favoritesStore.movies" />
     </div>
   </div>
 </template>

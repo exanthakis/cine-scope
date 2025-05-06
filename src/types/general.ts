@@ -1,4 +1,4 @@
-import type { Genre } from './movie'
+import type { Genre, Movie } from './movie'
 
 export interface MovieCardProps {
   id: number
@@ -9,6 +9,12 @@ export interface MovieCardProps {
     hideOutline?: boolean
     num?: number | null
   }
+}
+
+export interface MovieCardsProps {
+  movies: Movie[] | MovieCardStore[]
+  limit?: number
+  showNum?: boolean
 }
 
 export type MovieCardStore = Omit<MovieCardProps, 'hideFav'>

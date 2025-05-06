@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import FiltersForm from '@/components/FiltersForm.vue'
-import MovieCard from '@/components/movie/MovieCard.vue'
+import MovieCards from '@/components/movie/MovieCards.vue'
 import MovieCardSkeleton from '@/components/movie/MovieCardSkeleton.vue'
 import MoviePagination from '@/components/movie/MoviePagination.vue'
 import SearchInput from '@/components/SearchInput.vue'
@@ -279,17 +279,8 @@ watch(
           </span>
         </span>
       </p>
-      <div
-        class="max-2xl mx-auto grid grid-cols-2 gap-9 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-      >
-        <MovieCard
-          v-for="movie in movieResults"
-          :key="movie.id"
-          :id="movie.id"
-          :title="movie.title"
-          :imgUrl="movie.poster_path"
-        />
-      </div>
+
+      <MovieCards :movies="movieResults" />
     </div>
 
     <MoviePagination
@@ -310,20 +301,8 @@ watch(
           ></span>
         </h2>
       </div>
-      <div
-        class="grid grid-cols-2 gap-9 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-      >
-        <MovieCard
-          v-for="(trendingMovie, idx) in mockMovies"
-          :key="trendingMovie.id"
-          :id="trendingMovie.id"
-          :title="trendingMovie.title"
-          :imgUrl="trendingMovie.poster_path"
-          :config="{
-            num: idx + 1,
-          }"
-        />
-      </div>
+
+      <MovieCards :movies="mockMovies" :show-num="true" :limit="15" />
     </section>
   </main>
 </template>
