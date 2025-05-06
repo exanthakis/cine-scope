@@ -25,8 +25,7 @@ onMounted(async () => {
       MovieService.getMoviesByProvider('337'), // Disney+
     ])
 
-    if (trendingResponse.status === 200)
-      trendingMovies.value = trendingResponse.data.results || [] // Get only the first 6 movies
+    if (trendingResponse.status === 200) trendingMovies.value = trendingResponse.data.results || []
     else throw new Error('Could not retrieve Trending movies!')
 
     if (popularResponse.status === 200) movies.value = popularResponse.data.results || []
