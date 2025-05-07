@@ -14,7 +14,6 @@ const router = createRouter({
       props: (route) => ({
         page: parseInt(route.query.page?.toString() || '1'),
         genres: route.query.genres?.toString() || '',
-        query: route.query.query?.toString() || '',
       }),
       meta: {
         title: 'Home',
