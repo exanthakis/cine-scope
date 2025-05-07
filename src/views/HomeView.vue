@@ -16,6 +16,7 @@ import { useRoute, useRouter } from 'vue-router'
 interface HomeViewProps {
   page: number
   genres: string
+  query: string
 }
 
 const props = defineProps<HomeViewProps>()
@@ -43,6 +44,7 @@ const route = useRoute()
 
 const page = computed(() => props.page)
 const genres = computed(() => props.genres)
+const query = computed(() => props.query)
 
 const hasNextPage = computed(() => {
   return page.value < pagination.totalPages
@@ -118,6 +120,7 @@ const handleFiltersData = (data: MovieFilter) => {
 // Genre Filter
 onMounted(() => {
   if (genres.value) selectedFilters.value.genres = [parseInt(genres.value)] //Initialize with genres from movie details hero click
+  if (query.value) searchState.searchQuery = query.value
 
   genresResult.value = null
   MovieService.getGenres()
@@ -198,7 +201,7 @@ watch(
   getSearchResults,
 )
 
-watch([withGenres, fullReleaseYear, selectedLanguage], () => {
+watch([withGenres, fullReleaseYear, selectedLanguage, () => searchState.searchQuery], () => {
   router.replace({
     name: 'movie-list',
     query: {
@@ -209,6 +212,30 @@ watch([withGenres, fullReleaseYear, selectedLanguage], () => {
     },
   })
 })
+
+watch(
+  [() => searchState.searchQuery, () => searchState.isLoading, () => searchState.movieResults],
+  () => {
+    if (!searchState.isLoading && searchState.movieResults && searchState.searchQuery.trim()) {
+      router.replace({
+        name: 'movie-list',
+        query: {
+          ...route.query,
+          query: searchState.searchQuery,
+        },
+      })
+    } else if (!searchState.searchQuery.trim()) {
+      const { query, ...rest } = route
+      const newQuery = { ...query }
+      delete newQuery.query
+
+      router.replace({
+        ...rest,
+        query: newQuery,
+      })
+    }
+  },
+)
 
 watch(
   [showFilters],
