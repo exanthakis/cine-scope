@@ -10,7 +10,7 @@ import { mockMovies } from '@/mocks/movies'
 import MovieService from '@/services/MovieService'
 import type { MovieFilter, ReleaseYear, SelectedFilters } from '@/types/general'
 import { type Genre, type Movie } from '@/types/movie'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 interface HomeViewProps {
@@ -19,13 +19,18 @@ interface HomeViewProps {
 }
 
 const props = defineProps<HomeViewProps>()
-const totalPages = ref(0)
-const totalResults = ref<number | null>(null)
-const searchQuery = ref('')
+
 const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
-const movieResults = ref<Movie[] | null>(null)
-const isLoading = ref(false)
-const searchError = ref<string | null>(null)
+const searchState = reactive({
+  searchQuery: '',
+  movieResults: null as Movie[] | null,
+  isLoading: false,
+  searchError: null as string | null,
+})
+const pagination = reactive({
+  totalPages: 0,
+  totalResults: null as number | null,
+})
 const showFilters = ref(false)
 const genresResult = ref<Genre[] | null>(null)
 const selectedFilters = ref<SelectedFilters>({
@@ -40,54 +45,58 @@ const page = computed(() => props.page)
 const genres = computed(() => props.genres)
 
 const hasNextPage = computed(() => {
-  return page.value < totalPages.value
+  return page.value < pagination.totalPages
 })
 
 const getSearchResults = async () => {
   if (queryTimeout.value) clearTimeout(queryTimeout.value)
 
-  if (!searchQuery.value.trim() && !withGenres.value.trim() && !fullReleaseYear.value.trim()) {
-    movieResults.value = null
-    totalResults.value = null
-    totalPages.value = 0
+  if (
+    !searchState.searchQuery.trim() &&
+    !withGenres.value.trim() &&
+    !fullReleaseYear.value.trim()
+  ) {
+    searchState.movieResults = null
+    pagination.totalResults = null
+    pagination.totalPages = 0
     return
   }
-  movieResults.value = null
-  searchError.value = null
-  totalResults.value = null
+  searchState.movieResults = null
+  searchState.searchError = null
+  pagination.totalResults = null
 
   // Remove genres filters when is typed a search query since search api does not accept genres filter.
   // TODO: Show an alert
-  if (searchQuery.value.trim()) {
+  if (searchState.searchQuery.trim()) {
     selectedFilters.value.genres = []
   }
 
   // Remove release year range filter when is typed a search query and we have set a range value through range slider. (releaseYear?.gte = 0 when we use single range slider)
-  if (searchQuery.value.trim() && selectedFilters.value.releaseYear?.gte)
+  if (searchState.searchQuery.trim() && selectedFilters.value.releaseYear?.gte)
     selectedFilters.value.releaseYear = null
 
   queryTimeout.value = setTimeout(async () => {
-    isLoading.value = true
+    searchState.isLoading = true
     try {
       const movieDetails = await MovieService.searchMovies(
-        searchQuery.value,
+        searchState.searchQuery,
         withGenres.value,
         releaseYear.value,
         selectedLanguage.value,
         page.value,
       )
-      totalResults.value = movieDetails.data.total_results
-      movieResults.value = movieDetails.data.results
-      totalPages.value = movieDetails.data.total_pages
+      pagination.totalResults = movieDetails.data.total_results
+      searchState.movieResults = movieDetails.data.results
+      pagination.totalPages = movieDetails.data.total_pages
     } catch (error) {
-      searchError.value =
+      searchState.searchError =
         error instanceof Error ? error.message : 'Failed to fetch data - please try again later'
       router.push({ name: 'network-error' })
     } finally {
       // Flicker Delay to display skeleton
       await new Promise((res) => setTimeout(res, 1000))
       queryTimeout.value = null
-      isLoading.value = false
+      searchState.isLoading = false
     }
   }, 1500)
 }
@@ -184,7 +193,10 @@ const selectedFullLanguage = computed(() =>
 )
 
 // Watchers
-watch([page, withGenres, searchQuery, fullReleaseYear, selectedLanguage], getSearchResults)
+watch(
+  [page, withGenres, () => searchState.searchQuery, fullReleaseYear, selectedLanguage],
+  getSearchResults,
+)
 
 watch([withGenres, fullReleaseYear, selectedLanguage], () => {
   router.replace({
@@ -220,26 +232,32 @@ watch(
             @submit-filters-form="handleFiltersData"
             @reset-filters="resetFilters"
             :genres="genresResult"
-            :searchQuery="searchQuery"
+            :searchQuery="searchState.searchQuery"
           />
         </template>
         <template #actions><span></span></template>
       </BaseDialog>
       <SearchInput
-        v-model:searchQuery="searchQuery"
+        v-model:searchQuery="searchState.searchQuery"
         @on-filter-show="showFilters = true"
-        @clear-search-query="searchQuery = ''"
+        @clear-search-query="searchState.searchQuery = ''"
       />
     </div>
     <div
-      v-if="isLoading"
-      class="3xl:max-w-[100rem] mx-auto grid max-w-5xl grid-cols-2 gap-9 px-5 py-10 sm:grid-cols-2 sm:px-10 md:max-w-4xl md:grid-cols-3 lg:max-w-5xl lg:grid-cols-4 xl:grid-cols-5"
+      v-if="searchState.isLoading"
+      class="3xl:max-w-[100rem] mx-auto grid max-w-5xl grid-cols-2 gap-9 px-5 py-10 pb-10 sm:grid-cols-2 sm:px-10 md:max-w-4xl md:grid-cols-3 lg:max-w-7xl lg:grid-cols-4 xl:grid-cols-5"
     >
-      <MovieCardSkeleton v-for="res in movieResults?.length" :key="res" />
+      <MovieCardSkeleton v-for="res in searchState.movieResults?.length" :key="res" />
     </div>
-    <p v-else-if="!isLoading && searchError">{{ searchError }}</p>
+    <p v-else-if="!searchState.isLoading && searchState.searchError">
+      {{ searchState.searchError }}
+    </p>
     <p
-      v-else-if="!isLoading && totalResults === 0 && searchQuery.trim().length > 0"
+      v-else-if="
+        !searchState.isLoading &&
+        pagination.totalResults === 0 &&
+        searchState.searchQuery.trim().length > 0
+      "
       class="text-blue-navy text-center text-lg font-bold dark:text-white"
     >
       Sorry, we couldn't find any results
@@ -247,11 +265,11 @@ watch(
     <div
       class="3xl:max-w-[100rem] mx-auto max-w-5xl px-5 sm:px-10 md:max-w-4xl lg:max-w-7xl"
       v-else-if="
-        !isLoading &&
-        totalResults &&
-        totalResults > 0 &&
-        movieResults?.length &&
-        movieResults?.length > 0
+        !searchState.isLoading &&
+        pagination.totalResults &&
+        pagination.totalResults > 0 &&
+        searchState.movieResults?.length &&
+        searchState.movieResults?.length > 0
       "
     >
       <p
@@ -259,10 +277,14 @@ watch(
       >
         <span class="sm:text-nowrap">
           Found
-          <b>{{ totalResults }}</b> results for:
+          <b>{{ pagination.totalResults }}</b> results for:
         </span>
         <span class="flex flex-wrap justify-start gap-2 sm:pl-2">
-          <BaseBadge v-if="searchQuery.trim()" :title="searchQuery" @close="searchQuery = ''" />
+          <BaseBadge
+            v-if="searchState.searchQuery.trim()"
+            :title="searchState.searchQuery"
+            @close="searchState.searchQuery = ''"
+          />
           <span class="flex flex-wrap justify-start gap-2">
             <BaseBadge
               v-for="filter in selectedFilters.genres"
@@ -280,12 +302,12 @@ watch(
         </span>
       </p>
 
-      <MovieCards :movies="movieResults" />
+      <MovieCards :movies="searchState.movieResults" />
     </div>
 
     <MoviePagination
-      v-show="movieResults && movieResults.length > 0"
-      :total-pages="totalPages"
+      v-show="searchState.movieResults && searchState.movieResults.length > 0"
+      :total-pages="pagination.totalPages"
       :page="page"
       :has-next-page="hasNextPage"
       route="movie-list"
