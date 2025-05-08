@@ -17,6 +17,8 @@ interface HomeViewProps {
   page: number
   genres: string
   query: string
+  lang: string
+  year: string
 }
 
 const props = defineProps<HomeViewProps>()
@@ -45,6 +47,8 @@ const route = useRoute()
 const page = computed(() => props.page)
 const genres = computed(() => props.genres)
 const query = computed(() => props.query)
+const lang = computed(() => props.lang)
+const year = computed(() => props.year)
 
 const hasNextPage = computed(() => {
   return page.value < pagination.totalPages
@@ -119,8 +123,19 @@ const handleFiltersData = (data: MovieFilter) => {
 
 // Genre Filter
 onMounted(() => {
-  if (genres.value) selectedFilters.value.genres = [parseInt(genres.value)] //Initialize with genres from movie details hero click
+  if (genres.value)
+    selectedFilters.value.genres = (
+      Array.isArray(genres.value) ? genres.value.join('|') : genres.value || ''
+    )
+      ?.split('|')
+      .map(Number) //Initialize with genres from movie details hero click
   if (query.value) searchState.searchQuery = query.value
+  if (lang.value) selectedFilters.value.language = lang.value
+  if (year.value) {
+    selectedFilters.value.releaseYear = year.value.includes('|')
+      ? { lte: year.value.split('|')[1], gte: year.value.split('|')[0] }
+      : { lte: year.value, gte: '' }
+  }
 
   genresResult.value = null
   MovieService.getGenres()
@@ -201,40 +216,55 @@ watch(
   getSearchResults,
 )
 
-watch([withGenres, fullReleaseYear, selectedLanguage, () => searchState.searchQuery], () => {
-  router.replace({
-    name: 'movie-list',
-    query: {
-      ...route.query,
-      genres: withGenres.value ?? undefined,
-      year: fullReleaseYear.value ?? undefined,
-      lang: selectedLanguage.value ?? undefined,
-    },
-  })
-})
-
+//  Handle query updates for genres, year, language, and search query.
 watch(
-  [() => searchState.searchQuery, () => searchState.isLoading, () => searchState.movieResults],
+  [
+    withGenres,
+    selectedLanguage,
+    () => searchState.searchQuery,
+    () => searchState.isLoading,
+    selectedFilters,
+  ],
   () => {
-    if (!searchState.isLoading && searchState.movieResults && searchState.searchQuery.trim()) {
+    const query = { ...route.query }
+
+    if (fullReleaseYear.value && fullReleaseYear.value != '|') {
+      query.year = fullReleaseYear.value
+    } else {
+      delete query.year
+    }
+
+    if (selectedLanguage.value) {
+      query.lang = selectedLanguage.value
+    } else {
+      delete query.lang
+    }
+
+    if (searchState.searchQuery && !searchState.isLoading && searchState.movieResults) {
+      query.query = searchState.searchQuery
+    } else {
+      delete query.query
+    }
+
+    const newGenres = selectedFilters.value.genres?.join('|') || ''
+
+    if (newGenres) {
+      query.genres = newGenres
+    } else {
+      delete query.genres
+    }
+
+    const currentQuery = { ...route.query }
+    const queryChanged = JSON.stringify(currentQuery) !== JSON.stringify(query)
+
+    if (queryChanged) {
       router.replace({
         name: 'movie-list',
-        query: {
-          ...route.query,
-          query: searchState.searchQuery,
-        },
-      })
-    } else if (!searchState.searchQuery.trim()) {
-      const { query, ...rest } = route
-      const newQuery = { ...query }
-      delete newQuery.query
-
-      router.replace({
-        ...rest,
-        query: newQuery,
+        query,
       })
     }
   },
+  { deep: true },
 )
 
 watch(

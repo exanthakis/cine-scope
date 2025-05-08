@@ -15,6 +15,8 @@ const router = createRouter({
         page: parseInt(route.query.page?.toString() || '1'),
         genres: route.query.genres?.toString() || '',
         query: route.query.query?.toString() || '',
+        lang: route.query.lang?.toString() || '',
+        year: route.query.year?.toString() || '',
       }),
       meta: {
         title: 'Home',
