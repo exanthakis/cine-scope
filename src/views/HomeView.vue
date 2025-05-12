@@ -5,6 +5,7 @@ import MovieCardSkeleton from '@/components/movie/MovieCardSkeleton.vue'
 import MoviePagination from '@/components/movie/MoviePagination.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import BaseBadge from '@/components/ui/BaseBadge.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
 import { LANGUAGES } from '@/constants/general'
 import { mockMovies } from '@/mocks/movies'
 import MovieService from '@/services/MovieService'
@@ -210,6 +211,31 @@ const selectedFullLanguage = computed(() =>
   LANGUAGES.find((el) => el.code === selectedFilters.value.language),
 )
 
+const clearSearchQuery = () => {
+  const query = { ...route.query }
+
+  delete query.page
+  delete query.genres
+  delete query.query
+  delete query.lang
+  delete query.year
+
+  searchState.searchQuery = ''
+  router.replace({
+    name: 'movie-list',
+    query,
+  })
+}
+
+const clearFilters = () => {
+  clearSearchQuery()
+  selectedFilters.value = {
+    genres: [],
+    releaseYear: null,
+    language: '',
+  }
+}
+
 // Watchers
 watch(
   [page, withGenres, () => searchState.searchQuery, fullReleaseYear, selectedLanguage],
@@ -297,7 +323,7 @@ watch(
       <SearchInput
         v-model:searchQuery="searchState.searchQuery"
         @on-filter-show="showFilters = true"
-        @clear-search-query="searchState.searchQuery = ''"
+        @clear-search-query="clearSearchQuery"
       />
     </div>
     <div
@@ -330,13 +356,13 @@ watch(
       "
     >
       <p
-        class="dark:text-white-primary flex flex-col justify-start gap-2 pb-4 text-left sm:flex-row"
+        class="dark:text-white-primary flex flex-col justify-start gap-5 pb-6 text-left sm:flex-row sm:gap-3"
       >
         <span class="sm:text-nowrap">
           Found
           <b>{{ pagination.totalResults }}</b> results for:
         </span>
-        <span class="flex flex-wrap justify-start gap-2 sm:pl-2">
+        <span class="flex h-fit flex-wrap justify-start gap-2 sm:pl-2">
           <BaseBadge
             v-if="searchState.searchQuery.trim()"
             :title="searchState.searchQuery"
@@ -357,6 +383,14 @@ watch(
             />
           </span>
         </span>
+        <BaseButton
+          class="!bg-white-primary !text-black-primary m-0 !h-fit cursor-pointer !rounded-full !px-3 !py-1 whitespace-pre sm:ml-auto"
+          mode="secondary"
+          type="button"
+          @click="clearFilters"
+        >
+          Clear All
+        </BaseButton>
       </p>
 
       <MovieCards :movies="searchState.movieResults" />
