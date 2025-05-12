@@ -370,6 +370,7 @@ watch(
       route="movie-list"
     />
     <section
+      v-show="!searchState.movieResults && !searchState.isLoading && !pagination.totalResults"
       class="3xl:max-w-[100rem] mx-auto max-w-5xl px-5 pb-10 sm:px-10 md:max-w-4xl lg:max-w-7xl"
     >
       <div class="mt-5 mb-4 w-full border-b border-gray-500/55 pb-2">
