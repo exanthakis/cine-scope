@@ -236,6 +236,18 @@ const clearFilters = () => {
   }
 }
 
+const goToFirstPage = () => {
+  const query = {
+    ...route.query,
+    page: '1',
+  }
+
+  router.replace({
+    name: 'movie-list',
+    query,
+  })
+}
+
 // Watchers
 watch(
   [page, withGenres, () => searchState.searchQuery, fullReleaseYear, selectedLanguage],
@@ -326,6 +338,16 @@ watch(
         @clear-search-query="clearSearchQuery"
       />
     </div>
+
+    <h3
+      class="text-black-primary dark:text-white-primary px-4 text-center"
+      v-if="page > pagination.totalPages"
+    >
+      It looks like you're trying to reach a page that does not exist.
+      <a href="#" @click="goToFirstPage" class="font-bold">Click here</a> to go to the first page
+      for the movie: <span class="font-bold">{{ searchState.searchQuery }}</span
+      >.
+    </h3>
     <div
       v-if="searchState.isLoading"
       class="3xl:max-w-[100rem] mx-auto grid max-w-5xl grid-cols-2 gap-9 px-5 py-10 pb-10 sm:grid-cols-2 sm:px-10 md:max-w-4xl md:grid-cols-3 lg:max-w-7xl lg:grid-cols-4 xl:grid-cols-5"
