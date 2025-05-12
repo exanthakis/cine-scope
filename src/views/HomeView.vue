@@ -341,7 +341,7 @@ watch(
 
     <h3
       class="text-black-primary dark:text-white-primary px-4 text-center"
-      v-if="page > pagination.totalPages"
+      v-if="page > pagination.totalPages && pagination.totalPages"
     >
       It looks like you're trying to reach a page that does not exist.
       <a href="#" @click="goToFirstPage" class="font-bold">Click here</a> to go to the first page
