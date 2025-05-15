@@ -222,6 +222,11 @@ nav .active {
   color: #fff;
 }
 
+/* Change cookies banner bg color */
+.cm__btn:not(.cm__btn--secondary) {
+  background-color: #10141e !important;
+}
+
 @media only screen and (min-width: 640px) {
   .bg-gradient-bottom::after {
     opacity: 0.7;
