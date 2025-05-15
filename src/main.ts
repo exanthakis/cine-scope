@@ -7,6 +7,7 @@ import App from './App.vue'
 import router from './router'
 import BaseButton from './components/ui/BaseButton.vue'
 import BaseDialog from './components/ui/BaseDialog.vue'
+import { setupCookieConsent } from './analytics/cookieConsent'
 
 const app = createApp(App)
 
@@ -15,3 +16,5 @@ app.use(createPinia())
 app.use(router)
 
 app.mount('#app')
+
+setupCookieConsent()
