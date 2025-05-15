@@ -23,8 +23,8 @@ export const loadGoogleAnalytics = () => {
 
   script.onload = () => {
     setTimeout(() => {
-      if ((window as any).gtag) {
-        ;(window as any).gtag('event', 'page_view', {
+      if (window.gtag) {
+        window.gtag('event', 'page_view', {
           page_path: window.location.pathname + window.location.search,
           page_location: window.location.href,
           page_title: document.title,
@@ -35,8 +35,8 @@ export const loadGoogleAnalytics = () => {
 
   // Track SPA page views
   router.afterEach((to) => {
-    if ((window as any).gtag) {
-      ;(window as any).gtag('config', GA_MEASUREMENT_ID, {
+    if (window.gtag) {
+      window.gtag('config', GA_MEASUREMENT_ID, {
         page_path: to.fullPath,
       })
     }
