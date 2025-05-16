@@ -24,9 +24,9 @@ export const setupCookieConsent = () => {
       translations: {
         en: {
           consentModal: {
-            title: 'We use cookies!',
+            title: '🍪 We use cookies!',
             description:
-              'Our website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.',
+              'Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.',
             acceptAllBtn: 'Accept all',
             acceptNecessaryBtn: 'Reject all',
             showPreferencesBtn: 'Manage preferences',
