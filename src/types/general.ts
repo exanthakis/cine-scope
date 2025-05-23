@@ -3,6 +3,7 @@ import type { Genre, Movie } from './movie'
 export interface MovieCardProps {
   id: number
   title: string
+  description?: string
   imgUrl?: string
   config?: {
     hideFav?: boolean

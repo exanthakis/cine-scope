@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import FiltersForm from '@/components/FiltersForm.vue'
+import ListCardSkeleton from '@/components/list/ListCardSkeleton.vue'
 import MovieCards from '@/components/movie/MovieCards.vue'
 import MovieCardSkeleton from '@/components/movie/MovieCardSkeleton.vue'
 import MoviePagination from '@/components/movie/MoviePagination.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import BaseBadge from '@/components/ui/BaseBadge.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
+import MoviesViewToggle from '@/components/ui/MoviesViewToggle.vue'
 import { LANGUAGES } from '@/constants/general'
 import { mockMovies } from '@/mocks/movies'
 import MovieService from '@/services/MovieService'
+import { useMoviesViewStore } from '@/stores/movies-view'
+import { MOVIES_VIEW } from '@/types/enums'
 import type { MovieFilter, ReleaseYear, SelectedFilters } from '@/types/general'
 import { type Genre, type Movie } from '@/types/movie'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
@@ -24,6 +28,7 @@ interface HomeViewProps {
 
 const props = defineProps<HomeViewProps>()
 
+const moviesViewStore = useMoviesViewStore()
 const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 const searchState = reactive({
   searchQuery: '',
@@ -349,10 +354,16 @@ watch(
       >.
     </h3>
     <div
-      v-if="searchState.isLoading"
+      v-if="searchState.isLoading && moviesViewStore.view === MOVIES_VIEW.CARDS_VIEW"
       class="3xl:max-w-[100rem] mx-auto grid max-w-5xl grid-cols-2 gap-9 px-5 py-10 pb-10 sm:grid-cols-2 sm:px-10 md:max-w-4xl md:grid-cols-3 lg:max-w-7xl lg:grid-cols-4 xl:grid-cols-5"
     >
       <MovieCardSkeleton v-for="res in searchState.movieResults?.length" :key="res" />
+    </div>
+    <div
+      v-if="searchState.isLoading && moviesViewStore.view === MOVIES_VIEW.LIST_VIEW"
+      class="3xl:max-w-[100rem] mx-auto flex max-w-5xl flex-col gap-9 px-5 py-10 pb-10 sm:px-10 md:max-w-4xl lg:max-w-7xl"
+    >
+      <ListCardSkeleton v-for="res in searchState.movieResults?.length" :key="res" />
     </div>
     <p v-else-if="!searchState.isLoading && searchState.searchError">
       {{ searchState.searchError }}
@@ -406,13 +417,14 @@ watch(
           </span>
         </span>
         <BaseButton
-          class="!bg-white-primary !text-black-primary m-0 !h-fit cursor-pointer !rounded-full !px-3 !py-1 whitespace-pre sm:ml-auto"
+          class="bg-black-primary/10 dark:bg-white-primary !text-black-primary m-0 !h-fit cursor-pointer !rounded-full !px-3 !py-1 whitespace-pre sm:ml-auto"
           mode="secondary"
           type="button"
           @click="clearFilters"
         >
           Clear All
         </BaseButton>
+        <MoviesViewToggle />
       </p>
 
       <MovieCards :movies="searchState.movieResults" />
@@ -429,13 +441,17 @@ watch(
       v-show="!searchState.movieResults && !searchState.isLoading && !pagination.totalResults"
       class="3xl:max-w-[100rem] mx-auto max-w-5xl px-5 pb-10 sm:px-10 md:max-w-4xl lg:max-w-7xl"
     >
-      <div class="mt-5 mb-4 w-full border-b border-gray-500/55 pb-2">
+      <div
+        class="mt-5 mb-4 flex w-full items-center justify-between gap-3 border-b border-gray-500/55 pb-2"
+      >
         <h2 class="text-black-primary relative w-fit text-2xl dark:text-white">
           Creator's Selections
           <span
             class="bg-red-netflix absolute top-0 -right-4 inline-flex h-2 w-2 animate-ping rounded-full opacity-75"
           ></span>
         </h2>
+
+        <MoviesViewToggle />
       </div>
 
       <MovieCards :movies="mockMovies" :show-num="true" :limit="15" />

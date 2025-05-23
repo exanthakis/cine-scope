@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 import MovieCard from '@/components/movie/MovieCard.vue'
 import SwiperSlider from '@/components/ui/SwiperSlider.vue'
+import MoviesViewToggle from '@/components/ui/MoviesViewToggle.vue'
 import { MOVIES_SLIDER_BREAKPOINTS } from '@/constants/general'
 import MovieCards from '@/components/movie/MovieCards.vue'
 
@@ -54,16 +55,19 @@ onMounted(async () => {
 
       <div v-else>
         <section class="mt-10">
-          <div class="mt-5 mb-4 w-full border-b border-gray-500/55 pb-2">
+          <div
+            class="mt-5 mb-4 flex w-full items-center justify-between gap-3 border-b border-gray-500/55 pb-2"
+          >
             <h2 class="text-black-primary relative w-fit text-2xl dark:text-white">
               Trending movies
               <span
                 class="bg-red-netflix absolute top-0 -right-4 inline-flex h-2 w-2 animate-ping rounded-full opacity-75"
               ></span>
             </h2>
+            <MoviesViewToggle />
           </div>
 
-          <MovieCards :movies="trendingMovies" :show-num="true" :limit="6" class="xl:grid-cols-6" />
+          <MovieCards :movies="trendingMovies" :show-num="true" :limit="5" />
         </section>
         <section class="mt-10">
           <h2
