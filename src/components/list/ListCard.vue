@@ -49,9 +49,6 @@ const numberClasses = computed(() => {
     .filter(Boolean)
     .join(' ')
 })
-
-console.log('isHovered', isHovered.value)
-watch(isHovered, () => console.log(isHovered.value), { deep: true })
 </script>
 <template>
   <RouterLink
