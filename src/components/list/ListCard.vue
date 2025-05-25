@@ -59,7 +59,7 @@ watch(isHovered, () => console.log(isHovered.value), { deep: true })
     class="group before:outline-blue-navy dark:bg-black-primary/50 bg-black-primary/10 xs:flex-row relative flex transform cursor-pointer flex-col justify-start gap-4 rounded-md transition duration-400 before:absolute before:inset-0 before:rounded-sm before:border-3 before:border-solid before:border-transparent before:opacity-0 before:outline-3 before:outline-offset-3 before:transition-opacity before:duration-300 before:content-[''] hover:scale-105 dark:before:outline-white"
   >
     <div
-      class="h-full rounded-md md:w-[20%]"
+      class="h-full rounded-md sm:max-w-[12rem] md:w-[20%]"
       :class="config.hideOutline ? 'hover:before:opacity-0' : 'hover:before:opacity-100'"
     >
       <div
