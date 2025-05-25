@@ -17,6 +17,8 @@ const disneyMovies = ref<Movie[]>([])
 const loading = ref(true)
 const router = useRouter()
 
+const limit = ref(5)
+
 onMounted(async () => {
   try {
     const [trendingResponse, popularResponse, netflixResponse, disneyResponse] = await Promise.all([
@@ -44,6 +46,10 @@ onMounted(async () => {
     loading.value = false
   }
 })
+
+const loadTrendingMovies = () => {
+  limit.value = limit.value === 5 ? trendingMovies.value.length : 5
+}
 </script>
 
 <template>
@@ -67,7 +73,14 @@ onMounted(async () => {
             <MoviesViewToggle />
           </div>
 
-          <MovieCards :movies="trendingMovies" :show-num="true" :limit="5" />
+          <MovieCards :movies="trendingMovies" :show-num="true" :limit="limit" />
+          <BaseButton
+            @click="loadTrendingMovies"
+            class="mx-auto flex cursor-pointer !rounded-full"
+            mode="primary"
+          >
+            {{ limit === 5 ? 'Load more' : 'Load less' }}
+          </BaseButton>
         </section>
         <section class="mt-10">
           <h2

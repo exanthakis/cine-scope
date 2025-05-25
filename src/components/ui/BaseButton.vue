@@ -8,9 +8,9 @@ defineSlots<{
 }>()
 
 const buttonClasses = computed(() => [
-  'relative px-6 py-2 text-white no-underline align-middle cursor-pointer text-sm rounded-xs font-bold',
+  'relative px-6 py-2 text-white no-underline align-middle cursor-pointer text-sm rounded-xs font-bold transition-all ease-in',
   mode === 'primary'
-    ? '!bg-red-netflix hover:bg-button-hover'
+    ? 'bg-red-netflix hover:bg-button-hover/60'
     : 'bg-black-primary hover:bg-button-sec-hover hover:border-0 hover:text-black-primary ',
 ])
 </script>

@@ -64,7 +64,7 @@ const visiblePages = computed(() => {
         v-for="p in visiblePages"
         :key="p"
         :mode="p === page ? 'primary' : 'secondary'"
-        class="dark:bg-white-primary dark:text-black-primary !px-2 sm:!px-3"
+        :class="`${p !== page ? 'dark:bg-white-primary dark:text-black-primary' : ''} !px-2 sm:!px-3`"
         @click="goToPage(p)"
       >
         {{ p }}
