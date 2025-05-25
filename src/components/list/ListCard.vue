@@ -135,3 +135,23 @@ watch(isHovered, () => console.log(isHovered.value), { deep: true })
     </div>
   </RouterLink>
 </template>
+
+<style scoped>
+.fade-text-enter-from,
+.fade-text-leave-to {
+  opacity: 0;
+}
+
+.fade-text-enter-active {
+  transition: opacity 0.1s ease-out;
+}
+
+.fade-text-enter-to,
+.fade-text-leave-from {
+  opacity: 1;
+}
+
+.fade-text-leave-active {
+  transition: opacity 0.1s ease-in;
+}
+</style>
