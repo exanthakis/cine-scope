@@ -1,40 +1,22 @@
 <script setup lang="ts">
-import MovieService from '@/services/MovieService'
 import type { MovieDetailsProps } from '@/types/general'
 import type { MovieDetails } from '@/types/movie'
 import { computed, ref, watch } from 'vue'
 import MovieDetailsItem from './MovieDetailsItem.vue'
-import { useRoute, useRouter } from 'vue-router'
-import type { AxiosError } from 'axios'
+import { useRoute } from 'vue-router'
 import SimilarMovies from '../SimilarMovies.vue'
 import CreditsWrapper from '@/components/CreditsWrapper.vue'
 import MovieDetailsHero from './MovieDetailsHero.vue'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
+import { useMovieDetails } from '@/composables/useMovieDetails'
 
 const { id } = defineProps<MovieDetailsProps>()
 const route = useRoute()
-const router = useRouter()
 const movieDetails = ref<MovieDetails | null>(null)
-const isLoading = ref(false)
 
-const getMovieData = async () => {
-  isLoading.value = true
-  try {
-    const response = await MovieService.getMovieData(id)
-    return response.data
-  } catch (err) {
-    const error = err as AxiosError
-    if (error.response?.status === 404) {
-      router.push({ name: '404-resource', params: { resource: 'movie' } })
-    } else {
-      router.push({ name: 'network-error' })
-    }
-  } finally {
-    isLoading.value = false
-  }
-}
+const { getMovieDetails, isLoading } = useMovieDetails(id)
 
-movieDetails.value = await getMovieData()
+movieDetails.value = await getMovieDetails()
 
 const spokenLanguages = computed(
   () => movieDetails.value?.spoken_languages?.map((l) => l.english_name).join(', ') ?? 'N/A',
@@ -70,7 +52,7 @@ const providers = computed(() => movieDetails.value?.['watch/providers']?.result
 watch(
   () => route.params.id,
   async (newId) => {
-    if (newId) movieDetails.value = await getMovieData()
+    if (newId) movieDetails.value = await getMovieDetails()
   },
 )
 </script>
