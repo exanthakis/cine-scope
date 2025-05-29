@@ -4,7 +4,7 @@ import { useFavoritesStore } from '@/stores/favorites'
 import { useMoviesViewStore } from '@/stores/movies-view'
 import { MOVIES_VIEW } from '@/types/enums'
 import type { MovieCardProps, MovieCardStore } from '@/types/general'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 const {
   id,
