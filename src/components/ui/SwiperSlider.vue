@@ -8,7 +8,7 @@ import { CREDITS_SLIDER_BREAKPOINTS, DEVICE_BREAKPOINTS } from '@/constants/gene
 import type { Movie } from '@/types/movie'
 import type { CreditsArr, SwiperSliderProps } from '@/types/general'
 import { computed } from 'vue'
-import { useWindowResize } from '@/hooks/useWindowResize'
+import { useWindowResize } from '@/composables/useWindowResize'
 
 const {
   breakpoints = CREDITS_SLIDER_BREAKPOINTS,

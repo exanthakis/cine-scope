@@ -6,7 +6,7 @@ import { MOVIES_SLIDER_BREAKPOINTS } from '@/constants/general'
 import SwiperSlider from '@/components/ui/SwiperSlider.vue'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 import MovieCard from '@/components/movie/MovieCard.vue'
-import { useSimilarMovies } from '@/hooks/useSimilarMovies'
+import { useSimilarMovies } from '@/composables/useSimilarMovies'
 
 interface SimilarMoviesProps {
   id?: number

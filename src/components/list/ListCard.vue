@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMouse } from '@/hooks/useMouse'
+import { useMouse } from '@/composables/useMouse'
 import { useFavoritesStore } from '@/stores/favorites'
 import { useMoviesViewStore } from '@/stores/movies-view'
 import { MOVIES_VIEW } from '@/types/enums'

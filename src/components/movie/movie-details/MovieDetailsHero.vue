@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import IconPlay from '@/components/icons/IconPlay.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
-import { useMouse } from '@/hooks/useMouse'
+import { useMouse } from '@/composables/useMouse'
 import { useFavoritesStore } from '@/stores/favorites'
 import type { MovieCardStore, MovieDetailsHeroProps } from '@/types/general'
 import { computed, ref, watch } from 'vue'
