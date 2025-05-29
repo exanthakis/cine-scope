@@ -1,42 +1,22 @@
 <script setup lang="ts">
-import MovieService from '@/services/MovieService'
-import type { AxiosError } from 'axios'
 import { computed, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import type { Movie } from '@/types/movie'
 import { MOVIES_SLIDER_BREAKPOINTS } from '@/constants/general'
 import SwiperSlider from '@/components/ui/SwiperSlider.vue'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 import MovieCard from '@/components/movie/MovieCard.vue'
+import { useSimilarMovies } from '@/hooks/useSimilarMovies'
 
 interface SimilarMoviesProps {
   id?: number
 }
 const { id } = defineProps<SimilarMoviesProps>()
 const route = useRoute()
-const router = useRouter()
 const similarMovies = ref<Movie[] | null>(null)
 const movieId = computed(() => (id ? id.toString() : ''))
-const isLoading = ref(false)
 
-const getSimilarMovies = async () => {
-  isLoading.value = true
-  try {
-    const similarMovies = await MovieService.getSimilarMovies(movieId.value)
-
-    return similarMovies.data.results
-  } catch (err) {
-    const error = err as AxiosError
-    if (error && error.response && error.response.status == 404) {
-      router.push({ name: '404-resource', params: { resource: 'movie' } })
-    } else {
-      router.push({ name: 'network-error' })
-    }
-  } finally {
-    await new Promise((res) => setTimeout(res, 1000))
-    isLoading.value = false
-  }
-}
+const { getSimilarMovies, isLoading } = useSimilarMovies(movieId)
 
 similarMovies.value = await getSimilarMovies()
 
