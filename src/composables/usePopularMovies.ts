@@ -10,8 +10,9 @@ export const usePopularMovies = (popularMoviesPage: Ref<string>) => {
       return null
     }
 
-    return await fetchData(() =>
-      MovieService.getPopularMovies(popularMoviesPage.value).then((res) => res.data),
+    return await fetchData(
+      () => MovieService.getPopularMovies(popularMoviesPage.value).then((res) => res.data),
+      { delay: 500 },
     )
   }
 

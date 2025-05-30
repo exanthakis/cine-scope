@@ -10,10 +10,12 @@ export const useProviderMovies = (providerId: string, providerMoviesPage: Ref<st
       return null
     }
 
-    return await fetchData(() =>
-      MovieService.getMoviesByProvider(providerId, providerMoviesPage.value).then(
-        (res) => res.data,
-      ),
+    return await fetchData(
+      () =>
+        MovieService.getMoviesByProvider(providerId, providerMoviesPage.value).then(
+          (res) => res.data,
+        ),
+      { delay: 500 },
     )
   }
 
