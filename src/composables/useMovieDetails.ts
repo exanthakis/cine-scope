@@ -1,7 +1,7 @@
 import MovieService from '@/services/MovieService'
 import { useFetch } from './useFetch'
 
-export function useMovieDetails(movieId: string | undefined | null) {
+export const useMovieDetails = (movieId: string | undefined | null) => {
   const { fetchData, isLoading } = useFetch()
 
   const getMovieDetails = async () => {

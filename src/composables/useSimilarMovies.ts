@@ -2,7 +2,7 @@ import { type Ref } from 'vue'
 import MovieService from '@/services/MovieService'
 import { useFetch } from './useFetch'
 
-export function useSimilarMovies(movieId: Ref<string>) {
+export const useSimilarMovies = (movieId: Ref<string>) => {
   const { fetchData, isLoading } = useFetch()
 
   const getSimilarMovies = async () => {

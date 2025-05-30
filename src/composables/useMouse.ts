@@ -1,11 +1,11 @@
 import type { Ref } from 'vue'
 import { ref, onMounted, onUnmounted } from 'vue'
 
-export function useMouse(
+export const useMouse = (
   elementRef: Ref<HTMLElement | null>,
   threshold: number = 0,
   screenWidthThreshold = 1,
-) {
+) => {
   const x = ref(0)
   const y = ref(0)
   const isHovered = ref(false)

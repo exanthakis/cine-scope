@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import type { AxiosError } from 'axios'
 
-export function useFetch() {
+export const useFetch = () => {
   const isLoading = ref(false)
   const router = useRouter()
 
