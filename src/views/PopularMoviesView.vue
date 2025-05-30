@@ -1,61 +1,59 @@
 <script setup lang="ts">
-import MovieService from '@/services/MovieService'
-import type { Movie } from '@/types/movie'
 import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 import MovieCard from '@/components/movie/MovieCard.vue'
 import SwiperSlider from '@/components/ui/SwiperSlider.vue'
 import MoviesViewToggle from '@/components/ui/MoviesViewToggle.vue'
 import { MOVIES_SLIDER_BREAKPOINTS } from '@/constants/general'
 import MovieCards from '@/components/movie/MovieCards.vue'
+import { useMultipleMovieLists } from '@/composables/usePopularMoviesLists'
+import { usePopularMovies } from '@/composables/usePopularMovies'
+import { useProviderMovies } from '@/composables/useProviderMovies'
+import { handlePaginatedFetch } from '@/lib/utils'
 
-const trendingMovies = ref<Movie[]>([])
-const movies = ref<Movie[]>([])
-const netflixMovies = ref<Movie[]>([])
-const disneyMovies = ref<Movie[]>([])
-const loading = ref(true)
-const router = useRouter()
-
+const popularMoviesPage = ref('1')
+const netflixMoviesPage = ref('1')
+const disneyMoviesPage = ref('1')
 const limit = ref(5)
 
-onMounted(async () => {
-  try {
-    const [trendingResponse, popularResponse, netflixResponse, disneyResponse] = await Promise.all([
-      MovieService.getTrendingMovies(),
-      MovieService.getPopularMovies('1'), //1st page only
-      MovieService.getMoviesByProvider('8'), // Netflix
-      MovieService.getMoviesByProvider('337'), // Disney+
-    ])
+const { trendingMovies, popularMovies, netflixMovies, disneyMovies, loadMovieLists, isLoading } =
+  useMultipleMovieLists(popularMoviesPage)
+const { getPopularMovies, isLoading: popularMoviesLoading } = usePopularMovies(popularMoviesPage)
+const { getProviderMovies: getNetflixMovies, isLoading: netflixMoviesLoading } = useProviderMovies(
+  '8',
+  netflixMoviesPage,
+)
+const { getProviderMovies: getDisneyMovies, isLoading: disneyMoviesLoading } = useProviderMovies(
+  '337',
+  disneyMoviesPage,
+)
 
-    if (trendingResponse.status === 200) trendingMovies.value = trendingResponse.data.results || []
-    else throw new Error('Could not retrieve Trending movies!')
-
-    if (popularResponse.status === 200) movies.value = popularResponse.data.results || []
-    else throw new Error('Could not retrieve Popular movies!')
-
-    if (netflixResponse.status === 200) netflixMovies.value = netflixResponse.data.results || []
-    else throw new Error('Could not retrieve Netflix movies!')
-
-    if (disneyResponse.status === 200) disneyMovies.value = disneyResponse.data.results || []
-    else throw new Error('Could not retrieve Disney movies!')
-  } catch (error) {
-    router.push({ name: 'network-error' })
-    console.error(error)
-  } finally {
-    loading.value = false
-  }
+onMounted(() => {
+  loadMovieLists()
+  popularMoviesPage.value = (parseInt(popularMoviesPage.value) + 1).toString()
+  netflixMoviesPage.value = (parseInt(netflixMoviesPage.value) + 1).toString()
+  disneyMoviesPage.value = (parseInt(disneyMoviesPage.value) + 1).toString()
 })
 
 const loadTrendingMovies = () => {
   limit.value = limit.value === 5 ? trendingMovies.value.length : 5
+}
+
+const handleReachEnd = async (type: 'popular' | 'disney' | 'netflix') => {
+  if (type === 'popular') {
+    await handlePaginatedFetch(getPopularMovies, popularMoviesPage, popularMovies)
+  } else if (type === 'netflix') {
+    await handlePaginatedFetch(getNetflixMovies, netflixMoviesPage, netflixMovies)
+  } else if (type === 'disney') {
+    await handlePaginatedFetch(getDisneyMovies, disneyMoviesPage, disneyMovies)
+  }
 }
 </script>
 
 <template>
   <main class="min-h-[calc(100vh-60px)] w-full pb-15">
     <div class="3xl:max-w-[100rem] mx-auto max-w-5xl px-5 sm:px-10 md:max-w-4xl lg:max-w-7xl">
-      <div v-if="loading" class="flex h-[50vh] items-center justify-center">
+      <div v-if="isLoading" class="flex h-[50vh] items-center justify-center">
         <BaseSpinner />
       </div>
 
@@ -88,9 +86,15 @@ const loadTrendingMovies = () => {
           >
             Popular movies
           </h2>
-          <SwiperSlider :data="movies" :navigation="false" :breakpoints="MOVIES_SLIDER_BREAKPOINTS">
+          <SwiperSlider
+            :data="popularMovies"
+            :navigation="false"
+            :breakpoints="MOVIES_SLIDER_BREAKPOINTS"
+            @reach-end="() => handleReachEnd('popular')"
+            :loop="false"
+          >
             <template #default="{ id, title, poster_path }">
-              <template v-if="id && title">
+              <template v-if="id && title && !popularMoviesLoading">
                 <MovieCard
                   :id="id"
                   :title="title"
@@ -102,6 +106,9 @@ const loadTrendingMovies = () => {
                   class="!min-h-[10vh]"
                 />
               </template>
+              <div v-else class="flex items-center justify-center py-10">
+                <BaseSpinner />
+              </div>
             </template>
           </SwiperSlider>
         </section>
@@ -115,9 +122,11 @@ const loadTrendingMovies = () => {
             :data="netflixMovies"
             :navigation="false"
             :breakpoints="MOVIES_SLIDER_BREAKPOINTS"
+            @reach-end="() => handleReachEnd('netflix')"
+            :loop="false"
           >
             <template #default="{ id, title, poster_path }">
-              <template v-if="id && title">
+              <template v-if="id && title && !netflixMoviesLoading">
                 <MovieCard
                   :id="id"
                   :title="title"
@@ -129,6 +138,9 @@ const loadTrendingMovies = () => {
                   class="!min-h-[10vh]"
                 />
               </template>
+              <div v-else class="flex items-center justify-center py-10">
+                <BaseSpinner />
+              </div>
             </template>
           </SwiperSlider>
         </section>
@@ -151,9 +163,11 @@ const loadTrendingMovies = () => {
             :data="disneyMovies"
             :navigation="false"
             :breakpoints="MOVIES_SLIDER_BREAKPOINTS"
+            @reach-end="() => handleReachEnd('disney')"
+            :loop="false"
           >
             <template #default="{ id, title, poster_path }">
-              <div v-if="id && title">
+              <template v-if="id && title && !disneyMoviesLoading">
                 <MovieCard
                   :id="id"
                   :title="title"
@@ -164,6 +178,9 @@ const loadTrendingMovies = () => {
                   }"
                   class="!min-h-[10vh]"
                 />
+              </template>
+              <div v-else class="flex items-center justify-center py-10">
+                <BaseSpinner />
               </div>
             </template>
           </SwiperSlider>

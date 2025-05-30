@@ -12,13 +12,15 @@ const getTrendingMovies = () => {
   return apiClient.get('/trending/movie/day?api_key=' + import.meta.env.VITE_TMDB_API_KEY)
 }
 
-const getMoviesByProvider = (id: string) => {
+const getMoviesByProvider = (id: string, page?: string) => {
   return apiClient.get(
     '/discover/movie?api_key=' +
       import.meta.env.VITE_TMDB_API_KEY +
       '&sort_by=vote_count.desc&with_watch_providers=' +
       id +
-      '&watch_region=US',
+      '&watch_region=US' +
+      '&page=' +
+      page,
   )
 }
 

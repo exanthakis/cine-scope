@@ -17,7 +17,7 @@ export const useFetch = () => {
 
   const fetchData = async <T>(
     fetchFn: () => Promise<T>,
-    { delay = 1000, updateLoading = true } = {},
+    { delay = 0, updateLoading = true } = {},
   ): Promise<T | null> => {
     if (updateLoading) isLoading.value = true
     try {
