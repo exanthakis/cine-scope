@@ -26,7 +26,7 @@ const isHeroImgLoaded = ref(false)
 
 // Hero movie texts
 const isExpanded = ref(false)
-const rating = computed(() => (vote_average ? Math.round(vote_average * 10) : 'N/A'))
+const rating = computed(() => (vote_average ? Math.round(vote_average * 10) : ''))
 const duration = computed(() => {
   const runtimeval = runtime
   if (!runtimeval) return 'Unknown'
@@ -211,8 +211,10 @@ watch(
                 <span class="mx-1 my-0"> | </span>
 
                 <span class="absolute top-[-9999px] left-[-9999px]">Maturity Rating:</span>
-                <span class="my-1 inline-block border border-[#a1a1a1] p-1">{{ rating }}%</span>
-                <span class="mx-1 my-0"> | </span>
+                <span v-if="rating" class="my-1 inline-block border border-[#a1a1a1] p-1"
+                  >{{ rating }}%</span
+                >
+                <span v-if="rating" class="mx-1 my-0"> | </span>
                 <span class="inline-block">{{ duration }}</span>
                 <span class="mx-1 my-0"> | </span>
                 <RouterLink
