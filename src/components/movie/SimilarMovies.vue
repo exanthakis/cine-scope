@@ -33,9 +33,9 @@ watch(
     <div v-if="isLoading || !similarMovies"><BaseSpinner /></div>
     <p
       v-else-if="!isLoading && similarMovies?.length === 0"
-      class="text-blue-navy text-center dark:text-white"
+      class="text-blue-navy pt-5 text-left dark:text-white"
     >
-      Sorry, we couldn't find any results
+      Sorry, we couldn't find any results!
     </p>
     <div v-else-if="similarMovies && similarMovies.length > 0" class="mt-6">
       <SwiperSlider :data="similarMovies" :breakpoints="MOVIES_SLIDER_BREAKPOINTS">

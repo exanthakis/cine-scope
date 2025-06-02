@@ -216,6 +216,7 @@ watch(
                 <span class="inline-block">{{ duration }}</span>
                 <span class="mx-1 my-0"> | </span>
                 <RouterLink
+                  class="pointer-events-auto"
                   v-for="(genre, idx) in genres"
                   :key="genre.id"
                   :to="{ name: 'movie-list', query: { genres: genre.id } }"
