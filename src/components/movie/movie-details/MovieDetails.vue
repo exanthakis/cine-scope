@@ -10,7 +10,8 @@ import MovieDetailsHero from './MovieDetailsHero.vue'
 import BaseSpinner from '@/components/ui/BaseSpinner.vue'
 import { useMovieDetails } from '@/composables/useMovieDetails'
 
-const { id } = defineProps<MovieDetailsProps>()
+const { id: initialId } = defineProps<MovieDetailsProps>()
+const id = ref(initialId)
 const route = useRoute()
 const movieDetails = ref<MovieDetails | null>(null)
 
@@ -48,13 +49,18 @@ const trailerKey = computed((): string => {
 
 const providers = computed(() => movieDetails.value?.['watch/providers']?.results['US']?.flatrate)
 
+const routeId = computed(() => {
+  const param = route.params.id
+  return Array.isArray(param) ? param[0] : param
+})
+
 // Re-Fetch Data When Route Changes (On click at similar movies section)
-watch(
-  () => route.params.id,
-  async (newId) => {
-    if (newId) movieDetails.value = await getMovieDetails()
-  },
-)
+watch(routeId, async (newId) => {
+  if (newId && newId !== id.value) {
+    id.value = newId
+    movieDetails.value = await getMovieDetails()
+  }
+})
 </script>
 
 <template>
@@ -144,7 +150,7 @@ watch(
           <BaseSpinner />
         </div>
         <div v-else class="pb-10">
-          <SimilarMovies :id="movieDetails?.id" />
+          <SimilarMovies :id="+id" />
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
 import MovieService from '@/services/MovieService'
 import { useFetch } from './useFetch'
+import type { Ref } from 'vue'
 
-export const useMovieDetails = (movieId: string | undefined | null) => {
+export const useMovieDetails = (movieId: Ref<string>) => {
   const { fetchData, isLoading } = useFetch()
 
   const getMovieDetails = async () => {
@@ -9,7 +10,7 @@ export const useMovieDetails = (movieId: string | undefined | null) => {
       return null
     }
 
-    return await fetchData(() => MovieService.getMovieData(movieId).then((res) => res.data), {
+    return await fetchData(() => MovieService.getMovieData(movieId.value).then((res) => res.data), {
       delay: 1000,
     })
   }
