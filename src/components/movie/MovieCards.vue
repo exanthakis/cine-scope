@@ -22,6 +22,9 @@ const moviesViewStore = useMoviesViewStore()
         :key="movie.id"
         :id="movie.id"
         :title="movie.title"
+        :description="
+          'overview' in movie ? movie.overview : 'description' in movie ? movie.description : ''
+        "
         :imgUrl="'poster_path' in movie ? movie.poster_path : movie.imgUrl"
         :config="{
           ...(showNum && { num: idx + 1 }),

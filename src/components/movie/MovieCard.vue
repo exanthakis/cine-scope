@@ -6,6 +6,7 @@ import { computed, ref } from 'vue'
 const {
   id,
   title,
+  description,
   imgUrl = '',
   config = { hideFav: false, hideOutline: false, num: null },
 } = defineProps<MovieCardProps>()
@@ -19,6 +20,7 @@ const onFavoriteClick = () => {
   const movie: MovieCardStore = {
     id,
     title,
+    description,
     imgUrl,
   }
 
