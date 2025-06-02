@@ -11,7 +11,7 @@ export const DEVICE_BREAKPOINTS = {
 }
 
 const MOVIES_SLIDER_BREAKPOINTS = {
-  0: { slidesPerView: 1.8 },
+  0: { slidesPerView: 2.2 },
   [DEVICE_BREAKPOINTS.SMALL]: { slidesPerView: 3.5 },
   [DEVICE_BREAKPOINTS.MEDIUM]: { slidesPerView: 4.5 },
   [DEVICE_BREAKPOINTS.LARGE]: { slidesPerView: 6.5 },
